@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/note-ir.schema.json",
+  "title": "Note Intermediate Representation",
+  "description": "IR generado por el parser NoteMark (F48). 20 nodos de bloque + 13 inline = 33 nodos. Cada nodo lleva un discriminador `node`, `attrs` con `capability` obligatoria + campos específicos del tipo, `children` recursivo opcional, `source_refs` (ancla al SDM), y flags `derived`/`external`/`layer`. Documento normativo de Fase 14.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "note_id", "title", "blocks"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del esquema. Mayor en cambios incompatibles; menor en campo opcional nuevo."
+    },
+    "note_id": { "type": "string", "description": "Identificador estable de la nota (e.g. 'postgres-shared-buffers')." },
+    "title":   { "type": "string" },
+    "layer":   { "type": "string", "enum": ["l1", "l2", "l3"], "default": "l2" },
+    "blocks":  { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/node" } }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node", "attrs", "source_refs"],
+      "properties": {
+        "node":        { "$ref": "#/$defs/nodeType" },
+        "attrs":       { "$ref": "#/$defs/attrs" },
+        "children":    { "type": "array", "items": { "$ref": "#/$defs/node" } },
+        "source_refs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sourceRef" }
+        },
+        "derived":  { "type": "boolean", "default": false, "description": "true si el contenido es derivado (analogía propia, inferencia)." },
+        "external": { "type": "boolean", "default": false, "description": "true si el contenido es externo al SDM (no respaldado)." },
+        "layer":    { "type": "string", "enum": ["l1", "l2", "l3"], "description": "Override por-nodo del `layer` raíz." }
+      }
+    },
+    "nodeType": {
+      "enum": [
+        "section", "paragraph", "list", "checklist", "table",
+        "definition-list", "code", "console", "equation", "figure",
+        "diagram", "admonition", "collapsible", "quote", "columns",
+        "divider", "property-block", "question", "step", "parameter-table",
+        "text", "strong", "em", "code-inline", "link-external",
+        "link-note", "term-ref", "source-ref", "math-inline",
+        "footnote-ref", "keyboard", "placeholder", "deleted"
+      ]
+    },
+    "attrs": {
+      "description": "Forma de `attrs` discriminada por `node`. Cada rama fija los campos específicos + `capability` obligatoria.",
+      "anyOf": [
+        { "if": { "properties": { "node": { "const": "section" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["level", "capability"],
+                    "properties": { "level": { "type": "integer", "minimum": 1, "maximum": 6 },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "paragraph" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["capability"],
+                    "properties": { "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "list" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["ordered", "capability"],
+                    "properties": { "ordered": { "type": "boolean" }, "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "checklist" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["capability"],
+                    "properties": { "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "table" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["headers", "capability"],
+                    "properties": { "headers": { "type": "array", "items": { "type": "string" } },
+                                    "caption": { "type": "string" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "definition-list" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["entries", "capability"],
+                    "properties": { "entries": { "type": "array", "items": {
+                                     "type": "object", "additionalProperties": false,
+                                     "required": ["term", "definition"],
+                                     "properties": { "term": { "type": "string" }, "definition": { "type": "string" } } } },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "code" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["lang", "text", "capability"],
+                    "properties": { "lang": { "type": "string" }, "text": { "type": "string" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "console" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["lines", "capability"],
+                    "properties": { "lines": { "type": "array", "items": { "type": "string" } },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "equation" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["latex", "display", "capability"],
+                    "properties": { "latex": { "type": "string" }, "display": { "type": "boolean" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "figure" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["src", "alt", "capability"],
+                    "properties": { "src": { "type": "string" }, "alt": { "type": "string" },
+                                    "caption": { "type": "string" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "diagram" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["kind", "text", "capability"],
+                    "properties": { "kind": { "type": "string", "enum": ["mermaid", "railroad"] },
+                                    "text": { "type": "string" },
+                                    "alt": { "type": "string" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "admonition" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["severity", "capability"],
+                    "properties": { "severity": { "type": "string",
+                                                     "enum": ["note", "tip", "warning", "danger",
+                                                              "security", "performance", "version",
+                                                              "deprecated", "conflict", "external"] },
+                                    "title": { "type": "string" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "collapsible" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["title", "default_open", "capability"],
+                    "properties": { "title": { "type": "string" },
+                                    "default_open": { "type": "boolean" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "quote" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["capability"],
+                    "properties": { "cite": { "type": "string" }, "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "columns" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["count", "capability"],
+                    "properties": { "count": { "type": "integer", "minimum": 2 },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "divider" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["capability"],
+                    "properties": { "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "property-block" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["name", "value", "capability"],
+                    "properties": { "name": { "type": "string" },
+                                    "value": { "type": ["string", "number", "boolean", "array", "object"] },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "question" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["prompt", "capability"],
+                    "properties": { "prompt": { "type": "string" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "step" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["index", "capability"],
+                    "properties": { "index": { "type": "integer", "minimum": 1 },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "parameter-table" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["columns", "capability"],
+                    "properties": { "columns": { "type": "array", "items": { "type": "string" } },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "text" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["text", "capability"],
+                    "properties": { "text": { "type": "string" }, "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "strong" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["capability"],
+                    "properties": { "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "em" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["capability"],
+                    "properties": { "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "code-inline" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["text", "capability"],
+                    "properties": { "text": { "type": "string" }, "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "link-external" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["text", "url", "capability"],
+                    "properties": { "text": { "type": "string" }, "url": { "type": "string", "format": "uri" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "link-note" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["text", "target", "capability"],
+                    "properties": { "text": { "type": "string" },
+                                    "target": { "type": "string", "description": "ID de la nota destino." },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "term-ref" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["text", "term_id", "capability"],
+                    "properties": { "text": { "type": "string" },
+                                    "term_id": { "type": "string", "description": "ID del término canónico." },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "source-ref" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["block_id", "source_hash", "capability"],
+                    "properties": { "block_id": { "type": "string", "pattern": "^[0-9a-f]{12}$" },
+                                    "source_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "math-inline" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["latex", "capability"],
+                    "properties": { "latex": { "type": "string" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "footnote-ref" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["ref_id", "capability"],
+                    "properties": { "text": { "type": "string" },
+                                    "ref_id": { "type": "string" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "keyboard" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["text", "capability"],
+                    "properties": { "text": { "type": "string" }, "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "placeholder" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["text", "capability"],
+                    "properties": { "text": { "type": "string" },
+                                    "default_value": { "type": "string" },
+                                    "capability": { "type": "string" } } } },
+
+        { "if": { "properties": { "node": { "const": "deleted" } } },
+          "then": { "type": "object", "additionalProperties": false, "required": ["capability"],
+                    "properties": { "capability": { "type": "string" } } } }
+      ]
+    },
+    "sourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["block_id"],
+      "properties": {
+        "block_id":     { "type": "string", "pattern": "^[0-9a-f]{12}$",
+                          "description": "id del bloque en el SDM (sha1 hash[:12])." },
+        "source_hash":  { "type": "string", "pattern": "^[0-9a-f]{64}$",
+                          "description": "sha256 hex del archivo fuente." },
+        "section_path": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+# Perfil de usuario — notemartin-study-notes
+#
+# Copia este archivo a `.notes-work/<source_hash>/profile.yaml` y edita solo
+# lo que necesites. Cualquier campo omitido toma su valor por defecto del
+# esquema (`skill/notemartin-study-notes/schemas/profile.schema.json`).
+#
+# Precedencia de resolución: prompt > perfil > defaults. Ver
+# `references/00-pipeline/architecture.md` §7.4 para el detalle y un ejemplo
+# de conflicto resuelto.
+
+schema_version: "1.0.0"
+
+# === Destinos activos y configuración por destino ===
+# Capacidades verificadas por destino en references/08-render/capability-matrix.md.
+targets:
+  active: [obsidian]    # default: [obsidian]. Edita para añadir Notion, AppFlowy, etc.
+
+  obsidian:
+    enabled: true
+    vault: ~/Documents/vault    # ruta del vault
+    folder: notes/              # carpeta dentro del vault
+
+  # notion:
+  #   enabled: true
+  #   database_id: "<uuid>"
+  #   folder: ""
+
+  # appflowy:
+  #   enabled: true
+  #   database_id: ""
+  #   folder: ""
+
+  # markdown:
+  #   enabled: false
+
+  # html:
+  #   enabled: false
+
+  # pdf:
+  #   enabled: false
+
+  # anki:
+  #   enabled: false
+  #   deck: ""
+
+# === Idioma, estilo y profundidad de redacción (L3) ===
+# Estilo por defecto: intuition-first (Fase 94).
+writing:
+  language: es                 # es | en | es-en | en-es
+  style: intuition-first       # intuition-first | reference-pure | tutorial | summary
+  depth:
+    layers: [l1, l2, l3]       # capas que el agente redacta
+    default_layer: l2          # capa por defecto cuando no se especifica
+
+# === Tags ===
+# Prefijos de namespace; el agente compone `topic/postgres`, `type/concept`, etc.
+tags:
+  prefixes: [topic/, type/, domain/]
+
+# === Esquema de carpetas destino ===
+# Independiente de la carpeta configurada en targets.<destino>.folder.
+folders:
+  schema: by-domain            # flat | by-domain | by-source | by-type
+
+# === Política de términos canónicos / bilingües (Fase 101) ===
+terms:
+  policy: keep-source-language   # keep-source-language | force-translate | always-show-both
+
+# === Perfil de uso ===
+# Criterio pedagógico: study (repasar), reference (consultar), hybrid (ambos).
+# Ver evals/rubric.md §2.
+use_case_profile: hybrid       # study | reference | hybrid
+
+# === OCR ===
+# Solo se usa si la fuente es PDF escaneado o imagen.
+ocr:
+  engine: tesseract            # tesseract | easyocr | paddleocr | cloud-vision | manual
+  languages: [en]              # códigos BCP-47 simplificados
+  confidence_threshold: 0.7
+
+# === Cadena de preprocesado de imagen (L0) ===
+# Aplica antes del OCR.
+preprocessing:
+  chain: [deskew, binarize, denoise]
+
+# === Metadatos del producto (L1) ===
+# Si vendor/edition se omiten, el agente asume unknown_if_undeclared (INV-17).
+product:
+  # vendor: ""
+  # edition: ""
+  version_policy: unknown_if_undeclared   # strict | unknown_if_undeclared
+
+# === Criticidad por defecto en el ledger (L2) ===
+units:
+  default_criticality: must-keep   # must-keep | context
+
+# === Política de descarte del ledger (L2) ===
+# closed-list = solo motivos de la lista cerrada (F15).
+ledger:
+  discard_policy: closed-list      # closed-list | allow-with-reason | allow-any
+
+# === Política de ciclos en el grafo de prerrequisitos (L2) ===
+graph:
+  cycle_policy: block              # block | allow
+
+# === Estilo visual ===
+# Tokens referenciados, no literales (INV-14). Valores mapean a tokens.json (Fase 72).
+visual:
+  theme: auto                      # auto | light | dark
+  density: normal                  # compact | normal | spacious
+
+# === Política de citación de hechos derivados y externos (IR §13) ===
+citation:
+  mark_derived: visible            # visible | muted | footnote
+  mark_external: visible
+
+# === Overrides comunes por dominio (INV-15: al menos 2 dominios) ===
+#
+# Documentación técnica de producto → Notion:
+#   targets.active: [notion]
+#   targets.notion.database_id: "<uuid>"
+#   use_case_profile: reference
+#
+# Libro técnico escaneado en español:
+#   ocr.languages: [es]
+#   ocr.confidence_threshold: 0.6
+#   writing.language: es
+#
+# Repaso espaciado para certificación:
+#   targets.active: [anki]
+#   targets.anki.deck: "Cert-Kubernetes"
+#   use_case_profile: study
+#
+# Capítulo de libro técnico + Notion como wiki:
+#   writing.language: en
+#   writing.style: intuition-first
+#   targets.active: [notion]
+#   use_case_profile: hybrid

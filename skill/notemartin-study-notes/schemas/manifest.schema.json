@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/manifest.schema.json",
+  "title": "Workdir Manifest",
+  "description": "Manifiesto reanudable del workdir. Captura el estado suficiente para interrumpir y retomar sin reprocesar. Documento normativo de Fase 16.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "current_stage", "stage_progress", "published_notes", "last_modified"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del esquema. Mayor en cambios incompatibles; menor en campo opcional nuevo."
+    },
+    "source":          { "$ref": "#/$defs/source" },
+    "current_stage":   {
+      "type": "string",
+      "enum": ["none", "l0", "l1", "l2", "l3", "l4"],
+      "description": "Etapa en curso en este momento (puede no estar completada). 'none' antes del primer arranque."
+    },
+    "stage_progress":  { "$ref": "#/$defs/stageProgress" },
+    "units_processed": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Cuenta de unidades del ledger que han alcanzado estado terminal (written/merged/discarded)."
+    },
+    "published_notes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/publishedNote" },
+      "uniqueItems": false,
+      "description": "Notas publicadas por destino. Idempotencia por (note_id, destination) — re-publicar actualiza la entrada existente en lugar de añadir."
+    },
+    "glossary":        { "$ref": "#/$defs/glossary" },
+    "naming_decisions":{
+      "type": "array",
+      "items": { "$ref": "#/$defs/namingDecision" }
+    },
+    "link_debt": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/linkDebt" }
+    },
+    "hash_mismatch": {
+      "type": "boolean",
+      "default": false,
+      "description": "true cuando el hash actual del archivo difiere del registrado en source.hash. Activa la política §6 del spec."
+    },
+    "last_modified":   { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "hash", "algorithm"],
+      "properties": {
+        "id":       { "type": "string", "description": "Identificador único de la fuente (e.g. '01-postgresql-chapter')." },
+        "path":     { "type": "string", "description": "Ruta absoluta del archivo fuente original (architecture.md §4)." },
+        "hash":     { "type": "string", "pattern": "^[0-9a-f]{64}$",
+                      "description": "sha256 hex del archivo fuente (architecture.md §6)." },
+        "algorithm":{ "type": "string", "enum": ["sha256"], "default": "sha256" },
+        "version":  { "type": ["string", "null"], "description": "Versión del producto declarado en la fuente." },
+        "vendor":   { "type": ["string", "null"] },
+        "product":  { "type": ["string", "null"] }
+      }
+    },
+    "stageProgress": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "l0": { "type": "string", "enum": ["pending", "in_progress", "done"] },
+        "l1": { "type": "string", "enum": ["pending", "in_progress", "done"] },
+        "l2": { "type": "string", "enum": ["pending", "in_progress", "done"] },
+        "l3": { "type": "string", "enum": ["pending", "in_progress", "done"] },
+        "l4": { "type": "string", "enum": ["pending", "in_progress", "done"] }
+      }
+    },
+    "publishedNote": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["note_id", "destination", "remote_id", "published_at", "last_updated"],
+      "properties": {
+        "note_id":      { "type": "string", "description": "ID estable de la nota (e.g. 'postgres-shared-buffers')." },
+        "destination":  {
+          "type": "string",
+          "enum": ["obsidian", "notion", "appflowy", "markdown", "html", "pdf", "anki"]
+        },
+        "remote_id":    {
+          "type": "string",
+          "description": "ID remoto en el destino (página UUID, archivo path, anki note id, etc.). Obligatorio para idempotencia."
+        },
+        "remote_url":   {
+          "type": ["string", "null"],
+          "description": "URL al recurso publicado, si aplica (vault://, https://, etc.)."
+        },
+        "etag": {
+          "type": ["string", "null"],
+          "description": "ETag HTTP opcional, para idempotencia cross-publish en destinos que lo soporten."
+        },
+        "published_at": { "type": "string", "format": "date-time" },
+        "last_updated": { "type": "string", "format": "date-time" }
+      }
+    },
+    "glossary": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Mapa término canónico → descripción corta, acumulado del L2. Las claves duplicadas sobrescriben; documentado en §8 del spec."
+    },
+    "namingDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entity", "decision"],
+      "properties": {
+        "entity":    { "type": "string", "description": "A qué se aplica la decisión (e.g. 'note-id', 'tag-prefix')." },
+        "decision":  { "type": "string", "description": "Decisión tomada (e.g. 'kebab-case')." },
+        "rationale": { "type": "string", "description": "Por qué se tomó esa decisión." }
+      }
+    },
+    "linkDebt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_note", "target", "kind", "detected_at"],
+      "properties": {
+        "from_note":   { "type": "string" },
+        "target":      { "type": "string", "description": "ID o path del target roto." },
+        "kind":        {
+          "type": "string",
+          "enum": ["broken-wikilink", "missing-target", "redirected", "external-dead"],
+          "description": "broken-wikilink: el destino no existe en el corpus. missing-target: el destino es null. redirected: el destino existía pero cambió de ID. external-dead: URL externa que no responde."
+        },
+        "detected_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

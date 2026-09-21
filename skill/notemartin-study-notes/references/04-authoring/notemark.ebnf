@@ -1,0 +1,75 @@
+(* notemark — EBNF grammar (Fase 12)                                       *)
+(* Sintaxis base CommonMark (paragraph, heading, list, table, code, link,  *)
+(* image, math-inline) se asume. Esta gramática solo define las extensiones *)
+
+(* ── Documento ─────────────────────────────────────────────────── *)
+notemark         = frontmatter? block+ ;
+frontmatter      = "---" nl yaml-body "---" nl ;
+yaml-body        = { yaml-line nl } ;
+yaml-line        = key ":" value ;
+key              = ? snake_case identifier ? ;
+value            = ? YAML scalar or block scalar ? ;
+
+(* ── Bloques (CommonMark asumido para heading/paragraph/list/table/code/quote/divider) ── *)
+block            = heading-block | paragraph-block | list-block | checklist-block
+                  | table-block | definition-list | code-block
+                  | console-block | equation-block | figure-block | diagram-block
+                  | admonition-block | collapsible-block | quote-block
+                  | columns-block | divider | property-block
+                  | question-block | step-block | parameter-table-block ;
+heading-block    = ( "#" | "##" | "###" | "####" | "#####" | "######" ) sp inline* nl ;
+
+(* ── Admonitions (10 subtipos) ─────────────────────────────────── *)
+admonition-block = ":::" admonition-type nl { block-or-inline } ":::" nl ;
+admonition-type  = "warning" | "note" | "tip" | "example" | "danger"
+                  | "security" | "performance" | "version"
+                  | "deprecated" | "conflict" | "external" ;
+
+(* ── Bloques compuestos ────────────────────────────────────────── *)
+collapsible-block = ":::collapsible" nl heading-block? { block-or-inline }
+                    ":::collapsible" nl ;
+columns-block    = ":::columns" nl column-block nl column-block ":::columns" nl ;
+column-block     = { block-or-inline } ;
+parameter-table-block = ":::param-table" nl table-block ":::param-table" nl ;
+step-block       = ":::step" nl heading-block? { block-or-inline } ":::step" nl ;
+question-block   = ":::question" nl heading-block? { block-or-inline }
+                    ":::question" nl ;
+console-block    = ":::console" nl { line } ":::console" nl ;
+diagram-block    = ":::diagram" nl mermaid-fence ":::diagram" nl ;
+mermaid-fence    = "```mermaid" nl { line } "```" nl ;
+figure-block     = ":::figure" nl image-line nl { block-or-inline }
+                    ":::figure" nl ;
+image-line       = "!" "[" alt-text "]" "(" src-uri ")" ;
+equation-block   = ":::equation" nl math-block ":::equation" nl ;
+math-block       = "$$" nl { line } "$$" nl ;
+property-block   = ":::property" nl yaml-body ":::property" nl ;
+quote-block      = ">" sp { line } ;
+block-or-inline  = block | inline+ nl ;
+
+(* ── Inline (CommonMark asumido para strong/em/code/link) ─────── *)
+inline           = text-run | strong-em | code-inline | link-external
+                  | link-note | term-ref | source-ref | math-inline
+                  | footnote-ref | keyboard | placeholder | deleted
+                  | derived-mark | external-mark | layer-mark ;
+source-ref       = "{src:" block-id "}" ;
+block-id         = 12*12HEXDIG ;
+term-ref         = "[[term:" term-name "]]" ;
+term-name        = ? nombre canónico ? ;
+link-note        = "[[note:" note-id "]]" ;
+note-id          = ? identificador estable ? ;
+placeholder      = "{{" placeholder-name "}}" ;
+placeholder-name = ? nombre a sustituir por el usuario ? ;
+keyboard         = "[[kbd:" key-combo "]]" ;
+deleted          = "~~" text-run "~~" ;
+derived-mark     = "{derived}" ;
+external-mark    = "{external}" ;
+layer-mark       = "{layer:" layer "}" ;
+layer            = "l1" | "l2" | "l3" ;
+footnote-ref     = "[[fn:" footnote-id "]]" ;
+
+(* ── Tokens ────────────────────────────────────────────────────── *)
+sp               = " " | "\t" ;
+nl               = "\n" | "\r\n" ;
+line             = ? caracteres hasta fin de línea sin nl ? ;
+text-run         = ? caracteres de texto no especiales ? ;
+HEXDIG           = "0"…"9" | "a"…"f" ;

@@ -1,0 +1,334 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/profile.schema.json",
+  "title": "notemartin-study-notes profile",
+  "description": "Perfil del usuario para la skill notemartin-study-notes. Define destinos de publicación, idioma y estilo de redacción, configuración de OCR y preprocesado, política de citación y tokens visuales. Cualquier campo omitido toma su valor por defecto. Precedencia de resolución: prompt > perfil > defaults (ver references/00-pipeline/architecture.md §7.4).",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del esquema. Incremento mayor en cambios incompatibles; menor en campo opcional nuevo (per AGENT.md §7.4)."
+    },
+    "targets": {
+      "description": "Destinos activos y configuración por destino. Capacidades verificadas por destino en references/08-render/capability-matrix.md.",
+      "$ref": "#/$defs/targets"
+    },
+    "writing": {
+      "description": "Idioma, estilo y profundidad de redacción (L3).",
+      "$ref": "#/$defs/writing"
+    },
+    "tags": {
+      "description": "Prefijos de namespace para tags (L3).",
+      "$ref": "#/$defs/tags"
+    },
+    "folders": {
+      "description": "Esquema de carpetas dentro del destino.",
+      "$ref": "#/$defs/folders"
+    },
+    "terms": {
+      "description": "Política de términos canónicos / bilingües (Fase 101).",
+      "$ref": "#/$defs/terms"
+    },
+    "use_case_profile": {
+      "type": "string",
+      "enum": ["study", "reference", "hybrid"],
+      "default": "hybrid",
+      "description": "Perfil de uso: study (repasar), reference (consultar), hybrid (ambos). Ver evals/rubric.md §2."
+    },
+    "ocr": {
+      "description": "Configuración del motor OCR (L0). Solo se usa si la fuente es PDF escaneado o imagen.",
+      "$ref": "#/$defs/ocr"
+    },
+    "preprocessing": {
+      "description": "Cadena de preprocesado de imagen antes del OCR (L0).",
+      "$ref": "#/$defs/preprocessing"
+    },
+    "product": {
+      "description": "Metadatos del producto (L1). Si vendor/edition se omiten, el agente asume unknown_if_undeclared (INV-17).",
+      "$ref": "#/$defs/product"
+    },
+    "units": {
+      "description": "Criticidad por defecto de unidades nuevas en el ledger (L2).",
+      "$ref": "#/$defs/units"
+    },
+    "ledger": {
+      "description": "Política de descarte del ledger (L2). 'closed-list' exige motivo de la lista cerrada (F15).",
+      "$ref": "#/$defs/ledger"
+    },
+    "graph": {
+      "description": "Política de ciclos en el grafo de prerrequisitos (L2).",
+      "$ref": "#/$defs/graph"
+    },
+    "visual": {
+      "description": "Tokens visuales. Sin colores literales (INV-14); los valores se referencian desde tokens.json (Fase 72).",
+      "$ref": "#/$defs/visual"
+    },
+    "citation": {
+      "description": "Política de citación de hechos derivados y externos (IR §13).",
+      "$ref": "#/$defs/citation"
+    }
+  },
+  "$defs": {
+    "targets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "active": {
+          "type": "array",
+          "items": {
+            "enum": ["obsidian", "notion", "appflowy", "markdown", "html", "pdf", "anki"]
+          },
+          "default": ["obsidian"],
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "Lista de destinos activos. Capacidades verificadas de cada uno en references/08-render/capability-matrix.md."
+        },
+        "obsidian":  { "$ref": "#/$defs/targetConfig" },
+        "notion":    { "$ref": "#/$defs/targetConfig" },
+        "appflowy":  { "$ref": "#/$defs/targetConfig" },
+        "markdown":  { "$ref": "#/$defs/targetConfig" },
+        "html":      { "$ref": "#/$defs/targetConfig" },
+        "pdf":       { "$ref": "#/$defs/targetConfig" },
+        "anki":      { "$ref": "#/$defs/targetConfig" }
+      },
+      "required": ["active"]
+    },
+    "targetConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Habilita o deshabilita este destino sin retirarlo de targets.active."
+        },
+        "vault": {
+          "type": "string",
+          "description": "Ruta del vault (Obsidian) o nombre del vault."
+        },
+        "database_id": {
+          "type": "string",
+          "description": "ID de la base de datos destino (Notion, AppFlowy)."
+        },
+        "folder": {
+          "type": "string",
+          "description": "Carpeta destino dentro del vault o base de datos."
+        },
+        "idempotency_key": {
+          "type": "string",
+          "description": "Identificador estable para publicación idempotente (F62)."
+        }
+      }
+    },
+    "writing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string",
+          "enum": ["es", "en", "es-en", "en-es"],
+          "default": "es",
+          "description": "Idioma principal de las notas. 'es-en' significa español con términos canónicos en inglés."
+        },
+        "style": {
+          "type": "string",
+          "enum": ["intuition-first", "reference-pure", "tutorial", "summary"],
+          "default": "intuition-first",
+          "description": "Estilo de redacción (Fase 94). intuition-first = problema → intuición → analogía → formalismo."
+        },
+        "depth": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "layers": {
+              "type": "array",
+              "items": { "enum": ["l1", "l2", "l3"] },
+              "uniqueItems": true,
+              "default": ["l1", "l2", "l3"],
+              "description": "Capas que el agente redacta: l1 TL;DR, l2 operativo, l3 referencia exhaustiva."
+            },
+            "default_layer": {
+              "type": "string",
+              "enum": ["l1", "l2", "l3"],
+              "default": "l2",
+              "description": "Capa en la que el agente redacta por defecto cuando no se especifica."
+            }
+          }
+        }
+      }
+    },
+    "tags": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["topic/", "type/", "domain/"],
+          "description": "Prefijos de namespace para tags. El agente compone `topic/postgres`, `type/concept`, etc."
+        }
+      }
+    },
+    "folders": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "type": "string",
+          "enum": ["flat", "by-domain", "by-source", "by-type"],
+          "default": "by-domain",
+          "description": "Esquema de carpetas destino, independiente del vault configurado en targets.<destino>.folder."
+        }
+      }
+    },
+    "terms": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy": {
+          "type": "string",
+          "enum": ["keep-source-language", "force-translate", "always-show-both"],
+          "default": "keep-source-language",
+          "description": "Cómo se manejan los términos canónicos en notas bilingües (Fase 101)."
+        }
+      }
+    },
+    "ocr": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "engine": {
+          "type": "string",
+          "enum": ["tesseract", "easyocr", "paddleocr", "cloud-vision", "manual"],
+          "default": "tesseract",
+          "description": "Motor OCR. Manual = el agente transcribe a mano sin OCR automatizado."
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z]{2}(-[A-Z][a-z]+)?$"
+          },
+          "default": ["en"],
+          "uniqueItems": true,
+          "description": "Códigos de idioma BCP-47 simplificados (en, es, en-US, etc.)."
+        },
+        "confidence_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.7,
+          "description": "Umbral de confianza OCR (palabra). Por debajo del umbral se reintenta o se marca para revisión (architecture.md §8)."
+        }
+      }
+    },
+    "preprocessing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "chain": {
+          "type": "array",
+          "items": {
+            "enum": ["deskew", "binarize", "denoise", "remove-borders", "enhance-contrast"]
+          },
+          "default": ["deskew", "binarize", "denoise"],
+          "description": "Cadena de preprocesado aplicada antes del OCR (L0)."
+        }
+      }
+    },
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "vendor": {
+          "type": "string",
+          "description": "Fabricante del producto documentado (PostgreSQL Global Development Group, Microsoft, etc.)."
+        },
+        "edition": {
+          "type": "string",
+          "description": "Edición del producto (Community, Enterprise, etc.)."
+        },
+        "version_policy": {
+          "type": "string",
+          "enum": ["strict", "unknown_if_undeclared"],
+          "default": "unknown_if_undeclared",
+          "description": "Cómo tratar la versión del producto si no se declara. strict = bloquear; unknown_if_undeclared = registrar unknown (INV-17)."
+        }
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "default_criticality": {
+          "type": "string",
+          "enum": ["must-keep", "context"],
+          "default": "must-keep",
+          "description": "Criticidad por defecto al crear unidades nuevas en el ledger."
+        }
+      }
+    },
+    "ledger": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "discard_policy": {
+          "type": "string",
+          "enum": ["closed-list", "allow-with-reason", "allow-any"],
+          "default": "closed-list",
+          "description": "Política de descarte del ledger. closed-list = solo motivos de la lista cerrada (F15)."
+        }
+      }
+    },
+    "graph": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cycle_policy": {
+          "type": "string",
+          "enum": ["block", "allow"],
+          "default": "block",
+          "description": "Qué hacer si el grafo de prerrequisitos tiene ciclos. block = bloquea (architecture.md §8)."
+        }
+      }
+    },
+    "visual": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "theme": {
+          "type": "string",
+          "enum": ["auto", "light", "dark"],
+          "default": "auto",
+          "description": "Tema visual por defecto. auto respeta el tema del destino (Obsidian: el del vault; Notion: el del workspace)."
+        },
+        "density": {
+          "type": "string",
+          "enum": ["compact", "normal", "spacious"],
+          "default": "normal",
+          "description": "Densidad visual. Mapea a tokens numéricos en tokens.json (Fase 72)."
+        }
+      }
+    },
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mark_derived": {
+          "type": "string",
+          "enum": ["visible", "muted", "footnote"],
+          "default": "visible",
+          "description": "Marcado de hechos derivados (no presentes en la fuente): visible = callout visible; muted = nota discreta; footnote = nota al pie."
+        },
+        "mark_external": {
+          "type": "string",
+          "enum": ["visible", "muted", "footnote"],
+          "default": "visible",
+          "description": "Marcado de hechos externos (fuera de bloque identificable): mismas opciones que mark_derived."
+        }
+      }
+    }
+  }
+}

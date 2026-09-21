@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/ledger.schema.json",
+  "title": "Coverage Ledger",
+  "description": "Registro fuente→nota que hace verificable la cobertura. Cada entrada es una unidad de información extraída del SDM; el estado y el destino conectan con la nota final. El ledger es la fuente de verdad de la puerta de fidelidad (architecture.md §3.3); las notas NO lo son. Documento normativo de Fase 15.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "entries"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del esquema. Mayor en cambios incompatibles; menor en campo opcional nuevo."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "hash"],
+      "properties": {
+        "id":   { "type": "string" },
+        "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$",
+                  "description": "sha256 hex del archivo fuente (architecture.md §6)." }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit_id", "source_block_ids", "type", "criticality", "state"],
+      "properties": {
+        "unit_id": {
+          "type": "string",
+          "description": "Identificador único de la unidad (e.g. 'u_001')."
+        },
+        "source_block_ids": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[0-9a-f]{12}$" },
+          "minItems": 1,
+          "description": "Bloques del SDM que respaldan esta unidad (F13). Permite la trazabilidad bidireccional."
+        },
+        "source_section_path": {
+          "type": "string",
+          "description": "Ruta canónica de la sección en el SDM; habilita el query '¿dónde quedó la sección X?' (criterio 3)."
+        },
+        "type": {
+          "type": "string",
+          "description": "Tipo semántico de la unidad: parameter, step, definition, error, warning, example, etc."
+        },
+        "criticality": {
+          "type": "string",
+          "enum": ["must-keep", "context"],
+          "description": "must-keep: la unidad no puede omitirse (puerta de fidelidad). context: aporta color pero puede fusionarse o descartarse con motivo."
+        },
+        "target_note": {
+          "type": ["string", "null"],
+          "description": "note_id destino. Obligatorio para must-keep."
+        },
+        "target_section": {
+          "type": ["string", "null"],
+          "description": "Sección dentro de la nota destino (e.g. 'Configuration')."
+        },
+        "state": {
+          "type": "string",
+          "enum": ["pending", "written", "merged", "discarded"],
+          "description": "pending: extraída pero no redactada. written: la nota contiene una versión redactada. merged: absorbida por otra unidad (no aparece standalone). discarded: descartada con motivo de la lista cerrada."
+        },
+        "discard_reason": {
+          "type": ["string", "null"],
+          "pattern": "^(redundant-with:[a-zA-Z0-9_-]+|boilerplate|navigation|out-of-scope-by-user)$",
+          "description": "Motivo de descarte de la lista cerrada (criterio 2). Solo presente cuando state == 'discarded'."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "state": { "const": "discarded" } } },
+          "then": {
+            "required": ["discard_reason"],
+            "properties": { "discard_reason": { "type": "string", "minLength": 1 } }
+          }
+        },
+        {
+          "if": { "properties": { "state": { "enum": ["pending", "written", "merged"] } } },
+          "then": {
+            "properties": { "discard_reason": { "type": "null" } }
+          }
+        },
+        {
+          "if": { "properties": { "criticality": { "const": "must-keep" } } },
+          "then": { "required": ["target_note"] }
+        }
+      ]
+    }
+  }
+}
