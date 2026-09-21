@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "06-kubernetes-api-ref",
+    "path": "/Users/martin/sources/06-kubernetes-api-ref.html",
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "algorithm": "sha256",
+    "version": "1.30",
+    "vendor": "Cloud Native Computing Foundation",
+    "product": "Kubernetes"
+  },
+  "current_stage": "l3",
+  "stage_progress": {
+    "l0": "done",
+    "l1": "done",
+    "l2": "done",
+    "l3": "done",
+    "l4": "pending"
+  },
+  "units_processed": 12,
+  "published_notes": [
+    {
+      "note_id": "kubernetes-pod-v1",
+      "destination": "obsidian",
+      "remote_id": "obs-pod-v1",
+      "remote_url": "obsidian://vault/notes/kubernetes-pod-v1.md",
+      "etag": null,
+      "published_at": "2026-09-21T18:30:00Z",
+      "last_updated": "2026-09-21T18:30:00Z"
+    },
+    {
+      "note_id": "kubernetes-pod-v1",
+      "destination": "notion",
+      "remote_id": "notion-page-uuid-789",
+      "remote_url": "https://notion.so/page-uuid-789",
+      "etag": "W/\"abc123\"",
+      "published_at": "2026-09-21T18:35:00Z",
+      "last_updated": "2026-09-21T18:35:00Z"
+    },
+    {
+      "note_id": "kubernetes-deployment-v1",
+      "destination": "obsidian",
+      "remote_id": "obs-deployment-v1",
+      "remote_url": "obsidian://vault/notes/kubernetes-deployment-v1.md",
+      "etag": null,
+      "published_at": "2026-09-21T18:40:00Z",
+      "last_updated": "2026-09-21T18:40:00Z"
+    }
+  ],
+  "glossary": {
+    "pod": "Unidad mínima desplegable en Kubernetes; encapsula uno o más contenedores."
+  },
+  "naming_decisions": [],
+  "link_debt": [
+    {
+      "from_note": "kubernetes-pod-v1",
+      "target": "kubernetes-deployment-v1",
+      "kind": "missing-target",
+      "detected_at": "2026-09-21T18:45:00Z"
+    }
+  ],
+  "hash_mismatch": false,
+  "last_modified": "2026-09-21T18:45:00Z"
+}

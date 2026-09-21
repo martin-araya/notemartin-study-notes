@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "13-internet-archive-scan-hostil",
+    "hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "entries": [
+    {
+      "unit_id": "u_030",
+      "source_block_ids": [
+        "a0b6d0673d98"
+      ],
+      "source_section_path": "/page-3",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": null,
+      "target_section": null,
+      "state": "pending"
+    }
+  ]
+}

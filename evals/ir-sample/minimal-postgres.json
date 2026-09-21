@@ -1,0 +1,158 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "postgres-shared-buffers",
+  "title": "PostgreSQL 16 — shared_buffers",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section-h2"
+      },
+      "source_refs": [
+        {
+          "block_id": "a8f4ce140580",
+          "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+          "section_path": "/ch02/intro"
+        }
+      ],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [
+            {
+              "block_id": "a8f4ce140581",
+              "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+              "section_path": "/ch02/intro"
+            }
+          ],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "PostgreSQL reserva ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "term-ref",
+              "attrs": {
+                "text": "shared_buffers",
+                "term_id": "shared-buffers",
+                "capability": "link-term"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " como buffer pool. El tamaño se controla con ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "shared_buffers",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ".",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        },
+        {
+          "node": "parameter-table",
+          "attrs": {
+            "columns": [
+              "parametro",
+              "tipo",
+              "default",
+              "rango"
+            ],
+            "capability": "parameter-table"
+          },
+          "source_refs": [
+            {
+              "block_id": "a8f4ce140582",
+              "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+              "section_path": "/ch02/intro"
+            }
+          ],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "max_connections | integer | 100 | 1-10000",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        },
+        {
+          "node": "admonition",
+          "attrs": {
+            "severity": "warning",
+            "capability": "callout"
+          },
+          "source_refs": [
+            {
+              "block_id": "a8f4ce140583",
+              "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+              "section_path": "/ch02/intro"
+            }
+          ],
+          "children": [
+            {
+              "node": "paragraph",
+              "attrs": {
+                "capability": "paragraph"
+              },
+              "source_refs": [],
+              "children": [
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": "Cambiar ",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                },
+                {
+                  "node": "code-inline",
+                  "attrs": {
+                    "text": "shared_buffers",
+                    "capability": "code-inline"
+                  },
+                  "source_refs": []
+                },
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": " requiere reinicio.",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "14-book-bad-numbering-hostil",
+    "hash": "dd6c80d16bd8e7a3f39d58a3684de55cff91ad0ab12088dca0cea9a99dbef2a9",
+    "algorithm": "sha256",
+    "vendor": "Editorial Hostil (test fixture)",
+    "product": "Book with inconsistent numbering",
+    "url": "https://example.com/hostil-book",
+    "language": "en",
+    "format": "pdf",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/chapter-2",
+      "blocks": [
+        {
+          "id": "3a853e445602",
+          "type": "heading",
+          "content": {
+            "level": 1,
+            "text": "Chapter 2 (numbered as 1 in the original)"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/chapter-2",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "80a813251c52",
+          "type": "prose",
+          "content": "This chapter has inconsistent numbering across printings.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/chapter-2",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "796794eecd7b",
+          "type": "list",
+          "content": {
+            "ordered": false,
+            "items": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/chapter-2",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "c3c577bfa8c3",
+          "type": "toc",
+          "content": {
+            "entries": [
+              {
+                "label": "Chapter 2",
+                "page": 17,
+                "anchor": "/chapter-2"
+              },
+              {
+                "label": "Appendix A",
+                "page": 245,
+                "anchor": "/appendix-a"
+              }
+            ]
+          },
+          "anchor": {
+            "page": 4,
+            "section_path": "/chapter-2",
+            "char_range": [
+              300,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

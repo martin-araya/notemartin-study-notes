@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "05-iso-sql-tables",
+    "hash": "d21a9121420bb8d732d08c473164b9cd7ed039b2a44ea2fdde43f478662b03cc",
+    "algorithm": "sha256",
+    "vendor": "ISO/IEC",
+    "product": "ISO/IEC 9075:2023 SQL",
+    "url": "https://www.iso.org/standard/76583.html",
+    "language": "en",
+    "format": "pdf",
+    "version": "2023",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/annex-a",
+      "blocks": [
+        {
+          "id": "9daac1bf1013",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "Annex A (informative)"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/annex-a",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "8d230fd5296a",
+          "type": "prose",
+          "content": "This annex provides additional context for the SQL standard.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/annex-a",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "cb85021e1cad",
+          "type": "table",
+          "content": {
+            "headers": [
+              "Feature",
+              "Status"
+            ],
+            "rows": [
+              [
+                "Feature 1",
+                "mandatory"
+              ],
+              [
+                "Feature 2",
+                "optional"
+              ]
+            ]
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/annex-a",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

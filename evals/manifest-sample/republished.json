@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "01-postgresql-chapter",
+    "path": "/Users/martin/sources/01-postgresql-chapter.html",
+    "hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+    "algorithm": "sha256",
+    "version": "16",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL 16"
+  },
+  "current_stage": "l4",
+  "stage_progress": {
+    "l0": "done",
+    "l1": "done",
+    "l2": "done",
+    "l3": "done",
+    "l4": "done"
+  },
+  "units_processed": 7,
+  "published_notes": [
+    {
+      "note_id": "postgres-shared-buffers",
+      "destination": "obsidian",
+      "remote_id": "obs-shared-buffers-v2",
+      "remote_url": "obsidian://vault/notes/postgres-shared-buffers.md",
+      "etag": "W/\"v2-abc\"",
+      "published_at": "2026-09-21T19:00:00Z",
+      "last_updated": "2026-09-21T20:15:00Z"
+    }
+  ],
+  "glossary": {
+    "shared-buffers": "Región de memoria compartida usada como buffer pool.",
+    "mvcc": "Control de concurrencia multiversión."
+  },
+  "naming_decisions": [
+    {
+      "entity": "note-id",
+      "decision": "kebab-case",
+      "rationale": "Coherencia con el corpus y legibilidad en destinos."
+    }
+  ],
+  "link_debt": [],
+  "hash_mismatch": false,
+  "last_modified": "2026-09-21T20:15:00Z"
+}

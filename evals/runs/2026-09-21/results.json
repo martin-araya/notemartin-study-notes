@@ -1,0 +1,875 @@
+{
+  "date": "2026-09-21",
+  "thresholds": {
+    "tpr_train": 0.9,
+    "tpr_holdout": 0.9,
+    "fpr_train": 0.1,
+    "fpr_holdout": 0.1
+  },
+  "metrics": {
+    "tpr_train": 1.0,
+    "tpr_holdout": 1.0,
+    "fpr_train": 0.0,
+    "fpr_holdout": 0.0,
+    "counts": {
+      "positives_train": 18,
+      "positives_holdout": 7,
+      "negatives_train": 10,
+      "negatives_holdout": 5
+    }
+  },
+  "query_results": [
+    {
+      "id": "P-001",
+      "category": "documentacion-tecnica",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "16",
+        "capitulo",
+        "convierte",
+        "documentacion",
+        "este",
+        "estudio",
+        "notas",
+        "postgresql"
+      ],
+      "matched_tokens": [
+        "convierte",
+        "documentacion",
+        "estudio",
+        "notas"
+      ]
+    },
+    {
+      "id": "P-002",
+      "category": "documentacion-tecnica",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "este",
+        "estructuradas",
+        "kubernetes",
+        "manual",
+        "notas",
+        "obsidian",
+        "pasame",
+        "usuario"
+      ],
+      "matched_tokens": [
+        "manual",
+        "notas",
+        "obsidian"
+      ]
+    },
+    {
+      "id": "P-003",
+      "category": "documentacion-tecnica",
+      "language": "en",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "api",
+        "guide",
+        "into",
+        "notes",
+        "onboarding",
+        "stripe",
+        "study",
+        "team",
+        "turn"
+      ],
+      "matched_tokens": [
+        "api",
+        "notes",
+        "study"
+      ]
+    },
+    {
+      "id": "P-004",
+      "category": "documentacion-tecnica",
+      "language": "en",
+      "split": "holdout",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "attached",
+        "docker",
+        "documentation",
+        "generate",
+        "notes",
+        "official",
+        "product",
+        "study"
+      ],
+      "matched_tokens": [
+        "documentation",
+        "notes",
+        "product",
+        "study"
+      ]
+    },
+    {
+      "id": "P-005",
+      "category": "capitulo-libro",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "applications",
+        "apuntes",
+        "capitulo",
+        "data",
+        "designing",
+        "estudio",
+        "hazme",
+        "intensive",
+        "partir"
+      ],
+      "matched_tokens": [
+        "apuntes",
+        "estudio"
+      ]
+    },
+    {
+      "id": "P-006",
+      "category": "capitulo-libro",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "capitulo",
+        "convierte",
+        "database",
+        "indices",
+        "internals",
+        "notas",
+        "sobre",
+        "trazables"
+      ],
+      "matched_tokens": [
+        "convierte",
+        "notas",
+        "trazables"
+      ]
+    },
+    {
+      "id": "P-007",
+      "category": "capitulo-libro",
+      "language": "en",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "algorithms",
+        "book",
+        "chapter",
+        "complete",
+        "consensus",
+        "into",
+        "notes",
+        "process",
+        "study",
+        "technical"
+      ],
+      "matched_tokens": [
+        "book",
+        "notes",
+        "study",
+        "technical"
+      ]
+    },
+    {
+      "id": "P-008",
+      "category": "capitulo-libro",
+      "language": "en",
+      "split": "holdout",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "book",
+        "chapter",
+        "into",
+        "notes",
+        "notion",
+        "processing",
+        "technical",
+        "transaction",
+        "turn"
+      ],
+      "matched_tokens": [
+        "book",
+        "notes",
+        "notion",
+        "technical"
+      ]
+    },
+    {
+      "id": "P-009",
+      "category": "pdf-escaneado",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "19c",
+        "conviertelo",
+        "escaneado",
+        "estudio",
+        "manual",
+        "notas",
+        "oracle",
+        "pdf",
+        "tengo"
+      ],
+      "matched_tokens": [
+        "estudio",
+        "manual",
+        "notas",
+        "pdf"
+      ]
+    },
+    {
+      "id": "P-010",
+      "category": "pdf-escaneado",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "antiguo",
+        "escaneado",
+        "este",
+        "libro",
+        "obsidian",
+        "pasalo",
+        "pdf",
+        "procesa",
+        "tecnico"
+      ],
+      "matched_tokens": [
+        "obsidian",
+        "pdf"
+      ]
+    },
+    {
+      "id": "P-011",
+      "category": "pdf-escaneado",
+      "language": "en",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "draft",
+        "iso",
+        "notes",
+        "ocr",
+        "pdf",
+        "produce",
+        "scanned",
+        "standard",
+        "study"
+      ],
+      "matched_tokens": [
+        "notes",
+        "pdf",
+        "scanned",
+        "study"
+      ]
+    },
+    {
+      "id": "P-012",
+      "category": "pdf-escaneado",
+      "language": "en",
+      "split": "holdout",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "into",
+        "manual",
+        "notes",
+        "old",
+        "page",
+        "scanned",
+        "structured",
+        "technical",
+        "turn"
+      ],
+      "matched_tokens": [
+        "manual",
+        "notes",
+        "scanned",
+        "technical"
+      ]
+    },
+    {
+      "id": "P-013",
+      "category": "api-reference",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "api",
+        "convierte",
+        "kubernetes",
+        "notas",
+        "referencia",
+        "rest"
+      ],
+      "matched_tokens": [
+        "api",
+        "convierte",
+        "notas"
+      ]
+    },
+    {
+      "id": "P-014",
+      "category": "api-reference",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "cli",
+        "docker",
+        "engine",
+        "genera",
+        "notas",
+        "partir",
+        "referencia"
+      ],
+      "matched_tokens": [
+        "notas"
+      ]
+    },
+    {
+      "id": "P-015",
+      "category": "api-reference",
+      "language": "en",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "build",
+        "function",
+        "notes",
+        "postgresql",
+        "reference",
+        "study"
+      ],
+      "matched_tokens": [
+        "notes",
+        "reference",
+        "study"
+      ]
+    },
+    {
+      "id": "P-016",
+      "category": "api-reference",
+      "language": "en",
+      "split": "holdout",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "api",
+        "appflowy",
+        "aws",
+        "extract",
+        "into",
+        "notes",
+        "reference",
+        "sdk"
+      ],
+      "matched_tokens": [
+        "api",
+        "appflowy",
+        "notes",
+        "reference"
+      ]
+    },
+    {
+      "id": "P-017",
+      "category": "destino-explicito",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "estudio",
+        "notas",
+        "notion",
+        "pasalo"
+      ],
+      "matched_tokens": [
+        "estudio",
+        "notas",
+        "notion"
+      ]
+    },
+    {
+      "id": "P-018",
+      "category": "destino-explicito",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "enlaces",
+        "este",
+        "internos",
+        "manual",
+        "obsidian",
+        "publicado",
+        "quiero",
+        "tecnico"
+      ],
+      "matched_tokens": [
+        "manual",
+        "obsidian"
+      ]
+    },
+    {
+      "id": "P-019",
+      "category": "destino-explicito",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "anki",
+        "capitulo",
+        "este",
+        "fichas",
+        "formato",
+        "repaso",
+        "saca",
+        "tecnico"
+      ],
+      "matched_tokens": [
+        "formato",
+        "repaso"
+      ]
+    },
+    {
+      "id": "P-020",
+      "category": "destino-explicito",
+      "language": "en",
+      "split": "holdout",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "appflowy",
+        "book",
+        "push",
+        "structured",
+        "technical",
+        "vault"
+      ],
+      "matched_tokens": [
+        "appflowy",
+        "book",
+        "technical"
+      ]
+    },
+    {
+      "id": "P-021",
+      "category": "destino-explicito",
+      "language": "en",
+      "split": "holdout",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "documentation",
+        "generate",
+        "host",
+        "html",
+        "markdown",
+        "site",
+        "study"
+      ],
+      "matched_tokens": [
+        "documentation",
+        "html",
+        "markdown",
+        "study"
+      ]
+    },
+    {
+      "id": "P-022",
+      "category": "estudio-metas",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "apuntes",
+        "certificacion",
+        "estudiar",
+        "examen",
+        "kubernetes",
+        "necesito"
+      ],
+      "matched_tokens": [
+        "apuntes"
+      ]
+    },
+    {
+      "id": "P-023",
+      "category": "estudio-metas",
+      "language": "es",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "dame",
+        "este",
+        "estudio",
+        "manual",
+        "notas",
+        "repasar",
+        "semana",
+        "tecnico",
+        "viene"
+      ],
+      "matched_tokens": [
+        "estudio",
+        "manual",
+        "notas"
+      ]
+    },
+    {
+      "id": "P-024",
+      "category": "estudio-metas",
+      "language": "en",
+      "split": "train",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "architecture",
+        "create",
+        "notes",
+        "prepare",
+        "review",
+        "rfc",
+        "so",
+        "study"
+      ],
+      "matched_tokens": [
+        "notes",
+        "review",
+        "study"
+      ]
+    },
+    {
+      "id": "P-025",
+      "category": "estudio-metas",
+      "language": "en",
+      "split": "holdout",
+      "expected": "dispara",
+      "predicted": "dispara",
+      "match": true,
+      "tokens_in_query": [
+        "into",
+        "month",
+        "next",
+        "notes",
+        "paper",
+        "self",
+        "study",
+        "technical",
+        "turn",
+        "use"
+      ],
+      "matched_tokens": [
+        "notes",
+        "study",
+        "technical"
+      ]
+    },
+    {
+      "id": "N-001",
+      "category": "codigo-puro",
+      "language": "es",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "clave",
+        "diccionarios",
+        "escribeme",
+        "funcion",
+        "lista",
+        "ordene",
+        "python"
+      ]
+    },
+    {
+      "id": "N-002",
+      "category": "codigo-puro",
+      "language": "es",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "dependencias",
+        "externas",
+        "implementa",
+        "json",
+        "parser",
+        "rust"
+      ]
+    },
+    {
+      "id": "N-003",
+      "category": "codigo-puro",
+      "language": "es",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "este",
+        "java",
+        "legible",
+        "metodo",
+        "refactoriza",
+        "sea"
+      ]
+    },
+    {
+      "id": "N-004",
+      "category": "codigo-puro",
+      "language": "en",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "flattens",
+        "function",
+        "go",
+        "map",
+        "nested",
+        "write"
+      ]
+    },
+    {
+      "id": "N-005",
+      "category": "codigo-puro",
+      "language": "en",
+      "split": "holdout",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "bug",
+        "early",
+        "exits",
+        "fix",
+        "javascript",
+        "loop",
+        "too",
+        "where"
+      ]
+    },
+    {
+      "id": "N-006",
+      "category": "codigo-puro",
+      "language": "en",
+      "split": "holdout",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "algorithm",
+        "binary",
+        "implement",
+        "search",
+        "typescript"
+      ]
+    },
+    {
+      "id": "N-007",
+      "category": "resumen-libre",
+      "language": "es",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "correo",
+        "este",
+        "lineas",
+        "resumeme",
+        "tres"
+      ]
+    },
+    {
+      "id": "N-008",
+      "category": "resumen-libre",
+      "language": "es",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "dr",
+        "hazme",
+        "meteorologico",
+        "parte",
+        "paso",
+        "tl"
+      ]
+    },
+    {
+      "id": "N-009",
+      "category": "resumen-libre",
+      "language": "en",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "article",
+        "news",
+        "sentences",
+        "summarize",
+        "two"
+      ]
+    },
+    {
+      "id": "N-010",
+      "category": "resumen-libre",
+      "language": "en",
+      "split": "holdout",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "customer",
+        "gist",
+        "give",
+        "me",
+        "support",
+        "ticket"
+      ]
+    },
+    {
+      "id": "N-011",
+      "category": "traduccion",
+      "language": "es",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "correo",
+        "espanol",
+        "este",
+        "ingles",
+        "traduceme"
+      ]
+    },
+    {
+      "id": "N-012",
+      "category": "traduccion",
+      "language": "en",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "document",
+        "english",
+        "french",
+        "into",
+        "legal",
+        "translate"
+      ]
+    },
+    {
+      "id": "N-013",
+      "category": "traduccion",
+      "language": "en",
+      "split": "holdout",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "german",
+        "readme",
+        "spanish",
+        "translate"
+      ]
+    },
+    {
+      "id": "N-014",
+      "category": "ensayo-otro",
+      "language": "es",
+      "split": "train",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "breve",
+        "educacion",
+        "ensayo",
+        "escribe",
+        "ia",
+        "impacto",
+        "sobre"
+      ]
+    },
+    {
+      "id": "N-015",
+      "category": "ensayo-otro",
+      "language": "en",
+      "split": "holdout",
+      "expected": "no-dispara",
+      "predicted": "no-dispara",
+      "match": false,
+      "tokens_in_query": [
+        "declining",
+        "draft",
+        "email",
+        "invitation",
+        "meeting",
+        "polite"
+      ]
+    }
+  ]
+}

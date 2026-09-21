@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "13-internet-archive-scan-hostil",
+    "hash": "ec7cfb5578a5742e53456943277aae6bfebb4243129ad6c7f7ff8c08b8867132",
+    "algorithm": "sha256",
+    "vendor": "Internet Archive",
+    "product": "Scanned document",
+    "url": "https://archive.org/details/example-scan",
+    "language": "en",
+    "format": "pdf",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/page-3",
+      "blocks": [
+        {
+          "id": "4c11e501adf9",
+          "type": "prose",
+          "content": "[OCR result with rotation; partially garbled]",
+          "anchor": {
+            "page": 1,
+            "section_path": "/page-3",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 0.85,
+          "origin": "ocr"
+        },
+        {
+          "id": "04d0b76bb162",
+          "type": "code",
+          "content": {
+            "lang": "python",
+            "text": "def hello(): print('hello, world')"
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/page-3",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 0.85,
+          "origin": "ocr"
+        },
+        {
+          "id": "c03f7fd510a6",
+          "type": "formula",
+          "content": {
+            "latex": "f(x) = ax^2 + bx + c",
+            "display": false
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/page-3",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 0.85,
+          "origin": "ocr"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "06-kubernetes-api-ref",
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "entries": [
+    {
+      "unit_id": "u_010",
+      "source_block_ids": [
+        "3ae5291b976e"
+      ],
+      "source_section_path": "/workload/pod-v1",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "kubernetes-pod-v1",
+      "target_section": "Overview",
+      "state": "written"
+    },
+    {
+      "unit_id": "u_011",
+      "source_block_ids": [
+        "f2f5f5edd0ce"
+      ],
+      "source_section_path": "/workload/pod-v1",
+      "type": "parameter",
+      "criticality": "must-keep",
+      "target_note": "kubernetes-pod-v1",
+      "target_section": "Spec",
+      "state": "written"
+    },
+    {
+      "unit_id": "u_012",
+      "source_block_ids": [
+        "4ce7cabcb163"
+      ],
+      "source_section_path": "/workload/pod-v1",
+      "type": "example",
+      "criticality": "must-keep",
+      "target_note": "kubernetes-pod-v1",
+      "target_section": "Examples",
+      "state": "merged"
+    },
+    {
+      "unit_id": "u_013",
+      "source_block_ids": [
+        "af43951533cf"
+      ],
+      "source_section_path": "/intro",
+      "type": "step",
+      "criticality": "must-keep",
+      "target_note": "kubernetes-pod-v1",
+      "target_section": "Setup",
+      "state": "merged"
+    },
+    {
+      "unit_id": "u_014",
+      "source_block_ids": [
+        "b47f4f37b6cc"
+      ],
+      "source_section_path": "/toc",
+      "type": "navigation",
+      "criticality": "must-keep",
+      "target_note": "kubernetes-pod-v1",
+      "target_section": null,
+      "state": "discarded",
+      "discard_reason": "navigation"
+    },
+    {
+      "unit_id": "u_015",
+      "source_block_ids": [
+        "df8909b535b9"
+      ],
+      "source_section_path": "/workload/pod-v1",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "kubernetes-pod-v1",
+      "target_section": null,
+      "state": "discarded",
+      "discard_reason": "redundant-with:u_010"
+    }
+  ]
+}

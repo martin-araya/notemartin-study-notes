@@ -1,0 +1,4 @@
+# Perfil mínimo válido — solo fija el destino activo. El resto toma defaults.
+# Esperado: validate_profile.py retorna exit 0.
+targets:
+  active: [obsidian]

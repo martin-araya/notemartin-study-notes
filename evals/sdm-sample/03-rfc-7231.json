@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "03-rfc-7231",
+    "hash": "a83d026937f6f7929a0e53f8a9bfec4104285f0f89d6dbabd3927c4208a715b2",
+    "algorithm": "sha256",
+    "vendor": "IETF",
+    "product": "RFC 7231",
+    "url": "https://datatracker.ietf.org/doc/html/rfc7231",
+    "language": "en",
+    "format": "html",
+    "version": "7231",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/section-4-request-methods",
+      "blocks": [
+        {
+          "id": "7658f9b4e6da",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "Request Methods"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/section-4-request-methods",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "87cf099a38e9",
+          "type": "prose",
+          "content": "The Request-Line begins with a method token.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/section-4-request-methods",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "b8d11d79a844",
+          "type": "code",
+          "content": {
+            "lang": "http",
+            "text": "GET /index.html HTTP/1.1"
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/section-4-request-methods",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "0c2d098011bf",
+          "type": "footnote",
+          "content": {
+            "text": "See RFC 7230 for connection management.",
+            "ref": "1"
+          },
+          "anchor": {
+            "page": 4,
+            "section_path": "/section-4-request-methods",
+            "char_range": [
+              300,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

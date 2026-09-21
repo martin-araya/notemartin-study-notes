@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "01-postgresql-chapter",
+    "hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657"
+  },
+  "entries": [
+    {
+      "unit_id": "u_001",
+      "source_block_ids": [
+        "c77ee08b9b0b"
+      ],
+      "source_section_path": "/ch02/intro",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "postgres-shared-buffers",
+      "target_section": "Configuration",
+      "state": "written"
+    },
+    {
+      "unit_id": "u_002",
+      "source_block_ids": [
+        "9d68ef9f982f"
+      ],
+      "source_section_path": "/ch02/intro",
+      "type": "parameter",
+      "criticality": "must-keep",
+      "target_note": "postgres-shared-buffers",
+      "target_section": "Configuration",
+      "state": "written"
+    },
+    {
+      "unit_id": "u_003",
+      "source_block_ids": [
+        "006fdec21d40"
+      ],
+      "source_section_path": "/ch02/section-2.3.2",
+      "type": "warning",
+      "criticality": "must-keep",
+      "target_note": "postgres-shared-buffers",
+      "target_section": "Warnings",
+      "state": "merged"
+    },
+    {
+      "unit_id": "u_004",
+      "source_block_ids": [
+        "e7ecb00ed1f0"
+      ],
+      "source_section_path": "/ch03/wal",
+      "type": "step",
+      "criticality": "must-keep",
+      "target_note": "postgres-wal",
+      "target_section": "Procedure",
+      "state": "written"
+    },
+    {
+      "unit_id": "u_005",
+      "source_block_ids": [
+        "c4668e0ba872"
+      ],
+      "source_section_path": "/ch03/wal",
+      "type": "warning",
+      "criticality": "must-keep",
+      "target_note": "postgres-wal",
+      "target_section": "Warnings",
+      "state": "discarded",
+      "discard_reason": "out-of-scope-by-user"
+    },
+    {
+      "unit_id": "u_006",
+      "source_block_ids": [
+        "70ae70589b7d"
+      ],
+      "source_section_path": "/ch02/intro",
+      "type": "note",
+      "criticality": "context",
+      "target_note": null,
+      "target_section": null,
+      "state": "written"
+    },
+    {
+      "unit_id": "u_007",
+      "source_block_ids": [
+        "628579f49982"
+      ],
+      "source_section_path": "/ch02/intro",
+      "type": "tip",
+      "criticality": "context",
+      "target_note": null,
+      "target_section": null,
+      "state": "discarded",
+      "discard_reason": "boilerplate"
+    }
+  ]
+}

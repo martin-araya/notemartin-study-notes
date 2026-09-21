@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "07-docker-cli-ref",
+    "hash": "31f7340509fd8a62925dc765f5c53e38d1d80e49557f8306cb1c7d4a903bf211",
+    "algorithm": "sha256",
+    "vendor": "Docker Inc.",
+    "product": "Docker Engine CLI",
+    "url": "https://docs.docker.com/engine/reference/commandline/cli/",
+    "language": "en",
+    "format": "html",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/run",
+      "blocks": [
+        {
+          "id": "475f696f314f",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "docker run"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/run",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "dcb81fab5692",
+          "type": "prose",
+          "content": "Run a command in a new container.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/run",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "592ef561a331",
+          "type": "code",
+          "content": {
+            "lang": "bash",
+            "text": "docker run -d --name web nginx:alpine"
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/run",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "543d51ae2483",
+          "type": "console",
+          "content": {
+            "lines": [
+              "$ docker ps --filter name=web",
+              "CONTAINER ID   IMAGE          PORTS     NAMES",
+              "abc123         nginx:alpine   80/tcp    web"
+            ]
+          },
+          "anchor": {
+            "page": 4,
+            "section_path": "/run",
+            "char_range": [
+              300,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

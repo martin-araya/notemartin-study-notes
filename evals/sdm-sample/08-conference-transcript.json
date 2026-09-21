@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "08-conference-transcript",
+    "hash": "0c7e02e3da3cd58d187851652e571751a1bab3db5ecdbdb55820b446814a3d43",
+    "algorithm": "sha256",
+    "vendor": "PostgreSQL Conference",
+    "product": "Conference Transcript",
+    "url": "https://www.postgresqlconference.org/",
+    "language": "en",
+    "format": "transcript",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/talk/intro",
+      "blocks": [
+        {
+          "id": "c11bef84862b",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "Talk Introduction"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/talk/intro",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "14ac25d2cb55",
+          "type": "prose",
+          "content": "Speaker: Today I want to talk about MVCC implementation in PostgreSQL.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/talk/intro",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "16141f1643c8",
+          "type": "list",
+          "content": {
+            "ordered": true,
+            "items": [
+              "Why MVCC matters",
+              "Implementation details",
+              "Operational tips"
+            ]
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/talk/intro",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

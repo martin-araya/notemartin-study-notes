@@ -1,0 +1,12 @@
+# Perfil malformado — fixture para validar el rechazo de entrada incorrecta.
+# Errores intencionales:
+#   1. `writing.lenguage` — typo en la clave (debería ser `language`).
+#   2. `writing.style: novel` — valor fuera del enum declarado.
+#   3. `targets.active` — entrada `medium` no está en el enum.
+# Esperado: validate_profile.py retorna exit 1 con mensajes para cada uno.
+schema_version: "1.0.0"
+writing:
+  lenguage: es
+  style: novel
+targets:
+  active: [obsidian, medium]

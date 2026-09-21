@@ -1,0 +1,333 @@
+# Set de consultas para evaluación de disparo de la skill `notemartin-study-notes`
+# Fase 10 — Optimización de disparo.
+# Distribución: 25 positivos (6 categorías) + 15 negativos (4 categorías) = 40 consultas.
+# Split: 70/30 estratificado por categoría → 28 train + 12 holdout.
+# Etiqueta esperada: `dispara` (positivos) | `no-dispara` (negativos).
+# Categorías:
+#   positivos: documentacion-tecnica, capitulo-libro, pdf-escaneado, api-reference,
+#              destino-explicito, estudio-metas
+#   negativos: codigo-puro, resumen-libre, traduccion, ensayo-otro
+
+positives:
+
+  - id: P-001
+    category: documentacion-tecnica
+    language: es
+    text: "Convierte este capítulo de la documentación de PostgreSQL 16 en notas de estudio."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-002
+    category: documentacion-tecnica
+    language: es
+    text: "Pásame este manual de usuario de Kubernetes a Obsidian como notas estructuradas."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-003
+    category: documentacion-tecnica
+    language: en
+    text: "Turn this Stripe API guide into study notes for my team's onboarding."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-004
+    category: documentacion-tecnica
+    language: en
+    text: "Generate study notes from the official Docker product documentation I attached."
+    expected: dispara
+    split: holdout
+    source: manual
+
+  - id: P-005
+    category: capitulo-libro
+    language: es
+    text: "Hazme apuntes de estudio a partir del capítulo 3 de 'Designing Data-Intensive Applications'."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-006
+    category: capitulo-libro
+    language: es
+    text: "Convierte el capítulo sobre índices de 'Database Internals' en notas trazables."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-007
+    category: capitulo-libro
+    language: en
+    text: "Process this technical book chapter on consensus algorithms into complete study notes."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-008
+    category: capitulo-libro
+    language: en
+    text: "Turn the transaction-processing chapter of this technical book into Notion notes."
+    expected: dispara
+    split: holdout
+    source: manual
+
+  - id: P-009
+    category: pdf-escaneado
+    language: es
+    text: "Tengo un PDF escaneado del manual de Oracle 19c; conviértelo en notas de estudio."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-010
+    category: pdf-escaneado
+    language: es
+    text: "Procesa este PDF escaneado de un libro técnico antiguo y pásalo a Obsidian."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-011
+    category: pdf-escaneado
+    language: en
+    text: "OCR this scanned PDF of the ISO C++ standard draft and produce study notes."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-012
+    category: pdf-escaneado
+    language: en
+    text: "This is a scanned page from an old technical manual — turn it into structured notes."
+    expected: dispara
+    split: holdout
+    source: manual
+
+  - id: P-013
+    category: api-reference
+    language: es
+    text: "Convierte la referencia de la API REST de Kubernetes en notas de referencia."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-014
+    category: api-reference
+    language: es
+    text: "Genera notas a partir de la referencia CLI de Docker Engine."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-015
+    category: api-reference
+    language: en
+    text: "Build study notes from this PostgreSQL function reference."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-016
+    category: api-reference
+    language: en
+    text: "Extract the API reference for the AWS SDK into AppFlowy notes."
+    expected: dispara
+    split: holdout
+    source: manual
+
+  - id: P-017
+    category: destino-explicito
+    language: es
+    text: "Pásalo a Notion como notas de estudio."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-018
+    category: destino-explicito
+    language: es
+    text: "Quiero este manual técnico publicado en Obsidian con sus enlaces internos."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-019
+    category: destino-explicito
+    language: es
+    text: "Saca fichas de repaso en formato Anki de este capítulo técnico."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-020
+    category: destino-explicito
+    language: en
+    text: "Push this technical book to AppFlowy as a structured vault."
+    expected: dispara
+    split: holdout
+    source: manual
+
+  - id: P-021
+    category: destino-explicito
+    language: en
+    text: "Generate a Markdown study site from this documentation and host it as HTML."
+    expected: dispara
+    split: holdout
+    source: manual
+
+  - id: P-022
+    category: estudio-metas
+    language: es
+    text: "Necesito apuntes para estudiar para el examen de certificación de Kubernetes."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-023
+    category: estudio-metas
+    language: es
+    text: "Dame notas de estudio de este manual técnico para repasar la semana que viene."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-024
+    category: estudio-metas
+    language: en
+    text: "Create study notes from this RFC so I can prepare for the architecture review."
+    expected: dispara
+    split: train
+    source: manual
+
+  - id: P-025
+    category: estudio-metas
+    language: en
+    text: "Turn this technical paper into notes I can use for self-study next month."
+    expected: dispara
+    split: holdout
+    source: manual
+
+negatives:
+
+  - id: N-001
+    category: codigo-puro
+    language: es
+    text: "Escríbeme una función en Python que ordene una lista de diccionarios por una clave."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-002
+    category: codigo-puro
+    language: es
+    text: "Implementa en Rust un parser de JSON sin dependencias externas."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-003
+    category: codigo-puro
+    language: es
+    text: "Refactoriza este método de Java para que sea más legible."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-004
+    category: codigo-puro
+    language: en
+    text: "Write a function in Go that flattens a nested map."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-005
+    category: codigo-puro
+    language: en
+    text: "Fix this JavaScript bug where the loop exits too early."
+    expected: no-dispara
+    split: holdout
+    source: manual
+
+  - id: N-006
+    category: codigo-puro
+    language: en
+    text: "Implement a binary search algorithm in TypeScript."
+    expected: no-dispara
+    split: holdout
+    source: manual
+
+  - id: N-007
+    category: resumen-libre
+    language: es
+    text: "Resúmeme este correo en tres líneas."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-008
+    category: resumen-libre
+    language: es
+    text: "Hazme un TL;DR del parte meteorológico que te paso."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-009
+    category: resumen-libre
+    language: en
+    text: "Summarize this news article in two sentences."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-010
+    category: resumen-libre
+    language: en
+    text: "Give me the gist of this customer support ticket."
+    expected: no-dispara
+    split: holdout
+    source: manual
+
+  - id: N-011
+    category: traduccion
+    language: es
+    text: "Tradúceme este correo del inglés al español."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-012
+    category: traduccion
+    language: en
+    text: "Translate this French legal document into English."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-013
+    category: traduccion
+    language: en
+    text: "Translate this German README to Spanish."
+    expected: no-dispara
+    split: holdout
+    source: manual
+
+  - id: N-014
+    category: ensayo-otro
+    language: es
+    text: "Escribe un ensayo breve sobre el impacto de la IA en la educación."
+    expected: no-dispara
+    split: train
+    source: manual
+
+  - id: N-015
+    category: ensayo-otro
+    language: en
+    text: "Draft a polite email declining a meeting invitation."
+    expected: no-dispara
+    split: holdout
+    source: manual

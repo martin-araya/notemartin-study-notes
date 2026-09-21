@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "iso-cpp-declaration",
+  "title": "ISO C++ — Declaration Syntax",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section-h2"
+      },
+      "source_refs": [
+        {
+          "block_id": "9ec03a85fcd9",
+          "source_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "section_path": "/syntax/declaration"
+        }
+      ],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [
+            {
+              "block_id": "3ac1cf50c117",
+              "source_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "section_path": "/syntax/declaration"
+            }
+          ],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "A ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "strong",
+              "attrs": {
+                "capability": "strong"
+              },
+              "source_refs": [],
+              "children": [
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": "declaration",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                }
+              ]
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " introduces one or more names into a scope.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        },
+        {
+          "node": "diagram",
+          "attrs": {
+            "kind": "railroad",
+            "text": "declaration := block-declaration | function-definition | template-declaration",
+            "alt": "EBNF declaration syntax",
+            "capability": "diagram-railroad"
+          },
+          "source_refs": [
+            {
+              "block_id": "98ece1f3ad5a",
+              "source_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "section_path": "/syntax/declaration"
+            }
+          ]
+        },
+        {
+          "node": "code",
+          "attrs": {
+            "lang": "cpp",
+            "text": "int x = 42;",
+            "capability": "code-block-fenced"
+          },
+          "source_refs": [
+            {
+              "block_id": "5f7aae8ff86d",
+              "source_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "section_path": "/syntax/declaration"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

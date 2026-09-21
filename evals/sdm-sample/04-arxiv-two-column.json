@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "04-arxiv-two-column",
+    "hash": "9c0ec88674d888e77aa774fe22e12904b7f3ec77bd0aa55cc3676d3d02a4502e",
+    "algorithm": "sha256",
+    "vendor": "arXiv",
+    "product": "arXiv preprint",
+    "url": "https://arxiv.org/abs/cs.DC/0001001",
+    "language": "en",
+    "format": "pdf",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/abstract",
+      "blocks": [
+        {
+          "id": "a7f1cf92deed",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "Abstract"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/abstract",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "17e211512dfe",
+          "type": "prose",
+          "content": "We present a new approach to distributed consensus.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/abstract",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "0b1e7f07e5ce",
+          "type": "formula",
+          "content": {
+            "latex": "P = \\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{i=1}^n X_i",
+            "display": true
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/abstract",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "10-postgres-readme-repo",
+    "hash": "f8f3f3b5e7f522c8b4d8e49679ccab090b26fd0a0b4bcf6fd54e22fec6a88b2a",
+    "algorithm": "sha256",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL GitHub README",
+    "url": "https://github.com/postgres/postgres",
+    "language": "en",
+    "format": "repo",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/readme",
+      "blocks": [
+        {
+          "id": "fa4f2251c5ed",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "PostgreSQL"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/readme",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "e416462437d7",
+          "type": "prose",
+          "content": "PostgreSQL is an advanced object-relational database management system.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/readme",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "70d09fa18512",
+          "type": "code",
+          "content": {
+            "lang": "sh",
+            "text": "./configure && make && make install"
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/readme",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "04443f38184b",
+          "type": "list",
+          "content": {
+            "ordered": false,
+            "items": [
+              "Multi-version concurrency control",
+              "Point-in-time recovery",
+              "SQL/MED"
+            ]
+          },
+          "anchor": {
+            "page": 4,
+            "section_path": "/readme",
+            "char_range": [
+              300,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

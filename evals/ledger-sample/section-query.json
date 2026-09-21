@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "03-rfc-7231",
+    "hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "entries": [
+    {
+      "unit_id": "u_020",
+      "source_block_ids": [
+        "8fa97b58cd06"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "rfc7231-overview",
+      "target_section": "Intro",
+      "state": "written"
+    },
+    {
+      "unit_id": "u_021",
+      "source_block_ids": [
+        "66db77ec2a78"
+      ],
+      "source_section_path": "/ch02/request-methods",
+      "type": "parameter",
+      "criticality": "must-keep",
+      "target_note": "rfc7231-overview",
+      "target_section": "Methods",
+      "state": "written"
+    },
+    {
+      "unit_id": "u_022",
+      "source_block_ids": [
+        "392b7fe4bfdb"
+      ],
+      "source_section_path": "/ch02/section-2.3.2",
+      "type": "step",
+      "criticality": "must-keep",
+      "target_note": "rfc7231-overview",
+      "target_section": "Semantics",
+      "state": "written"
+    },
+    {
+      "unit_id": "u_023",
+      "source_block_ids": [
+        "07d291def520"
+      ],
+      "source_section_path": "/ch02/section-2.3.2",
+      "type": "warning",
+      "criticality": "must-keep",
+      "target_note": "rfc7231-overview",
+      "target_section": "Semantics",
+      "state": "merged"
+    },
+    {
+      "unit_id": "u_024",
+      "source_block_ids": [
+        "174e7d943c92"
+      ],
+      "source_section_path": "/appendix",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "rfc7231-overview",
+      "target_section": "Appendix",
+      "state": "written"
+    }
+  ]
+}

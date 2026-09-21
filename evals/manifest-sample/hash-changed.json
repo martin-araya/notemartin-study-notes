@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "13-internet-archive-scan-hostil",
+    "path": "/Users/martin/sources/13-internet-archive-scan-hostil.pdf",
+    "hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "algorithm": "sha256",
+    "version": "n/a",
+    "vendor": "Internet Archive",
+    "product": "Scanned document"
+  },
+  "current_stage": "l1",
+  "stage_progress": {
+    "l0": "done",
+    "l1": "in_progress",
+    "l2": "pending",
+    "l3": "pending",
+    "l4": "pending"
+  },
+  "units_processed": 0,
+  "published_notes": [],
+  "glossary": {},
+  "naming_decisions": [],
+  "link_debt": [],
+  "hash_mismatch": true,
+  "last_modified": "2026-09-21T17:00:00Z"
+}

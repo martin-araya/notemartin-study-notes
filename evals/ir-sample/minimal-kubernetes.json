@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "kubernetes-pod-v1",
+  "title": "Kubernetes — Pod v1 API Reference",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section-h2"
+      },
+      "source_refs": [
+        {
+          "block_id": "c10397aecc30",
+          "source_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "section_path": "/workload/pod-v1"
+        }
+      ],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [
+            {
+              "block_id": "53234068b8b0",
+              "source_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "section_path": "/workload/pod-v1"
+            }
+          ],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Un ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "term-ref",
+              "attrs": {
+                "text": "Pod",
+                "term_id": "pod",
+                "capability": "link-term"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " es la unidad mínima desplegable.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        },
+        {
+          "node": "list",
+          "attrs": {
+            "ordered": false,
+            "capability": "list"
+          },
+          "source_refs": [
+            {
+              "block_id": "7aa705c79b1d",
+              "source_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "section_path": "/workload/pod-v1"
+            }
+          ],
+          "children": [
+            {
+              "node": "paragraph",
+              "attrs": {
+                "capability": "paragraph"
+              },
+              "source_refs": [],
+              "children": [
+                {
+                  "node": "code-inline",
+                  "attrs": {
+                    "text": "spec.containers",
+                    "capability": "code-inline"
+                  },
+                  "source_refs": []
+                }
+              ]
+            },
+            {
+              "node": "paragraph",
+              "attrs": {
+                "capability": "paragraph"
+              },
+              "source_refs": [],
+              "children": [
+                {
+                  "node": "code-inline",
+                  "attrs": {
+                    "text": "spec.restartPolicy",
+                    "capability": "code-inline"
+                  },
+                  "source_refs": []
+                }
+              ]
+            },
+            {
+              "node": "paragraph",
+              "attrs": {
+                "capability": "paragraph"
+              },
+              "source_refs": [],
+              "children": [
+                {
+                  "node": "code-inline",
+                  "attrs": {
+                    "text": "spec.nodeSelector",
+                    "capability": "code-inline"
+                  },
+                  "source_refs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node": "code",
+          "attrs": {
+            "lang": "yaml",
+            "text": "apiVersion: v1\nkind: Pod",
+            "capability": "code-block-fenced"
+          },
+          "source_refs": [
+            {
+              "block_id": "bc37f3180d94",
+              "source_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "section_path": "/workload/pod-v1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,382 @@
+---
+title: "NoteMark — nota sonda ampliada (Fase 12)"
+note-type: probe
+tags: [type/probe, type/notemark-sample, domain/databases, domain/http, domain/orchestration, f012]
+source: f012
+source-type: synthetic
+source-anchor: synthetic
+retrieved: 2026-09-21
+language: es
+coverage: full
+status: draft
+difficulty: intermediate
+review-next: none
+aliases: [note-ampliada-notemark, full-sample]
+related:
+  - references/04-authoring/notemark.md
+  - references/04-authoring/notemark.ebnf
+  - evals/probe/probe.nm
+vendor: notemartin-study-notes
+product: notemartin-study-notes
+product-version: 0.1.0
+---
+
+# NoteMark — nota sonda ampliada (Fase 12)
+
+Esta nota ejercita **cada una de las 20 directivas de bloque**, las **6 marcas inline**, los **3 marcadores de capa** y el **frontmatter canónico** definido en `references/04-authoring/notemark.md`. Existe como evidencia ejecutable del criterio 4 del roadmap: un agente puede escribir una nota de 400 líneas en NoteMark sin ambigüedad sintáctica.
+
+## Resumen en una capa
+
+{layer:l1}
+
+NoteMark es el formato de autoría de la skill `notemartin-study-notes`. El agente escribe prosa + directivas en este formato; un parser lo convierte al Note IR; los renderers traducen al dialecto de cada destino (Obsidian, Notion, AppFlowy, Markdown, HTML, PDF, Anki). Este documento NO contiene sintaxis de ninguna plataforma; cualquier marca de Obsidian, Notion o AppFlowy es aquí un anti-ejemplo tachado.
+
+## PostgreSQL 16 — `shared_buffers` y WAL
+
+{layer:l2}
+
+PostgreSQL reserva una región de memoria compartida para el buffer pool. El tamaño se controla con el parámetro `shared_buffers`. [[term:shared-buffers]] {src:blk_b123} El valor por defecto es 128 MB en una instalación por defecto, pero la documentación de producto recomienda un 25 % de la RAM del servidor para cargas típicas. {src:blk_b124}
+
+### Configuración recomendada
+
+:::param-table
+| parametro | tipo | default | rango | versión |
+| --- | --- | --- | --- | --- |
+| shared_buffers | bytes | 128MB | 8MB- | all |
+| work_mem | bytes | 4MB | 64KB-2GB | all |
+| max_connections | integer | 100 | 1-10000 | all |
+| effective_cache_size | bytes | 4GB | 0- | 9.4+ |
+:::
+
+El cambio de `shared_buffers` requiere reinicio del servidor. {src:blk_b125}
+
+:::warning
+Si aumentas `shared_buffers` por encima del 40 % de RAM, considera bajar `work_mem` para evitar OOM. {src:blk_b126}
+:::
+
+### Write-Ahead Log (WAL)
+
+{layer:l3}
+
+El log de escritura anticipada garantiza durabilidad y permite la recuperación tras un crash. Cada cambio se escribe primero al WAL antes de tocar las páginas de datos. {src:blk_c234}
+
+:::performance
+Con `synchronous_commit = off` reduces la latencia de commit a costa de perder hasta 0.5 s de transacciones en un crash. {src:blk_c235}
+:::
+
+:::console
+$ pg_ctl reload
+$ psql -c "SHOW synchronous_commit"
+ synchronous_commit
+--------------------
+ on
+:::
+
+:::tip
+Para verificar el flujo WAL en producción: `SELECT * FROM pg_stat_wal;` muestra la cantidad de registros escritos y reciclados.
+:::
+
+:::example
+```sql
+-- Configurar WAL level a replica para streaming replication
+ALTER SYSTEM SET wal_level = 'replica';
+SELECT pg_reload_conf();
+```
+:::
+
+:::note
+El nombre "WAL" es histórico; internamente son archivos segmentados en `pg_wal/`.
+:::
+
+## PostgreSQL 16 — MVCC y aislamiento
+
+{layer:l2}
+
+El control de concurrencia multiversión ([[term:mvcc]]) hace que cada transacción vea un snapshot consistente de la base de datos al inicio. {src:blk_d345} Los conflictos de escritura se resuelven al commit con un chequeo de visibilidad, no con locks de lectura.
+
+:::version
+PostgreSQL 15 → 16: el planificador ahora considera `pg_stat_io` para latencia de I/O en decisiones de ordenación. {src:blk_d346}
+:::
+
+:::security
+CVE-2024-1234: bypass de autenticación en el endpoint `pg_stat_statements` cuando `shared_preload_libraries` está mal configurado. Parchear a 16.3 o superior. {src:blk_e456}
+:::
+
+:::danger
+Nunca ejecutar `DROP TABLE` sin antes verificar dependencias y tener un backup verificado. La operación es irreversible fuera de un PITR reciente.
+:::
+
+:::deprecated
+El tipo `json` (sin la `b`) se conserva por compatibilidad pero `jsonb` lo reemplaza desde 9.4. Usar `jsonb` para datos nuevos. {src:blk_f567}
+:::
+
+:::question
+### ¿Qué es un "xmin"?
+Cada fila lleva el id de la transacción que la insertó (`xmin`). Vacuum compara `xmin` con `xmax` para detectar versiones obsoletas. {src:blk_g678}
+:::
+
+### Procedimiento de vacuum
+
+{layer:l3}
+
+:::step
+### Detectar tablas con mucha tupla muerta
+Ejecutar `SELECT relname, n_dead_tup FROM pg_stat_user_tables WHERE n_dead_tup > 10000 ORDER BY n_dead_tup DESC;`. {src:blk_h789}
+:::
+
+:::step
+### Programar vacuum manual si es urgente
+`VACUUM (VERBOSE, ANALYZE) nombre_tabla;` no bloquea lecturas pero sí escribe. {src:blk_h790}
+:::
+
+:::step
+### Configurar autovacuum si no estaba
+`ALTER TABLE nombre_tabla SET (autovacuum_vacuum_scale_factor = 0.05);` reduce el umbral al 5 %. {src:blk_h791}
+:::
+
+:::collapsible
+### Detalle extendido sobre visibilidad
+La visibilidad de una fila para una transacción T depende de si `xmin <= T.snapshot.xmin` y `xmax > T.snapshot.xmax`. Este detalle raramente se necesita en operación normal, pero explica por qué un `SELECT` post-transaction puede ver filas distintas. {src:blk_h792}
+:::
+
+## Kubernetes — `Pod` v1 API Reference
+
+{layer:l2}
+
+Un [[term:pod]] es la unidad mínima desplegable en Kubernetes; contiene uno o más contenedores que comparten red y almacenamiento. {src:blk_j012} La especificación del Pod se describe en `core/v1`.
+
+### Especificación mínima
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{nombre_del_pod}}
+spec:
+  containers:
+    - name: app
+      image: nginx:1.27
+      ports:
+        - containerPort: 80
+```
+
+Sustituye {{nombre_del_pod}} por el nombre de tu pod antes de aplicar.
+
+### Parámetros clave
+
+:::param-table
+| parametro | tipo | default | descripción |
+| --- | --- | --- | --- |
+| spec.restartPolicy | enum | Always | Always / OnFailure / Never. |
+| spec.containers[].image | string | — | Imagen del contenedor. |
+| spec.containers[].ports[].containerPort | integer | — | Puerto expuesto por el contenedor. |
+| spec.nodeSelector | object | {} | Restringe scheduling por etiquetas de nodo. |
+:::
+
+:::warning
+Si el contenedor necesita más de 1 GB de memoria, configura `resources.requests` y `resources.limits` explícitamente. Sin límites, Kubernetes puede programarlo en un nodo sin RAM. {src:blk_k123}
+:::
+
+:::performance
+El campo `imagePullPolicy: Always` añade una verificación de hash en cada arranque de pod. Para imágenes inmutables usa `IfNotPresent` y reduce latencia de scheduling. {src:blk_k124}
+:::
+
+:::tip
+Para debugging rápido: `kubectl describe pod {{nombre_del_pod}}` muestra eventos ordenados del ciclo de vida.
+:::
+
+:::external
+Esta analogía con un "proceso Unix con namespace propio" es nuestra; el manual oficial no la usa. {external}
+:::
+
+## RFC 7231 — HTTP Semantics
+
+{layer:l2}
+
+[[term:http-1.1]] es la versión mayor de HTTP publicada en 2014 como RFC 7230-7235. La semántica de métodos y headers se describe en RFC 7231. {src:blk_l234}
+
+### Métodos
+
+:::param-table
+| método | seguro | idempotente | descripción |
+| --- | --- | --- | --- |
+| GET | sí | sí | Lectura de representación. |
+| HEAD | sí | sí | Igual que GET sin cuerpo. |
+| PUT | no | sí | Reemplaza la representación. |
+| DELETE | no | sí | Elimina el recurso. |
+| POST | no | no | Crea o procesa. |
+| PATCH | no | no | Modifica parcialmente. |
+:::
+
+:::note
+Un método idempotente puede repetirse sin efecto adicional tras la primera aplicación. PUT y DELETE lo son; POST no.
+:::
+
+:::security
+Los métodos no listados en la tabla (`TRACE`, `CONNECT`, custom) requieren configuración explícita del servidor para evitar CSRF amplification attacks. {src:blk_m345}
+:::
+
+### Status codes
+
+{layer:l3}
+
+:::columns
+**Códigos informativos (1xx)**: 100 Continue, 101 Switching Protocols, 103 Early Hints.
+
+**Códigos de éxito (2xx)**: 200 OK, 201 Created, 204 No Content, 206 Partial Content.
+:::
+
+{layer:l3}
+
+:::example
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: max-age=3600
+
+{"id": 42, "name": "probe"}
+```
+:::
+
+:::question
+### ¿Por qué 404 y no 410?
+404 indica "no encontrado ahora"; 410 indica "fue aquí pero se fue intencionalmente". Para SEO se recomienda 410 cuando se sabe que el recurso no volverá. {src:blk_n456}
+:::
+
+:::console
+$ curl -I https://example.com/api/v1/health
+HTTP/2 200
+server: nginx/1.27.0
+content-type: application/json
+:::
+
+:::conflict
+La RFC 7231 dice que 303 See Other debe usarse tras un POST para forzar GET al Location. La práctica común usa 302 Found para lo mismo, aunque técnicamente es incorrecto. {src:blk_p567} vs práctica común.
+:::
+
+## Database Internals (libro escaneado) — B-Trees
+
+{layer:l2}
+
+Capítulo 3 de "Database Internals" (Petrov, 2019). El capítulo cubre la estructura de [[term:b-tree]] y sus variantes para almacenamiento en disco. {src:blk_q678}
+
+### Estructura de página
+
+{layer:l3}
+
+Cada nodo de un B-tree ocupa una página de tamaño fijo (típicamente 4 KB o 16 KB). Los nodos hoja contienen las tuplas; los internos contienen separadores. {src:blk_r789}
+
+:::note
+Una página de 16 KB con separadores de 8 bytes puede contener ~2000 punteros por nodo, dando árboles con factor de ramificación suficiente para que 4 niveles cubran hasta ~10^13 registros. {src:blk_r790}
+:::
+
+:::tip
+El parámetro `merge_threshold` (default 50 %) controla cuándo nodos vecinos se fusionan tras un delete. Subirlo a 75 % reduce fragmentación en workloads con muchos updates pequeños.
+:::
+
+:::collapsible
+### Variantes cubiertas en el capítulo
+- B+ tree: solo hojas contienen datos; internos solo claves y punteros.
+- B-link tree: punteros laterales entre hojas para concurrencia.
+- Concurrent B-tree: lock-coupling con hand-over-hand locking.
+- Lazy B-tree: actualizaciones bufferadas y aplicadas en batches.
+:::
+
+### Diagramas
+
+{layer:l3}
+
+:::diagram
+```mermaid
+graph TD
+  R[Root] --> I1[Interno 1]
+  R --> I2[Interno 2]
+  I1 --> L1[Hoja 1]
+  I1 --> L2[Hoja 2]
+  I2 --> L3[Hoja 3]
+  I2 --> L4[Hoja 4]
+  L1 -.->|link| L2
+  L2 -.->|link| L3
+  L3 -.->|link| L4
+```
+:::
+
+:::figure
+![Diagrama de B-tree con factor de ramificación 3](assets/btree-fanout-3.png){src:blk_fig02}
+:::
+
+:::equation
+$$
+\text{altura} = \lceil \log_f(N / f) \rceil + 1
+$$
+donde $f$ es el factor de ramificación y $N$ el número de registros.
+:::
+
+:::tip
+Para calcular el factor de ramificación efectivo en un B-tree real: `tamaño_página / (tamaño_clave + tamaño_puntero)`. {src:blk_s890}
+:::
+
+:::console
+$ python3 -c "print(16 * 1024 / (8 + 8))"
+1024.0
+:::
+
+## Glosario acumulativo
+
+{layer:l3}
+
+[[term:shared-buffers]]: región de memoria compartida usada como buffer pool por PostgreSQL. {src:blk_b123}
+
+[[term:mvcc]]: control de concurrencia multiversión; cada transacción ve un snapshot. {src:blk_d345}
+
+[[term:pod]]: unidad mínima desplegable en Kubernetes, encapsula uno o más contenedores. {src:blk_j012}
+
+[[term:http-1.1]]: revisión mayor de HTTP especificada en RFC 7230-7235. {src:blk_l234}
+
+[[term:b-tree]]: estructura de árbol balanceado usada como índice en bases de datos relacionales. {src:blk_q678}
+
+[[term:hash-join]]: algoritmo de join que usa una tabla hash en memoria. {src:blk_l234}
+
+## Notas derivadas y externas
+
+{layer:l3}
+
+:::external
+La analogía del "WAL como bitácora de barco" es nuestra, no del manual de PostgreSQL. La fuente usa metáforas más técnicas (write-ahead = "escribe antes"). {external}
+:::
+
+Párrafo derivado: para entender MVCC es útil pensarlo como un sistema de versiones de archivos donde cada commit crea una versión nueva, pero el rendimiento real requiere comprensión del `xmin`/`xmax`. {derived}
+
+:::external
+La sección "RFC 7231 — HTTP Semantics" incluye una interpretación nuestra del status 303 vs 302; la fuente oficial es la RFC misma, no este resumen. {external}
+:::
+
+## Placeholders pendientes
+
+{layer:l3}
+
+Antes de publicar esta nota, sustituye:
+
+- {{nombre_del_pod}} en el ejemplo de Kubernetes.
+- {{nombre_del_tablespace}} (si aparece en otra nota relacionada).
+- {{url_del_repositorio}} en la sección de related.
+
+## Anti-patrones tachados (recordatorio)
+
+{layer:l3}
+
+- ~~Sintaxis de callout de Obsidian (bloque con prefijo `>` y tipo entre corchetes exclamados)~~ → usar `:::warning`.
+- ~~`[[doble]]` (wikilink Obsidian)~~ → `[[note:id]]`.
+- ~~`<details>` HTML con markdown~~ → `:::collapsible`.
+- ~~Colores `#abc` literales~~ → tokens via `assets/tokens.json`.
+
+## Verificación de cierre
+
+{layer:l3}
+
+Esta nota es evidencia de los criterios 1-4 de Fase 12:
+
+- Criterio 1 (cobertura IR): cada una de las 20 directivas aparece al menos una vez en el cuerpo de la nota.
+- Criterio 2 (sin plataforma): ningún bloque positivo usa sintaxis de Obsidian, Notion o AppFlowy. Los anti-ejemplos están tachados.
+- Criterio 3 (ejemplos documentados): `references/04-authoring/notemark.md` §6 contiene 20 subsecciones con ejemplo por directiva.
+- Criterio 4 (nota de 400 líneas sin ambigüedad): esta nota tiene ~400 líneas y se tokeniza con la gramática EBNF sin ambigüedad.

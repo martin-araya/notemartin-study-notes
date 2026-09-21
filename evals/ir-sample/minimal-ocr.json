@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "internet-archive-scan",
+  "title": "Scanned document (OCR recovered)",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section-h2"
+      },
+      "source_refs": [
+        {
+          "block_id": "f09976e9e77a",
+          "source_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "section_path": "/page-3"
+        }
+      ],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [
+            {
+              "block_id": "8178263a160d",
+              "source_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "section_path": "/page-3"
+            }
+          ],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "[OCR result with rotation; partially garbled]",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ],
+          "external": true
+        },
+        {
+          "node": "code",
+          "attrs": {
+            "lang": "python",
+            "text": "def hello(): print('hello, world')",
+            "capability": "code-block-fenced"
+          },
+          "source_refs": [
+            {
+              "block_id": "08d389252f64",
+              "source_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "section_path": "/page-3"
+            }
+          ]
+        },
+        {
+          "node": "admonition",
+          "attrs": {
+            "severity": "external",
+            "title": "External reconstruction",
+            "capability": "callout"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "paragraph",
+              "attrs": {
+                "capability": "paragraph"
+              },
+              "source_refs": [],
+              "children": [
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": "Esta interpretación es nuestra, no del documento original.",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                }
+              ]
+            }
+          ],
+          "external": true,
+          "derived": true
+        }
+      ]
+    }
+  ]
+}

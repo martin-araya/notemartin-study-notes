@@ -1,0 +1,775 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "f014-canonical-sample",
+  "title": "Note IR — canonical sample covering all 33 nodes",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1,
+        "capability": "section-h1"
+      },
+      "source_refs": [
+        {
+          "block_id": "3337f15b2fef",
+          "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+          "section_path": "/ch02/intro"
+        }
+      ],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [
+            {
+              "block_id": "896b65fcfab3",
+              "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+              "section_path": "/ch02/intro"
+            }
+          ],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Plain text ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "strong",
+              "attrs": {
+                "capability": "strong"
+              },
+              "source_refs": [],
+              "children": [
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": "bold",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                }
+              ]
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "em",
+              "attrs": {
+                "capability": "em"
+              },
+              "source_refs": [],
+              "children": [
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": "italic",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                }
+              ]
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "code",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "link-external",
+              "attrs": {
+                "text": "site",
+                "url": "https://example.com",
+                "capability": "link-external"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "link-note",
+              "attrs": {
+                "text": "see also",
+                "target": "other-note-id",
+                "capability": "link-note"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "term-ref",
+              "attrs": {
+                "text": "MVCC",
+                "term_id": "mvcc",
+                "capability": "link-term"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "source-ref",
+              "attrs": {
+                "block_id": "3e41e737c6a9",
+                "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                "capability": "source-ref"
+              },
+              "source_refs": [
+                {
+                  "block_id": "3e41e737c6a9",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ]
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "math-inline",
+              "attrs": {
+                "latex": "x^2",
+                "capability": "math-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "footnote-ref",
+              "attrs": {
+                "ref_id": "1",
+                "text": "see RFC",
+                "capability": "footnote-ref"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "keyboard",
+              "attrs": {
+                "text": "Ctrl+S",
+                "capability": "keyboard"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "placeholder",
+              "attrs": {
+                "text": "name",
+                "default_value": "alice",
+                "capability": "placeholder"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "deleted",
+              "attrs": {
+                "capability": "deleted"
+              },
+              "source_refs": [],
+              "children": [
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": "removed",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node": "section",
+          "attrs": {
+            "level": 2,
+            "capability": "section-h2"
+          },
+          "source_refs": [
+            {
+              "block_id": "16fddcd2c767",
+              "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+              "section_path": "/ch02/intro"
+            }
+          ],
+          "children": [
+            {
+              "node": "list",
+              "attrs": {
+                "ordered": false,
+                "capability": "list"
+              },
+              "source_refs": [
+                {
+                  "block_id": "e3943be23471",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "item 1",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                },
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "item 2",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "node": "checklist",
+              "attrs": {
+                "capability": "checklist"
+              },
+              "source_refs": [
+                {
+                  "block_id": "beb4eb4b6b50",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "todo item",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "node": "table",
+              "attrs": {
+                "headers": [
+                  "name",
+                  "type"
+                ],
+                "caption": "Parameters",
+                "capability": "table"
+              },
+              "source_refs": [
+                {
+                  "block_id": "88f4d342b1dc",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": "foo | string",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                },
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": "bar | integer",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                }
+              ]
+            },
+            {
+              "node": "definition-list",
+              "attrs": {
+                "entries": [
+                  {
+                    "term": "MVCC",
+                    "definition": "Multiversion concurrency control"
+                  }
+                ],
+                "capability": "definition-list"
+              },
+              "source_refs": [
+                {
+                  "block_id": "254a68717bdd",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ]
+            },
+            {
+              "node": "code",
+              "attrs": {
+                "lang": "sql",
+                "text": "SELECT 1;",
+                "capability": "code-block-fenced"
+              },
+              "source_refs": [
+                {
+                  "block_id": "02ab61697944",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ]
+            },
+            {
+              "node": "console",
+              "attrs": {
+                "lines": [
+                  "$ psql",
+                  "postgres=# SELECT 1;"
+                ],
+                "capability": "console-block"
+              },
+              "source_refs": [
+                {
+                  "block_id": "e9395b1969a5",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ]
+            },
+            {
+              "node": "equation",
+              "attrs": {
+                "latex": "\\sum_{i=1}^n x_i",
+                "display": true,
+                "capability": "equation-block"
+              },
+              "source_refs": [
+                {
+                  "block_id": "f56d28ac90ab",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ]
+            },
+            {
+              "node": "figure",
+              "attrs": {
+                "src": "assets/fig.png",
+                "alt": "Figure",
+                "caption": "Caption",
+                "capability": "figure"
+              },
+              "source_refs": [
+                {
+                  "block_id": "3e68fdb8aadc",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ]
+            },
+            {
+              "node": "diagram",
+              "attrs": {
+                "kind": "mermaid",
+                "text": "graph TD; A-->B",
+                "alt": "diagram",
+                "capability": "diagram-mermaid-block"
+              },
+              "source_refs": [
+                {
+                  "block_id": "c1cc0953599f",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ]
+            },
+            {
+              "node": "admonition",
+              "attrs": {
+                "severity": "warning",
+                "title": "Caution",
+                "capability": "callout"
+              },
+              "source_refs": [
+                {
+                  "block_id": "a906c02cd982",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "warning text",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "node": "collapsible",
+              "attrs": {
+                "title": "Detail",
+                "default_open": false,
+                "capability": "collapsible"
+              },
+              "source_refs": [
+                {
+                  "block_id": "d44a3e59f47c",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "hidden",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "node": "quote",
+              "attrs": {
+                "cite": "Author",
+                "capability": "quote"
+              },
+              "source_refs": [
+                {
+                  "block_id": "a19e26e3b942",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "quoted text",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "node": "columns",
+              "attrs": {
+                "count": 2,
+                "capability": "columns"
+              },
+              "source_refs": [
+                {
+                  "block_id": "52056f797356",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "left",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                },
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "right",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "node": "divider",
+              "attrs": {
+                "capability": "divider"
+              },
+              "source_refs": [
+                {
+                  "block_id": "5a5528d96a4d",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ]
+            },
+            {
+              "node": "property-block",
+              "attrs": {
+                "name": "license",
+                "value": "MIT",
+                "capability": "property-table"
+              },
+              "source_refs": [
+                {
+                  "block_id": "0e41a007f65d",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ]
+            },
+            {
+              "node": "question",
+              "attrs": {
+                "prompt": "What is MVCC?",
+                "capability": "question"
+              },
+              "source_refs": [
+                {
+                  "block_id": "fba01b6a5296",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "Answer text.",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "node": "step",
+              "attrs": {
+                "index": 1,
+                "capability": "step"
+              },
+              "source_refs": [
+                {
+                  "block_id": "6e16b3a52275",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "paragraph",
+                  "attrs": {
+                    "capability": "paragraph"
+                  },
+                  "source_refs": [],
+                  "children": [
+                    {
+                      "node": "text",
+                      "attrs": {
+                        "text": "Step text.",
+                        "capability": "text"
+                      },
+                      "source_refs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "node": "parameter-table",
+              "attrs": {
+                "columns": [
+                  "param",
+                  "type",
+                  "default"
+                ],
+                "capability": "parameter-table"
+              },
+              "source_refs": [
+                {
+                  "block_id": "7395aafe2580",
+                  "source_hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+                  "section_path": "/ch02/intro"
+                }
+              ],
+              "children": [
+                {
+                  "node": "text",
+                  "attrs": {
+                    "text": "p | int | 0",
+                    "capability": "text"
+                  },
+                  "source_refs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

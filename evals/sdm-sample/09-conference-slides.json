@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "09-conference-slides",
+    "hash": "1d0c58822bd2adb1cb8aa73c563fc09cbe8d6238264f86803933375c2496aa07",
+    "algorithm": "sha256",
+    "vendor": "PostgreSQL Conference",
+    "product": "Conference Slides",
+    "url": "https://www.postgresqlconference.org/",
+    "language": "en",
+    "format": "pdf",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/slide-3",
+      "blocks": [
+        {
+          "id": "2e30052bcc6d",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "Slide 3: Architecture"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/slide-3",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "e6a5d2a80591",
+          "type": "prose",
+          "content": "Two-layer storage: shared buffers + WAL.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/slide-3",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "2c8eee591797",
+          "type": "figure",
+          "content": {
+            "src": "assets/slide-3.png",
+            "alt": "Architecture diagram"
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/slide-3",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "896b3f2eb209",
+          "type": "caption",
+          "content": "Two-layer storage with WAL.",
+          "anchor": {
+            "page": 4,
+            "section_path": "/slide-3",
+            "char_range": [
+              300,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "11-iso-cpp-syntax",
+    "hash": "9b0ab404e0d5ed51783a580c189c6a38a86e6ed790847a8b012b8f0ac39d7ba5",
+    "algorithm": "sha256",
+    "vendor": "ISO/IEC",
+    "product": "ISO C++ Standard Draft",
+    "url": "https://www.iso.org/standard/83626.html",
+    "language": "en",
+    "format": "html",
+    "version": "n4910",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/syntax/declaration",
+      "blocks": [
+        {
+          "id": "46c6570d9ced",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "Declaration syntax"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/syntax/declaration",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "eb6fd339e777",
+          "type": "prose",
+          "content": "A declaration introduces one or more names into a scope.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/syntax/declaration",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "83d25887ac20",
+          "type": "syntax-diagram",
+          "content": {
+            "notation": "ebnf",
+            "text": "declaration := block-declaration | function-definition | template-declaration"
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/syntax/declaration",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "603f559276ca",
+          "type": "code",
+          "content": {
+            "lang": "cpp",
+            "text": "int x = 42;"
+          },
+          "anchor": {
+            "page": 4,
+            "section_path": "/syntax/declaration",
+            "char_range": [
+              300,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

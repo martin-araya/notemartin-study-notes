@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "06-kubernetes-api-ref",
+    "hash": "1bbe58a87b1bcea942c970985feb7953370d62bdabca96f314cff37db8543510",
+    "algorithm": "sha256",
+    "vendor": "Cloud Native Computing Foundation",
+    "product": "Kubernetes API Reference",
+    "url": "https://kubernetes.io/docs/reference/kubernetes-api/",
+    "language": "en",
+    "format": "html",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/workload-resources/pod-v1",
+      "blocks": [
+        {
+          "id": "7548655d7d9a",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "Pod v1"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/workload-resources/pod-v1",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "f84c489965af",
+          "type": "prose",
+          "content": "Pod is a collection of containers that can run on a host.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/workload-resources/pod-v1",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "d9057d25fcbe",
+          "type": "list",
+          "content": {
+            "ordered": false,
+            "items": [
+              "spec.containers",
+              "spec.restartPolicy",
+              "spec.nodeSelector"
+            ]
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/workload-resources/pod-v1",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "199cf4ab0eec",
+          "type": "code",
+          "content": {
+            "lang": "yaml",
+            "text": "apiVersion: v1\nkind: Pod"
+          },
+          "anchor": {
+            "page": 4,
+            "section_path": "/workload-resources/pod-v1",
+            "char_range": [
+              300,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

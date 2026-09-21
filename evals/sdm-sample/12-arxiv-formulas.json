@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "12-arxiv-formulas",
+    "hash": "a288e5a34c387ec36329091d6359470e84e098cb8dc91efbfcd320adf286f66a",
+    "algorithm": "sha256",
+    "vendor": "arXiv",
+    "product": "arXiv preprint",
+    "url": "https://arxiv.org/abs/math.AC/0001002",
+    "language": "en",
+    "format": "pdf",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/section-2",
+      "blocks": [
+        {
+          "id": "fe9f40c14239",
+          "type": "prose",
+          "content": "We derive the following bound:",
+          "anchor": {
+            "page": 1,
+            "section_path": "/section-2",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "c6ef52fe1fbe",
+          "type": "formula",
+          "content": {
+            "latex": "\\sum_{i=1}^{n} \\frac{1}{i^2} = \\frac{\\pi^2}{6}",
+            "display": true
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/section-2",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}
