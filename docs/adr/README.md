@@ -1,0 +1,37 @@
+# ADRs — Architecture Decision Records
+
+Registro de decisiones arquitectónicas del proyecto. Cada ADR es un markdown corto con tres secciones: **Contexto**, **Decisión**, **Consecuencias**.
+
+## Plantilla
+
+```markdown
+# ADR-NNNN — Título corto
+
+**Fecha:** YYYY-MM-DD
+**Estado:** propuesta | aceptada | sustituida
+
+## Contexto
+
+Qué problema se aborda, qué alternativas se consideraron.
+
+## Decisión
+
+Qué se decide.
+
+## Consecuencias
+
+Qué se gana, qué se pierde, qué queda atado a esta decisión.
+```
+
+## Reglas
+
+- Numeración correlativa `ADR-NNNN`.
+- Idioma español.
+- Las decisiones cerradas (marcadas como `aceptada` en `skills/AGENT.md` §8) **no se reabren** salvo petición explícita del usuario; si se reabre, se crea un ADR nuevo que sustituya al anterior.
+- Un ADR atado a un invariante (`INV-xx`) lo referencia en "Consecuencias".
+
+## ADRs ya registradas
+
+_(vacío al cierre de Fase 5)_
+
+Las decisiones cerradas hasta ahora viven en `skills/AGENT.md` §8. Cuando una de ellas se reabre formalmente, se promueve a ADR aquí.
