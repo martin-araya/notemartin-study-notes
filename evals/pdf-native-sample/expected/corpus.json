@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "evals/corpus/*/sample.pdf",
+  "criterion_1": {
+    "pdfs": [
+      "04-arxiv-two-column",
+      "12-arxiv-formulas"
+    ],
+    "min_match_rate": 0.95
+  },
+  "criterion_3": {
+    "every_fragment_has_page_and_bbox": true
+  },
+  "notes": "All fragments must have valid page (int >= 1) and bbox ([x0,y0,x1,y1] with x1>x0, y1>y0)."
+}

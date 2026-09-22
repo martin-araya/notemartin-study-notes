@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "boilerplate-test.pdf",
+  "criterion_2": {
+    "header_text_expected": [
+      "Confidential Draft v1"
+    ],
+    "footer_text_expected": [
+      "Internal Distribution Only"
+    ],
+    "min_body_fragments_per_page": 7,
+    "all_body_fragments_have_is_boilerplate_false": true,
+    "all_boilerplate_fragments_have_is_boilerplate_true": true
+  },
+  "notes": "10 pages with header/footer repeated. Header+footer must be boilerplate; body preserved."
+}

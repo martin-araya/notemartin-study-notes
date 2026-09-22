@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "outline-test.pdf",
+  "criterion_1": {
+    "outline_entries": [
+      {
+        "level": 1,
+        "title": "Chapter 1 \u2014 Introduction",
+        "page": 1
+      },
+      {
+        "level": 2,
+        "title": "Background",
+        "page": 2
+      },
+      {
+        "level": 1,
+        "title": "Chapter 2 \u2014 Methods",
+        "page": 3
+      },
+      {
+        "level": 2,
+        "title": "Results",
+        "page": 4
+      },
+      {
+        "level": 2,
+        "title": "Conclusions",
+        "page": 5
+      }
+    ],
+    "min_match_rate": 0.95
+  },
+  "notes": "5 pages with PDF outline injected. All 5 outline entries must be matched."
+}
