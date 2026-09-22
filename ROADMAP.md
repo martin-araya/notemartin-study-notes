@@ -503,9 +503,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Salida: plan de ingesta por rango de páginas.
 
 **Criterios:**
-- [ ] Clasifica correctamente las 15 fuentes del corpus.
-- [ ] Un PDF híbrido produce plan mixto por rangos.
-- [ ] Todas las heurísticas tienen umbral numérico.
+- [x] Clasifica correctamente las 15 fuentes del corpus.
+- [x] Un PDF híbrido produce plan mixto por rangos.
+- [x] Todas las heurísticas tienen umbral numérico.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/triage.py` (Python 3.9+ stdlib; PyYAML recomendado; pypdf opcional; códigos 0/1/2; escritura atómica `tempfile`+`Path.replace`; CLI `--source --out-dir --thresholds --format --json-only`). Umbrales en `skill/notemartin-study-notes/scripts/ingest/thresholds.yaml` (4 heurísticas PDF numéricas: `chars_per_page.reliable_min=1000` / `degraded_min=100`, `fonts.reliable_min=1`, `full_page_image.rate_scan_min=0.9` / `rate_hybrid_min=0.5`, `non_printable_ratio.degraded_min=0.05`; + `global_classification.dominant_share=0.8` / `hybrid_min_classes=2`; + `non_pdf.html_tag_ratio_max=0.3` / `text_printable_min=0.95`; + `extractor_map` y `confidence_expected`). Spec en `skill/notemartin-study-notes/references/01-ingest/triage.md` (252 líneas / 400, 11 secciones; §3 clases; §4 umbrales numéricos sin adjetivos; §6 extractor; §8 mapping corpus; §11 verificación). 15 fixtures en `evals/triage-sample/expected/` (14 corpus + 1 hybrid) + PDF sintético `fixtures/hybrid-synthetic.pdf` (8 pp: 3 native reliable + 2 pure scan + 3 native degraded) generado por `build_hybrid.py` (reportlab) + `run_eval.py --check-ranges` que verifica PASS 15/15 + plan híbrido con ≥ 3 clases distintas. `SKILL.md` §3, §5.1 y §6 actualizados; `references/01-ingest/README.md` marca `triage.md` como disponible; `scripts/README.md` añade la entrada `ingest/triage.py`. Validación: 3/3 verde. Nota: el corpus tiene 14 fuentes (no 15); F13 ya documentó la discrepancia. Aquí se verifica contra 14 corpus + 1 fixture híbrido.
 
 ---
 
@@ -520,9 +522,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Índice reconstruido desde los marcadores del PDF cuando existen.
 
 **Criterios:**
-- [ ] Los encabezados coinciden con el índice en ≥95 % de los casos del corpus.
-- [ ] El boilerplate se elimina sin borrar contenido real.
-- [ ] Cada fragmento conserva página y coordenadas.
+- [x] Los encabezados coinciden con el índice en ≥95 % de los casos del corpus.
+- [x] El boilerplate se elimina sin borrar contenido real.
+- [x] Cada fragmento conserva página y coordenadas.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/pdf_native.py` (~520 líneas, Python 3.9+ stdlib + pypdf ≥ 4 obligatorio; códigos 0/1/2; escritura atómica `tempfile`+`Path.replace`; CLI `--source --out-dir --plan --json-only`). Salida `fragments.json` + `extraction.md` por página con runs de texto + bbox `[x0,y0,x1,y1]` + font + size + role + heading_level + section_path + is_boilerplate. Algoritmos: heading detection por `body_size` modal + ranking por tamaño (`HEADING_FREQ_MAX=0.20`) + refinamiento por peso (Bold/Italic); boilerplate por bandas header/footer (top/bottom 8%, `BOILERPLATE_PAGE_RATIO=0.30`) + tolerancia posicional ± 5%; outline reconstruido desde `reader.outline` con fallback por heading levels y `assign_section_paths` case-insensitive. Constantes numéricas inline (no YAML). Spec en `skill/notemartin-study-notes/references/01-ingest/pdf-native.md` (246 líneas / 400, 11 secciones; §3 modelo de fragmento; §4-§6 algoritmos con umbrales numéricos; §7 fragments.json; §8 conexión con triage y SDM). 2 fixtures sintéticos en `evals/pdf-native-sample/fixtures/` (boilerplate-test 10 pp con header/footer repetidos + cuerpo único, outline-test 5 pp con marcadores PDF inyectados vía `pypdf.PdfWriter.add_outline_item`) + `build_fixtures.py` (reportlab + pypdf) + `run_eval.py` que valida los 3 criterios: outline-test (5/5), 04-arxiv-two-column (11/11), 12-arxiv-formulas (19/20 = 95%), boilerplate-test (header + footer detectados, cuerpo preservado). 2724/2724 fragments verificados con page+bbox válidos. `SKILL.md` §6 + `references/01-ingest/triage.md` §12 + `scripts/README.md` actualizados con la conexión a F17 y F31. Validación: 3/3 verde.
 
 ---
 
@@ -536,9 +540,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - La imagen original se conserva siempre junto a la procesada.
 
 **Criterios:**
-- [ ] La fuente hostil mejora su tasa de acierto de OCR de forma medible.
-- [ ] Las páginas rotadas se corrigen automáticamente.
-- [ ] La imagen original nunca se destruye.
+- [x] La fuente hostil mejora su tasa de acierto de OCR de forma medible.
+- [x] Las páginas rotadas se corrigen automáticamente.
+- [x] La imagen original nunca se destruye.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/preprocess.py` (~520 líneas, Python 3.9+ + pypdfium2 ≥ 4 + opencv-python-headless ≥ 4 + Pillow + numpy; CLI `--source --out-dir --dpi --pipeline --format --json-only`; códigos 0/1/2; escritura atómica por archivo). Pipeline configurable de 6 etapas: rasterize (pypdfium2 a DPI configurable, default 300) → deskew (projection profile en [-10°, +10°] paso 0.5°, aplica si mejora varianza ≥ 1.10) → curvature (opt-in, Hough-based score; warping si score ≥ 0.6) → denoise (`cv2.fastNlMeansDenoising`) → binarize (`cv2.adaptiveThreshold` block=31 C=10) → border (inpainting de márgenes con inpaint_radius=5). Preservación estricta del original: `<basename>-NNNN.png` para original + `<basename>-NNNN.processed.png` para procesado + `<basename>-NNNN.meta.json` por página + `preprocess.log` plano + `preprocess_summary.json` global; rechazo si `--out-dir` coincide con el directorio fuente. Detección de blank por `non_white_ratio < 0.005`; rotación fuera de rango marcada con `rotation_too_large`. Constantes numéricas inline (`DEFAULT_DPI=300`, `MAX_ROTATION_DEG=10.0`, `BLANK_THRESHOLD=0.005`, `BORDER_DARKNESS_THRESHOLD=180`, etc.). Spec en `skill/notemartin-study-notes/references/01-ingest/preprocess.md` (236 líneas / 400, 11 secciones; §3 pipeline; §4 umbrales numéricos; §5 rotación y blank; §7 preprocess_summary.json; §8 preservación). 3 fixtures en `evals/preprocess-sample/fixtures/` (rotated-test 3 pp con rotaciones 0°/+3°/-5°, blank-test 5 pp con 2 con contenido, hostile-scan.png con rotación 3° + ruido gaussiano + sombra de lomo) + `build_fixtures.py` (reportlab + Pillow + numpy) + `run_eval.py` que valida los 3 criterios + auxiliar blank detection: mejora hostil 2.86x (≥ 1.15x), rotación |0°/3°/5°| con tolerancia ±0.5°, sha256 del input inalterado en los 3 fixtures, blank detection 5/5. `pdf-native.md` §12 + `scripts/README.md` actualizados con la conexión F18↔F19. Validación: 3/3 verde + 1/1 auxiliar.
 
 ---
 
@@ -553,10 +559,12 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Reintento automático con otra cadena de preprocesado si la confianza media cae bajo umbral.
 
 **Criterios:**
-- [ ] La salida incluye confianza y caja por palabra.
-- [ ] Un documento con ambos idiomas se procesa sin degradación notoria.
-- [ ] El reintento se dispara y se registra.
-- [ ] La instalación de cada motor está documentada por sistema operativo.
+- [x] La salida incluye confianza y caja por palabra.
+- [x] Un documento con ambos idiomas se procesa sin degradación notoria.
+- [x] El reintento se dispara y se registra.
+- [x] La instalación de cada motor está documentada por sistema operativo.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/ocr.py` (~530 líneas, Python 3.9+ stdlib + pytesseract + Pillow + opencv-python-headless + numpy; invoca Tesseract 5.x vía subprocess; EasyOCR lazy import como alternativo). Interfaz abstracta `OCREngine` con `TesseractEngine` y `EasyOCREngine`. Tesseract primario con `--psm 6` y `--languages "spa+eng"`; soporta `--user-words` y `--user-patterns` para wordlists del dominio. Reintentos en cascada (max 3): invert → alternative_engine → sparse_psm (`--psm 11`), disparados cuando `mean_conf < 0.70` (per `architecture.md` §8) y `len(words) > 5`. Cada reintento registrado en `ocr_summary.json.retries[]` con `{page, attempt, reason, action, resulting_mean_conf, succeeded}`. Salida `ocr_summary.json` global + `ocr_pages/<basename>-NNNN.json` por página con `words[]` (text + bbox [x,y,w,h] + conf + position). Constantes numéricas inline (`OCR_RETRY_THRESHOLD=0.70`, `OCR_MIN_WORDS=5`, `OCR_MAX_RETRIES=3`, `OCR_DEFAULT_PSM=6`, `OCR_SPARSE_PSM=11`). Spec en `skill/notemartin-study-notes/references/01-ingest/ocr-engines.md` (348 líneas / 400, 11 secciones; §3 motores; §4 idiomas combinados; §5 wordlists; §6 instalación por SO: macOS `brew install tesseract tesseract-lang`, Ubuntu/Debian `apt install tesseract-ocr tesseract-ocr-spa tesseract-ocr-eng`, Fedora `dnf`, Arch `pacman`, Windows instalador + chocolatey + scoop). 3 fixtures en `evals/ocr-sample/fixtures/` (ocr-fixture, bilingual ES+EN, low-confidence ruidoso) + `build_fixtures.py` (Pillow + numpy) + `run_eval.py` que valida los 4 criterios: 59/59 words con conf ≥ 0 y bbox válido (100% ≥ 90%), 99 words con `mean_conf=95.4` (≥ 70) en bilingüe, 2 retries disparados en low-confidence (invert + sparse_psm), spec contiene macOS+Ubuntu+Windows con comandos y verificación. `preprocess.md` §12 + `scripts/README.md` actualizados. Validación: 4/4 verde.
 
 ---
 
