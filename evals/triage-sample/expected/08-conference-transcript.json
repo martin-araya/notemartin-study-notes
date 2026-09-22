@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "08-conference-transcript",
+  "format_classification": "text",
+  "plan_runs_expected": [
+    {
+      "pages": "1",
+      "class": "text"
+    }
+  ],
+  "notes": "Transcripción de PostgreSQL conference; corpus sin muestra."
+}

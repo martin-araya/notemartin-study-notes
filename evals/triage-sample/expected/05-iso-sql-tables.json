@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "05-iso-sql-tables",
+  "format_classification": "html",
+  "plan_runs_expected": [
+    {
+      "pages": "1",
+      "class": "html"
+    }
+  ],
+  "notes": "HTML denso en tablas de la PostgreSQL Reference."
+}

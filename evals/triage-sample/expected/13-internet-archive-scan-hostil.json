@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "13-internet-archive-scan-hostil",
+  "format_classification": "pdf_pure_scan",
+  "plan_runs_expected": [
+    {
+      "pages": "1-10",
+      "class": "pure_scan"
+    }
+  ],
+  "notes": "Escaneo torcido de Internet Archive; OCR con reintento."
+}

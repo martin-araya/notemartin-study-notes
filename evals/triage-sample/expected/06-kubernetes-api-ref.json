@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "06-kubernetes-api-ref",
+  "format_classification": "html",
+  "plan_runs_expected": [
+    {
+      "pages": "1",
+      "class": "html"
+    }
+  ],
+  "notes": "HTML de la Kubernetes API Reference — Pod v1."
+}

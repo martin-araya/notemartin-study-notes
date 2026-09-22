@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "04-arxiv-two-column",
+  "format_classification": "pdf_native_reliable",
+  "plan_runs_expected": [
+    {
+      "pages": "1-8",
+      "class": "native_reliable"
+    }
+  ],
+  "notes": "PDF de paper arXiv con figuras decorativas; capa de texto fiable."
+}

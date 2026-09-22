@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "01-postgresql-chapter",
+  "format_classification": "html",
+  "plan_runs_expected": [
+    {
+      "pages": "1",
+      "class": "html"
+    }
+  ],
+  "notes": "HTML multipágina de postgresql.org/docs/16/sql-select.html"
+}

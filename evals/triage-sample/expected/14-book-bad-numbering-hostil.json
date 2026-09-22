@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "14-book-bad-numbering-hostil",
+  "format_classification": "pdf_hybrid",
+  "plan_runs_expected": [
+    {
+      "pages": "1-N",
+      "class": "native_reliable"
+    },
+    {
+      "pages": "X-Y",
+      "class": "pure_scan"
+    }
+  ],
+  "notes": "Libro técnico con numeración inconsistente + escaneos intercalados. ≥ 2 rangos."
+}

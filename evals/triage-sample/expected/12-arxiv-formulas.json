@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "12-arxiv-formulas",
+  "format_classification": "pdf_native_reliable",
+  "plan_runs_expected": [
+    {
+      "pages": "1-11",
+      "class": "native_reliable"
+    }
+  ],
+  "notes": "PDF nativo con fórmulas densas (LaTeX embebido)."
+}

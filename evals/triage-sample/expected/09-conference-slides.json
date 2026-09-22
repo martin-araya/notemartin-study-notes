@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "09-conference-slides",
+  "format_classification": "pdf_pure_scan",
+  "plan_runs_expected": [
+    {
+      "pages": "1-30",
+      "class": "pure_scan"
+    }
+  ],
+  "notes": "Slides escaneados; OCR requerido."
+}

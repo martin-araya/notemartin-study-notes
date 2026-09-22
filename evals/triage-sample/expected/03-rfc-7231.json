@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "03-rfc-7231",
+  "format_classification": "text",
+  "plan_runs_expected": [
+    {
+      "pages": "1",
+      "class": "text"
+    }
+  ],
+  "notes": "RFC 7231 en TXT ASCII; texto plano canónico."
+}

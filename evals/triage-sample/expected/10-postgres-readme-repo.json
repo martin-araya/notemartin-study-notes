@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "10-postgres-readme-repo",
+  "format_classification": "markdown",
+  "plan_runs_expected": [
+    {"pages": "1", "class": "markdown"}
+  ],
+  "notes": "El corpus tiene únicamente sample.md (el README del repo postgres/postgres). El card.md describe un escenario 'README + tree + código fuente', pero la muestra versionada es un solo .md. El triage sobre sample.md devuelve markdown; el triage sobre un árbol real (.git/ + README*) devolvería repository. F118 lo verifica contra el árbol completo."
+}
