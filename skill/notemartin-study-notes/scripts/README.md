@@ -25,4 +25,76 @@ Ejecutables invocables por el agente. **No se leen en contexto**; se invocan por
 
 ## Cuándo se crea
 
-Esta carpeta se puebla desde F17 en adelante. Hoy está vacía.
+Esta carpeta se puebla desde F17 en adelante. Hoy tiene **F17 materializado** (`triage.py`).
+
+## Scripts disponibles
+
+### `ingest/triage.py` — F17 · Triaje de archivo
+
+L0 preflight: clasifica una fuente (PDF / EPUB / DOCX / PPTX / HTML / Markdown / TXT / repositorio) y emite un plan de ingesta por rangos de páginas.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <ruta>` (archivo o directorio) |
+| Salida | `<out-dir>/triage.json` + `<out-dir>/triage.md` |
+| Umbrales | `ingest/thresholds.yaml` (default; override con `--thresholds`) |
+| Forzar formato | `--format {auto,pdf,epub,docx,pptx,html,markdown,text,repository}` |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/triage.py --source <ruta> --out-dir <dir>` |
+| Dependencias | Python 3.9+ stdlib; PyYAML (recomendado, para umbrales); pypdf (opcional, mejora precisión de PDF) |
+| Comportamiento si falta PyYAML | Usa defaults internos; warning en `warnings[]` del JSON |
+| Comportamiento si falta pypdf | Análisis PDF a nivel de bytes (aproximado); warning; exit code 2 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Documentación | `references/01-ingest/triage.md` (normativa) |
+
+### `ingest/pdf_native.py` — F18 · Extracción de PDF nativo
+
+L0 extracción: extrae runs de texto de un PDF con coordenadas, fuente y tamaño. Detecta encabezados por tipografía, marca boilerplate por repetición posicional y reconstruye el índice desde los marcadores PDF.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <pdf>`; opcionalmente `--plan <triage.json>` para limitar a rangos nativos |
+| Salida | `<out-dir>/fragments.json` + `<out-dir>/extraction.md` |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/pdf_native.py --source <pdf> --out-dir <dir> [--plan <triage.json>]` |
+| Dependencias | Python 3.9+ stdlib; pypdf >= 4 (obligatorio) |
+| Comportamiento si falta pypdf | Error fatal, exit code 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (outline ausente, pure_scan saltadas, etc.) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/pdf-native.md` §4-§5 (`HEADER_BAND_RATIO=0.08`, `BOILERPLATE_PAGE_RATIO=0.30`, `HEADING_FREQ_MAX=0.20`, etc.) |
+| Documentación | `references/01-ingest/pdf-native.md` (normativa) |
+
+### `ingest/preprocess.py` — F19 · Preprocesado de imagen
+
+L0 preprocesado: rasteriza PDFs y aplica un pipeline configurable de 6 etapas (rasterize, deskew, curvature opt-in, denoise, binarize, border) para producir imágenes limpias para OCR. La imagen original nunca se destruye.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <pdf|img|dir>`; `--dpi 300`; `--pipeline csv` |
+| Salida | `<out-dir>/ingest/pages/<basename>-NNNN.png` (original) + `<basename>-NNNN.processed.png` + `<basename>-NNNN.meta.json`; `<out-dir>/ingest/preprocess.log` + `preprocess_summary.json` |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/preprocess.py --source <pdf> --out-dir <dir> [--dpi 300] [--pipeline rasterize,deskew,denoise,binarize,border]` |
+| Dependencias | Python 3.9+ stdlib; pypdfium2 ≥ 4 (renderizado PDF); opencv-python-headless ≥ 4 (pipeline de imagen); Pillow ≥ 10; numpy ≥ 1.24 |
+| Comportamiento si falta alguna dependencia | Error fatal, exit code 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (rotación fuera de rango, blank, curvatura no corregida) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/preprocess.md` §4 (`DEFAULT_DPI=300`, `MAX_ROTATION_DEG=10.0`, `BLANK_THRESHOLD=0.005`, etc.) |
+| Documentación | `references/01-ingest/preprocess.md` (normativa) |
+
+### `ingest/ocr.py` — F20 · Motor OCR multilingüe
+
+L0 OCR: ejecuta Tesseract (motor principal) o EasyOCR (alternativo) sobre las imágenes preprocesadas por F19. Reintentos automáticos en cascada (invert → alternative_engine → sparse_psm) cuando la confianza media cae bajo el umbral. Idiomas combinados (es/en) y wordlists opcionales.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <dir|img>`; `--languages "spa+eng"`; `--engine auto|tesseract|easyocr`; `--user-words <path>`; `--user-patterns <path>` |
+| Salida | `<out-dir>/ingest/ocr/ocr_summary.json` (global con retries) + `ocr_pages/<basename>-NNNN.json` (palabras por página con text+bbox+conf) |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/ocr.py --source <dir|img> --out-dir <dir> [--languages "spa+eng"] [--engine tesseract]` |
+| Dependencias | Python 3.9+ stdlib; pytesseract ≥ 0.3.10 (Tesseract wrapper); Pillow ≥ 10; opencv-python-headless + numpy (para retry con invert); Tesseract 5.x binario externo; easyocr opcional (lazy import) |
+| Comportamiento si falta el motor | Error fatal, exit code 1, con instrucciones de instalación por SO |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (reintentos, motor alternativo, blank) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/ocr-engines.md` §3 (`OCR_RETRY_THRESHOLD=0.70`, `OCR_MIN_WORDS=5`, `OCR_MAX_RETRIES=3`, `OCR_DEFAULT_PSM=6`, `OCR_SPARSE_PSM=11`) |
+| Documentación | `references/01-ingest/ocr-engines.md` (normativa con instalación por SO) |
