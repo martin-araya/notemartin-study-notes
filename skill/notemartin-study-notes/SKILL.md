@@ -50,7 +50,7 @@ El agente elige la cadena de ingesta L0 con este árbol. Cada hoja nombra el scr
 └─ Repositorio con README → catalogar como fuente plurilingüe (per F10 corpus)
 ```
 
-Triage por página, no por documento: un PDF híbrido (capítulos nativos, anexos escaneados) se divide página a página. Detalle y umbrales numéricos en `references/01-ingest/triage.md` `[pendiente F17]`.
+Triage por página, no por documento: un PDF híbrido (capítulos nativos, anexos escaneados) se divide página a página. Detalle y umbrales numéricos en `references/01-ingest/triage.md` (F17). El script ejecutable es `scripts/ingest/triage.py` (§6).
 
 ## §4 · Flujo de las 5 capas
 
@@ -87,7 +87,7 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | Antes de implementar, decidir si algo es script o instrucción | [responsibilities.md](references/00-pipeline/responsibilities.md) | ninguno (es el discriminador raíz) | F3 |
 | Inicio de capítulo u obra completa, para entender qué artefacto produce cada capa | [architecture.md](references/00-pipeline/architecture.md) | `references/01-ingest/` y posteriores hasta saber la cadena L0 | F4 |
 | Interrupción o reanudación de un trabajo | `references/00-pipeline/manifest.md` | ninguno | [pendiente F16] |
-| Antes de la primera ingesta de un documento | `references/01-ingest/triage.md` | `references/02-source-model/` y posteriores | [pendiente F17] |
+| Antes de la primera ingesta de un documento | [triage.md](references/01-ingest/triage.md) | `references/02-source-model/` y posteriores | F17 |
 | Selección de motor OCR para un documento | `references/01-ingest/ocr-engines.md` | `references/04-authoring/`, `references/05-note-types/` | [pendiente F20] |
 | OCR sobre región clasificada como código | `references/01-ingest/code-ocr.md` | `references/04-authoring/` (la validación sintáctica se decide en zona gris) | [pendiente F25] |
 | Umbrales por tipo de región para revisión humana | `references/01-ingest/confidence.md` | `references/03-knowledge/` | [pendiente F26] |
@@ -158,6 +158,10 @@ El catálogo exhaustivo vive en `scripts/README.md` `[pendiente F117]` y se mate
 | Ruta | Qué hace | Invocación | Dependencias |
 |---|---|---|---|
 | `scripts/util/build_probe_note.py` | Regenera `evals/probe/probe.nm` (la nota sonda que ejercita todas las capacidades de la matriz) | `python scripts/util/build_probe_note.py --out <ruta>` | Python 3.10+ sin dependencias externas |
+| `scripts/ingest/triage.py` | L0 preflight: clasifica fuente (PDF/EPUB/DOCX/PPTX/HTML/MD/TXT/repo) y emite `triage.json` + `triage.md` con plan por rangos | `python scripts/ingest/triage.py --source <ruta> --out-dir <dir>` | Python 3.9+ stdlib; PyYAML (recomendado); pypdf (opcional, mejora precisión) |
+| `scripts/ingest/pdf_native.py` | L0 extracción de PDF nativo: runs de texto con bbox + fuente + tamaño; encabezados por tipografía; boilerplate posicional; outline | `python scripts/ingest/pdf_native.py --source <pdf> --out-dir <dir> [--plan <triage.json>]` | Python 3.9+ stdlib; pypdf >= 4 (obligatorio) |
+| `scripts/ingest/preprocess.py` | L0 preprocesado de imagen: rasteriza PDF/PNG y aplica pipeline de 6 etapas (deskew, denoise, binarize, border, curvature opt-in). Preserva el original | `python scripts/ingest/preprocess.py --source <pdf|img|dir> --out-dir <dir> [--dpi 300] [--pipeline rasterize,deskew,denoise,binarize,border]` | Python 3.9+ stdlib; pypdfium2 >= 4; opencv-python-headless >= 4; Pillow >= 10; numpy >= 1.24 |
+| `scripts/ingest/ocr.py` | L0 OCR multilingüe: Tesseract primario, EasyOCR alternativo, reintentos en cascada (invert, alternative_engine, sparse_psm) con `mean_conf < 0.70` | `python scripts/ingest/ocr.py --source <dir|img> --out-dir <dir> [--languages "spa+eng"] [--engine tesseract] [--user-words <path>]` | Python 3.9+ stdlib; pytesseract; Pillow; opencv-python-headless; numpy; Tesseract 5.x binario externo |
 
 Cualquier otra acción ejecutable prevista por el pipeline (ingesta, OCR, validación, parseo NoteMark, render, publicación) sigue marcada `[pendiente Fxxx]` en `docs/skill-anatomy.md` §6. El agente **no inventa** invocaciones; cuando la fase que materializa el script cierre, esa fila entra en `scripts/README.md` y se cita desde §5.
 
