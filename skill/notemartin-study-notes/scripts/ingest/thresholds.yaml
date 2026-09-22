@@ -1,0 +1,47 @@
+schema_version: "1.0.0"
+
+pdf:
+  chars_per_page:
+    reliable_min: 1000.0
+    degraded_min: 100.0
+  fonts:
+    reliable_min: 1.0
+  full_page_image:
+    rate_scan_min: 0.9
+    rate_hybrid_min: 0.5
+  non_printable_ratio:
+    degraded_min: 0.05
+  global_classification:
+    dominant_share: 0.8
+    hybrid_min_classes: 2
+
+non_pdf:
+  html_tag_ratio_max: 0.3
+  markdown_max_special_ratio: 0.15
+  text_printable_min: 0.95
+  repo_required_files:
+    - ".git"
+    - "README"
+
+extractor_map:
+  native_reliable: pdf_native
+  native_degraded: pdf_native
+  pure_scan: ocr
+  hybrid_page: pdf_native
+  html: web_docs
+  markdown: text
+  text: text
+  repository: repo_tree
+  epub: other_formats
+  docx: other_formats
+  pptx: other_formats
+
+confidence_expected:
+  native_reliable: high
+  native_degraded: medium
+  pure_scan: low
+  hybrid_page: medium
+  html: high
+  markdown: high
+  text: high
+  repository: high
