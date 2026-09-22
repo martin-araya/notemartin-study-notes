@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "blank-test.pdf",
+  "criterion_blank_detection": {
+    "is_blank_expected": {
+      "1": false,
+      "2": true,
+      "3": false,
+      "4": true,
+      "5": true
+    }
+  },
+  "notes": "5 pages; pages 1 and 3 contain text body; pages 2, 4, 5 are blank."
+}

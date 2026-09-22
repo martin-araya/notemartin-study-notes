@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "hostile-scan.png",
+  "criterion_1_improvement": {
+    "metric": "useful_rows",
+    "min_improvement_ratio": 1.15,
+    "notes": "Useful rows = number of image rows with std dev > 30 (high contrast content). Preprocessed must show \u2265 15% improvement."
+  },
+  "notes": "Single PNG with rotation +3\u00b0, Gaussian noise, spine shadow."
+}

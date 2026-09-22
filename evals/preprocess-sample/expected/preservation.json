@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "evals/preprocess-sample/fixtures/*",
+  "criterion_3_preservation": {
+    "files": [
+      "rotated-test.pdf",
+      "blank-test.pdf",
+      "hostile-scan.png"
+    ],
+    "original_sha256_must_be_unchanged": true
+  },
+  "notes": "Input files must not be modified by preprocess.py."
+}

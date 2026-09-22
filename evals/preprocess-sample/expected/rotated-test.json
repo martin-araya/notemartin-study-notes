@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "rotated-test.pdf",
+  "criterion_2_rotation": {
+    "page_rotations_deg": [
+      0.0,
+      3.0,
+      5.0
+    ],
+    "rotation_applied_expected": [
+      false,
+      true,
+      true
+    ],
+    "tolerance_deg": 0.5,
+    "notes": "reportlab draws text at +3\u00b0 (clockwise); deskew detects -3\u00b0 (counterclockwise to upright). For comparison use |detected|."
+  },
+  "notes": "3 pages; c.rotate(0), c.rotate(+3), c.rotate(-5); deskew reports angle to apply to upright."
+}
