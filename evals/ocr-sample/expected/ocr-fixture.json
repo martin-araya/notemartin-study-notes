@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "ocr-fixture.png",
+  "criterion_1_word_level": {
+    "min_words_with_valid_bbox_and_conf": 30,
+    "min_pct_words_with_conf_ge_0_and_bbox_valid": 0.9,
+    "notes": "Each word must have conf >= 0 and bbox [x, y, w, h] with w > 0 and h > 0."
+  }
+}

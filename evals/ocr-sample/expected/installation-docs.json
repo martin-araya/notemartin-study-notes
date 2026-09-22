@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "spec_file": "skill/notemartin-study-notes/references/01-ingest/ocr-engines.md",
+  "criterion_4_install_docs": {
+    "required_sections": [
+      "macOS",
+      "Ubuntu",
+      "Windows"
+    ],
+    "required_commands": {
+      "macOS": "brew install tesseract",
+      "Ubuntu": "apt install tesseract-ocr",
+      "Windows": "tesseract"
+    },
+    "required_verifications": [
+      "tesseract --version",
+      "tesseract --list-langs"
+    ]
+  }
+}

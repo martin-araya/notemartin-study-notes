@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "low-confidence-fixture.png",
+  "criterion_3_retry": {
+    "min_retries": 1,
+    "expected_actions": [
+      "invert",
+      "alternative_engine",
+      "sparse_psm"
+    ],
+    "notes": "Low-quality fixture should trigger at least one retry; reason must mention mean_conf."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "bilingual-fixture.png",
+  "criterion_2_multilingual": {
+    "languages": "spa+eng",
+    "min_words": 80,
+    "min_mean_conf": 0.7
+  }
+}
