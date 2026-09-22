@@ -8,9 +8,9 @@ Cargar antes de la primera ingesta de una fuente (L0). Cargar también durante l
 
 ## Estado actual
 
-Todos los archivos están pendientes:
+Estado de los archivos:
 
-- `triage.md` `[pendiente F17]`
+- `triage.md` ✅ F17
 - `ocr-engines.md` `[pendiente F20]`
 - `code-ocr.md` `[pendiente F25]`
 - `confidence.md` `[pendiente F26]`
@@ -19,7 +19,7 @@ Todos los archivos están pendientes:
 
 | Archivo | Lee | Produce |
 |---|---|---|
-| `triage.md` | F17 (script de triaje), agente al inicio | F17 |
+| `triage.md` | agente al inicio de cada ingesta; `scripts/ingest/triage.py` | F17 |
 | `ocr-engines.md` | F20, agente al elegir motor | F20 |
 | `code-ocr.md` | F25, agente en validación sintáctica | F25 |
 | `confidence.md` | F26, humano en revisión | F26 |
