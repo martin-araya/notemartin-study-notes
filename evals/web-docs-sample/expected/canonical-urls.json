@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "docs-site/",
+  "criterion_3_canonical_url_deep": {
+    "url_prefix": "https://example.com/docs/",
+    "verify_method": "every section.canonical_url starts with url_prefix and is not just the host"
+  }
+}

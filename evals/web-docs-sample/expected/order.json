@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "docs-site/",
+  "criterion_1_order_reproduces_index": {
+    "expected_section_order": [
+      "intro.html",
+      "install.html",
+      "config.html",
+      "api.html"
+    ],
+    "verify_method": "sections[0].url_path == intro.html, sections[3].url_path == api.html"
+  }
+}

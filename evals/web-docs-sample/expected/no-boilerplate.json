@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "docs-site/",
+  "criterion_2_no_boilerplate": {
+    "boilerplate_strings_to_avoid": [
+      "Skip to content",
+      "All rights reserved",
+      "Accept cookies"
+    ],
+    "verify_method": "sections[*].text does not contain any of the boilerplate_strings_to_avoid"
+  }
+}
