@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "source_url": "https://example.com/docs",
+  "index_url": "https://example.com/docs/overview.html",
+  "total_pages": 5,
+  "product_version": "1.0",
+  "domain": "https://example.com",
+  "warnings": [],
+  "source": {
+    "dir": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/anchors-sample/fixtures/source-unnumbered-html",
+    "base_url": "https://example.com/docs",
+    "index": "overview.html",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "criterion_1_unnumbered_anchors": {
+    "applies_to_html_only": true,
+    "applies": false
+  },
+  "criterion_2_stable_anchors": {
+    "identical_across_runs": true
+  },
+  "criterion_3_L2_references": {
+    "all_referenced_block_ids_exist": true
+  },
+  "duplicates_resolved_with_ordinal": {
+    "advisory": true,
+    "notes": "Outline has /ch01/foo twice (pages 1 and 2). Either BOTH survive as two sections (with -N ordinal per §7.1), or the second is dropped. The expected behavior is BOTH survive; if F31 doesn't yet emit -N, this check is informational, not a fail."
+  },
+  "skipped_numbers_not_invented": {
+    "no_synthetic_section_path_for_1_2": true,
+    "notes": "Source skips 1.2 (jumps 1.1 → 1.3). SDM must NOT invent a 1.2 section."
+  }
+}

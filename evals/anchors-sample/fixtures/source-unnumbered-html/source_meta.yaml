@@ -1,0 +1,10 @@
+id: eval-anchorless-html
+hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+vendor: 'https://example.com'
+product: Anchorless
+version: '1.0'
+url: 'https://example.com/docs/overview.html'
+language: en
+format: html
+date: '2026-09-24'
+authors: []

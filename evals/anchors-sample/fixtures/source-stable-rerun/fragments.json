@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0.0",
+  "pages": [
+    {
+      "page": 1,
+      "fragments": [
+        {
+          "page": 1,
+          "bbox": [
+            50.0,
+            700.0,
+            350.0,
+            720.0
+          ],
+          "font_name": "Helvetica-Bold",
+          "font_size": 18.0,
+          "text": "Chapter 1: Introduction",
+          "role": "heading",
+          "heading_level": 1,
+          "section_path": "/ch01/intro",
+          "is_boilerplate": false
+        },
+        {
+          "page": 1,
+          "bbox": [
+            50.0,
+            600.0,
+            550.0,
+            660.0
+          ],
+          "font_name": "Helvetica",
+          "font_size": 12.0,
+          "text": "Distributed databases are a core building block of modern infrastructure.",
+          "role": "body",
+          "heading_level": null,
+          "section_path": "/ch01/intro",
+          "is_boilerplate": false
+        },
+        {
+          "page": 1,
+          "bbox": [
+            80.0,
+            300.0,
+            480.0,
+            550.0
+          ],
+          "font_name": "Helvetica",
+          "font_size": 10.0,
+          "text": "[figure: assets/architecture.png alt='High-level architecture']",
+          "role": "body",
+          "heading_level": null,
+          "section_path": "/ch01/intro",
+          "is_boilerplate": false
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "fragments": [
+        {
+          "page": 2,
+          "bbox": [
+            80.0,
+            240.0,
+            480.0,
+            258.0
+          ],
+          "font_name": "Helvetica-Oblique",
+          "font_size": 10.0,
+          "text": "Figure 1.1: High-level architecture of a distributed database.",
+          "role": "caption",
+          "heading_level": null,
+          "section_path": "/ch01/intro",
+          "is_boilerplate": false
+        },
+        {
+          "page": 2,
+          "bbox": [
+            60.0,
+            100.0,
+            460.0,
+            118.0
+          ],
+          "font_name": "Helvetica",
+          "font_size": 10.0,
+          "text": "Table 2.1: Generic support summary.",
+          "role": "body",
+          "heading_level": null,
+          "section_path": "/ch01/intro",
+          "is_boilerplate": false
+        }
+      ]
+    }
+  ],
+  "outline": [
+    {
+      "level": 1,
+      "title": "Chapter 1: Introduction",
+      "page": 1,
+      "section_path": "/ch01/intro"
+    }
+  ],
+  "boilerplate_summary": {
+    "header_band": [],
+    "footer_band": []
+  },
+  "warnings": []
+}

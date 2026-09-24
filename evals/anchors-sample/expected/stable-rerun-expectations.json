@@ -1,0 +1,6 @@
+{
+  "criterion_2_stable_anchors": {
+    "identical_across_runs": true,
+    "notes": "Re-run of F31 source-pdf with the same hash must produce a bit-identical sdm.json."
+  }
+}

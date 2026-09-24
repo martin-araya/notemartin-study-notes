@@ -1,0 +1,49 @@
+{
+  "page": 1,
+  "regions": [
+    {
+      "id": "r-h1",
+      "semantic_class": "heading",
+      "level": 1,
+      "text": "Chapter 1: Introduction",
+      "bbox": [
+        50.0,
+        700.0,
+        300.0,
+        20.0
+      ],
+      "class_confidence": 0.92,
+      "ambiguity": false,
+      "origin": "native"
+    },
+    {
+      "id": "r-p1",
+      "semantic_class": "text",
+      "text": "Distributed databases are a core building block of modern infrastructure.",
+      "bbox": [
+        50.0,
+        600.0,
+        500.0,
+        60.0
+      ],
+      "class_confidence": 0.8,
+      "ambiguity": false,
+      "origin": "native"
+    },
+    {
+      "id": "r-fig1",
+      "semantic_class": "figure",
+      "src": "assets/architecture.png",
+      "alt": "High-level architecture",
+      "bbox": [
+        80.0,
+        300.0,
+        400.0,
+        250.0
+      ],
+      "class_confidence": 0.9,
+      "ambiguity": false,
+      "origin": "native"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0.0",
+  "source_url": "https://example.com/docs",
+  "total_pages": 5,
+  "sections": [
+    {
+      "url_path": "overview.html",
+      "canonical_url": "https://example.com/docs/overview.html",
+      "level": 1,
+      "title": "Overview",
+      "text": "This document has no numbered sections. Navigation flows by URL slug.",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Overview",
+          "anchor": ""
+        }
+      ],
+      "links_internal": [],
+      "page_metadata": {
+        "product": "Anchorless",
+        "version": "1.0",
+        "domain": "https://example.com",
+        "fetched_at": "2026-09-24T00:00:00Z"
+      }
+    },
+    {
+      "url_path": "concepts.html",
+      "canonical_url": "https://example.com/docs/concepts.html",
+      "level": 1,
+      "title": "Concepts",
+      "text": "Core concepts without numbers.",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Concepts",
+          "anchor": ""
+        }
+      ],
+      "links_internal": [],
+      "page_metadata": {
+        "product": "Anchorless",
+        "version": "1.0",
+        "domain": "https://example.com",
+        "fetched_at": "2026-09-24T00:00:00Z"
+      }
+    },
+    {
+      "url_path": "setup.html",
+      "canonical_url": "https://example.com/docs/setup.html",
+      "level": 1,
+      "title": "Setup",
+      "text": "How to set up the project.",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Setup",
+          "anchor": ""
+        }
+      ],
+      "links_internal": [],
+      "page_metadata": {
+        "product": "Anchorless",
+        "version": "1.0",
+        "domain": "https://example.com",
+        "fetched_at": "2026-09-24T00:00:00Z"
+      }
+    },
+    {
+      "url_path": "usage.html",
+      "canonical_url": "https://example.com/docs/usage.html",
+      "level": 1,
+      "title": "Usage",
+      "text": "Common usage patterns.",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Usage",
+          "anchor": ""
+        }
+      ],
+      "links_internal": [],
+      "page_metadata": {
+        "product": "Anchorless",
+        "version": "1.0",
+        "domain": "https://example.com",
+        "fetched_at": "2026-09-24T00:00:00Z"
+      }
+    },
+    {
+      "url_path": "reference.html",
+      "canonical_url": "https://example.com/docs/reference.html",
+      "level": 1,
+      "title": "Reference",
+      "text": "API reference without numbers.",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Reference",
+          "anchor": ""
+        }
+      ],
+      "links_internal": [],
+      "page_metadata": {
+        "product": "Anchorless",
+        "version": "1.0",
+        "domain": "https://example.com",
+        "fetched_at": "2026-09-24T00:00:00Z"
+      }
+    }
+  ]
+}

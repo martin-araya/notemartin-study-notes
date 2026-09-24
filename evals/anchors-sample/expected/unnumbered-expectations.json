@@ -1,0 +1,25 @@
+{
+  "criterion_1_unnumbered_anchors": {
+    "min_sections": 5,
+    "all_blocks_have_section_path": true,
+    "all_anchors_resolvable": true,
+    "page_is_null": true,
+    "notes": "HTML doc without numbered headings. Every block must carry anchor.section_path non-empty and anchor.page = null."
+  },
+  "criterion_2_stable_anchors": {
+    "identical_across_runs": true,
+    "notes": "build_sdm --check-determinism runs twice, sdm.json must be byte-identical."
+  },
+  "criterion_3_L2_references": {
+    "all_referenced_block_ids_exist": true,
+    "no_orphan_section_paths": true,
+    "notes": "The sample ledger references block_ids; every one must resolve to a real block in sdm.json."
+  },
+  "duplicates_resolved_with_ordinal": {
+    "advisory": true,
+    "notes": "D5 says duplicate-numbered sections must each get a distinct section_path with ordinal suffix. Currently build_sdm uses outline section_path literally; this check documents the gap if it fails, not the criteria."
+  },
+  "skipped_numbers_not_invented": {
+    "no_synthetic_section_path_for_1_2": true
+  }
+}
