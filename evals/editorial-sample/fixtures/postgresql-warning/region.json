@@ -1,0 +1,19 @@
+{
+  "raw_region": {
+    "id": "r-pg-warn",
+    "semantic_class": "editorial_note",
+    "sub_kind": "box",
+    "text": "WARNING: this query may lock the table for hours.",
+    "bbox": [
+      10.0,
+      100.0,
+      200.0,
+      60.0
+    ],
+    "class_confidence": 0.92,
+    "ambiguity": false,
+    "origin": "native",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL 16"
+  }
+}

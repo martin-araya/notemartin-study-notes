@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "eval-pg-warning",
+    "hash": "71ee5c5c9019479aaa43f4cdecf7ec9ac52e52884bdd1f1df76820674daa6df7",
+    "algorithm": "sha256",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL 16",
+    "version": "16",
+    "url": "https://example.com/eval",
+    "language": "en",
+    "format": "html"
+  },
+  "source_provenance": {
+    "id": {
+      "method": "read",
+      "value": "eval-pg-warning",
+      "confidence": 1.0
+    },
+    "hash": {
+      "method": "read",
+      "value": "71ee5c5c9019479aaa43f4cdecf7ec9ac52e52884bdd1f1df76820674daa6df7",
+      "confidence": 1.0
+    },
+    "vendor": {
+      "method": "read",
+      "value": "PostgreSQL Global Development Group",
+      "confidence": 1.0
+    },
+    "product": {
+      "method": "read",
+      "value": "PostgreSQL 16",
+      "confidence": 1.0
+    },
+    "version": {
+      "method": "read",
+      "value": "16",
+      "confidence": 1.0
+    },
+    "url": {
+      "method": "read",
+      "value": "https://example.com/eval",
+      "confidence": 1.0
+    },
+    "language": {
+      "method": "default",
+      "value": "en",
+      "confidence": 0.0
+    },
+    "date": {
+      "method": "default",
+      "value": "2026-09-24",
+      "confidence": 0.0
+    },
+    "format": {
+      "method": "read",
+      "value": "html",
+      "confidence": 1.0
+    },
+    "edition": {
+      "method": "default",
+      "value": null,
+      "confidence": 0.0
+    },
+    "isbn": {
+      "method": "default",
+      "value": null,
+      "confidence": 0.0
+    },
+    "authors": {
+      "method": "default",
+      "value": [],
+      "confidence": 0.0
+    },
+    "algorithm": {
+      "method": "read",
+      "value": "sha256",
+      "confidence": 1.0
+    }
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Intro",
+      "blocks": [
+        {
+          "id": "d405a6ba33dc",
+          "type": "warning",
+          "content": {
+            "text": "WARNING: this query may lock the table for hours.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro",
+            "bbox": [
+              10.0,
+              100.0,
+              200.0,
+              60.0
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

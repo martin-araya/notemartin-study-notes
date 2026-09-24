@@ -1,0 +1,19 @@
+{
+  "raw_region": {
+    "id": "r-py-warn",
+    "semantic_class": "editorial_note",
+    "sub_kind": "box",
+    "text": "[WARN] This is deprecated since 3.10.",
+    "bbox": [
+      10.0,
+      100.0,
+      200.0,
+      60.0
+    ],
+    "class_confidence": 0.92,
+    "ambiguity": false,
+    "origin": "native",
+    "vendor": "Python Software Foundation (docs.python.org)",
+    "product": "Python docs"
+  }
+}
