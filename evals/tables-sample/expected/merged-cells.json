@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "merged-cells-fixture.pdf",
+  "criterion_2_merged_cells_preserve_value": {
+    "expected_merged_cells_min": 1,
+    "must_contain_values": [
+      "Combined Header (colspan 3)"
+    ],
+    "notes": "Verify that 'Combined Header (colspan 3)' appears in merged_cells with the original value preserved."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "large-table-fixture.pdf",
+  "criterion_1_thirty_plus_rows": {
+    "expected_rows": 36,
+    "expected_cols": 5,
+    "expected_data_rows": 35,
+    "notes": "1 header row + 35 data rows; all 36 rows have 5 cells; no truncation."
+  }
+}

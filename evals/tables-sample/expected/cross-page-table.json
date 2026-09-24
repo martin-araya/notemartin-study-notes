@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "cross-page-table-fixture.pdf",
+  "criterion_3_no_truncation": {
+    "expected_total_rows": 24,
+    "expected_cross_page_continued": true,
+    "expected_cols": 4,
+    "notes": "12 rows on page 1 + 12 rows on page 2 = 24 total after merge; cross_page_continued=true."
+  }
+}
