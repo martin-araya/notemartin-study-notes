@@ -1,0 +1,15 @@
+{
+  "page": 1,
+  "regions": [
+    {
+      "id": "r-html-fn",
+      "semantic_class": "footnote",
+      "text": "See the RFC for the wire format.",
+      "anchor": "footnote-1",
+      "section_path": "/intro",
+      "confidence": 0.95,
+      "ambiguity": false,
+      "origin": "native"
+    }
+  ]
+}

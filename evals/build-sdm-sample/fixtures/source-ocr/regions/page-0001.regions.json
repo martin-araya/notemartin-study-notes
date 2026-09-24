@@ -1,0 +1,42 @@
+{
+  "page": 1,
+  "regions": [
+    {
+      "id": "r-ocr-h1",
+      "semantic_class": "heading",
+      "level": 2,
+      "text": "OCR Result",
+      "bbox": [
+        50.0,
+        700.0,
+        200.0,
+        20.0
+      ],
+      "class_confidence": 0.62,
+      "ambiguity": true,
+      "alternative_classes": [
+        {
+          "class": "text",
+          "score": 0.62
+        }
+      ],
+      "origin": "ocr",
+      "confidence": 0.65
+    },
+    {
+      "id": "r-ocr-p",
+      "semantic_class": "text",
+      "text": "[OCR] Section heading detected with low confidence.",
+      "bbox": [
+        50.0,
+        600.0,
+        500.0,
+        40.0
+      ],
+      "class_confidence": 0.58,
+      "ambiguity": true,
+      "origin": "ocr",
+      "confidence": 0.6
+    }
+  ]
+}

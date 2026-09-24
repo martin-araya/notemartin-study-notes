@@ -1,0 +1,43 @@
+{
+  "page": 2,
+  "regions": [
+    {
+      "id": "r-cap1",
+      "semantic_class": "capture",
+      "text": "Figure 1.1: High-level architecture of a distributed database.",
+      "bbox": [
+        80.0,
+        240.0,
+        400.0,
+        18.0
+      ],
+      "class_confidence": 0.85,
+      "ambiguity": false,
+      "origin": "native"
+    },
+    {
+      "id": "r-cap-orphan",
+      "semantic_class": "text",
+      "text": "Table 2.1: Generic support summary.",
+      "bbox": [
+        60.0,
+        100.0,
+        400.0,
+        18.0
+      ],
+      "class_confidence": 0.55,
+      "ambiguity": true,
+      "alternative_classes": [
+        {
+          "class": "capture",
+          "score": 0.55
+        },
+        {
+          "class": "text",
+          "score": 0.5
+        }
+      ],
+      "origin": "native"
+    }
+  ]
+}

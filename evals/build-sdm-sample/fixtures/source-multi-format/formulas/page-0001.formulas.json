@@ -1,0 +1,15 @@
+{
+  "page": 1,
+  "formulas": [
+    {
+      "id": "r-multi-formula",
+      "latex": "f(x) = ax^2 + bx + c",
+      "latex_compiled": true,
+      "compile_errors": [],
+      "display": true,
+      "page": 1,
+      "pending": false,
+      "confidence": 0.9
+    }
+  ]
+}

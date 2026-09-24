@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0.0",
+  "pages": [
+    {
+      "page": 1,
+      "fragments": [
+        {
+          "page": 1,
+          "bbox": [
+            50.0,
+            700.0,
+            350.0,
+            720.0
+          ],
+          "font_name": "Helvetica-Bold",
+          "font_size": 18.0,
+          "text": "Multi-type page",
+          "role": "heading",
+          "heading_level": 1,
+          "section_path": "/ch01/multi",
+          "is_boilerplate": false
+        },
+        {
+          "page": 1,
+          "bbox": [
+            50.0,
+            600.0,
+            550.0,
+            640.0
+          ],
+          "font_name": "Helvetica",
+          "font_size": 12.0,
+          "text": "This page exercises every block type supported by the SDM schema.",
+          "role": "body",
+          "heading_level": null,
+          "section_path": "/ch01/multi",
+          "is_boilerplate": false
+        },
+        {
+          "page": 1,
+          "bbox": [
+            50.0,
+            500.0,
+            450.0,
+            580.0
+          ],
+          "font_name": "Helvetica",
+          "font_size": 12.0,
+          "text": "1. Item one\n2. Item two\n3. Item three",
+          "role": "body",
+          "heading_level": null,
+          "section_path": "/ch01/multi",
+          "is_boilerplate": false
+        },
+        {
+          "page": 1,
+          "bbox": [
+            50.0,
+            380.0,
+            450.0,
+            440.0
+          ],
+          "font_name": "Courier",
+          "font_size": 10.0,
+          "text": "def hello():\n    print('hello, world')",
+          "role": "body",
+          "heading_level": null,
+          "section_path": "/ch01/multi",
+          "is_boilerplate": false
+        },
+        {
+          "page": 1,
+          "bbox": [
+            50.0,
+            260.0,
+            250.0,
+            288.0
+          ],
+          "font_name": "Helvetica-Oblique",
+          "font_size": 12.0,
+          "text": "f(x) = ax^2 + bx + c",
+          "role": "body",
+          "heading_level": null,
+          "section_path": "/ch01/multi",
+          "is_boilerplate": false
+        }
+      ]
+    }
+  ],
+  "outline": [
+    {
+      "level": 1,
+      "title": "Multi-type page",
+      "page": 1,
+      "section_path": "/ch01/multi"
+    }
+  ],
+  "boilerplate_summary": {
+    "header_band": [],
+    "footer_band": []
+  },
+  "warnings": []
+}

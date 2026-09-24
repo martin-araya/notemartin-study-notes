@@ -1,0 +1,11 @@
+id: eval-04-multi-format
+hash: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+vendor: Test corpus
+product: Eval Multi
+version: '1.0'
+url: https://example.com/eval-multi
+language: en
+format: pdf
+date: '2026-09-24'
+authors:
+- eval

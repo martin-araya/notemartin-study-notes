@@ -1,0 +1,11 @@
+id: eval-01-pdf-figure
+hash: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+vendor: Test corpus
+product: Eval PDF
+version: '1.0'
+url: https://example.com/eval-pdf
+language: en
+format: pdf
+date: '2026-09-24'
+authors:
+- eval

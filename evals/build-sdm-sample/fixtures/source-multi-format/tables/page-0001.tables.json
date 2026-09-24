@@ -1,0 +1,33 @@
+{
+  "page": 1,
+  "tables": [
+    {
+      "region_id": "r-multi-table",
+      "page_start": 1,
+      "page_end": 1,
+      "rows": 3,
+      "cols": 2,
+      "headers": [
+        "Name",
+        "Type"
+      ],
+      "data": [
+        [
+          "foo",
+          "string"
+        ],
+        [
+          "bar",
+          "integer"
+        ],
+        [
+          "baz",
+          "float"
+        ]
+      ],
+      "merged_cells": [],
+      "cross_page_continued": false,
+      "confidence": 0.95
+    }
+  ]
+}

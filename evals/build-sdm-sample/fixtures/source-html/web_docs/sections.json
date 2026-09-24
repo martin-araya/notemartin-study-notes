@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "source_url": "https://example.com/docs",
+  "total_pages": 3,
+  "sections": [
+    {
+      "url_path": "intro.html",
+      "canonical_url": "https://example.com/docs/intro.html",
+      "level": 1,
+      "title": "Introduction",
+      "text": "This document presents the core concepts of the system.\n\nFollow the setup steps in chapter two.",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Introduction",
+          "anchor": ""
+        }
+      ],
+      "links_internal": [],
+      "page_metadata": {
+        "product": "EvalWeb",
+        "version": "2.0",
+        "domain": "https://example.com",
+        "fetched_at": "2026-09-24T00:00:00Z"
+      }
+    },
+    {
+      "url_path": "install.html",
+      "canonical_url": "https://example.com/docs/install.html",
+      "level": 1,
+      "title": "Installation",
+      "text": "First, install the package. Then verify the installation as documented.",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Installation",
+          "anchor": ""
+        }
+      ],
+      "links_internal": [],
+      "page_metadata": {
+        "product": "EvalWeb",
+        "version": "2.0",
+        "domain": "https://example.com",
+        "fetched_at": "2026-09-24T00:00:00Z"
+      }
+    },
+    {
+      "url_path": "config.html",
+      "canonical_url": "https://example.com/docs/config.html",
+      "level": 1,
+      "title": "Configuration",
+      "text": "Configure the runtime with a YAML file.",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Configuration",
+          "anchor": ""
+        }
+      ],
+      "links_internal": [],
+      "page_metadata": {
+        "product": "EvalWeb",
+        "version": "2.0",
+        "domain": "https://example.com",
+        "fetched_at": "2026-09-24T00:00:00Z"
+      }
+    }
+  ]
+}

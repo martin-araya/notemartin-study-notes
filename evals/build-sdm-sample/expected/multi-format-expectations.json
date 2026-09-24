@@ -1,0 +1,10 @@
+{
+  "blocks_by_type": {
+    "heading": 1,
+    "prose": 2,
+    "code": 1,
+    "formula": 1,
+    "table": 1
+  },
+  "sections_count": 1
+}

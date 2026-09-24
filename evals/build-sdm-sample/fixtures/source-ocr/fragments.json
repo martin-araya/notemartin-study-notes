@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "pages": [
+    {
+      "page": 1,
+      "fragments": [
+        {
+          "page": 1,
+          "bbox": [
+            50.0,
+            700.0,
+            250.0,
+            720.0
+          ],
+          "font_name": "Times-Italic",
+          "font_size": 16.0,
+          "text": "OCR Result",
+          "role": "heading",
+          "heading_level": 2,
+          "section_path": "/scan/intro",
+          "is_boilerplate": false
+        },
+        {
+          "page": 1,
+          "bbox": [
+            50.0,
+            600.0,
+            550.0,
+            640.0
+          ],
+          "font_name": "Times",
+          "font_size": 12.0,
+          "text": "[OCR] Section heading detected with low confidence.",
+          "role": "body",
+          "heading_level": null,
+          "section_path": "/scan/intro",
+          "is_boilerplate": false
+        }
+      ]
+    }
+  ],
+  "outline": [
+    {
+      "level": 1,
+      "title": "OCR Result",
+      "page": 1,
+      "section_path": "/scan/intro"
+    }
+  ],
+  "boilerplate_summary": {
+    "header_band": [],
+    "footer_band": []
+  },
+  "warnings": []
+}

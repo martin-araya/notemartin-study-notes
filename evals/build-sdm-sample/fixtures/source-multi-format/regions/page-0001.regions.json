@@ -1,0 +1,102 @@
+{
+  "page": 1,
+  "regions": [
+    {
+      "id": "r-multi-h1",
+      "semantic_class": "heading",
+      "level": 1,
+      "text": "Multi-type page",
+      "bbox": [
+        50.0,
+        700.0,
+        300.0,
+        20.0
+      ],
+      "class_confidence": 0.95,
+      "ambiguity": false,
+      "origin": "native"
+    },
+    {
+      "id": "r-multi-prose",
+      "semantic_class": "text",
+      "text": "This page exercises every block type supported by the SDM schema.",
+      "bbox": [
+        50.0,
+        600.0,
+        500.0,
+        40.0
+      ],
+      "class_confidence": 0.85,
+      "ambiguity": false,
+      "origin": "native"
+    },
+    {
+      "id": "r-multi-list",
+      "semantic_class": "text",
+      "text": "1. Item one\n2. Item two\n3. Item three",
+      "bbox": [
+        50.0,
+        500.0,
+        400.0,
+        80.0
+      ],
+      "class_confidence": 0.55,
+      "ambiguity": true,
+      "alternative_classes": [
+        {
+          "class": "list",
+          "score": 0.55
+        },
+        {
+          "class": "text",
+          "score": 0.5
+        }
+      ],
+      "origin": "native"
+    },
+    {
+      "id": "r-multi-code",
+      "semantic_class": "code",
+      "language": "python",
+      "text": "def hello():\n    print('hello, world')",
+      "bbox": [
+        50.0,
+        380.0,
+        400.0,
+        60.0
+      ],
+      "class_confidence": 0.92,
+      "ambiguity": false,
+      "origin": "native"
+    },
+    {
+      "id": "r-multi-formula",
+      "semantic_class": "formula",
+      "text": "f(x) = ax^2 + bx + c",
+      "latex": "f(x) = ax^2 + bx + c",
+      "display": true,
+      "bbox": [
+        50.0,
+        260.0,
+        200.0,
+        28.0
+      ],
+      "class_confidence": 0.78,
+      "ambiguity": false,
+      "origin": "native"
+    },
+    {
+      "id": "r-multi-table",
+      "semantic_class": "table",
+      "bbox": [
+        50.0,
+        200.0,
+        400.0,
+        60.0
+      ],
+      "class_confidence": 0.93,
+      "ambiguity": false,
+      "origin": "native"
+    }
+  ]
+}
