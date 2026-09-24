@@ -183,3 +183,103 @@ L0 code/console OCR: reconstruye texto byte-exact preservando indentación, apli
 | Escritura | Atómica: tempfile + `Path.replace` |
 | Constantes | `references/01-ingest/code-ocr.md` §3-§8 (`LINE_HEIGHT_TOL_PX=4.0`, `SMALL_GAP=2.0`, `LOW_CONFIDENCE_THRESHOLD=0.7`, `MAX_CORRECTIONS_PER_BLOCK=20`) |
 | Documentación | `references/01-ingest/code-ocr.md` (normativa) |
+
+### `ingest/review_report.py` — F26 · Confianza y revisión humana
+
+Fase mixta (script + spec): agrega confianza por tipo de región, genera reporte HTML con recortes de imagen y texto lado a lado, bloquea si hay demasiadas regiones críticas dudosas, propaga correcciones humanas a repeticiones del mismo error.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <ingest_dir>` (contiene ingest/regions, tables, formulas, code); opcional `--images-dir <images_dir>` (F19) para recortes; opcional `--corrections <corrections.json>` para propagación |
+| Salida | `<out-dir>/ingest/review/report.html` (reporte interactivo con filter bar JS) + `summary.json` (machine-readable con umbrales, blocked, applied_corrections, propagated_corrections) + `crops/page-NNNN/<id>.png` (recortes Pillow) |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/review_report.py --source <ingest_dir> --out-dir <dir> [--images-dir <dir>] [--corrections <corrections.json>]` |
+| Dependencias | Python 3.9+ stdlib; Pillow opcional (solo para recortes de imagen) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · **1 BLOQUEADO** (≥ 3 regiones críticas dudosas) · 2 OK con advertencias |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/confidence.md` §2-§5 (15 umbrales por clase, `MAX_LOW_CONF_CRITICAL=3`, `CROP_PADDING_PX=5`, `PROPAGATION_MIN_LENGTH=5`) |
+| Documentación | `references/01-ingest/confidence.md` (normativa) |
+
+### `ingest/post_ocr.py` — F27 · Corrección post-OCR determinista
+
+Aplica correcciones deterministas (R001-R010) y diccionario técnico auditable. NUNCA usa ML; NUNCA modifica código ni tablas. Cada corrección tiene `correction_id` único y es individualmente revertible.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <ingest_dir>` (contiene ingest/regions); opcional `--dictionary <dictionary.yaml>` (default: 5 entradas comunes) |
+| Salida | `<out-dir>/ingest/post_ocr/page-NNNN.post_ocr.json` (regiones con original/corrected/corrections) + `post_ocr_summary.json` (global) + `audit_log.json` (applies + reverts) |
+| Modos | apply (default) · `--revert <correction_id>` · `--revert-all` |
+| Invocación | `python3 scripts/ingest/post_ocr.py --source <ingest_dir> --out-dir <dir> [--dictionary <dict.yaml>]` |
+| Dependencias | Python 3.9+ stdlib (sin numpy ni ML) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (regiones saltadas, parcial) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/post-ocr.md` §3-§7 (10 reglas R001-R010, `INDENT_PRESERVE_MIN=4`, `MAX_CORRECTIONS_PER_REGION=50`, `MAX_DICTIONARY_ENTRIES=1000`, `MAX_AUDIT_LOG_ENTRIES=1000`) |
+| Documentación | `references/01-ingest/post-ocr.md` (normativa) |
+
+### `ingest/other_formats.py` — F28 · EPUB, DOCX, PPTX, transcripciones
+
+Procesa formatos que no son PDF y los normaliza al contrato de F22. Detecta formato por extensión + magic bytes. EPUB (`ebooklib`), DOCX (`python-docx`), PPTX (`python-pptx`), SRT/VTT/JSON (stdlib). Notas del orador → `speaker_note` (bloques propios). Muletillas fuera en transcripciones (whitelist cerrada). Marcas temporales como `anchor_id` resolubles.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <file_or_dir>` (EPUB/DOCX/PPTX/SRT/VTT/JSON); `--format auto\|epub\|docx\|pptx\|srt\|vtt\|json` (opcional) |
+| Salida | `<out-dir>/ingest/other_formats/<basename>.<fmt>.regions.json` (por formato) + `summary.json` (global con class_distribution, fillers_removed_count) |
+| Invocación | `python3 scripts/ingest/other_formats.py --source <dir> --out-dir <dir> [--format auto]` |
+| Dependencias | Python 3.9+ stdlib; `ebooklib` + `python-docx` + `python-pptx` opcionales (cada uno emite error claro si falta) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/other-formats.md` §2-§7 (`TRANSCRIPT_FILLER_WORDS` = {um, uh, er, ah, eh, mm, hmm, mm-hmm, uh-huh}, `MIN_PAUSE_FOR_FILLER_REMOVAL_S = 2.0`, ITEM_NOTE=10) |
+| Documentación | `references/01-ingest/other-formats.md` (normativa) |
+
+### `ingest/web_docs.py` — F29 · Documentación web multipágina
+
+Procesa un mirror de documentación HTML multipágina y produce `sections.json` con el orden del índice preservado, texto limpio (sin boilerplate: nav/menus/banners/footers), URL canónica por sección y versión del producto detectada. BFS desde `--index` con `--max-depth` y `--max-pages`. Sin ML, sin OCR, sin descarga de URLs remotas (wget se hace fuera de F29).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <dir>` (mirror HTML local); `--base-url <url>`; opcional `--index <path>` (default `index.html`); opcional `--respect-robots-txt`, `--allow-domain`, `--max-depth`, `--max-pages` |
+| Salida | `<out-dir>/ingest/web_docs/sections.json` (array de secciones en orden del índice) + `metadata.json` (global con total_pages, product_version, domain, warnings) |
+| Invocación | `python3 scripts/ingest/web_docs.py --source <dir> --base-url <url> --out-dir <dir> [--index <path>]` |
+| Dependencias | Python 3.9+ stdlib (html.parser) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/web-docs.md` §2-§7 (`MAX_PAGES_DEFAULT=500`, `MAX_DEPTH_DEFAULT=5`, `MIN_TEXT_LENGTH=50`, lista `BOILERPLATE_SELECTORS` con 14 selectores, `BOILERPLATE_ROLES` con 3 valores ARIA, `VERSION_PATTERNS` con 2 regex) |
+| Documentación | `references/01-ingest/web-docs.md` (normativa) |
+
+### `validate/ingest_check.py` — F30 · Verificación de ingesta (gate a L2)
+
+Detecta anomalías en la ingesta (páginas omitidas, secciones del índice ausentes, saltos de numeración, bloques vacíos, densidad anómala). Actúa como **puerta de verificación** entre L0 y L1/L2: exit 1 bloquea el avance si hay anomalías críticas sin override humano explícito.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--sdm <path>` (file o directorio `page-*.regions.json`); opcional `--declared-index <path>` (TOC JSON); opcional `--allow-critical --human-decision "..."` (override explícito) |
+| Salida | `<out-dir>/validation_report.json` (anomalías critical + warnings) + opcional `<out-dir>/decision_log.json` (registro de overrides) |
+| Invocación | `python3 scripts/validate/ingest_check.py --sdm <path> --out-dir <dir> [--declared-index <path>]` |
+| Dependencias | Python 3.9+ stdlib (sin numpy ni ML) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 BLOQUEADO (críticas sin override) · 2 OK con warnings |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/ingest-check.md` §2-§7 (`MIN_WORDS_PER_BLOCK=3`, `MAX_WORDS_PER_BLOCK=5000`, `MAX_NUMBERING_JUMP_FOR_WARNING=1`, `MAX_NUMBERING_JUMP_FOR_CRITICAL=100`) |
+| Documentación | `references/01-ingest/ingest-check.md` (normativa) |
+
+### `ingest/build_sdm.py` — F31 · Construcción del SDM
+
+L0→L1 ensamble: consume la salida de F17-F30 (regions, tables, formulas, code, review, web_docs, other_formats, fragments) en un único `sdm.json` conforme a `schemas/sdm.schema.json` (F13). Genera ids deterministas, asocia pies a figuras dentro de `CAPTION_MAX_PAGES_AHEAD=1` página y preserva referencias de footnotes. Valida el resultado contra el schema vía `scripts/util/validate_sdm.py`.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ingest-dir <dir>` (con `regions/`, `tables/`, `formulas/`, `code/`, `web_docs/`, `other_formats/`, `fragments.json`); `--source-meta <yaml>` (id, hash sha256 hex64, vendor, product, url, language, format); opcional `--source-file <path>` para calcular hash; opcional `--format {auto,pdf,html,epub,docx,pptx,transcript,repo}` |
+| Salida | `<out-dir>/sdm.json` + `<out-dir>/build_sdm_summary.json` + `<out-dir>/build_sdm.md` |
+| Determinismo | `--check-determinism` (re-construye dos veces y compara byte a byte) |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/build_sdm.py --ingest-dir <dir> --source-meta <yaml> --out-dir <dir> [--format auto] [--check-determinism]` |
+| Dependencias | Python 3.9+ stdlib; PyYAML (obligatorio para `--source-meta`); `scripts/util/validate_sdm.py` (subproceso) para validación de schema |
+| Comportamiento si falta PyYAML | Exit 1 con instrucción de instalación |
+| Códigos de salida | 0 OK sin advertencias · 1 error fatal / schema invalid / determinismo roto · 2 OK con advertencias (asociaciones faltantes, regiones ambiguas, etc.) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/02-source-model/build-sdm.md` §6-§9 (`CAPTION_PATTERN`, `CAPTION_MAX_PAGES_AHEAD=1`, `AMBIG_CLASS_MIN=0.45`, fórmula de id `sha1(hash + path + idx)[:12]`) |
+| Documentación | `references/02-source-model/build-sdm.md` (normativa) |
