@@ -673,9 +673,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Correcciones humanas registradas y propagadas a repeticiones del mismo error.
 
 **Criterios:**
-- [ ] El reporte muestra imagen y texto lado a lado.
-- [ ] Los umbrales difieren por tipo y están justificados.
-- [ ] Una fuente muy degradada no avanza sin confirmación.
+- [x] El reporte muestra imagen y texto lado a lado.
+- [x] Los umbrales difieren por tipo y están justificados.
+- [x] Una fuente muy degradada no avanza sin confirmación.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/review_report.py` (~440 líneas, Python 3.9+ stdlib + Pillow opcional). Fase mixta (script + spec). Consume ingest/{regions,tables,formulas,code}.json de F22/F23/F24/F25 + imágenes `.processed.png` de F19 (opcional). **15 umbrales por tipo** justificados en `confidence.md` §2: code/console ≥ 0.90 (typo = syntax error), table ≥ 0.85 (números importan), formula/syntax_diagram ≥ 0.75, heading/caption/figure_caption/index ≥ 0.70, editorial_note ≥ 0.65, text ≥ 0.60, figure/capture/diagram ≥ 0.50. **Regiones críticas**: code, console, table, formula, syntax_diagram. **Bloqueo** si `critical_low_confidence_count ≥ MAX_LOW_CONF_CRITICAL = 3` → exit code 1, `summary.blocked = true`, `blocked_reason = "too_many_low_confidence_critical_regions"`. Reporte HTML self-contained con filter bar JS inline (class / page / confidence / block), `<tr class="region-row">` con `<td class="region-image"><img src="crops/page-NNNN/<id>.png"></td>` + `<td><pre class="region-text">...</pre></td>` lado a lado. Banner rojo si `blocked=true`. Recortes Pillow con `CROP_PADDING_PX=5` y `MIN_REGION_AREA_PX=100`. **Correcciones humanas** (`--corrections <path>`): aplica cada corrección por `region_id` Y propaga a todas las regiones con `original_text` idéntico (mínimo `PROPAGATION_MIN_LENGTH=5` chars); cada propagación se registra en `propagated_corrections[]`. Constantes inline (15 umbrales, `MAX_LOW_CONF_CRITICAL=3`, `CROP_PADDING_PX=5`, `PROPAGATION_MIN_LENGTH=5`). Spec en `skill/notemartin-study-notes/references/01-ingest/confidence.md` (235 líneas / 400, 11 secciones; §2 umbrales justificados; §3 bloqueo; §4 recortes; §5 propagación; §6 reporte HTML). 2 fixtures en `evals/review-sample/fixtures/` (degraded-source 1 p con code+table+formula+text mixed, blocked-source 1 p con 4 regiones críticas low_confidence) + `build_fixtures.py` (reportlab + Courier; ingest trees sintéticos construidos por run_eval) + `run_eval.py` que valida los 3 criterios: HTML contiene `<img>` + `<pre class="region-text">` en misma fila; 15 umbrales distintos con code(0.9) > text(0.6); blocked exit=1 con critical_low=4. `code-ocr.md` §12 + `scripts/README.md` actualizados. Validación: 3/3 verde.
 
 ---
 
@@ -690,9 +692,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Registro completo y revertible; nunca toca código ni tablas.
 
 **Criterios:**
-- [ ] Toda corrección es rastreable a una regla o entrada de diccionario.
-- [ ] Código y tablas quedan intactos.
-- [ ] Cualquier corrección individual se puede revertir.
+- [x] Toda corrección es rastreable a una regla o entrada de diccionario.
+- [x] Código y tablas quedan intactos.
+- [x] Cualquier corrección individual se puede revertir.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/post_ocr.py` (~530 líneas, Python 3.9+ stdlib; sin numpy ni ML). Consume `ingest/regions/page-NNNN.regions.json` de F22 + opcional `dictionary.yaml`. **10 reglas deterministas** (R001-R010): R001 espacio después de `\n` con whitelist `[({<\d`, R002 colapsa `\n{3,}` a `\n\n`, R003 colapsa dobles espacios (preserva indentación ≥ `INDENT_PRESERVE_MIN=4`), R004 tabs a espacios, R005-R008 ligaduras (ﬁ, ﬂ, ﬃ, ﬄ → fi, fl, ffi, ffl) con URL-skip, R009 numeración incrustada (`\n\n` después del número), R010 marcadores `(N)`/`[N]` a línea propia. **Diccionario técnico auditable** YAML con `original → corrected` + `case_sensitive` + `scope`; default: 5 entradas (PostgreSQL, JavaScript, TypeScript, python, mySQL). **Regla dura**: regiones con `semantic_class ∈ {code, console, table, syntax_diagram}` **intactas** (`skipped: true`); `formula` SOLO recibe diccionario (no reglas R001-R010). Cada corrección con `correction_id` único global (`c-NNNN`), `source` ∈ {`rule_id`, `dict_id`}, `char_pos`, `char_end`, `original`, `corrected`, `applied_at`. **Revertibilidad individual** vía `--revert <correction_id>` (revierte ESA corrección sin afectar otras); `--revert-all` revierte todas. **Audit log** en `audit_log.json` registra applies y reverts. Constantes inline (`INDENT_PRESERVE_MIN=4`, `MAX_CORRECTIONS_PER_REGION=50`, `MAX_DICTIONARY_ENTRIES=1000`, `MAX_AUDIT_LOG_ENTRIES=1000`). Spec en `skill/notemartin-study-notes/references/01-ingest/post-ocr.md` (235 líneas / 400, 11 secciones; §3 catálogo de reglas; §4 diccionario YAML; §5 skip regiones; §6 aplicación + revertibilidad; §7 audit log). 4 fixtures en `evals/post-ocr-sample/fixtures/` (prose con R001/R002/R005/D001 activables, code Python intacto, table 4×4 intacta, revert activable) + `build_fixtures.py` (reportlab + Courier) + `dictionary.yaml` (5 entradas default) + `run_eval.py` que valida los 3 criterios: ≥ 1 corrección con `correction_id` + `source`; code y table `skipped=True` con `corrected==original`; `--revert c-0001` restaura `corrected_text==original_text`. `confidence.md` §12 + `scripts/README.md` actualizados. Validación: 3/3 verde.
 
 ---
 
@@ -707,9 +711,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Transcripciones: muletillas fuera, marca temporal conservada como ancla.
 
 **Criterios:**
-- [ ] Cada formato del corpus produce SDM válido.
-- [ ] Las notas del orador quedan como bloques propios.
-- [ ] Las anclas temporales son resolubles.
+- [x] Cada formato del corpus produce SDM válido.
+- [x] Las notas del orador quedan como bloques propios.
+- [x] Las anclas temporales son resolubles.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/other_formats.py` (~590 líneas, Python 3.9+ stdlib + `ebooklib` + `python-docx` + `python-pptx` opcionales). Detección de formato por extensión + magic bytes (EPUB = ZIP con mimetype, DOCX = ZIP con `[Content_Types].xml`, PPTX = ZIP con `ppt/presentation.xml`, SRT/VTT = texto, JSON Whisper-style). **EPUB** (`ebooklib`): orden desde OPF spine, capítulos, imágenes (`<img>` → `figure` con `src`/`alt`), notas al pie (`ITEM_NOTE=10` → `footnote` con `anchor`). **DOCX** (`python-docx`): estilos como `semantic_class` (`Heading 1`/`Heading 2` → `heading` con `level`; `Quote` → `editorial_note`; `Code` → `code`; `List Bullet` → `list_item`; `Normal` → `text`); comentarios (`comment_part` con `author`/`text`/`anchor_para_id`); change tracking (`<w:ins>`/`<w:del>` → `change_tracked: true`); tablas nativas (`<w:tbl>` → `table` con `rows`/`cols`/`cells[][]`). **PPTX** (`python-pptx`): 3 slides con `notes_slide.notes_text_frame.text` → `speaker_note` (criterio 2: notas quedan como bloques propios); grupos recursivos. **Transcripciones** (SRT/VTT/JSON): muletillas fuera (whitelist cerrada `{um, uh, er, ah, eh, mm, hmm, mm-hmm, uh-huh}`) **solo en pausas > `MIN_PAUSE_FOR_FILLER_REMOVAL_S = 2.0` segundos**; marcas temporales conservadas como `anchor_id: "t-NNNN"` con `start`/`end` numéricos (criterio 3). Cada formato emite `regions.json` compatible con F22. Sin ML, sin heurísticas de plausibilidad. Constantes inline (`TRANSCRIPT_FILLER_WORDS`, `MIN_PAUSE_FOR_FILLER_REMOVAL_S=2.0`, `ITEM_NOTE=10`). Spec en `skill/notemartin-study-notes/references/01-ingest/other-formats.md` (273 líneas / 400, 11 secciones; §2 detección; §3 EPUB; §4 DOCX; §5 PPTX; §6 transcripciones; §7 limpieza; §8 anclas). 6 fixtures en `evals/other-formats-sample/fixtures/` (epub 2 capítulos + nota, docx Heading 1 + párrafo + tabla 3×3, pptx 3 slides + 2 notas del orador, srt 4 segmentos + muletillas, vtt 2 segmentos, json 3 segmentos Whisper-style) + `build_fixtures.py` (zipfile para EPUB + python-docx + python-pptx) + `run_eval.py` que valida los 3 criterios: 6 formatos con regions.json válida, 2 speaker_note blocks con texto, 9 transcript regions con anchor_id+start+end. `post-ocr.md` §12 + `scripts/README.md` actualizados. Validación: 3/3 verde.
 
 ---
 
@@ -723,9 +729,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - URL canónica por sección como ancla profunda; detección de la versión del producto.
 
 **Criterios:**
-- [ ] El orden reproduce el índice del sitio.
-- [ ] El boilerplate no aparece en el SDM.
-- [ ] Cada sección conserva su URL profunda.
+- [x] El orden reproduce el índice del sitio.
+- [x] El boilerplate no aparece en el SDM.
+- [x] Cada sección conserva su URL profunda.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/web_docs.py` (~530 líneas, Python 3.9+ stdlib + html.parser). Consume directorio local de HTML (descargado manualmente con `wget --mirror`) + `--base-url <url>`. **BFS desde `--index`** preserva orden del nav. **Eliminación de boilerplate**: `HTMLCleaner` parser custom que extrae metadata (`<link rel="canonical">`, `<meta name="product">`, `<meta name="version">`) ANTES de saltar selectores (`nav`, `header.navbar`, `footer`, `aside`, `div.sidebar`, `div.banner`, `script`, `style`, `noscript`) + atributos ARIA (`role="banner"|"navigation"|"complementary"`); solo `<main>` y `<article>` se preservan para extraer texto. **URL canónica**: extraída de `<link rel="canonical">` o construida como `base-url + path + #anchor-del-primer-h1`. **Detección de versión**: `<meta name="product">` o `<meta name="version">` o regex en URL (`/v\d+\.\d+\.\d+/`, `/\d+\.\d+/`). **robots.txt** opcional: respeta `Disallow:` cuando `--respect-robots-txt`. Sin ML, sin OCR, sin descarga de URLs remotas. Constantes inline (`MAX_PAGES_DEFAULT=500`, `MAX_DEPTH_DEFAULT=5`, `MIN_TEXT_LENGTH=50`, lista `BOILERPLATE_SELECTORS` con 14 selectores, `BOILERPLATE_ROLES` con 3 valores ARIA, `VERSION_PATTERNS` con 2 regex). Spec en `skill/notemartin-study-notes/references/01-ingest/web-docs.md` (185 líneas / 400, 11 secciones; §2 BFS; §3 boilerplate; §4 robots.txt; §5 canonical URL; §6 product version; §7 sections.json schema). 1 fixture con `docs-site/` (index.html + intro + install + config + api = 5 archivos HTML) + `build_fixtures.py` (escritura directa de HTML con `<nav>`, `<main>`, `<link rel="canonical">`, `<meta name="product">`, `<meta name="version">`) + `run_eval.py` que valida los 3 criterios: 5 secciones en orden correcto `intro.html -> install.html -> config.html -> api.html`, sin boilerplate ("Skip to content", "All rights reserved", "Accept cookies" no aparecen en text), todos los `canonical_url` empiezan con `https://example.com/docs/`. `other-formats.md` §12 + `scripts/README.md` actualizados. Validación: 3/3 verde.
 
 ---
 
@@ -739,9 +747,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Puerta: no se avanza a L2 con anomalías críticas sin decisión explícita.
 
 **Criterios:**
-- [ ] Detecta una página omitida deliberadamente.
-- [ ] Lista secciones del índice ausentes en el SDM.
-- [ ] La puerta bloquea con anomalías críticas.
+- [x] Detecta una página omitida deliberadamente.
+- [x] Lista secciones del índice ausentes en el SDM.
+- [x] La puerta bloquea con anomalías críticas.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/validate/ingest_check.py` (~470 líneas, Python 3.9+ stdlib; sin numpy ni ML). Consume `--sdm <path>` (file o directorio con `page-*.regions.json`) + opcional `--declared-index <path>` (TOC JSON). **5 validaciones**: cobertura de páginas (`missing_page` crítico si una página del input no aparece en SDM), secciones del índice (`missing_section` crítico si una sección del TOC no aparece como heading), saltos de numeración (consecutivos ≤ `MAX_NUMBERING_JUMP_FOR_WARNING = 1` → warning; > `MAX_NUMBERING_JUMP_FOR_CRITICAL = 100` → crítico), bloques vacíos (heading sin contenido → crítico; otro bloque vacío → warning), densidad anómala (`MIN_WORDS_PER_BLOCK=3` y `MAX_WORDS_PER_BLOCK=5000` → warnings). **Comparación** índice declarado (TOC) vs jerarquía extraída del SDM → `missing_sections` (crítico) + `extra_sections` (info). **Gate de anomalías críticas**: exit 0 = sin anomalías o override humano aplicado; exit 1 = BLOQUEADO (críticas sin override, F31 NO debe consumir el SDM); exit 2 = solo warnings (gate abierto). **Override humano explícito** con `--allow-critical` + `--human-decision "reason"`; registra en `decision_log.json` con timestamp + razón + `critical_count`. Constantes inline (`MIN_WORDS_PER_BLOCK=3`, `MAX_WORDS_PER_BLOCK=5000`, `MAX_NUMBERING_JUMP_FOR_WARNING=1`, `MAX_NUMBERING_JUMP_FOR_CRITICAL=100`, `HEADING_CLASSES` con 9 valores). Spec en `skill/notemartin-study-notes/references/01-ingest/ingest-check.md` (236 líneas / 400, 11 secciones; §2 cobertura; §3 secciones; §4 saltos; §5 bloques; §6 comparación; §7 gate). 3 escenarios en `evals/ingest-check-sample/scenarios/` (sdm-with-missing-page con page 2 omitida, sdm-with-missing-section con sección 1.3 omitida, sdm-critical con página 2 omitida + sección 1.3 + heading vacío) + `build_fixtures.py` + `run_eval.py` que valida los 3 criterios. `web-docs.md` §12 + `scripts/README.md` (nueva sección `validate/`) actualizados. Validación: 3/3 verde.
 
 ---
 
@@ -754,22 +764,26 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** ensamblado de regiones en jerarquía con anclas; ids deterministas; pies asociados a figuras; notas al pie asociadas a su referencia; validación contra el esquema.
 
 **Criterios:**
-- [ ] Valida contra el esquema para todas las fuentes del corpus.
-- [ ] Los ids son idénticos entre ejecuciones.
-- [ ] Toda figura tiene su pie asociado cuando existe.
+- [x] Valida contra el esquema para todas las fuentes del corpus.
+- [x] Los ids son idénticos entre ejecuciones.
+- [x] Toda figura tiene su pie asociado cuando existe.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/build_sdm.py` (~1300 líneas, Python 3.9+ stdlib; PyYAML obligatorio para `--source-meta`; subproceso a `scripts/util/validate_sdm.py` para validación; códigos 0/1/2; escritura atómica `tempfile`+`Path.replace`). Ensambla jerarquía de secciones desde `fragments.json.outline` (PDF, F18), `web_docs/sections.json` (HTML, F29) o regiones de F28 (EPUB/DOCX/PPTX/transcript/repo); fallback a una sección por página. Mapeo `semantic_class` (F22) → `type` (F13) cubre los 16 tipos con manejo explícito de `editorial_note`, `capture`, `formula`, `code`, `console`, `syntax_diagram`, `index`, `footnote`. Asociación figura↔pie por `(misma sección, page delta ≤ CAPTION_MAX_PAGES_AHEAD=1, patrón CAPTION_PATTERN=^(Figure|Fig\.|Tabla|Tab.) N)`; el bloque `caption` se mantiene emitido además de poblar `figure.content.caption`. Backfill de `footnote.content.ref` con `"<page>:<N>"` cuando venga vacío. Reglas duras: regiones ambiguas → `prose` con `confidence=class_confidence` y `origin="reconstructed"`; `ocr` ⇒ `confidence<1.0`; tabla/fórmula/code con `confidence<1.0` ⇒ `origin="ocr"` o `"reconstructed"` (nunca `native` + `<1`). Constantes inline: `CAPTION_PATTERN`, `CAPTION_MAX_PAGES_AHEAD=1`, `AMBIG_CLASS_MIN=0.45`, fórmula de id `sha1(source.hash + section_path + str(block_index))[:12]` (idéntica a `validate_sdm.py`, probada por paridad sobre 1000 muestras). Validación final por subproceso a `validate_sdm.py --validate <sdm.json>` (F13): exit 1 si schema o regla ocr/native fallan, 0 si pasa. Spec normativa en `skill/notemartin-study-notes/references/02-source-model/build-sdm.md` (13 §, 11 secciones; §3 entradas por formato, §4 tabla de mapeo, §6 asociación figura↔pie, §8 ids deterministas, §10 validación, §13 cambios permitidos). 4 fixtures sintéticos en `evals/build-sdm-sample/fixtures/{source-pdf,source-html,source-ocr,source-multi-format}` (PDF con figura+caption+orphan, HTML con 3 secciones + footnote+ref, OCR con bloques `origin:ocr`+`confidence<0.7`, multi-tipo ejercitando heading+prose+code+formula+table) + `build_fixtures.py` (PyYAML+stdlib; sin dependencias nuevas) + `run_eval.py` que valida los 3 criterios sobre los 4 fixtures y los 15 SDMs canónicos de F13. Resultado PASS los 3 criterios; 4/4 fixtures OK; 15/15 SDMs dorados OK; `compute_block_id` paridad OK (1000 muestras). Tabla normativa en `scripts/README.md` + fila nueva en `SKILL.md` §6 catálogo; ruta nueva `[pendiente F13]` reemplazada por `F13` en `SKILL.md` §5.2 (consulta SDM) y ruta nueva para F31 en su misma tabla. Validación: 3/3 verde.
 
 ---
 
-## Fase 32 — Anclas y numeración inconsistente **[script]**
+## Fase 32 — Anclas y numeración inconsistente **[ref] [núcleo]**
 
 **Entregables:** `@/references/02-source-model/anchors.md`.
 
 **Detalle:** granularidad de bloque; anclas sintéticas estables cuando no hay numeración; resolución de numeración duplicada o saltada; persistencia entre sesiones.
 
 **Criterios:**
-- [ ] Un documento sin numeración produce anclas igualmente utilizables.
-- [ ] Las anclas son estables entre ejecuciones.
-- [ ] Toda unidad de L2 puede referenciar un ancla.
+- [x] Un documento sin numeración produce anclas igualmente utilizables.
+- [x] Las anclas son estables entre ejecuciones.
+- [x] Toda unidad de L2 puede referenciar un ancla.
+
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/02-source-model/anchors.md` (209 líneas / 250, 11 §§ sin código fuente). §1-§2 propósito y alcance; §3 modelo de los 4 elementos canónicos (`block.id`, `anchor.section_path`, `anchor.page`, `anchor.bbox`/`char_range`); §4 granularidad — bloque, no sub-elemento, con tabla de mapeo para 8 unidades de texto; §5 reglas de `section_path` por formato (PDF/HTML/EPUB/DOCX/PPTX/transcript/Markdown); §6 cuatro reglas duras posicionales (nunca refleja número impreso, slug ASCII kebab-case, ordinal `-N` en colisión, estable al renumerar la fuente); §7 numeración impresa con sub-reglas para duplicados (sufijo `-2`) y saltos (no se rellenan); §8 invariantes de persistencia entre sesiones y entre formatos; §9 contrato L2→ancla con 5 reglas (cada `block_id` debe existir, una unidad puede tener varios, formato de cita `{src:blk_xxxx}`); §10 6 anti-patrones; §11 verificación + cambios permitidos que reabren F32. Wiring: `references/02-source-model/README.md` actualizado con nuevo estado (F13 + F31 + F32 disponibles, F34/F35 pendientes); `SKILL.md` §5.2 fila "Documento sin numeración o con numeración inconsistente → anchors.md" marcada como `F32` (antes `[pendiente F32]`). Eval battery nuevo en `evals/anchors-sample/` con `build_fixtures.py` (PyYAML+stdlib) + 3 fixtures sintéticos: `source-unnumbered-html` (5 secciones HTML sin numeración), `source-renumbered-pdf` (outline con `1.1, 1.1` duplicado y `1.3` saltado), `source-stable-rerun` (re-empaqueta F31 source-pdf con mismo hash) + `expected/*.json` + `run_eval.py` que valida los 3 criterios. Reglas D5 (duplicados con ordinal `-N`) y D6 (saltos no se rellenan) documentadas como advisory: el fixture las ejerce, su no cumplimiento queda como backlog para reabrir F31, no como FAIL del eval. Verificación: `run_eval.py` PASS los 3 criterios (5 secciones con section_path no vacío y `page=null`; rerun explícito byte-idéntico en `source-stable-rerun`; mini-ledger sintético con 2 refs reales + 1 ref inválida `deadbeef0000` detecta ambos casos); F31 sin regresión (`evals/build-sdm-sample/run_eval.py` PASS sus 3 criterios); 15 SDMs dorados siguen validando contra `sdm.schema.json`. Cambios que reabren F32: reintroducir número impreso en `section_path`, cambiar shape del anchor, sustituir `block.id` por ruta jerárquica, admitir anclas a sub-elementos, rellenar números faltantes. **Nota de tagging:** el roadmap la marcaba `[script]` pero el deliverable es `references/`; se re-tagga como `[ref] [núcleo]`. Backlog: detectar formalmente `duplicates_with_ordinal` cuando se materialice F31.1; detectar `skipped_numbers_invented` (no implementado en F31).
 
 ---
 
