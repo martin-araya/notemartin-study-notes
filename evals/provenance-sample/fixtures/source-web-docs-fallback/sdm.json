@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "eval-web-docs-fallback",
+    "hash": "e2bc429cd38232b92d2e927fdc9ed4970b45cd9fe5516ace7097e8c76c05902f",
+    "algorithm": "sha256",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL 17",
+    "url": "https://www.postgresql.org/docs/17/sql.html",
+    "language": "en",
+    "format": "html",
+    "date": "2026-09-24",
+    "version": "17",
+    "authors": []
+  },
+  "source_provenance": {
+    "id": {
+      "method": "read",
+      "value": "eval-web-docs-fallback",
+      "confidence": 1.0
+    },
+    "hash": {
+      "method": "triage_metadata",
+      "value": "6b1ae074e888ef6896f2e6c6da4437a1f5f9c8bc8f7978e4d1c1f6888d85d6db",
+      "confidence": 1.0,
+      "reason": "triage.sha256_of_pdf"
+    },
+    "algorithm": {
+      "method": "read",
+      "value": "sha256",
+      "confidence": 1.0
+    },
+    "vendor": {
+      "method": "web_docs_metadata",
+      "value": "PostgreSQL Global Development Group",
+      "confidence": 0.9,
+      "reason": "web_docs.metadata.domain"
+    },
+    "product": {
+      "method": "web_docs_metadata",
+      "value": "PostgreSQL 17",
+      "confidence": 0.9,
+      "reason": "web_docs.metadata.product"
+    },
+    "version": {
+      "method": "url_regex",
+      "value": "17",
+      "confidence": 0.8,
+      "reason": "url:docs/17/(\\d+)"
+    },
+    "edition": {
+      "method": "read",
+      "value": null,
+      "confidence": 1.0
+    },
+    "isbn": {
+      "method": "read",
+      "value": null,
+      "confidence": 1.0
+    },
+    "authors": {
+      "method": "read",
+      "value": [],
+      "confidence": 1.0
+    },
+    "url": {
+      "method": "read",
+      "value": "https://www.postgresql.org/docs/17/sql.html",
+      "confidence": 1.0
+    },
+    "language": {
+      "method": "read",
+      "value": "en",
+      "confidence": 1.0
+    },
+    "date": {
+      "method": "read",
+      "value": "2026-09-24",
+      "confidence": 1.0
+    },
+    "format": {
+      "method": "read",
+      "value": "html",
+      "confidence": 1.0
+    }
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Intro",
+      "blocks": [
+        {
+          "id": "bbea33d7135a",
+          "type": "heading",
+          "level": 1,
+          "content": {
+            "level": 1,
+            "text": "Hello"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

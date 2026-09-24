@@ -1,0 +1,17 @@
+{
+  "criteria_pass": [
+    "C1",
+    "C2"
+  ],
+  "criteria_warn": [
+    "C3"
+  ],
+  "inferred_field_count_min": 3,
+  "inferred_fields": [
+    "vendor",
+    "product",
+    "version"
+  ],
+  "read_field_count_min": 7,
+  "missing_version": false
+}

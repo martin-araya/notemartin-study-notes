@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "01-postgresql-chapter",
+    "hash": "4d1ae29ed297862f407c03bb3bb794e2ac74bab51af9402d68987f8c1cf426ab",
+    "algorithm": "sha256",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL 16",
+    "url": "https://www.postgresql.org/docs/16/sql.html",
+    "language": "en",
+    "format": "html",
+    "date": "2026-09-24",
+    "version": "16",
+    "edition": null,
+    "isbn": null,
+    "authors": [
+      "PGDG"
+    ]
+  },
+  "source_provenance": {
+    "id": {
+      "method": "read",
+      "value": "01-postgresql-chapter",
+      "confidence": 1.0
+    },
+    "hash": {
+      "method": "read",
+      "value": "21e74d7a620ab8686b051d9062f939d9f8191d20fdfbc166844f0fb9141d7ad2",
+      "confidence": 1.0
+    },
+    "algorithm": {
+      "method": "read",
+      "value": "sha256",
+      "confidence": 1.0
+    },
+    "vendor": {
+      "method": "read",
+      "value": "PostgreSQL Global Development Group",
+      "confidence": 1.0
+    },
+    "product": {
+      "method": "read",
+      "value": "PostgreSQL 16",
+      "confidence": 1.0
+    },
+    "version": {
+      "method": "read",
+      "value": "16",
+      "confidence": 1.0
+    },
+    "edition": {
+      "method": "read",
+      "value": null,
+      "confidence": 1.0
+    },
+    "isbn": {
+      "method": "read",
+      "value": null,
+      "confidence": 1.0
+    },
+    "authors": {
+      "method": "read",
+      "value": [
+        "PGDG"
+      ],
+      "confidence": 1.0
+    },
+    "url": {
+      "method": "read",
+      "value": "https://www.postgresql.org/docs/16/sql.html",
+      "confidence": 1.0
+    },
+    "language": {
+      "method": "read",
+      "value": "en",
+      "confidence": 1.0
+    },
+    "date": {
+      "method": "read",
+      "value": "2026-09-24",
+      "confidence": 1.0
+    },
+    "format": {
+      "method": "read",
+      "value": "html",
+      "confidence": 1.0
+    }
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Intro",
+      "blocks": [
+        {
+          "id": "bbea33d7135a",
+          "type": "heading",
+          "level": 1,
+          "content": {
+            "level": 1,
+            "text": "Hello"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

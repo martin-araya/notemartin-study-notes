@@ -1,0 +1,10 @@
+{
+  "criteria_pass": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "read_field_count_min": 12,
+  "inferred_field_count_max": 0,
+  "missing_version": false
+}

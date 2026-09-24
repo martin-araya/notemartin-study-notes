@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "03-rfc-7231",
+    "hash": "ff4b52926c20fafc6767de08740a165c20b5ca60bada502f2295c31ce3bebd32",
+    "algorithm": "sha256",
+    "vendor": "IETF",
+    "product": "RFC 7231",
+    "url": "https://datatracker.ietf.org/doc/html/rfc7231",
+    "language": "en",
+    "format": "html",
+    "date": "2026-09-24",
+    "authors": []
+  },
+  "source_provenance": {
+    "id": {
+      "method": "read",
+      "value": "03-rfc-7231",
+      "confidence": 1.0
+    },
+    "hash": {
+      "method": "read",
+      "value": "496b7f584cfae8298a9115b95be7f5145c9cf7edb9512cc78626290bd58e3277",
+      "confidence": 1.0
+    },
+    "algorithm": {
+      "method": "read",
+      "value": "sha256",
+      "confidence": 1.0
+    },
+    "vendor": {
+      "method": "read",
+      "value": "IETF",
+      "confidence": 1.0
+    },
+    "product": {
+      "method": "read",
+      "value": "RFC 7231",
+      "confidence": 1.0
+    },
+    "version": {
+      "method": "absent",
+      "value": null,
+      "confidence": 0.0,
+      "reason": "no_version_in_source"
+    },
+    "edition": {
+      "method": "read",
+      "value": null,
+      "confidence": 1.0
+    },
+    "isbn": {
+      "method": "read",
+      "value": null,
+      "confidence": 1.0
+    },
+    "authors": {
+      "method": "read",
+      "value": [],
+      "confidence": 1.0
+    },
+    "url": {
+      "method": "read",
+      "value": "https://datatracker.ietf.org/doc/html/rfc7231",
+      "confidence": 1.0
+    },
+    "language": {
+      "method": "read",
+      "value": "en",
+      "confidence": 1.0
+    },
+    "date": {
+      "method": "read",
+      "value": "2026-09-24",
+      "confidence": 1.0
+    },
+    "format": {
+      "method": "read",
+      "value": "html",
+      "confidence": 1.0
+    }
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Intro",
+      "blocks": [
+        {
+          "id": "bbea33d7135a",
+          "type": "heading",
+          "level": 1,
+          "content": {
+            "level": 1,
+            "text": "Hello"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

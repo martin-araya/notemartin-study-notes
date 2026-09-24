@@ -1,0 +1,9 @@
+{
+  "criteria_pass_without_require_version": [
+    "C1",
+    "C2"
+  ],
+  "criteria_hard_fail_with_require_version": true,
+  "missing_version": true,
+  "is_documentation": true
+}
