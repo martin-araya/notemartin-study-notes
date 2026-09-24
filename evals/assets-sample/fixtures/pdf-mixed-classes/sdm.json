@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "eval-mixed-classes",
+    "hash": "a3f08db0daf2027852748d05fc285f1f49df1ba468515049c92b78e2a7104209",
+    "vendor": "Test corpus",
+    "product": "Eval Mixed",
+    "url": "https://example.com/eval",
+    "language": "en",
+    "format": "pdf"
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/figures",
+      "title": "Figures",
+      "blocks": [
+        {
+          "id": "fig-diag",
+          "type": "figure",
+          "content": {
+            "src": "/private/var/folders/hr/sbmrj9lj3_n56qv4b37q4y540000gn/T/f33-eval-zyfne97l/pdf-mixed-classes/assets/eval-mixed-classes/aa38aa422c6c8f93.png",
+            "alt": "Architecture diagram showing three connected services"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/figures",
+            "bbox": [
+              50.0,
+              380.0,
+              530.0,
+              320.0
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "fig-screen",
+          "type": "figure",
+          "content": {
+            "src": "/private/var/folders/hr/sbmrj9lj3_n56qv4b37q4y540000gn/T/f33-eval-zyfne97l/pdf-mixed-classes/assets/eval-mixed-classes/a1bff439f381cb06.png",
+            "alt": "Screenshot of the configuration page"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/figures",
+            "bbox": [
+              50.0,
+              50.0,
+              530.0,
+              320.0
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "fig-logo",
+          "type": "figure",
+          "content": {
+            "src": "/private/var/folders/hr/sbmrj9lj3_n56qv4b37q4y540000gn/T/f33-eval-zyfne97l/pdf-mixed-classes/assets/eval-mixed-classes/57d35074d6a5f51d.png",
+            "alt": ""
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/figures",
+            "bbox": [
+              700.0,
+              380.0,
+              50.0,
+              50.0
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

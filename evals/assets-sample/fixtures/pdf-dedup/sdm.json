@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "eval-dedup",
+    "hash": "7ba8cf2b67806d43bdb99f9d8aa76e6fa4147a2facc8eeab939770aa9d23b952",
+    "vendor": "Test corpus",
+    "product": "Eval Dedup",
+    "url": "https://example.com/eval",
+    "language": "en",
+    "format": "pdf"
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/figures",
+      "title": "Figures",
+      "blocks": [
+        {
+          "id": "fig-dup-a",
+          "type": "figure",
+          "content": {
+            "src": "/private/var/folders/hr/sbmrj9lj3_n56qv4b37q4y540000gn/T/f33-eval-zyfne97l/pdf-dedup/assets/eval-dedup/aa38aa422c6c8f93.png",
+            "alt": "Diagram A"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/figures",
+            "bbox": [
+              50.0,
+              380.0,
+              530.0,
+              320.0
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "fig-dup-b",
+          "type": "figure",
+          "content": {
+            "src": "/private/var/folders/hr/sbmrj9lj3_n56qv4b37q4y540000gn/T/f33-eval-zyfne97l/pdf-dedup/assets/eval-dedup/aa38aa422c6c8f93.png",
+            "alt": "Same diagram reused"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/figures",
+            "bbox": [
+              50.0,
+              50.0,
+              530.0,
+              320.0
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "criterion_1_no_dup": {"unique_assets_min": 3, "by_class_min_count": {"decorative": 1}},
+  "criterion_2_class_and_alt": {
+    "figures_count": 3,
+    "every_class_assigned": true,
+    "classes_seen": ["diagram_conceptual", "screenshot", "decorative"]
+  },
+  "criterion_3_decorative_recorded": {
+    "discarded_min": 1,
+    "discarded_reason": "decorative"
+  }
+}

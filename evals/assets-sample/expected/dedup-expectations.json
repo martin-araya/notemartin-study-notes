@@ -1,0 +1,7 @@
+{
+  "criterion_1_no_dup": {
+    "unique_assets": 1,
+    "referenced_by_len": 2,
+    "dedup_count": 1
+  }
+}
