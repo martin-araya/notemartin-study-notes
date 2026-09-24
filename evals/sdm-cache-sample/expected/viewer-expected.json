@@ -1,0 +1,14 @@
+{
+  "criteria_pass": [
+    "c1_low_confidence_filter_present",
+    "c2_low_confidence_blocks_visible"
+  ],
+  "low_confidence_blocks_min": 2,
+  "types_in_dropdown_min": 5,
+  "filters_present": [
+    "data-filter=type",
+    "data-filter=confidence",
+    "data-filter=boilerplate",
+    "data-action=low-confidence"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "eval-source-B",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "algorithm": "sha256",
+    "vendor": "Test corpus",
+    "product": "Eval Source B",
+    "url": "https://example.com/eval-source-B",
+    "language": "en",
+    "format": "html"
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Intro",
+      "blocks": [
+        {
+          "id": "b000000001",
+          "type": "prose",
+          "content": "Reference architecture diagram",
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "b000000002",
+          "type": "list",
+          "content": {
+            "items": [
+              {
+                "text": "alpha"
+              },
+              {
+                "text": "beta"
+              },
+              {
+                "text": "gamma"
+              }
+            ]
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "b000000003",
+          "type": "code",
+          "content": {
+            "lang": "sql",
+            "text": "SELECT 1;"
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 0.95,
+          "origin": "native"
+        }
+      ]
+    },
+    {
+      "section_path": "/ch01/concepts",
+      "title": "Concepts",
+      "blocks": []
+    }
+  ]
+}

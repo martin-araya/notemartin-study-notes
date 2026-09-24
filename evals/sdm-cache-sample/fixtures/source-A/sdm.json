@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "eval-source-A",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "algorithm": "sha256",
+    "vendor": "Test corpus",
+    "product": "Eval Source A",
+    "url": "https://example.com/eval-source-A",
+    "language": "en",
+    "format": "pdf"
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Intro",
+      "blocks": [
+        {
+          "id": "a000000001",
+          "type": "heading",
+          "content": {
+            "level": 1,
+            "text": "Chapter 1"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "a000000002",
+          "type": "prose",
+          "content": "Distributed databases are the backbone of modern infrastructure.",
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 0.85,
+          "origin": "native"
+        },
+        {
+          "id": "a000000003",
+          "type": "code",
+          "content": {
+            "lang": "python",
+            "text": "def hello():\n    return 42"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 0.92,
+          "origin": "native"
+        },
+        {
+          "id": "a000000004",
+          "type": "table",
+          "content": {
+            "headers": [
+              "Name",
+              "Type"
+            ],
+            "rows": [
+              [
+                "foo",
+                "string"
+              ],
+              [
+                "bar",
+                "int"
+              ]
+            ]
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 0.78,
+          "origin": "native"
+        },
+        {
+          "id": "a000000005",
+          "type": "prose",
+          "content": "This section reads ambiguously in OCR.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 0.42,
+          "origin": "ocr"
+        },
+        {
+          "id": "a000000006",
+          "type": "warning",
+          "content": {
+            "text": "dangerous operation: review before proceeding.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro"
+          },
+          "confidence": 0.55,
+          "origin": "ocr"
+        }
+      ]
+    },
+    {
+      "section_path": "/ch01/concepts",
+      "title": "Concepts",
+      "blocks": []
+    }
+  ]
+}
