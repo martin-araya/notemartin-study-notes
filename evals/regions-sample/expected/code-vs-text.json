@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "code-vs-text-fixture.pdf",
+  "criterion_1_code_vs_text": {
+    "min_precision": 0.85,
+    "min_recall": 0.85,
+    "min_f1": 0.85,
+    "notes": "Each region expected as 'code' or 'text'. Compute precision/recall/F1 over code regions. Ambiguous regions are counted as 'neither' (no penalty if not in target class)."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "editorial-boxes-fixture.pdf",
+  "criterion_2_editorial_boxes": {
+    "min_editorial_note_count": 10,
+    "notes": "Fixture has 6 editorial boxes (3 per page). Each box typically splits into \u2265 2 regions. Detection rate \u2265 10 'editorial_note' regions."
+  }
+}

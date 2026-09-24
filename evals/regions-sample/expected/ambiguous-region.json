@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "ambiguous-region-fixture.pdf",
+  "criterion_3_ambiguity_marked": {
+    "min_ambiguous_regions": 1,
+    "require_semantic_class_null": true,
+    "min_alternative_classes_length": 2,
+    "alternative_classes_unique": true,
+    "notes": "Verify ambiguity: true, semantic_class: null, alternative_classes: list of distinct classes (\u2265 2)."
+  }
+}
