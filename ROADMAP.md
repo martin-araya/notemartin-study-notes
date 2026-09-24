@@ -579,9 +579,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Regiones fuera del flujo principal como bloques propios.
 
 **Criterios:**
-- [ ] Un documento a dos columnas se reconstruye en orden correcto.
-- [ ] Una tabla que cruza páginas se reunifica.
-- [ ] La verificación detecta un orden roto inyectado a propósito.
+- [x] Un documento a dos columnas se reconstruye en orden correcto.
+- [x] Una tabla que cruza páginas se reunifica.
+- [x] La verificación detecta un orden roto inyectado a propósito.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/layout.py` (~610 líneas, Python 3.9+ stdlib + numpy). Normaliza entrada fragments.json (F18) o ocr_summary.json (F20); también acepta `--pdf` para invocar F18 internamente. Detectores: columnas (proyección horizontal X con histogramas bucket 8 px, gaps ≥ 30 px entre picos; usa `x_min` de bbox para evitar distorsión por ancho aproximado de F18), sidebars (franjas < 20% ancho no coincidentes con columnas), margin notes (márgenes < 50 px con font_size ≤ 11), figure captions (texto corto post-gap con patrón `Figure|Fig|Tab N`), floats (bbox ancho ≥ 60%). Orden de lectura: `(column_index, y_centroid)` + `continuity_score ∈ [0, 1]` (puntuación final + silabeo + line_height gap + misma columna). Verificación: ground truth por reglas estrictas; `reading_order_valid: false` si dos regiones consecutivas del flujo principal tienen `col_a > col_b` en el orden emitido; inconsistencias registradas en `layout_summary.json.inconsistencies[]`. Reunificación cross-page: párrafo (cierre sin puntuación + inicio minúscula o silabeo), tabla (alineación columnar: cualquier ventana de 6 palabras con `|y_max - y_min| < 3 line heights` y ≥ 3 X distintos), código (marcadores `(`, `[`, `{`, `,`, `;`, `\`, `:`). Constantes inline (`X_HISTOGRAM_BUCKET_PX=8`, `MIN_COLUMN_DENSITY=0.05`, `SIDEBAR_MAX_WIDTH_RATIO=0.20`, `MARGIN_THRESHOLD_PX=50`, `MARGIN_NOTE_MAX_SIZE=11`, `FLOAT_WIDTH_RATIO=0.60`, `MIN_CONTINUITY_SCORE=0.30`). Spec en `skill/notemartin-study-notes/references/01-ingest/layout.md` (271 líneas / 400, 11 secciones; §3 normalizador; §4 columnas; §5 sidebars y margin notes; §6 captions y floats; §7 orden y continuidad; §8 verificación; §9 cross-page; §10 layout_summary.json). 3 fixtures en `evals/layout-sample/fixtures/` (two-column 2 pp con 2 cols, cross-page-table 2 pp con tabla 4×12, broken-order 2 pp sintético) + `build_fixtures.py` (reportlab) + `run_eval.py` que valida los 3 criterios: dos columnas con cols=2 y reading_order_valid=true en ambas páginas; tabla cross-page detectada (1 cross_page_link type=table); verify_reading_order detecta inversión sintética (valid=False, kind=column_order_inverted). `ocr-engines.md` §12 + `scripts/README.md` actualizados con la conexión F20→F21. Validación: 3/3 verde.
 
 ---
 
@@ -595,9 +597,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Regiones ambiguas marcadas, nunca forzadas a una clase.
 
 **Criterios:**
-- [ ] Distingue código de texto corrido con precisión alta en el corpus.
-- [ ] Las cajas editoriales de los libros se detectan como tales.
-- [ ] Toda región ambigua queda marcada.
+- [x] Distingue código de texto corrido con precisión alta en el corpus.
+- [x] Las cajas editoriales de los libros se detectan como tales.
+- [x] Toda región ambigua queda marcada.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/regions.py` (~620 líneas, Python 3.9+ stdlib). Consume regiones geométricas de F21 (`page-NNNN.regions.json`) + `fragments.json` (F18) o `ocr_summary.json` (F20). Asocia palabras a regiones por bbox overlap (F21 no emite `word_indices`). 13 clases semánticas oficiales × 11 señales (S_MONOSPACE, S_BOLD, S_ITALIC, S_LARGE, S_SYMBOL_DENSITY, S_INDENT, S_ALIGN_CENTER, S_TABLE_GRID, S_HAS_GAPS, S_PATTERN, S_TOP_BOTTOM) con scoring numérico (`score = BASE_BIAS + Σ signal × weight`). `BASE_BIAS = {text: 0.50, otros: 0.30}` para que texto gane por defecto. Regla dura de ambigüedad: `semantic_class=null` + `ambiguity=true` + `alternative_classes.length≥2` cuando `max_score < CLASS_MIN_THRESHOLD (0.45)` O `max − second < AMBIGUITY_MARGIN (0.10)`. Cajas editoriales: `S_ITALIC` + `S_PATTERN` (regex `^(Note|Tip|Warning|...):?`) + `S_HAS_GAPS` → `editorial_note` con `sub_kind = "box"`. Sin-signal fallback → `text` (no ambiguo). Constantes inline (`CLASS_MIN_THRESHOLD=0.45`, `AMBIGUITY_MARGIN=0.10`, `LARGE_FACTOR=1.3`, `SYMBOL_DENSITY_HIGH=0.30`, `EMPTY_AREA_RATIO=0.60`, `EDITORIAL_BOX_GAP_PX=30`, etc.). Spec en `skill/notemartin-study-notes/references/01-ingest/regions.md` (270 líneas / 400, 11 secciones; §3 13 clases; §4 11 señales; §5 perfiles de clase; §6 scoring + umbrales; §7 ambigüedad; §8 cajas editoriales). 3 fixtures en `evals/regions-sample/fixtures/` (code-vs-text 2 pp con izq texto + der código monoespaciado, editorial-boxes 2 pp con 6 cajas Note/Tip/Warning, ambiguous-region 1 p con señales conflictivas math/símbolos) + `build_fixtures.py` (reportlab + Menlo.ttc) + `run_eval.py` con ground truth posicional que valida los 3 criterios: TP=3 FP=0 FN=0 TN=6 (precision=recall=F1=1.00), 13 regiones editorial_note (≥ 10), ambiguity OK con semantic_class=null + 4 alternative_classes distintas. `layout.md` §12 + `scripts/README.md` actualizados. Validación: 3/3 verde.
 
 ---
 
