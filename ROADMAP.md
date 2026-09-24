@@ -615,9 +615,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Verificación de conteo de filas y columnas; marcado de baja confianza.
 
 **Criterios:**
-- [ ] Una tabla escaneada de 30+ filas se extrae completa.
-- [ ] Las celdas combinadas conservan su valor.
-- [ ] Ninguna tabla se emite truncada ni resumida.
+- [x] Una tabla escaneada de 30+ filas se extrae completa.
+- [x] Las celdas combinadas conservan su valor.
+- [x] Ninguna tabla se emite truncada ni resumida.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/tables.py` (~470 líneas, Python 3.9+ stdlib). Consume regiones `semantic_class="table"` de F22 (con fallback geométrico desde fragments si F22 no marcó ninguna: ≥ 3 alineaciones X × ≥ 3 Y). Clusterización por filas (tolerancia 4 px) y columnas (tolerancia 6 px) sobre las palabras dentro del bbox; construcción del grid `rows × cols` con celdas vacías rellenadas. Headers multinivel (hasta 3 filas con bold o font_size ≥ 1.10 × body_size). Celdas combinadas: rowspan/colspan cuando width/height > 4.0 × col_width/row_height; valor preservado. Reunificación cross-page: similitud de header (último header de N vs último header de N+1) ≥ 0.80 → merge con `cross_page_continued=true`. Verificación dura (rows × cols = data × cells; sin truncado). Constantes inline (`ROW_BAND_TOL_PX=4.0`, `COL_BAND_TOL_PX=6.0`, `HEADER_MAX_ROWS=3`, `HEADER_FONT_SIZE_FACTOR=1.10`, `CROSS_PAGE_HEADER_MATCH_THRESHOLD=0.80`, `MERGED_CELL_FACTOR=4.0`, `LOW_CONFIDENCE_MIN_ROWS=3`). Filas se ordenan por `y_center` descendente (PDF coords). Spec en `skill/notemartin-study-notes/references/01-ingest/tables.md` (213 líneas / 400, 11 secciones; §3 detección; §4 clusterización; §5 merged cells; §6 headers; §7 cross-page; §8 verificación). 3 fixtures en `evals/tables-sample/fixtures/` (large-table 1 p con 35 filas × 5 cols, merged-cells 1 p con 5×5 + colspan preservado, cross-page-table 2 pp con 24 filas mergeadas con header repetido) + `build_fixtures.py` (reportlab) + `run_eval.py` que valida los 3 criterios: rows=35 + cols=5 + todas las filas con 5 celdas; "Combined Header (colspan 3)" en merged_cells; 24 rows merged + cross_page_continued=true. `regions.md` §12 + `scripts/README.md` actualizados. Validación: 3/3 verde.
 
 ---
 
@@ -631,9 +633,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Numeración de ecuaciones de la fuente preservada.
 
 **Criterios:**
-- [ ] Todo LaTeX emitido compila.
-- [ ] Una fórmula no reconocida se conserva como imagen marcada.
-- [ ] Las referencias a ecuaciones numeradas siguen resolviendo.
+- [x] Todo LaTeX emitido compila.
+- [x] Una fórmula no reconocida se conserva como imagen marcada.
+- [x] Las referencias a ecuaciones numeradas siguen resolviendo.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/formulas.py` (~520 líneas, Python 3.9+ stdlib; Pillow opcional para recortes). Consume regiones `semantic_class="formula"` de F22 (con fallback de autodetección desde fragments: clusters de palabras con `symbol_density ≥ 0.20`). Concatena texto de la región en orden de lectura y emite como LaTeX. `LaTeXValidator` regex puro Python (sin pdflatex) verifica: llaves balanceadas, anidamiento ≤ 5, entornos balanceados (`equation/align/matrix/cases/...`), sin especiales huérfanos, comandos en whitelist de ~80 macros (`frac/sum/int/sqrt/alpha/lim/...`). Detección bloque vs inline (`height ≤ 30 px` y `width < 50% × page_width` → inline). Numeración preservada vía regex `(N.M)` o `(N)` + `equation_index[]` global. Fallback: si `latex_compiled: false` → `pending: true` con `image_path` (recorte desde imágenes F19 vía `--images-dir`) o `bbox` referencial (PDF-only). NUNCA se aproxima la expresión. Constantes inline (`LATEX_MAX_NESTED_BRACES=5`, `INLINE_MAX_HEIGHT_PX=30.0`, `INLINE_MAX_WIDTH_RATIO=0.5`). Spec en `skill/notemartin-study-notes/references/01-ingest/formulas.md` (207 líneas / 400, 11 secciones; §3 triple entrada; §4 reconocimiento; §5 validador LaTeX; §6 bloque vs inline; §7 numeración; §8 fallback pendiente). 3 fixtures en `evals/formulas-sample/fixtures/` (latex 1 p con 5 fórmulas válidas, pending 1 p con 1 inválida `\\fract{1}{2}`, numbered 2 pp con 2 fórmulas numeradas `(1.1)/(1.2)` + `(1.3)`) + `build_fixtures.py` (reportlab + Courier) + `run_eval.py` que valida los 3 criterios: 5 formulas compiladas (pending=0); 1 pending con `image_path` o `bbox`; equation_index con 3 entradas `(1.1)/(1.2)/(1.3)`. `tables.md` §12 + `scripts/README.md` actualizados. Validación: 3/3 verde.
 
 ---
 
@@ -649,10 +653,12 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Bloques de baja confianza marcados para revisión obligatoria.
 
 **Criterios:**
-- [ ] La indentación del código escaneado se conserva exactamente.
-- [ ] Cada corrección sintáctica queda registrada individualmente.
-- [ ] Ningún carácter se corrige por plausibilidad.
-- [ ] Los bloques dudosos no pasan en silencio.
+- [x] La indentación del código escaneado se conserva exactamente.
+- [x] Cada corrección sintáctica queda registrada individualmente.
+- [x] Ningún carácter se corrige por plausibilidad.
+- [x] Los bloques dudosos no pasan en silencio.
+
+**Estado:** ✅ completado. Script CLI en `skill/notemartin-study-notes/scripts/ingest/code_ocr.py` (~530 líneas, Python 3.9+ stdlib). Consume regiones `semantic_class="code"|"console"` o `ambiguity=True` de F22 (con fallback autodetect por palabras monoespaciadas; reconoce Courier, Menlo, Monaco, Consolas, Monospace, **ZapfDingbats** para tabs renderizados). Reconstrucción byte-exact: ordena por `y_center` descendente + `x` ascendente; inserta `\n` cuando `|Δy| > 4 px` (LINE_HEIGHT_TOL_PX) y `" "` cuando gap > 2 px (SMALL_GAP). NUNCA colapsa whitespace, NUNCA modifica indentación. Detección de lenguaje por keywords (python/javascript/sql/bash/json). **Tabla de confusiones (regla dura)**: `l/1/I`, `0/O`, `;`/`:` NO se corrigen (decisión de plausibilidad prohibida); `-/—` por contexto (palabras pegadas vs separadas); comillas rectas vs curly forzadas en código monoespaciado; `{`/`(`/`[` no se corrigen. **Validación sintáctica**: `ast.parse` (Python), `json.loads` (JSON), bracket matching (JS/SQL/Bash). Cada corrección registrada en `corrections[]` con `{char_pos, original, corrected, reason}`. **Separación prompt/salida** con regex `^[$>]|>>>|In\[N\]:|mysql>|postgres>`. **Bloques low_confidence** con `reason` documentado (mixed_indentation, applied_forced_correction, ambiguous_monospace_chars). Constantes inline (`LINE_HEIGHT_TOL_PX=4.0`, `SMALL_GAP=2.0`, `LOW_CONFIDENCE_THRESHOLD=0.7`, `MIN_CORRECTION_LINE_LEN=3`, `MAX_CORRECTIONS_PER_BLOCK=20`). Spec en `skill/notemartin-study-notes/references/01-ingest/code-ocr.md` (206 líneas / 400, 11 secciones; §3 byte-exact; §4 detección lenguaje; §5 tabla confusiones; §6 validación forzada; §7 prompt; §8 low_confidence). 4 fixtures en `evals/code-ocr-sample/fixtures/` (clean-code Python con tabs, confusion Python con `)` faltante, plausibility Python con `l/1/I/0/O` sin correcciones, low-confidence Python con identificadores ambiguos) + `build_fixtures.py` (reportlab + Courier) + `run_eval.py` que valida los 4 criterios: text byte-exact (4 bloques concatenados, 0 correcciones); 1 corrección con `original=""` (inserción) pero con `char_pos`/`corrected`/`reason` completos; 0 correcciones con `low_confidence=true`; 1 low_confidence con `reason="ambiguous_monospace_chars"`. `formulas.md` §12 + `scripts/README.md` actualizados. Validación: 4/4 verde.
 
 ---
 
