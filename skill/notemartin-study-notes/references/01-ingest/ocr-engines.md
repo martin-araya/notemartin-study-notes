@@ -346,3 +346,15 @@ python3 evals/ocr-sample/run_eval.py
 - Cambiar la política de reintentos (afecta a F26).
 - Cambiar la convención de bbox (afecta a F22 layout, F31 SDM).
 - Eliminar Tesseract como motor principal.
+
+## 12. Siguiente extractor — `layout.py` (F21)
+
+Tras F20 (OCR) o F18 (extracción nativa), las palabras con coordenadas alimentan el análisis de layout:
+
+1. F21 lee `fragments.json` (F18) o `ocr_summary.json` (F20). Acepta también `--pdf <pdf>` que invoca F18 internamente.
+2. Detecta columnas (proyección horizontal con histogramas bucket 8 px, gaps ≥ 30 px), sidebars (anchura < 20% del ancho de página), margin notes (márgenes < 50 px), figure captions (post-gap con patrón "Figure N"), floats (bbox ancho ≥ 60%).
+3. Calcula orden de lectura por `(column_index, y_centroid)` + `continuity_score` (puntuación final, silabeo, line_height gap).
+4. Verifica el orden contra ground truth: si dos regiones consecutivas tienen `col_a > col_b` en el orden emitido, marca `reading_order_valid: false` y registra la inconsistencia.
+5. Reunifica párrafos (cierre sin puntuación + inicio minúscula), tablas (alineación columnar ≥ 6 palabras con misma Y y ≥ 3 X distintos), código (marcadores `{`, `(`, etc.) cross-page.
+
+Detalles y umbrales: [`layout.md`](layout.md).
