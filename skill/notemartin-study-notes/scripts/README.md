@@ -132,3 +132,54 @@ L0 classifier: reclasifica regiones geométricas de F21 en 13 clases semánticas
 | Escritura | Atómica: tempfile + `Path.replace` |
 | Constantes | `references/01-ingest/regions.md` §6 (`CLASS_MIN_THRESHOLD=0.45`, `AMBIGUITY_MARGIN=0.10`, `LARGE_FACTOR=1.3`, `EMPTY_AREA_RATIO=0.60`) |
 | Documentación | `references/01-ingest/regions.md` (normativa) |
+
+### `ingest/tables.py` — F23 · OCR de tablas
+
+L0 table extractor: detecta tablas (con o sin bordes) a partir de las regiones `table` de F22 (con fallback geométrico desde fragments si F22 no marcó ninguna). Clusterización por filas y columnas, celdas combinadas (rowspan/colspan), headers multinivel y reunión cross-page. Verificación dura de integridad (rows × cols = data × cells, no truncado).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <regions_dir>` (F22); opcional `--fragments <fragments.json>` (F18) o `--ocr <ocr_summary.json>` (F20) |
+| Salida | `<out-dir>/ingest/tables/page-NNNN.tables.json` (tablas por página con headers/data/merged_cells) + `tables_summary.json` global con cross-page merged |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/tables.py --source <regions_dir> --out-dir <dir> [--fragments <fragments.json>]` |
+| Dependencias | Python 3.9+ stdlib (sin numpy ni ML) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (low_confidence, cross-page ambiguo) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/tables.md` §4-§8 (`ROW_BAND_TOL_PX=4.0`, `COL_BAND_TOL_PX=6.0`, `HEADER_MAX_ROWS=3`, `MERGED_CELL_FACTOR=4.0`, `CROSS_PAGE_HEADER_MATCH_THRESHOLD=0.80`) |
+| Documentación | `references/01-ingest/tables.md` (normativa) |
+
+### `ingest/formulas.py` — F24 · OCR de fórmulas
+
+L0 formula OCR: extrae fórmulas matemáticas como LaTeX, valida con un verificador regex puro Python (sin pdflatex), preserva numeración y marca pendientes las fórmulas inválidas con recorte de imagen o bbox referencial.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <regions_dir>` (F22); opcional `--fragments <fragments.json>` (F18) o `--ocr <ocr_summary.json>` (F20); opcional `--images-dir <images_dir>` (F19) para recortes |
+| Salida | `<out-dir>/ingest/formulas/page-NNNN.formulas.json` (fórmulas por página) + `formulas_summary.json` global con `equation_index[]` + recortes PNG de pendientes |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/formulas.py --source <regions_dir> --out-dir <dir> [--fragments <fragments.json>] [--images-dir <dir>]` |
+| Dependencias | Python 3.9+ stdlib; Pillow opcional (solo si se recortan imágenes) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (pending, numeración faltante) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/formulas.md` §5-§6 (`LATEX_MAX_NESTED_BRACES=5`, `INLINE_MAX_HEIGHT_PX=30`, `INLINE_MAX_WIDTH_RATIO=0.5`, ~80 macros en whitelist) |
+| Documentación | `references/01-ingest/formulas.md` (normativa) |
+
+### `ingest/code_ocr.py` — F25 · OCR de código y consolas
+
+L0 code/console OCR: reconstruye texto byte-exact preservando indentación, aplica solo correcciones sintácticas forzadas (cada una registrada con char_pos, original, corrected, reason), separa prompt y salida en consolas, y marca como `low_confidence: true` cualquier bloque dudoso con `reason` documentado.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <regions_dir>` (F22); opcional `--fragments <fragments.json>` (F18) |
+| Salida | `<out-dir>/ingest/code/page-NNNN.code.json` (bloques por página con text/language/confidence/low_confidence/corrections/commands/output) + `code_summary.json` global con correcciones y low_confidence_blocks |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/code_ocr.py --source <regions_dir> --out-dir <dir> [--fragments <fragments.json>]` |
+| Dependencias | Python 3.9+ stdlib (sin numpy ni ML) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (correcciones, low_confidence) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/code-ocr.md` §3-§8 (`LINE_HEIGHT_TOL_PX=4.0`, `SMALL_GAP=2.0`, `LOW_CONFIDENCE_THRESHOLD=0.7`, `MAX_CORRECTIONS_PER_BLOCK=20`) |
+| Documentación | `references/01-ingest/code-ocr.md` (normativa) |
