@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "cross-page-table.pdf",
+  "criterion_2_cross_page_table": {
+    "min_table_links": 1,
+    "notes": "cross_page_links[] must contain \u2265 1 entry with type='table'."
+  }
+}

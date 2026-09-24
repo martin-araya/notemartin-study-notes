@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "two-column-fixture.pdf",
+  "criterion_1_column_order": {
+    "min_pages_with_cols_ge_2": 2,
+    "all_pages_reading_order_valid": true,
+    "notes": "Each page must have column_count >= 2 and reading_order_valid: true."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "broken-order-fixture.pdf",
+  "criterion_3_broken_order_detected": {
+    "verification_function": "verify_reading_order",
+    "notes": "Inject a synthetic broken order with 2 regions (column_index 0 and 1) emitted in reversed order. The verify_reading_order function must return valid=False and inconsistencies \u2265 1."
+  }
+}
