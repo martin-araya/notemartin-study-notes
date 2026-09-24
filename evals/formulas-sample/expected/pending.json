@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "pending-fixture.pdf",
+  "criterion_2_pending_fallback": {
+    "min_pending": 1,
+    "require_image_path_or_bbox": true,
+    "notes": "Invalid formula must be marked pending: true with image_path (when --images-dir) or bbox (when PDF-only)."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "latex-fixture.pdf",
+  "criterion_1_latex_compiles": {
+    "min_compiled": 4,
+    "max_pending": 0,
+    "notes": "All formulas must have latex_compiled: true and compile_errors: []."
+  }
+}

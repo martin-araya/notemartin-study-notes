@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "numbered-equations-fixture.pdf",
+  "criterion_3_numbered_preservation": {
+    "min_equation_index": 3,
+    "expected_numbers": [
+      "(1.1)",
+      "(1.2)",
+      "(1.3)"
+    ],
+    "notes": "equation_index must contain entries for (1.1), (1.2), (1.3)."
+  }
+}
