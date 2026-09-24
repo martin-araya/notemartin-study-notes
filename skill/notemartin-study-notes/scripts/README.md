@@ -315,5 +315,38 @@ L0→L1 ensamble: consume la salida de F17-F30 (regions, tables, formulas, code,
 | Comportamiento si falta PyYAML | Exit 1 con instrucción de instalación |
 | Códigos de salida | 0 OK sin advertencias · 1 error fatal / schema invalid / determinismo roto · 2 OK con advertencias (asociaciones faltantes, regiones ambiguas, etc.) |
 | Escritura | Atómica: tempfile + `Path.replace` |
-| Constantes | `references/02-source-model/build-sdm.md` §6-§9 (`CAPTION_PATTERN`, `CAPTION_MAX_PAGES_AHEAD=1`, `AMBIG_CLASS_MIN=0.45`, fórmula de id `sha1(hash + path + idx)[:12]`) |
+| Constantes | `references/02-source-model/build-sdm.md` §6-§9 (`CAPTION_PATTERN`, `CAPTION_MAX_PAGES_AHEAD=1`, `AMBIG_CLASS_MIN=0.45`, fórmula de id `sha1(hash + path + idx)[:12]`)
+
+### `util/sdm_cache.py` — F36 · Caché por hash con invalidación selectiva
+
+API Python (`cache_get_or_compute(source_hash, step, engine_version, script_version, params, compute_fn, cache_dir)`) que evita recomputes cuando la misma fuente + step + motor + script_version + params se repiten (criterio 1). Cambios en `engine_version` invalidan solo esa rama (criterio 2); coexisten directorios por motor. Para uso futuro por F19/F25/F31/F23/F24 — esta fase entrega la librería y la cierra sin reabrir otros contratos.
+
+| Aspecto | Valor |
+|---|---|
+| CLI subcomandos | `put` (almacena desde `--value-file`), `get` (imprime stdout; exit 2 si no existe), `list`, `invalidate` (`--step s [--engine-version v]`), `info` (resumen por step / engine_version) |
+| Layout | `<cache-dir>/<step>/<key>.json` con `key = sha256(source_hash + step + engine_version + script_version + params_canon)[:16]`; `index.json` en la raíz |
+| Override | `--cache-dir <dir>` (default `.sdm_cache`) |
+| Invocación | `python3 scripts/util/sdm_cache.py put --step ocr --source-hash <h> --engine-version <ev> --value-file <f>` |
+| API | `from sdm_cache import cache_get_or_compute; cache_get_or_compute(...)` |
+| Dependencias | Python 3.9+ stdlib |
+| Comportamiento si `cache_dir` no existe | Creado transparente; sin cache previo → `compute_fn()` se invoca y se persiste |
+| Códigos de salida | 0 OK · 1 error fatal (input ilegible) · 2 OK con warning (`get` con cache miss) |
+| Escritura | Atómica: `tempfile` + `Path.replace` |
+| Constantes inline | función `cache_clear_engine_version` (selective), `cache_clear_step` (wipe), `cache_info` (resumen) |
+
+### `util/sdm_view.py` — F36 · Visor HTML self-contained del SDM
+
+Genera un archivo HTML único con CSS + JS inline (sin assets externos). Jerarquía (aside izquierdo), resumen con histogramas y conteos por tipo, lista de bloques con `data-confidence`, badge de origen, anchor.page, y enlace al source. Filtros reactivos client-side: dropdown por tipo (16 clases + "all"), input numérico de umbral de confianza, botón "Show only low-confidence (< 0.7)" (criterio 3), checkbox Hide boilerplate. Bloques con `figure.content.src` muestran `<img>` o placeholder. Si `source.url` está presente, muestra `→ go to source` por bloque.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--sdm <path>` (F31 output) |
+| Salida | `--out <html>` (HTML self-contained) |
+| Skip imágenes | `--no-include-images` (omite el resolver a `file://`) |
+| Invocación | `python3 scripts/util/sdm_view.py --sdm <sdm.json> --out <out.html> [--no-include-images]` |
+| Dependencias | Python 3.9+ stdlib (`html`, `json`, `base64`, `pathlib`) — sin Pillow, sin CDN |
+| Comportamiento | Cero assets externos (CSS/JS inline); funciona offline; los filtros son client-side sin backend |
+| Códigos de salida | 0 OK · 1 sdm no encontrado o inválido · 2 OK con warnings (assets no resueltos) |
+| Constantes inline | 16 BLOCK_TYPES, lista cerrada de clases para dropdown |
+| Límites | Sin paginación; para SDMs > 100k bloques el visor puede ralentizar (DOM completo); fuera del scope F36 | |
 | Documentación | `references/02-source-model/build-sdm.md` (normativa) |
