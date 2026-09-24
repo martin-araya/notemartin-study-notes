@@ -204,3 +204,15 @@ python3 evals/code-ocr-sample/run_eval.py
 - Cambiar el algoritmo de reconstrucción byte-exact.
 - Cambiar la regla de baja confianza.
 - Eliminar el registro obligatorio de correcciones.
+
+## 12. Siguiente fase — `review_report.py` (F26)
+
+Tras F25 (code-ocr), F26 agrega la capa de confianza y revisión humana:
+
+1. F26 lee `ingest/{regions,tables,formulas,code}.json` (F22/F23/F24/F25) + opcionalmente `images-dir/*.processed.png` (F19).
+2. **Umbrales por tipo** (15 clases, justificados en §2 de `confidence.md`): code/console ≥ 0.90 (typo = syntax error), table ≥ 0.85 (números importan), formula/syntax_diagram ≥ 0.75, heading/caption ≥ 0.70, editorial_note ≥ 0.65, text ≥ 0.60, figure/capture/diagram ≥ 0.50.
+3. **Bloqueo** si `critical_low_confidence_count ≥ MAX_LOW_CONF_CRITICAL = 3` (regiones críticas = code, console, table, formula, syntax_diagram). Exit code 1, `summary.blocked = true`.
+4. **Reporte HTML** con filter bar JS inline; layout `<img>` (recorte Pillow, padding 5 px) + `<pre class="region-text">` lado a lado en cada `<tr class="region-row">`.
+5. **Correcciones humanas** (`corrections.json`): aplica a la región especificada + propaga a todas las regiones con `original_text` idéntico (mínimo 5 chars para evitar propagación de chars sueltos).
+
+Detalles y umbrales: [`confidence.md`](confidence.md).
