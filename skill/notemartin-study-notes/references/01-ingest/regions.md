@@ -268,3 +268,18 @@ python3 evals/regions-sample/run_eval.py
 - Cambiar el algoritmo de scoring (multiplicativo vs aditivo).
 - Cambiar la regla de ambigüedad (umbral o criterio).
 - Cambiar el orden de aplicación de señales.
+
+## 12. Siguiente extractor — `tables.py` (F23)
+
+Tras F22 (regions), las regiones con `semantic_class = "table"` se consumen para extracción estructurada:
+
+1. F23 lee `ingest/regions/page-NNNN.regions.json` + `fragments.json` (F18) o `ocr_summary.json` (F20).
+2. Para cada región `table`: clusterización por Y (filas, tolerancia 4 px) + clusterización por X (columnas, tolerancia 6 px) sobre las palabras dentro del bbox.
+3. Construcción del grid `rows × cols`; celdas vacías se rellenan con `""`.
+4. Detección de headers (hasta 3 filas con bold o font_size ≥ 1.10 × body_size).
+5. Detección de celdas combinadas: width/height > 4.0 × col_width/row_height → rowspan/colspan.
+6. Reunificación cross-page: si el último header de página N matchea el último header de página N+1 (similitud ≥ 0.80), se mergea la tabla. Resultado: tabla única con `cross_page_continued=true`.
+
+Fallback: si F22 no marcó ninguna región como `table`, F23 detecta tablas geométricamente desde fragments (≥ 3 alineaciones X repetidas en ≥ 3 Y distintos).
+
+Detalles y umbrales: [`tables.md`](tables.md).
