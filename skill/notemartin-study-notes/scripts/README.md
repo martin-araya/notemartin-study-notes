@@ -266,6 +266,23 @@ Detecta anomalías en la ingesta (páginas omitidas, secciones del índice ausen
 | Constantes | `references/01-ingest/ingest-check.md` §2-§7 (`MIN_WORDS_PER_BLOCK=3`, `MAX_WORDS_PER_BLOCK=5000`, `MAX_NUMBERING_JUMP_FOR_WARNING=1`, `MAX_NUMBERING_JUMP_FOR_CRITICAL=100`) |
 | Documentación | `references/01-ingest/ingest-check.md` (normativa) |
 
+### `validate/provenance.py` — F34 · Procedencia y versión
+
+Valida que cada SDM lleva `source_provenance` con los campos requeridos (id, hash, vendor, product, version), aplica las reglas duras de distinguibilidad (`read ⇒ confidence==1.0`; métodos inferidos ⇒ `confidence<1.0`), y opcionalmente aplica `--require-version` como gate de release (documentación sin versión ⇒ exit 1).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--sdm <path>` (file o dir con `*.json`) |
+| Salida | `--report <path>` JSON (`validation_report.json` por defecto) |
+| Modos | `--require-version` (gate; exit 1 cuando documentación sin versión); `--min-confidence <float>` (warning por debajo del umbral, default 0.7); `--json-only` |
+| Invocación | `python3 scripts/validate/provenance.py --sdm <path> [--require-version] [--min-confidence 0.7]` |
+| Dependencias | Python 3.9+ stdlib |
+| Comportamiento si falta | Error fatal (input ausente o ilegible) con exit 1 |
+| Códigos de salida | 0 OK · 1 hard fail (`--require-version` + doc sin version) · 2 OK con warnings (inferred bajo umbral o version ausente sin `--require-version`) |
+| Escritura | Atómica: `tempfile` + `Path.replace` para texto y JSON |
+| Constantes | inline en el docstring (taxonomía de 8 métodos; `INFERRED_METHODS = {inferred, url_regex, cover_or_header, web_docs_metadata}`; `triage_metadata` excluido porque su `confidence == 1.0` por spec §4) |
+| Documentación | `references/02-source-model/provenance.md` (normativa) |
+
 ### `ingest/assets.py` — F33 · Catálogo de assets
 
 L0→L1 catálogo: lee el SDM (F31), auto-extrae las imágenes desde `--source-file` (PDF vía pypdfium2, EPUB vía ZIP), dedup por hash sha256 con nombre determinista (`assets/<source_id>/<sha256[:16]>.<ext>`), clasifica cada asset en `diagram_conceptual | screenshot | data_figure | decorative` mediante heurística Pillow + override YAML por vendor/product, valida alt text (decorativas pueden llevar `alt=""`, no-decorativas requieren `alt` ≥ 3 chars), actualiza `figure.content.src` en el SDM y emite `assets.json` + `assets_summary.json` (counts + discarded + warnings).
