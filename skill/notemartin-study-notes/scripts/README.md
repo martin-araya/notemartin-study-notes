@@ -266,6 +266,23 @@ Detecta anomalías en la ingesta (páginas omitidas, secciones del índice ausen
 | Constantes | `references/01-ingest/ingest-check.md` §2-§7 (`MIN_WORDS_PER_BLOCK=3`, `MAX_WORDS_PER_BLOCK=5000`, `MAX_NUMBERING_JUMP_FOR_WARNING=1`, `MAX_NUMBERING_JUMP_FOR_CRITICAL=100`) |
 | Documentación | `references/01-ingest/ingest-check.md` (normativa) |
 
+### `ingest/assets.py` — F33 · Catálogo de assets
+
+L0→L1 catálogo: lee el SDM (F31), auto-extrae las imágenes desde `--source-file` (PDF vía pypdfium2, EPUB vía ZIP), dedup por hash sha256 con nombre determinista (`assets/<source_id>/<sha256[:16]>.<ext>`), clasifica cada asset en `diagram_conceptual | screenshot | data_figure | decorative` mediante heurística Pillow + override YAML por vendor/product, valida alt text (decorativas pueden llevar `alt=""`, no-decorativas requieren `alt` ≥ 3 chars), actualiza `figure.content.src` en el SDM y emite `assets.json` + `assets_summary.json` (counts + discarded + warnings).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--sdm <sdm.json>` (F31 output); `--source-file <pdf\|epub>`; opcional `--out-sdm <path>` (default: sobreescribe `--sdm`); opcional `--classify <yaml>` (overrides vendor/product → class) |
+| Salida | `<out-dir>/assets/<source_id>/<sha256[:16]>.<ext>` (1 archivo por hash único) + `<out-dir>/assets/assets.json` + `<out-dir>/assets/assets_summary.json` + opcional `<out-dir>/assets/assets.md` |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/assets.py --sdm <sdm.json> --source-file <pdf\|epub> --out-dir <dir> [--out-sdm <path>] [--classify <yaml>]` |
+| Dependencias | Python 3.9+ stdlib; Pillow ≥ 10 (obligatorio); pypdfium2 ≥ 4 (PDF); `zipfile` stdlib para EPUB (sin ebooklib obligatorio) |
+| Comportamiento si falta Pillow | Decorativos con fallback, warning + `needs_review=true` |
+| Comportamiento si falta pypdfium2 (PDF) | Exit 1 con instrucción de instalación |
+| Códigos de salida | 0 OK sin advertencias · 1 error fatal / source ilegible · 2 OK con advertencias (`missing_alt`, `low_resolution`, `format_not_supported` para figuras HTML) |
+| Escritura | Atómica: `tempfile` + `Path.replace` para texto, JSON y bytes |
+| Constantes | inline (`MIN_DIMMENSION_PX=32`, `MIN_WIDTH_PX=256`, `MIN_HEIGHT_PX=256`, `DECORATIVE_AREA_RATIO=0.05`, `SCREENSHOT_ASPECTS=[(16,9),(16,10),(4,3),(3,2)]`, `EDGE_DENSITY_MIN=0.04`, `COLOR_BUCKETS_MIN=4`, `MAX_LARGE_BYTES=50 MB`) — registradas en `--help` epilog |
+
 ### `ingest/build_sdm.py` — F31 · Construcción del SDM
 
 L0→L1 ensamble: consume la salida de F17-F30 (regions, tables, formulas, code, review, web_docs, other_formats, fragments) en un único `sdm.json` conforme a `schemas/sdm.schema.json` (F13). Genera ids deterministas, asocia pies a figuras dentro de `CAPTION_MAX_PAGES_AHEAD=1` página y preserva referencias de footnotes. Valida el resultado contra el schema vía `scripts/util/validate_sdm.py`.
