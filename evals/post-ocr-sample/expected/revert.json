@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "revert-fixture.pdf",
+  "criterion_3_revertible": {
+    "method": "Run F27, get correction_id, re-run with --revert <correction_id>, verify corrected_text reverts",
+    "notes": "Each correction_id can be reverted individually without affecting others."
+  }
+}

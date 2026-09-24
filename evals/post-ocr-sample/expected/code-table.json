@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "code-fixture.pdf + table-fixture.pdf",
+  "criterion_2_code_table_intact": {
+    "skipped_classes": [
+      "code",
+      "console",
+      "table",
+      "syntax_diagram"
+    ],
+    "verify": "corrected_text == original_text for each skipped region",
+    "notes": "Code and table regions are not modified by F27."
+  }
+}

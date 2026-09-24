@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "prose-fixture.pdf",
+  "criterion_1_corrections_traceable": {
+    "min_corrections": 1,
+    "required_fields": [
+      "correction_id",
+      "rule_id OR dict_id",
+      "char_pos",
+      "char_end",
+      "original",
+      "corrected",
+      "applied_at"
+    ],
+    "notes": "All corrections have correction_id and source \u2208 {rule_id, dict_id}."
+  }
+}

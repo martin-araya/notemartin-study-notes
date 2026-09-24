@@ -1,0 +1,27 @@
+schema_version: "1.0.0"
+entries:
+  - id: D001
+    original: "PostgresQL"
+    corrected: "PostgreSQL"
+    case_sensitive: true
+    scope: prose
+  - id: D002
+    original: "Javascript"
+    corrected: "JavaScript"
+    case_sensitive: false
+    scope: prose
+  - id: D003
+    original: "mySQL"
+    corrected: "MySQL"
+    case_sensitive: true
+    scope: prose
+  - id: D004
+    original: "Typescript"
+    corrected: "TypeScript"
+    case_sensitive: true
+    scope: prose
+  - id: D005
+    original: "pyhton"
+    corrected: "python"
+    case_sensitive: false
+    scope: prose
