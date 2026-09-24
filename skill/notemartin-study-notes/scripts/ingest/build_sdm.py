@@ -537,6 +537,7 @@ def assemble_sections(
     `summary_counts` carries counters the caller merges into build_sdm_summary.
     """
     warnings: List[str] = []
+    unknown_conventions: List[Dict[str, Any]] = []
     counts: Dict[str, Any] = {
         "blocks_by_type": Counter(),
         "figures": 0,
@@ -700,6 +701,16 @@ def assemble_sections(
             if b is None:
                 counts["boilerplate_discarded"] += 1
                 continue
+            # F35: capture unknown editorial conventions for the summary.
+            if b.get("__editorial_unknown_convention"):
+                unknown_conventions.append(
+                    _format_unknown_record(
+                        text=b.get("__editorial_source_text", ""),
+                        vendor=b.get("__editorial_source_vendor", ""),
+                        product=b.get("__editorial_source_product", ""),
+                        decision=b.get("__editorial_decision", {}),
+                    )
+                )
             provisional.append(b)
 
     # Pass 2: figure↔caption association (D6).
@@ -746,7 +757,184 @@ def assemble_sections(
     counts["figures_without_caption"] = max(0, counts["figures"] - counts["captions_attached"])
     counts["captions_orphan"] = max(0, counts["captions_total"] - counts["captions_attached"])
 
-    return sections, {"warnings": warnings, "counts": counts}
+    return sections, {
+        "warnings": warnings,
+        "counts": counts,
+        "unknown_conventions": unknown_conventions,
+    }
+
+
+# ============================================================
+# Editorial box classification (F35)
+# ============================================================
+
+# Vendor conventions (references/02-source-model/editorial-semantics.md §4).
+# Each rule: vendor_match → regex → (sdm_type, severity?, version_introduced?).
+# Order: enforced top-down. Lower-priority rules fall through to plain regex.
+EDITORIAL_VENDOR_RULES: List[Dict[str, Any]] = [
+    {
+        "vendor_match": lambda v, p: "PostgreSQL" in (v or ""),
+        "rules": [
+            (re.compile(r"^\s*WARNING\s*:", re.I), "warning", "caution", None),
+            (re.compile(r"^\s*CAUTION\s*:", re.I), "warning", "caution", None),
+            (re.compile(r"^\s*NOTE\s*:", re.I), "note", "info", None),
+            (re.compile(r"^\s*TIP\s*:", re.I), "note", "tip", None),
+        ],
+    },
+    {
+        "vendor_match": lambda v, p: "python" in (v or "").lower() and "docs.python" in (v or "").lower(),
+        "rules": [
+            (re.compile(r"^\s*\[WARN(?:ING)?\]", re.I), "warning", "caution", None),
+            (re.compile(r"^\s*\[!WARNING\]", re.I), "warning", "caution", None),
+            (re.compile(r"^\s*\[NOTE\]", re.I), "note", "info", None),
+            (re.compile(r"^\s*\[TIP\]", re.I), "note", "tip", None),
+        ],
+    },
+    {
+        "vendor_match": lambda v, p: "kubernetes" in (v or "").lower(),
+        "rules": [
+            (re.compile(r"admonition-(warning|caution)", re.I), "warning", "caution", None),
+            (re.compile(r"admonition-note", re.I), "note", "info", None),
+            (re.compile(r"admonition-tip", re.I), "note", "tip", None),
+            (re.compile(r"admonition-danger", re.I), "warning", "removed", None),
+        ],
+    },
+    {
+        "vendor_match": lambda v, p: "stripe" in (v or "").lower(),
+        "rules": [
+            (re.compile(r"^\s*WARNING\s*:", re.I), "warning", "caution", None),
+        ],
+    },
+    {
+        "vendor_match": lambda v, p: "material" in (v or "").lower() or "mkdocs" in (v or "").lower(),
+        "rules": [
+            (re.compile(r"!!!\s*danger", re.I), "warning", "removed", None),
+            (re.compile(r"!!!\s*warning", re.I), "warning", "caution", None),
+            (re.compile(r"!!!\s*tip", re.I), "note", "tip", None),
+            (re.compile(r"!!!\s*note", re.I), "note", "info", None),
+        ],
+    },
+    {
+        "vendor_match": lambda v, p: "apple" in (v or "").lower() and "developer" in (v or "").lower(),
+        "rules": [
+            (re.compile(r"^\s*\*\*WARNING\*\*", re.I), "warning", "caution", None),
+        ],
+    },
+]
+
+# Fallback regex (any vendor, lower priority than vendor_match above)
+EDITORIAL_FALLBACK_RULES: List[Tuple[re.Pattern, str, Optional[str], Optional[str]]] = [
+    # Precaución
+    (re.compile(r"^\s*(WARNING|AVISO|WARN|DANGER|CAUTION|PERIGO)\s*:", re.I), "warning", "caution", None),
+    # Hard deprecation (warning, severity=removed)
+    (re.compile(r"^\s*(REMOVED|LEGACY|WILL BE REMOVED)\s*:", re.I), "warning", "removed", None),
+    # Soft deprecation (note, severity=deprecated)
+    (re.compile(r"^\s*(DEPRECATED|OBSOLETE|OBSOLETO|RENAMED|USE\s+\w+\s+INSTEAD)\s*:", re.I), "note", "deprecated", None),
+    # Consejo
+    (re.compile(r"^\s*(TIP|CONSEJO|HINT|SUGERENCIA)\s*:", re.I), "note", "tip", None),
+    # Novedad
+    (re.compile(r"^\s*(NEW IN|YA DISPONIBLE|NOVEDAD EN|SINCE)\s+(v?\d[\d.]*)", re.I), "note", "novelty", None),
+    (re.compile(r"^\s*(NEW|NOVEDAD)\s*$", re.I), "note", "novelty", None),
+    # Ejemplo
+    (re.compile(r"^\s*(EXAMPLE|EJEMPLO|FOR EXAMPLE|EX\.)\s*:", re.I), "example", None, None),
+    # Nota
+    (re.compile(r"^\s*(NOTE|NOTA|NOTAS|INFO|ℹ)\s*:", re.I), "note", "info", None),
+    # GitHub admonitions (the leading `> ` may have been stripped by F22)
+    (re.compile(r"^\s*\[!(NOTE|TIP)\]", re.I), "note", "info", None),   # default info; specific below
+    (re.compile(r"\[!TIP\]", re.I), "note", "tip", None),
+    (re.compile(r"\[!WARNING\]", re.I), "warning", "caution", None),
+    (re.compile(r"\[!IMPORTANT\]", re.I), "warning", "caution", None),
+    (re.compile(r"\[!CAUTION\]", re.I), "warning", "caution", None),
+]
+
+
+def _extract_version_introduced(text: str) -> Optional[str]:
+    """Pull first version-shape token from a Novedad-style text."""
+    m = re.search(r"(?:v|version)?\s*(\d+\.\d+(?:\.\d+)?)", text)
+    return m.group(1) if m else None
+
+
+def _classify_editorial_box(
+    text: str,
+    sub_kind: Optional[str],
+    vendor: str,
+    product: str,
+) -> Dict[str, Any]:
+    """F35 editorial box → SDM block decision.
+
+    Returns dict with at least `type` (one of note/warning/example — never prose).
+    Optional keys: `severity`, `version_introduced`, `unknown_convention`.
+    """
+    out: Dict[str, Any] = {}
+    text_stripped = (text or "").lstrip()
+    sub_kind = sub_kind or "inline"
+
+    # F35 only operates on `sub_kind == "box"`; inline notes are passthrough note/info.
+    if sub_kind != "box":
+        return {"type": "note", "severity": "info"}
+
+    # Step 1: vendor-specific rules (in declaration order)
+    vendor_matched = False
+    for vendor_rule in EDITORIAL_VENDOR_RULES:
+        try:
+            match_fn = vendor_rule["vendor_match"]
+        except KeyError:
+            continue
+        try:
+            is_match = bool(match_fn(vendor, product))
+        except Exception:
+            is_match = False
+        if not is_match:
+            continue
+        vendor_matched = True
+        for pattern, t, sev, ver_intro in vendor_rule["rules"]:
+            if pattern.search(text_stripped):
+                out["type"] = t
+                if sev:
+                    out["severity"] = sev
+                if ver_intro is not None:
+                    out["version_introduced"] = ver_intro
+                return out
+        break  # vendor matched but no rule fired → don't fall through to fallback
+
+    # Step 2: fallback regex
+    for pattern, t, sev, ver_intro in EDITORIAL_FALLBACK_RULES:
+        if pattern.search(text_stripped):
+            out["type"] = t
+            if sev:
+                out["severity"] = sev
+            if ver_intro is not None:
+                out["version_introduced"] = ver_intro
+            if t == "note" and sev == "novelty":
+                v = _extract_version_introduced(text_stripped)
+                if v:
+                    out["version_introduced"] = v
+            out.setdefault("unknown_convention", not vendor_matched)
+            return out
+
+    # Step 3: fallback per spec §5 step 3 — never prose
+    out["type"] = "note"
+    out["severity"] = "info"
+    out["unknown_convention"] = True
+    return out
+
+
+def _format_unknown_record(
+    text: str, vendor: str, product: str, decision: Dict[str, Any]
+) -> Dict[str, Any]:
+    snippet = (text or "").strip()[:80]
+    return {
+        "vendor": vendor or "",
+        "product": product or "",
+        "instance_kind": "editorial_note.box",
+        "text_snippet": snippet,
+        "guessed_type": decision.get("type", "note"),
+        "guessed_severity": decision.get("severity", "info"),
+        "reason": "no_vendor_match_no_text_regex_match"
+        if decision.get("unknown_convention")
+        else "no_vendor_match" if decision.get("reason") == "no_vendor_match"
+        else "no_text_regex_match",
+    }
 
 
 def _entry_to_block(
@@ -886,19 +1074,33 @@ def _entry_to_block(
 
     if sem == "editorial_note":
         text = region_text(raw, fragments_index)
-        if (raw.get("sub_kind") or "inline") == "box":
-            return {
-                "__section_path": section_path,
-                "type": "warning" if "warning" in (raw.get("text") or "").lower() else "note",
-                "content": {"text": text, **({"severity": "tip"} if "warning" not in (raw.get("text") or "").lower() else {})},
-                "anchor": _anchor(int(page), section_path, bbox=bbox) if page else _anchor(page, section_path, bbox=bbox),
-                "confidence": _coerce_confidence(raw),
-                "origin": origin,
-            }
+        decision = _classify_editorial_box(
+            text=text,
+            sub_kind=raw.get("sub_kind"),
+            vendor=raw.get("vendor") or "",
+            product=raw.get("product") or "",
+        )
+        # F35: invariant — never `prose` for an editorial box.
+        if decision.get("type") not in ("note", "warning", "example"):
+            decision["type"] = "note"
+            decision.setdefault("severity", "info")
+        content: Dict[str, Any] = {"text": text}
+        if "severity" in decision:
+            content["severity"] = decision["severity"]
+        if "version_introduced" in decision:
+            content["version_introduced"] = decision["version_introduced"]
+        # For inline editorial notes (sub_kind != "box"), always severity=info
+        if (raw.get("sub_kind") or "inline") != "box":
+            content["severity"] = "info"
         return {
             "__section_path": section_path,
-            "type": "note",
-            "content": {"text": text, "severity": "info"},
+            "type": decision["type"],
+            "content": content,
+            "__editorial_unknown_convention": bool(decision.get("unknown_convention", False)),
+            "__editorial_decision": decision,
+            "__editorial_source_vendor": raw.get("vendor") or "",
+            "__editorial_source_product": raw.get("product") or "",
+            "__editorial_source_text": text,
             "anchor": _anchor(int(page), section_path, bbox=bbox) if page else _anchor(page, section_path, bbox=bbox),
             "confidence": _coerce_confidence(raw),
             "origin": origin,
@@ -1303,6 +1505,7 @@ def run(
         "ambiguous_emitted": counts["forced_class"],
         "boilerplate_discarded": counts["boilerplate_discarded"],
         "warnings": agg["warnings"],
+        "unknown_conventions": agg.get("unknown_conventions", []),
         "validation": validation,
         "determinism": determinism,
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -1338,7 +1541,7 @@ def run(
         return 1
     if determinism.get("ran") and determinism.get("identical") is False:
         return 1
-    if agg["warnings"]:
+    if agg["warnings"] or agg.get("unknown_conventions"):
         return 2
     return 0
 

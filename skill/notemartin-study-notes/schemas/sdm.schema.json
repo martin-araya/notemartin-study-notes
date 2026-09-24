@@ -178,14 +178,18 @@
           "then": { "type": "object", "additionalProperties": false,
                     "required": ["text"],
                     "properties": {
-                      "text":     { "type": "string" },
-                      "severity": { "type": "string", "enum": ["info", "tip"] }
+                      "text":                 { "type": "string" },
+                      "severity":             { "type": "string", "enum": ["info", "tip", "novelty", "deprecated"] },
+                      "version_introduced":   { "type": "string" }
                     } } },
 
         { "if": { "properties": { "type": { "const": "warning" } }, "required": ["type"] },
           "then": { "type": "object", "additionalProperties": false,
                     "required": ["text"],
-                    "properties": { "text": { "type": "string" } } } },
+                    "properties": {
+                      "text":     { "type": "string" },
+                      "severity": { "type": "string", "enum": ["caution", "deprecated", "removed"] }
+                    } } },
 
         { "if": { "properties": { "type": { "const": "example" } }, "required": ["type"] },
           "then": { "type": "object", "additionalProperties": false,
