@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "confusion-fixture.pdf",
+  "criterion_2_corrections_registered": {
+    "min_corrections": 1,
+    "required_fields": [
+      "char_pos",
+      "original",
+      "corrected",
+      "reason"
+    ],
+    "notes": "Every correction must have all 4 fields. Missing or empty fields = FAIL."
+  }
+}

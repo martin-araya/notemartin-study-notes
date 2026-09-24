@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "low-confidence-fixture.pdf",
+  "criterion_4_no_silent_blocks": {
+    "must_have_low_confidence": true,
+    "reason_must_be_non_empty": true,
+    "notes": "Low-confidence blocks must have low_confidence: true and a non-empty reason."
+  }
+}

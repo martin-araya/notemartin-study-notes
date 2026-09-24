@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "plausibility-fixture.pdf",
+  "criterion_3_no_plausibility": {
+    "must_have_zero_corrections": true,
+    "min_low_confidence_count": 1,
+    "notes": "No corrections applied when forced by parser. Block marked low_confidence: true."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "clean-code-fixture.pdf",
+  "criterion_1_indent_preservation": {
+    "verify_method": "extract text via F18 reconstruct, compare with code_ocr.py output byte-exact",
+    "min_blocks": 1,
+    "max_corrections": 0,
+    "notes": "F25 must NOT modify any character. text equals F18 input verbatim (line breaks allowed)."
+  }
+}
