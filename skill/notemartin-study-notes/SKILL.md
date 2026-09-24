@@ -45,7 +45,7 @@ El agente elige la cadena de ingesta L0 con este árbol. Cada hoja nombra el scr
 │   ├─ ¿Tiene tablas con celdas combinadas? → scripts/ingest/tables.py    [pendiente F23]
 │   └─ ¿Tiene fórmulas? → scripts/ingest/formulas.py                    [pendiente F24]
 ├─ EPUB / DOCX / PPTX → scripts/ingest/other_formats.py                  [pendiente F28]
-├─ HTML multipágina → scripts/ingest/web_docs.py                         [pendiente F29]
+├─ HTML multipágina → scripts/ingest/web_docs.py                         F29
 ├─ Transcripción (TXT/MD con marcas de hablante) → scripts/ingest/other_formats.py [F28]
 └─ Repositorio con README → catalogar como fuente plurilingüe (per F10 corpus)
 ```
@@ -96,8 +96,9 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 
 | Situación | Archivo a leer | Archivos a NO leer | Fase |
 |---|---|---|---|
-| Cualquier consulta al SDM o a sus anclas | `references/02-source-model/spec.md` | `references/04-authoring/` (no redactar antes de tener SDM) | [pendiente F13] |
-| Documento sin numeración o con numeración inconsistente | `references/02-source-model/anchors.md` | `references/03-knowledge/` (las anclas son prerrequisito del ledger) | [pendiente F32] |
+| Cualquier consulta al SDM o a sus anclas | `references/02-source-model/spec.md` | `references/04-authoring/` (no redactar antes de tener SDM) | F13 |
+| Construcción del SDM a partir de la ingesta L0 | `references/02-source-model/build-sdm.md` | `references/02-source-model/spec.md` (consulta solo si necesitas saber qué valida el schema) | F31 |
+| Documento sin numeración o con numeración inconsistente | `references/02-source-model/anchors.md` | `references/03-knowledge/` (las anclas son prerrequisito del ledger) | F32 |
 | Extracción de metadatos editoriales de la fuente | `references/02-source-model/provenance.md` | `references/04-authoring/` | [pendiente F34] |
 | Clasificación de regiones editoriales (Nota, Precaución, Ejemplo) | `references/02-source-model/editorial-semantics.md` | `references/03-knowledge/` | [pendiente F35] |
 | Extracción de unidades de información en L2 | `references/03-knowledge/information-units.md` | `references/04-authoring/` (no decidir tipo de nota antes de tener unidades) | [pendiente F37] |
@@ -167,6 +168,12 @@ El catálogo exhaustivo vive en `scripts/README.md` `[pendiente F117]` y se mate
 | `scripts/ingest/tables.py` | L0 extracción de tablas (clusterización filas/columnas, merged cells, headers multinivel, cross-page merge) | `python scripts/ingest/tables.py --source <regions_dir> --out-dir <dir> [--fragments <fragments.json>]` | Python 3.9+ stdlib |
 | `scripts/ingest/formulas.py` | L0 OCR de fórmulas (LaTeX, validador regex, pending fallback, numeración preservada) | `python scripts/ingest/formulas.py --source <regions_dir> --out-dir <dir> [--fragments <fragments.json>] [--images-dir <dir>]` | Python 3.9+ stdlib; Pillow opcional |
 | `scripts/ingest/code_ocr.py` | L0 OCR de código y consolas (byte-exact, correcciones forzadas registradas, prompt/salida, low_confidence) | `python scripts/ingest/code_ocr.py --source <regions_dir> --out-dir <dir> [--fragments <fragments.json>]` | Python 3.9+ stdlib |
+| `scripts/ingest/review_report.py` | Mixta: confianza por tipo de región, reporte HTML con `<img>`+`<pre>` lado a lado, bloqueo por regiones críticas, propagación de correcciones humanas | `python scripts/ingest/review_report.py --source <ingest_dir> --out-dir <dir> [--images-dir <dir>] [--corrections <corrections.json>]` | Python 3.9+ stdlib; Pillow opcional |
+| `scripts/ingest/post_ocr.py` | Corrección post-OCR determinista (R001-R010 + diccionario, sin ML, sin tocar código/tabla, cada corrección revertible) | `python scripts/ingest/post_ocr.py --source <ingest_dir> --out-dir <dir> [--dictionary <dict.yaml>]` o `--revert <correction_id>` / `--revert-all` | Python 3.9+ stdlib |
+| `scripts/ingest/other_formats.py` | EPUB (ebooklib), DOCX (python-docx), PPTX (python-pptx), SRT/VTT/JSON → `regions.json` con speaker_note + anchor_id temporal | `python scripts/ingest/other_formats.py --source <dir> --out-dir <dir> [--format auto]` | Python 3.9+ stdlib + ebooklib + python-docx + python-pptx opcionales |
+| `scripts/ingest/web_docs.py` | Web docs multipágina (BFS desde índice, sin boilerplate, canonical_url profunda, robots.txt opcional, sin ML ni OCR) | `python scripts/ingest/web_docs.py --source <dir> --base-url <url> --out-dir <dir> [--index <path>]` | Python 3.9+ stdlib |
+| `scripts/validate/ingest_check.py` | Núcleo: gate entre L0 y L1/L2 — verifica páginas omitidas, secciones del índice ausentes, saltos de numeración, bloques vacíos, densidad anómala; override humano explícito con `--allow-critical --human-decision` | `python scripts/validate/ingest_check.py --sdm <path> --out-dir <dir> [--declared-index <path>]` | Python 3.9+ stdlib |
+| `scripts/ingest/build_sdm.py` | Núcleo L0→L1: ensambla regions/tables/formulas/code/web_docs/other_formats en `sdm.json` conforme a `sdm.schema.json`, asocia pies a figuras (`CAPTION_MAX_PAGES_AHEAD=1`), ids deterministas `sha1(hash+path+idx)[:12]` | `python scripts/ingest/build_sdm.py --ingest-dir <dir> --source-meta <yaml> --out-dir <dir> [--format auto] [--check-determinism]` | Python 3.9+ stdlib; PyYAML (obligatorio) |
 
 Cualquier otra acción ejecutable prevista por el pipeline (ingesta, OCR, validación, parseo NoteMark, render, publicación) sigue marcada `[pendiente Fxxx]` en `docs/skill-anatomy.md` §6. El agente **no inventa** invocaciones; cuando la fase que materializa el script cierre, esa fila entra en `scripts/README.md` y se cita desde §5.
 
