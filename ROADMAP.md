@@ -817,16 +817,18 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 
 ---
 
-## Fase 35 — Semántica editorial de la fuente **[ref]**
+## Fase 35 — Semántica editorial de la fuente **[ref] [núcleo]**
 
 **Entregables:** `@/references/02-source-model/editorial-semantics.md`.
 
 **Detalle:** reconocimiento de cajas de Nota, Precaución, Ejemplo, Consejo, Novedad, Obsoleto; mapeo a tipos de bloque del SDM; convenciones propias por vendor; registro de convenciones nuevas.
 
 **Criterios:**
-- [ ] Las cajas de advertencia de tres fuentes distintas se reconocen.
-- [ ] Toda advertencia editorial llega al IR como advertencia, no como párrafo.
-- [ ] Las convenciones desconocidas se registran.
+- [x] Las cajas de advertencia de tres fuentes distintas se reconocen.
+- [x] Toda advertencia editorial llega al IR como advertencia, no como párrafo.
+- [x] Las convenciones desconocidas se registran.
+
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/02-source-model/editorial-semantics.md` (176 líneas / 230, 11 §§). §3 tabla canónica de las 6 cajas con sinónimos y mapeo: Nota→note/info, Precaución→warning/caution, Ejemplo→example, Consejo→note/tip, Novedad→note/novelty+version_introduced, Obsoleto→warning/removed (hard) **o** note/deprecated (soft). §4 catálogo built-in con 10 vendors (PostgreSQL, Python docs.python.org, Kubernetes, GitHub Markdown, AsciiDoc, Microsoft DOCX, Stripe, Material for MkDocs, Ruby/Rails, Apple Developer). §5 algoritmo con prioridad vendor→regex→fallback `note/info`; invariante crítica: `editorial_note.box` nunca cae a `prose`. §6 enum de severidad por tipo. §7 shape JSON de `unknown_conventions[]` con razones `{no_vendor_match, no_text_regex_match, no_vendor_match_no_text_regex_match}`; política de >= 3 apariciones antes de ampliar el catálogo. **Schema additive (F13B)**: `note.content.severity` enum `{info, tip}` → `{info, tip, novelty, deprecated}`; `note.content.version_introduced?:string` opcional; `warning.content.severity?:{caution, deprecated, removed}` opcional. `additionalProperties:false` mantenido. **F31 edit**: nueva función `_classify_editorial_box(text, sub_kind, vendor, product)` con tabla `EDITORIAL_VENDOR_RULES` (10 vendors) + `EDITORIAL_FALLBACK_RULES` (10 regex); reemplaza el `editorial_note`-branch de `_entry_to_block`; invariante "nunca prose" enforced en el caller. `assemble_sections` ahora recoge `unknown_conventions[]` en el summary JSON (campo nuevo). `run()` exit 2 cuando hay unknown_conventions (warning). **Eval battery** nuevo en `evals/editorial-sample/` con `build_fixtures.py` (stdlib + hashlib; sin deps nuevas) + 4 fixtures separados: `sdm.json` (canónico validable por F13) y `region.json` (input crudo) para cada uno — `postgresql-warning`, `python-warning`, `kubernetes-admonition`, `unknown-vendor` + 4 `expected/*.json` + `run_eval.py` que importa `_classify_editorial_box` directamente y valida los 3 criterios. Resultado PASS los 3 criterios (3 vendors recognized como warning/caution; 4/4 fixtures editorial_note.box not-prose; unknown-vendor tag unknown_convention=true + canonical sdm validates schema OK); sin regresión en F13 (15/15 golden), F31 (3/3), F32 (3/3), F33 (3/3), F34 (3/3). Wiring: `references/02-source-model/README.md` actualizado (F35 marcado disponible, fila "Produce" añadida); `SKILL.md` §5.2 fila "Clasificación de regiones editoriales" pasa de `[pendiente F35]` a `F35`. **Out-of-scope**: serialización del frontmatter NoteMark para `note.novelty` + `version_introduced` (F47 — properties.md); detección visual de admonitions HTML sin marcadores textuales (F29B); heurísticas ML (rompería determinismo). Cambios que reabren F35: eliminar `severity` de cualquier tipo, añadir block type nuevo, cambiar la tabla §3 de las 6 cajas, cambiar la invariante "ningún editorial_note.box cae a prose", cambiar el shape de `unknown_conventions[]`.
 
 ---
 
