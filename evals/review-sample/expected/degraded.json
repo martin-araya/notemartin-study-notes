@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "degraded-source-fixture.pdf",
+  "criterion_1_image_text_side_by_side": {
+    "html_required_elements": [
+      "<img",
+      "<pre class=\"region-text\">"
+    ],
+    "side_by_side_in_same_row": true,
+    "notes": "HTML must contain <img> tag and <pre class=\"region-text\"> in the same row (same <tr> parent)."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "both",
+  "criterion_2_thresholds_per_type": {
+    "required_classes": [
+      "code",
+      "console",
+      "table",
+      "formula",
+      "syntax_diagram",
+      "heading",
+      "caption",
+      "figure_caption",
+      "index",
+      "editorial_note",
+      "text",
+      "figure",
+      "capture",
+      "diagram",
+      "unknown"
+    ],
+    "min_code_threshold": 0.85,
+    "min_text_threshold": 0.55,
+    "notes": "summary.class_thresholds has distinct entries per type. code >= 0.85 (stricter), text <= 0.65 (looser)."
+  }
+}
