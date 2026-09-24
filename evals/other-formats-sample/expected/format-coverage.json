@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "fixtures": [
+    "epub",
+    "docx",
+    "pptx",
+    "srt",
+    "vtt",
+    "json"
+  ],
+  "criterion_1_each_format_produces_valid_sdm": {
+    "min_regions_per_format": 1,
+    "verify_method": "Each format produces regions.json with text non-empty per region."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "fixtures": [
+    "srt",
+    "vtt",
+    "json"
+  ],
+  "criterion_3_temporal_anchors_resolvable": {
+    "verify_method": "Each transcript region has anchor_id + start (float) + end (float)."
+  }
+}

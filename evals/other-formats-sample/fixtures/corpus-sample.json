@@ -1,0 +1,19 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.5,
+      "text": "Hello world."
+    },
+    {
+      "start": 2.5,
+      "end": 5.0,
+      "text": "Um, this is a test."
+    },
+    {
+      "start": 5.0,
+      "end": 8.0,
+      "text": "And uh, we continue."
+    }
+  ]
+}

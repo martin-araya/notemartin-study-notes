@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "corpus-sample.pptx",
+  "criterion_2_speaker_notes_own_blocks": {
+    "min_speaker_note_blocks": 1,
+    "verify_method": "class_distribution['speaker_note'] >= 1 and each has non-empty text."
+  }
+}
