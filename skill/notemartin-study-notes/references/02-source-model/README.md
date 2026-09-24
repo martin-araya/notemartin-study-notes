@@ -12,7 +12,7 @@ Cargar en L1 (construcción del SDM) y cada vez que el agente consulta anclas.
 - `build-sdm.md` (F31) — mecánica de ensamblado.
 - `anchors.md` (F32) — anclas sintéticas estables; numeración duplicada/saltada; persistencia.
 - `provenance.md` (F34) — metadatos editoriales: taxonomía read/inferred y propagación al L3.
-- `editorial-semantics.md` `[pendiente F35]` — cajas Nota/Precaución/Ejemplo.
+- `editorial-semantics.md` (F35) — cajas Nota/Precaución/Ejemplo/Consejo/Novedad/Obsoleto; convenciones por vendor; registro de desconocidas.
 
 ## Quién lee / quién produce
 
@@ -22,4 +22,4 @@ Cargar en L1 (construcción del SDM) y cada vez que el agente consulta anclas.
 | `build-sdm.md` | L1 (consumir L0 → emitir sdm.json) | F31 |
 | `anchors.md` | L1 (al derivar `section_path`), L2 (al construir `source_block_ids`), L3 (al redactar `{src:blk_xxxx}`), L4 (al resolver deep-links) | F32 |
 | `provenance.md` | L1 (al emitir `source_provenance`), L3 (al redactar frontmatter NoteMark), validador `scripts/validate/provenance.py` | F34 |
-| `editorial-semantics.md` | L1 al clasificar regiones editoriales | F35 |
+| `editorial-semantics.md` | L1 (al clasificar regiones `editorial_note.box`); el catálogo de vendors vive en el spec §4 | F35 |
