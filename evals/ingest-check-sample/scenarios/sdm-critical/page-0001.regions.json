@@ -1,0 +1,21 @@
+{
+  "page": 1,
+  "regions": [
+    {
+      "id": "r001",
+      "page": 1,
+      "semantic_class": "heading",
+      "level": 1,
+      "number": "1",
+      "text": "Title",
+      "word_count": 1
+    },
+    {
+      "id": "r002",
+      "page": 1,
+      "semantic_class": "text",
+      "text": "Body content.",
+      "word_count": 2
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "pages": [
+    1,
+    2,
+    3
+  ],
+  "sections": [
+    {
+      "number": "1",
+      "title": "Title",
+      "expected_pages": [
+        1
+      ]
+    },
+    {
+      "number": "2",
+      "title": "Section Two",
+      "expected_pages": [
+        3
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "fixture": "sdm-critical/",
+  "criterion_3_gate_blocks_critical": {
+    "expected_exit_code": 1,
+    "verify_method": "ingest_check exits with code 1, validation_report has len(anomalies.critical) >= 1"
+  }
+}

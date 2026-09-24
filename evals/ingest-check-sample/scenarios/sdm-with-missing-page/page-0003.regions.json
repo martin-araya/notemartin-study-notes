@@ -1,0 +1,21 @@
+{
+  "page": 3,
+  "regions": [
+    {
+      "id": "r003",
+      "page": 3,
+      "semantic_class": "heading",
+      "level": 1,
+      "number": "2",
+      "text": "Methods",
+      "word_count": 1
+    },
+    {
+      "id": "r004",
+      "page": 3,
+      "semantic_class": "text",
+      "text": "Methods section content.",
+      "word_count": 3
+    }
+  ]
+}
