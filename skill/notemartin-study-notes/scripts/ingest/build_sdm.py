@@ -1071,7 +1071,32 @@ def _backfill_footnote_refs(blocks: List[Dict[str, Any]]) -> List[Dict[str, Any]
 def build_sdm_payload(
     source_meta: Dict[str, Any],
     sections: List[Dict[str, Any]],
+    fallback_metadata: Optional[Dict[str, Any]] = None,
+    fallback_reasons: Optional[Dict[str, str]] = None,
 ) -> Dict[str, Any]:
+    """Construct the SDM JSON payload.
+
+    `fallback_metadata` carries values that were **not** in --source-meta but
+    were filled from another source (web_docs.metadata, triage.json). When
+    present, the resulting `source_provenance` entry for that field is
+    `web_docs_metadata` or `triage_metadata` (lower confidence) instead of
+    `read` (1.0).
+
+    `fallback_reasons` maps field name to a short reason string for
+    `source_provenance.<field>.reason`. Optional.
+    """
+    fallback_metadata = fallback_metadata or {}
+    fallback_reasons = fallback_reasons or {}
+
+    def _method_for(field: str) -> Tuple[str, float, Optional[str]]:
+        """Return (method, confidence, reason) for a field based on provenance."""
+        if field in source_meta and source_meta[field] not in (None, "", [], {}):
+            return ("read", 1.0, None)
+        if field in fallback_metadata and fallback_metadata[field] not in (None, "", [], {}):
+            return ("web_docs_metadata", 0.9, fallback_reasons.get(field))
+        # Absent: no value at all
+        return ("absent", 0.0, "no_value_in_source")
+
     source: Dict[str, Any] = {
         "id": source_meta["id"],
         "hash": source_meta["hash"],
@@ -1088,9 +1113,23 @@ def build_sdm_payload(
     if "authors" in source_meta:
         source["authors"] = list(source_meta.get("authors") or [])
 
+    # source_provenance (F34): per-field method + confidence + reason
+    source_provenance: Dict[str, Dict[str, Any]] = {}
+    tracked = ["id", "hash", "vendor", "product", "version", "edition",
+               "isbn", "authors", "url", "language", "date", "format",
+               "algorithm"]
+    for field in tracked:
+        method, conf, reason = _method_for(field)
+        value = source.get(field)
+        entry: Dict[str, Any] = {"method": method, "value": value, "confidence": conf}
+        if reason:
+            entry["reason"] = reason
+        source_provenance[field] = entry
+
     return {
         "schema_version": SCHEMA_VERSION,
         "source": source,
+        "source_provenance": source_provenance,
         "sections": sections,
     }
 
@@ -1156,13 +1195,26 @@ def run(
     web_sections, web_metadata = load_web_docs(ingest_dir)
     of_regions = load_other_formats(ingest_dir)
 
+    # Snapshot meta BEFORE fallback to know which fields came from --source-meta
+    # (`read`) vs from web_docs.metadata (`web_docs_metadata`) — drives F34's
+    # `source_provenance` annotation.
+    pre_fallback_keys = set(meta.keys())
+    fallback_metadata: Dict[str, Any] = {}
+    fallback_reasons: Dict[str, str] = {}
+
     # Pull metadata fallbacks.
     if not meta.get("vendor") and web_metadata.get("domain"):
         meta["vendor"] = web_metadata["domain"]
+        fallback_metadata["vendor"] = web_metadata["domain"]
+        fallback_reasons["vendor"] = "web_docs.metadata.domain"
     if not meta.get("product") and web_metadata.get("product"):
         meta["product"] = web_metadata["product"]
+        fallback_metadata["product"] = web_metadata["product"]
+        fallback_reasons["product"] = "web_docs.metadata.product"
     if not meta.get("version") and web_metadata.get("product_version"):
         meta["version"] = web_metadata["product_version"]
+        fallback_metadata["version"] = web_metadata["product_version"]
+        fallback_reasons["version"] = "web_docs.metadata.product_version"
     if not meta.get("language"):
         meta["language"] = "en"
 
@@ -1186,7 +1238,7 @@ def run(
         )
         return 1
 
-    sdm = build_sdm_payload(meta, sections)
+    sdm = build_sdm_payload(meta, sections, fallback_metadata, fallback_reasons)
     out_dir.mkdir(parents=True, exist_ok=True)
     sdm_path = out_dir / "sdm.json"
     atomic_write_json(sdm_path, sdm)
@@ -1213,7 +1265,7 @@ def run(
                 of_regions=of_regions,
                 source_hash=src_hash,
             )
-            sdm_2 = build_sdm_payload(meta, sections_2)
+            sdm_2 = build_sdm_payload(meta, sections_2, fallback_metadata, fallback_reasons)
             sdm1_path = run1 / "sdm.json"
             sdm2_path = run2 / "sdm.json"
             atomic_write_json(sdm1_path, sdm)

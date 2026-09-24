@@ -16,6 +16,44 @@
     "sections": {
       "type": "array",
       "items": { "$ref": "#/$defs/section" }
+    },
+    "source_provenance": {
+      "type": "object",
+      "description": "F34 — Per-field provenance annotation. Optional; if absent, all non-null source fields are assumed method:read, confidence:1.0.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["method", "confidence"],
+        "properties": {
+          "method": {
+            "type": "string",
+            "enum": [
+              "read",
+              "web_docs_metadata",
+              "triage_metadata",
+              "cover_or_header",
+              "url_regex",
+              "inferred",
+              "default",
+              "absent"
+            ],
+            "description": "How this field was obtained. read = user-supplied (--source-meta). inferred family = derived heuristically."
+          },
+          "value": {
+            "description": "Mirror of source[FIELD] (or null). No schema constraint here to allow any value type (string / array / null)."
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "[0, 1]. read ⇒ 1.0; inferred family ⇒ <1.0; absent ⇒ 0.0."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Optional short hint for how the field was obtained."
+          }
+        }
+      }
     }
   },
   "$defs": {
