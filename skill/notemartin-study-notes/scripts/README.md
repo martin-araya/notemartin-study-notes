@@ -98,3 +98,37 @@ L0 OCR: ejecuta Tesseract (motor principal) o EasyOCR (alternativo) sobre las im
 | Escritura | Atómica: tempfile + `Path.replace` |
 | Constantes | `references/01-ingest/ocr-engines.md` §3 (`OCR_RETRY_THRESHOLD=0.70`, `OCR_MIN_WORDS=5`, `OCR_MAX_RETRIES=3`, `OCR_DEFAULT_PSM=6`, `OCR_SPARSE_PSM=11`) |
 | Documentación | `references/01-ingest/ocr-engines.md` (normativa con instalación por SO) |
+
+### `ingest/layout.py` — F21 · Layout y orden de lectura
+
+L0 layout: detecta columnas, sidebars, margin notes, figure captions y floats; calcula el orden de lectura con `continuity_score`; verifica el orden; reunifica párrafos/tablas/código cross-page.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <fragments.json\|ocr_summary.json>` o `--pdf <pdf>` (invoca F18 internamente); `--input-type auto\|pdf-native\|ocr` |
+| Salida | `<out-dir>/ingest/layout/page-NNNN.regions.json` + `page-NNNN.reading_order.json` por página + `layout_summary.json` global con `cross_page_links[]` e `inconsistencies[]` |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/layout.py --source <fragments.json> --out-dir <dir> [--json-only]` |
+| Dependencias | Python 3.9+ stdlib; numpy (recomendado, opcional) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (orden roto, cross-page ambiguo) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/layout.md` §4-§9 (`X_HISTOGRAM_BUCKET_PX=8`, `MIN_COLUMN_DENSITY=0.05`, `SIDEBAR_MAX_WIDTH_RATIO=0.20`, `MARGIN_THRESHOLD_PX=50`, `MIN_CONTINUITY_SCORE=0.30`) |
+| Documentación | `references/01-ingest/layout.md` (normativa) |
+
+### `ingest/regions.py` — F22 · Clasificación de regiones
+
+L0 classifier: reclasifica regiones geométricas de F21 en 13 clases semánticas mediante 11 señales tipográficas / geométricas con scoring numérico. Regla dura de ambigüedad: ninguna región se fuerza a una clase cuando las señales son insuficientes.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <layout_dir>` (páginas de F21); opcional `--fragments <fragments.json>` (F18) o `--ocr <ocr_summary.json>` (F20); opcional `--class-profile <yaml>` |
+| Salida | `<out-dir>/ingest/regions/page-NNNN.regions.json` (F21 enriquecido) + `regions_summary.json` global con `class_distribution` y `ambiguous_regions[]` |
+| Solo JSON | `--json-only` |
+| Invocación | `python3 scripts/ingest/regions.py --source <layout_dir> --out-dir <dir> [--fragments <fragments.json>]` |
+| Dependencias | Python 3.9+ stdlib (sin numpy ni ML) |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (regiones ambiguas, falta fragments/ocr) |
+| Escritura | Atómica: tempfile + `Path.replace` |
+| Constantes | `references/01-ingest/regions.md` §6 (`CLASS_MIN_THRESHOLD=0.45`, `AMBIGUITY_MARGIN=0.10`, `LARGE_FACTOR=1.3`, `EMPTY_AREA_RATIO=0.60`) |
+| Documentación | `references/01-ingest/regions.md` (normativa) |
