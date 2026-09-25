@@ -929,3 +929,21 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/03-knowledge/conflicts.md` (200 líneas / 230, 11 §§, español, INV-06). §3 modelo del registry (`knowledge/conflicts.json` con `id`/`type`/`anchors[]`/`description`/`status`/`resolution`/`model_says`/`first_seen_at`/`deprecation_status`); §4 enum cerrada de 5 tipos (`source-vs-source`/`source-vs-derived`/`source-vs-external`/`deprecation-mismatch`/`version-mismatch`); §5 anchors (≥2, tipos o instancias distintas, de 3 tipos: `block` F13 / `note` F38 / `concept` F39); §6 estados (`open`/`resolved`/`unresolved`); §7 R6 resolución fuente-wins (cuerpo refleja fuente, `model_says` documenta derivación); §8 taxonomía cross-cutting de obsolescencia (`current`/`preview`/`deprecated`/`legacy`/`removed`) que comparten glossary (F40), concept-graph (F39), ledger (F15/F38), notas (F12) y version-note (F37); §9 directivas NoteMark `:::contradiction id="..."` y `:::discrepancy source-says model-says` añadidas a F12 §4. Schema `schemas/conflicts.schema.json` (Draft 2020-12, `schema_version: "1.0.0"` const, `additionalProperties: false`). **ADR-0005** justifica storage dual JSON registry + directivas inline; enum cerrada de tipos; regla "fuente gana" sin excepciones. **Eval battery** `evals/conflicts-sample/` con 11 fixtures + `run_eval.py` con 5 sub-checks PASS: criterio 1 (good con 3 contradicciones, 3 negativos ortogonales), criterio 2 (marker-present + no-marker detectado), criterio 3 (good-notemark + undocumented detectado), R3 anchors distinct + schema validity, no-regresión F15/F37/F38/F39/F40. **Wirings**: `notemark.md` 2 directivas; `SKILL.md` F41; `references/03-knowledge/README.md` `conflicts.md` listado; `docs/adr/README.md` ADR-0005; `ROADMAP.md` criterios `[x]` + Estado ✅.
 
 ---
+
+## Fase 42 — Reglas de fidelidad **[ref] [núcleo]**
+
+**Entregables:** `@/references/10-quality/fidelity-rules.md`.
+
+**Detalle:**
+- Tres niveles: de la fuente (por defecto), derivado (síntesis, analogías, diagramas propios), externo (conocimiento del modelo, solo en bloque identificable).
+- Prohibido inventar defaults, rangos, nombres de parámetro, códigos de error, versiones, sintaxis o comandos.
+- Regla de la duda: se escribe la ausencia, no se completa.
+
+**Criterios:**
+- [x] Todo contenido externo va en bloque identificable en los siete destinos.
+- [x] Con una fuente incompleta a propósito, la nota declara la ausencia.
+- [x] Ningún valor técnico aparece sin respaldo en el ledger.
+
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/10-quality/fidelity-rules.md` (186 líneas / 230, 11 §§, español, INV-06). §3 taxonomía cerrada de 3 niveles (`source` default sin tag, `derived`, `external`); §4 prohibiciones absolutas sobre 7 categorías de valores técnicos (defaults, rangos, parámetros, error-codes, versiones, sintaxis, comandos) mapeados a tipos F37; §5 regla de la duda con lista cerrada de palabras prohibidas (`probablemente`, `típicamente`, `en general`, `asumimos`, `suponemos`, `creemos que`, `suele ser`, `lo más común es`, `por defecto`, `a menudo`, `generalmente`, `normalmente`); §6 directivas NoteMark (`:::external` existente F12 + `:::derived` añadida); §7 renderizado en 7 destinos (tabla con "Destino A/B/C" para INV-06); §8 auditoría de respaldo (cada valor técnico debe tener entry en ledger del tipo correspondiente); §9 anti-patrones; §10 verificación; §11 glosario. **ADR-0006** justifica 3 niveles cerrados, tagging dual, prohibiciones absolutas, regla de la duda. **Notemark.md** §4 añadida fila `:::derived`; nueva sección `### :::derived` con ejemplo de bloque mermaid. **Eval battery** `evals/fidelity-sample/` con 6 NoteMark + 3 ledger + 1 SDM + `run_eval.py` con 3 sub-checks PASS: criterio 1 (heurística de palabras externas + mermaid sin `:::derived`), criterio 2 (palabras prohibidas + formas aceptables + ausencia-bad), criterio 3 (defaults/parámetros/errores/versiones contra ledger). No-regresión F15/F37/F38/F39/F40/F41. **Wirings**: `SKILL.md` F42; `references/10-quality/README.md` `fidelity-rules.md` listado; `notemark.md` `:::derived` añadida; `docs/adr/README.md` ADR-0006; `ROADMAP.md` criterios `[x]` + Estado ✅.
+
+---

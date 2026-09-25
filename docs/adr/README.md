@@ -39,3 +39,4 @@ Qué se gana, qué se pierde, qué queda atado a esta decisión.
 
 Las decisiones cerradas hasta ahora viven en `skills/AGENT.md` §8. Cuando una de ellas se reabre formalmente, se promueve a ADR aquí.
 - `ADR-0005-conflicts-model.md` — F41: storage dual JSON registry + directivas inline `:::contradiction`/`:::discrepancy`; taxonomía cross-cutting de obsolescencia; fuente gana sin excepciones.
+- `ADR-0006-fidelity-levels.md` — F42: tres niveles source/derived/external; tagging dual `:::external`+`:::derived`; prohibiciones absolutas sobre 7 categorías de valores técnicos; regla de la duda.

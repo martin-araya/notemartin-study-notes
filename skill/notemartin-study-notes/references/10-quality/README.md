@@ -9,6 +9,7 @@ Cargar al redactar contenido fáctico y antes de cerrar cualquier trabajo.
 ## Estado actual
 
 - `fidelity-rules.md` `[pendiente F42]`
+- `fidelity-rules.md`
 - `completeness-audit.md` `[pendiente F43]`
 
 ## Quién lee / quién produce

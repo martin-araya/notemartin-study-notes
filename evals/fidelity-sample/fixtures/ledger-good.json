@@ -1,0 +1,58 @@
+{
+  "schema_version": "2.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "entries": [
+    {
+      "unit_id": "u_p_01",
+      "source_block_ids": [
+        "b2c3d4e5f6a7"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "parameter",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "state": "written",
+      "content": {
+        "name": "shared_buffers",
+        "description": "Tamaño del caché."
+      }
+    },
+    {
+      "unit_id": "u_d_01",
+      "source_block_ids": [
+        "c3d4e5f6a7b8"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "default",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "state": "written",
+      "content": {
+        "name": "shared_buffers",
+        "value": "128 MB"
+      }
+    },
+    {
+      "unit_id": "u_e_01",
+      "source_block_ids": [
+        "d4e5f6a7b8c9"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "error-code",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "state": "written",
+      "content": {
+        "code": "EADDRINUSE",
+        "message": "Puerto en uso."
+      }
+    }
+  ],
+  "build_metadata": {
+    "version": "1.0",
+    "built_at": "2026-09-25T00:00:00Z"
+  }
+}

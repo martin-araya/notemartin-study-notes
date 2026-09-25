@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "format": "pdf"
+  },
+  "sections": [
+    {
+      "section_path": "/ch02/configuration",
+      "title": "Configuration",
+      "blocks": [
+        {
+          "id": "b2c3d4e5f6a7",
+          "type": "parameter",
+          "content": {
+            "name": "shared_buffers",
+            "description": "Tamaño del caché."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}
