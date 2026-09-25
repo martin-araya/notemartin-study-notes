@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "test-source",
+    "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "vendor": "test",
+    "product": "test",
+    "url": "https://example.com",
+    "language": "en",
+    "format": "md"
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Chapter 1",
+      "blocks": [
+        {
+          "id": "aaa000000001",
+          "type": "prose",
+          "content": "Some original prose content from the source document.",
+          "anchor": "/ch01/intro#b0",
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "bbb000000002",
+          "type": "prose",
+          "content": "Another block from the source.",
+          "anchor": "/ch01/intro#b1",
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "ccc000000003",
+          "type": "prose",
+          "content": "This block is unused by any IR (orphan SDM).",
+          "anchor": "/ch01/intro#b2",
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

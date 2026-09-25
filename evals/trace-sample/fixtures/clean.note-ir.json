@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "clean",
+  "title": "Clean note",
+  "note-type": "concept",
+  "status": "draft",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1", "_title": "Clean"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [{"block_id": "aaa000000001", "source_hash": "0000000000000000000000000000000000000000000000000000000000000000"}],
+          "children": [
+            {"node": "text", "attrs": {"text": "Factual content with source.", "capability": "text"}, "source_refs": []}
+          ]
+        }
+      ]
+    }
+  ]
+}

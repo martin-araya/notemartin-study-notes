@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "orphan-typeA",
+  "title": "Orphan type A",
+  "note-type": "concept",
+  "status": "draft",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1", "_title": "Orphan A"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [],
+          "children": [
+            {"node": "text", "attrs": {"text": "This is a long factual paragraph without any source_refs attached to it.", "capability": "text"}, "source_refs": []}
+          ]
+        }
+      ]
+    }
+  ]
+}
