@@ -77,219 +77,70 @@ Cada nodo del Note IR (Fase 14) tiene exactamente una sintaxis NoteMark. 20 nodo
 
 ## §6 · Directivas de bloque
 
-Una subsección por cada directiva. Forma: sintaxis → ejemplo → anti-ejemplo.
+Las 22 directivas (`warning`, `note`, `tip`, `example`, `danger`, `security`,
+`performance`, `version`, `deprecated`, `conflict`, `external`, `derived`,
+`collapsible`, `columns`, `param-table`, `step`, `question`, `diagram`,
+`figure`, `equation`, `console`, `property`) se documentan en detalle en
+[`block-directives.md`](block-directives.md). Este documento mantiene la
+**gramática formal** ([`notemark.ebnf`](notemark.ebnf)), la **cobertura IR ↔
+NoteMark** (§5 de este doc) y las **marcas inline** (§7 de este doc).
 
-### :::warning
-Advertencia. Hoja: no admite otra directiva anidada.
-````
-:::warning
-El parámetro `shared_buffers` requiere reinicio. {src:blk_b123}
-~~~
-> [!warning]   ← sintaxis Obsidian, prohibida (INV-06)
+Para elegir qué directiva usar ante un hecho del SDM, consultar la tabla de
+decisión rápida en `block-directives.md` §6. Para resolver confusiones entre
+directivas vecinas, §7 (fronteras). Para reglas de anidamiento y longitud,
+§8 y §9. El catálogo completo está en §10.
 
-### :::note
-Nota aclaratoria.
-````
-:::note
-`VACUUM` no bloquea lecturas; solo adquiere lock en la tabla al final. {src:blk_c789}
-:::
-
-### :::tip
-Consejo operativo.
-````
-:::tip
-Usar `EXPLAIN ANALYZE` antes de tocar índices. {src:blk_d012}
-:::
-
-### :::example
-Ejemplo numerado o acompañado.
-````
-:::example
-```
-SELECT count(*) FROM pg_class WHERE relkind = 'r';
--- → 163 relations
-```
-:::
-
-### :::danger
-Peligro de pérdida de datos o corrupción.
-````
-:::danger
-Nunca ejecutar `DROP TABLE` sin `BEGIN;` previo y backup verificado.
-:::
-
-### :::security
-Aviso de seguridad (CVE, vulnerabilidad, vector de ataque).
-````
-:::security
-CVE-2024-1234: bypass de autenticación en API v1. Parchear a 16.3+. {src:blk_e345}
-:::
-
-### :::performance
-Impacto medible en rendimiento.
-````
-:::performance
-`work_mem = 4MB` con 200 conexiones simultáneas → OOM en sorts grandes. Default 4MB.
-:::
-
-### :::version
-Cambio entre versiones de un producto.
-````
-:::version
-PostgreSQL 15 → 16: el planner ahora usa `pg_stat_io` para I/O wait. {src:blk_f456}
-:::
-
-### :::deprecated
-Funcionalidad marcada para eliminación.
-````
-:::deprecated
-`json` (tipo) en favor de `jsonb` desde 9.4. Mantenido por compatibilidad.
-:::
-
-### :::conflict
-Contradicción con otra versión o fuente.
-````
-:::conflict
-La doc dice "no usar índices hash en valores grandes"; el manual interno dice "siempre que el valor sea fijo". {src:blk_g567} vs {src:blk_h678}
-:::
-
-### :::external
-Hecho externo al documento procesado (no respaldado por el SDM).
-````
-:::external
-Esta analogía con Git es nuestra, no del libro. {external}
-:::
-
-### :::derived
-Síntesis, analogía o diagrama del agente basado en la fuente. Nivel intermedio entre `source` (default, sin tag) y `external` (fuera de la fuente).
-````
-:::derived
-Diagrama que resume la arquitectura descrita en /ch02/intro:
-```mermaid
-flowchart LR
-    A[Cliente] --> B[Servidor]
-```
-:::
-### :::collapsible
-Bloque plegable. Admite heading interno opcional.
-````
-:::collapsible
-### Detalle extendido (click para expandir)
-Texto oculto por defecto. {src:blk_i789}
-:::
-
-### :::columns
-Dos columnas separadas por línea en blanco.
-````
-:::columns
-Columna izquierda.
-
-Columna derecha.
-:::
-
-### :::param-table
-Tabla de parámetros con columnas canónicas (`nombre`, `tipo`, `default`, `rango`).
-````
-:::param-table
-| parametro | tipo | default | rango | versión |
-| --- | --- | --- | --- | --- |
-| max_connections | integer | 100 | 1-10000 | all |
-| shared_buffers | bytes | 128MB | 8MB- | all |
-:::
-
-### :::step
-Paso numerado dentro de un procedimiento. Admite heading interno.
-````
-:::step
-### Configurar replica
-Editar `postgresql.conf` con `wal_level = replica`. {src:blk_j890}
-:::
-
-### :::question
-Pregunta-respuesta. Heading interno = pregunta; contenido = respuesta.
-````
-:::question
-### ¿Qué es MVCC?
-Control de concurrencia multiversión. Cada transacción ve un snapshot. {src:blk_k901}
-:::
-
-### :::diagram
-Diagrama Mermaid portable (ver `references/07-visual/mermaid-portable.md`).
-````
-:::diagram
-```mermaid
-graph LR
-  A[Cliente] --> B[HAProxy]
-  B --> C[PG-primary]
-  B --> D[PG-replica]
-```
-:::
-
-### :::figure
-Imagen con alt text y source_ref.
-````
-:::figure
-![Diagrama de WAL](assets/wal-flow.png){src:blk_fig01}
-:::
-
-### :::equation
-Bloque matemático. Contenido entre `$$…$$`.
-````
-:::equation
-$$
-\sum_{i=1}^{n} w_i x_i = b
-$$
-:::
-
-### :::console
-Transcripción de sesión CLI. Prompt `$` opcional pero recomendado.
-````
-:::console
-$ docker run -d --name db postgres:16
-$ docker exec -it db psql -U postgres
-:::
+> **Directivas que aún no tienen ficha en §10** (reservadas para F41):
+> `:::contradiction` y `:::discrepancy`. Se añadirán a `block-directives.md`
+> sin reabrir F45 cuando F41 cierre.
 
 ## §7 · Marcas inline
 
-| Marca | Sintaxis | Cuándo se inserta |
-|---|---|---|
-| `source-ref` | `{src:blk_xxxxxxxxxxxx}` | Cada hecho fáctico: cita al bloque del SDM. |
-| `term-ref` | `[[term:nombre]]` | Término canónico; se enlaza al glosario (F40). |
-| `link-note` | `[[note:id]]` | Enlace a otra nota del corpus. |
-| `placeholder` | `{{nombre}}` | Lo que el usuario sustituye antes de publicar. |
-| `derived` | `{derived}` | Párrafo derivado del contenido (analogía propia). |
-| `external` | `{external}` | Conocimiento externo al documento procesado. |
+Las 6 marcas obligatorias (`{src:blk_xxxx}`, `[[term:nombre]]`, `[[note:id]]`,
+`{{nombre}}`, `{derived}`, `{external}`) y las 3 de apoyo (`[[fn:id]]`,
+`[[kbd:]]`, `~~x~~`) se documentan en detalle en
+[`inline-marks.md`](inline-marks.md). Este documento mantiene la
+**gramática formal** ([`notemark.ebnf`](notemark.ebnf)) y el **mapeo IR**
+([`ir-spec.md`](ir-spec.md)).
 
-Ejemplo compuesto: `El optimizador elige un Hash Join cuando la tabla tiene > 10k filas. [[term:hash-join]] {src:blk_l234}`. Anti-ejemplo (sin marca): `El optimizador elige un Hash Join cuando hay muchas filas.` — sin respaldo, viola INV-04.
+Para decidir cuántas `{src:}` lleva cada bloque, ver `inline-marks.md` §4
+(densidad de citación). Para la regla de primera aparición de términos, §5.
+Para la tabla de comportamiento por destino (7 destinos), §7. Para las reglas
+de legibilidad y la regla "no más de una vez por bloque", §8 y §9.
 
 ## §8 · Frontmatter
 
 Forma: `---` al inicio, propiedades YAML canónicas, `---` de cierre.
 
-**Obligatorias:** `title`, `note-type`, `status`.
-**Recomendadas:** `tags`, `source`, `source-type`, `source-anchor`, `retrieved`, `language`, `coverage`, `aliases`, `related`. Detalle de tipos y enums en `references/04-authoring/properties.md` (F47, pendiente).
+El frontmatter canónico (18 propiedades cerradas, 3 obligatorias universales)
+se documenta en [`properties.md`](properties.md). Este documento mantiene la
+**gramática formal** ([`notemark.ebnf`](notemark.ebnf), reglas `frontmatter` /
+`yaml-body` / `yaml-line` / `key`) y la regla de orden (frontmatter al inicio
+del archivo, ningún bloque antes).
 
-| Propiedad | Tipo | Descripción |
-|---|---|---|
-| `title` | string | Título de la nota. |
-| `note-type` | enum | Tipo (F93): `concept`, `api-reference`, `procedure`, etc. |
-| `status` | enum | `draft` / `published` / `archived`. |
-| `tags`, `aliases`, `related` | array | Tags, sinónimos, rutas relacionadas. |
-| `source`, `source-anchor`, `source-url` | string / path | Identificador y ancla principal de la fuente. |
-| `source-type` | enum | `book` / `rfc` / `manual` / `repo` / `transcript` / `synthetic`. |
-| `retrieved` | date (ISO 8601) | Fecha de obtención. |
-| `language` | enum | `es` / `en` / `es-en` / `en-es` (perfil). |
-| `coverage` | enum | `full` / `partial` / `summary`. |
-
-Sin colores literales en valores (INV-14). Sin platform-specific (INV-06).
+Para declarar propiedades personalizadas (`x-*` o `user-*`), ver
+`properties.md` §8. Para la obligatoriedad por tipo de nota, §6. Para el
+render legible en destinos sin soporte de properties, §7.
 
 ## §9 · Marcadores de capa
 
-`{layer:l1}` = TL;DR. `{layer:l2}` = operativo. `{layer:l3}` = referencia exhaustiva. Se aplica a nivel de bloque (después de un heading, antes del contenido de esa sección).
+La marca `{layer:l1|l2|l3}` se documenta en
+[`depth-layers.md`](depth-layers.md) (F51). Resumen:
 
-Regla dura: **l3 nunca se omite** (puerta de fidelidad, INV-08). Si el agente decide no redactar l2, sigue redactando l3.
+- `{layer:l1}` = TL;DR autónomo (≤ 8 líneas / ≤ 60 palabras).
+- `{layer:l2}` = operativo (30-70% del cuerpo).
+- `{layer:l3}` = referencia exhaustiva (30-70% del cuerpo; en `:::collapsible` con `default_open: false`).
 
-Ejemplo: `### Conexiones \n{layer:l2} \n Configurar...`. Anti-ejemplo: omitir la marca y depender de la posición en el documento — ambiguo.
+Regla dura (INV-08): **l3 nunca se omite** (puerta de fidelidad, F42). Si el
+agente decide no redactar l2, sigue redactando l3.
+
+Aplicación: la marca va inmediatamente después de un heading `##` o `###`,
+antes del contenido de esa sección. Herencia: si se omite, el layer se hereda
+del anterior o del top-level `layer:` del frontmatter.
+
+Para umbrales de "nota extensa", override por tipo (F78-F92), extracción a
+nota hermana cuando L3 desborda, e integración con el ledger, ver
+`depth-layers.md` §2, §5 y §6.
 
 ## §10 · Anti-patrones generales
 
@@ -304,10 +155,10 @@ Ejemplo: `### Conexiones \n{layer:l2} \n Configurar...`. Anti-ejemplo: omitir la
 ## §11 · Cómo verificar
 
 1. `wc -l notemark.md` ≤ 300; `wc -l notemark.ebnf` ≤ 80.
-2. `rg -c '^### :::' notemark.md` ≥ 20.
+2. Verificaciones de directivas redirigidas a `block-directives.md` §13.
 3. `rg -c '\[\!warning\]|\[\!note\]' notemark.md evals/notemark-sample/full-note.nm` → 0.
 4. `wc -l evals/notemark-sample/full-note.nm` entre 380 y 420; contiene las 20 directivas, las 6 marcas inline y los 3 layer markers.
 
 ## §12 · Cambios permitidos sin reabrir F12
 
-Añadir subsección en §6 cuando F45 cree un nuevo bloque; fila en §5 cuando F14 extienda el IR; refinar ejemplos en §6 sin cambiar sintaxis. **Reabren F12:** cambiar INV-05/06/09, redefinir sintaxis de `:::directiva`, introducir inline que rompa compat con notas existentes, eliminar la prohibición de platform-specific.
+Refinar §5 (cobertura IR ↔ NoteMark) cuando F14 extienda el IR; ajustar §10 (anti-patrones generales) sin tocar §6 (que es puntero a `block-directives.md` F45) ni §7 (que es puntero a `inline-marks.md` F46). **Reabren F12:** cambiar INV-05/06/09, redefinir sintaxis de `:::directiva` o de marca inline, introducir inline/bloque que rompa compat con notas existentes, eliminar la prohibición de platform-specific, mover contenido de F45/F46 de vuelta a este documento.

@@ -8,11 +8,11 @@ Cargar al redactar cualquier nota. `notemark.md` siempre; el resto según el tip
 
 ## Estado actual
 
-- `notemark.md` `[pendiente F12]`
-- `ir-spec.md` `[pendiente F14]`
-- `block-directives.md` `[pendiente F45]`
-- `inline-marks.md` `[pendiente F46]`
-- `properties.md` `[pendiente F47]`
+- `notemark.md` F12
+- `ir-spec.md` F14
+- `block-directives.md` F45
+- `inline-marks.md` F46
+- `properties.md` F47
 - `depth-layers.md` `[pendiente F51]`
 
 ## Quién lee / quién produce
