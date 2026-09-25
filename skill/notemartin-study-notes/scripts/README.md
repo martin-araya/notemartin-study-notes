@@ -10,7 +10,7 @@ Ejecutables invocables por el agente. **No se leen en contexto**; se invocan por
 | `validate/` | Validadores de SDM, IR, NoteMark, Mermaid, completitud, equivalencia cross-target | F30, F43, F49, F63, F67 |
 | `authoring/` | Parser NoteMark, transformaciones de IR | F48, F50 |
 | `render/` | Renderers a cada destino + pre-render de diagramas y figuras | F54-F60, F68, F70 |
-| `util/` | Caché, visor, ledger, trazabilidad | F36, F38, F52 |
+| `util/` | Caché, visor, ledger, grafo de conceptos, trazabilidad | F36, F38, F39, F52 |
 | `README.md` | Catálogo con qué hace cada script, entrada, salida, dependencias, invocación | F117 |
 
 ## Reglas (per `AGENT.md` §6)
@@ -379,3 +379,32 @@ Módulo compartido que codifica `AUTO_RULES` (R1–R4 por tipo) y la condición 
 | Bloque/unidad aceptado | dict con `type: string` y `content: dict` |
 | Invocación | `from unit_rules import is_must_keep` |
 | Documentación | `references/03-knowledge/information-units.md` §5 (normativa) |
+
+### `util/concept_graph.py` — F39 · CLI del grafo de prerrequisitos
+
+CLI con 4 subcomandos que deriva `knowledge/concept-graph.json` desde el ledger (F38) + SDM (F13) como proyección. Nodos desde unidades `definition`; aristas desde unidades `cross-reference` con `content.relation: "prerequisite"`. Respeta `profile.yaml::graph.cycle_policy` (`block` default exit 1; `allow` registra ciclos en `cycles[]` y continúa). Detecta ciclos con DFS iterativo + marcas white/gray/black; calcula rutas (Dijkstra para `shortest`, DFS con poda para `broadest`); exporta un `.mmd` por dominio (`flowchart LR` con aristas `-->|prereq|`). Comparte `atomic_write_json` con `ledger.py` vía `util/_io.py`.
+
+| Aspecto | Valor |
+|---|---|
+| CLI subcomandos | `build`, `routes [--goal <id>] [--domain <d>] [--strategy {shortest,broadest,all}]`, `export [--out-dir <dir>]` (genera `<dir>/<domain>/graph.mmd`), `check [--strict]` |
+| Paths por defecto | `--workdir <PATH>`; `<workdir>/knowledge/ledger.json` + `<workdir>/sdm.json` + `<workdir>/profile.yaml` (opcional) |
+| Override | `--profile` |
+| Invocación | `python3 scripts/util/concept_graph.py --workdir .notes-work/<hash> build` |
+| Dependencias | Python 3.9+ stdlib; PyYAML opcional (lectura de `profile.graph.cycle_policy`); `jsonschema` opcional (validación contra schema) |
+| Comportamiento si falta PyYAML | `cycle_policy=block` por default + WARNING a stderr |
+| Comportamiento si falta jsonschema | Validación opcional desactivada; exit codes iguales |
+| Códigos de salida | 0 OK · 1 validación (ciclos con `cycle_policy=block`) · 2 uso (paths faltantes) |
+| Escritura | Atómica: `tempfile` + `Path.replace` (compartido con `ledger.py` vía `_io.py`) |
+| Constantes inline | `ALLOWED_RELATIONS = {"prerequisite"}`, `MAX_LABEL_LEN = 80`, `CYCLE_POLICIES = {"block", "allow"}` |
+| Documentación | `references/03-knowledge/concept-graph.md` (normativa) |
+| Schema | `schemas/concept-graph.schema.json` |
+
+### `util/_io.py` — F38/F39 · Utilidad I/O compartida (escritura atómica)
+
+Helper interno que codifica el patrón `tempfile` + `Path.replace` (L-04 de F15). Importado por `ledger.py` y `concept_graph.py`. Sin dependencias externas.
+
+| Aspecto | Valor |
+|---|---|
+| API | `atomic_write_json(path: Path, payload: Any) -> None` |
+| Garantía | El path destino siempre queda con un JSON válido (o no se toca) |
+| Documentación | (helper interno; sin spec normativa) |

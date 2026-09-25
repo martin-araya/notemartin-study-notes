@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/concept-graph.schema.json",
+  "title": "Concept Graph",
+  "description": "Proyección derivada del Coverage Ledger (F15/F38) que representa el grafo de conceptos y prerrequisitos por dominio. Generado por scripts/util/concept_graph.py (Fase 39). Consumido por F44 (note-plan) y F104 (rutas de lectura).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "domain", "nodes", "edges", "cycles", "routes", "dangling_edges", "build_metadata"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del esquema. Mayor en cambios incompatibles; menor en campo opcional nuevo."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "hash", "vendor", "product"],
+      "properties": {
+        "id": { "type": "string" },
+        "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$",
+                  "description": "sha256 hex de la fuente (F13)."},
+        "vendor": { "type": ["string", "null"] },
+        "product": { "type": ["string", "null"] }
+      }
+    },
+    "domain": {
+      "type": "string",
+      "description": "Dominio global del grafo: vendor+product, o 'unknown'."
+    },
+    "nodes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/node" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/edge" }
+    },
+    "cycles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/cycle" }
+    },
+    "routes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/route" }
+    },
+    "dangling_edges": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/danglingEdge" },
+      "description": "Aristas cuyo to_concept_id no existe como nodo. No bloquea (R6) pero se registran para auditoría."
+    },
+    "build_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["built_at", "cycle_policy", "node_count", "edge_count"],
+      "properties": {
+        "built_at": { "type": "string", "format": "date-time" },
+        "cycle_policy": { "type": "string", "enum": ["block", "allow"] },
+        "node_count": { "type": "integer", "minimum": 0 },
+        "edge_count": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["concept_id", "domain", "definition_unit_id", "section_path", "label"],
+      "properties": {
+        "concept_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+          "description": "Slug kebab-case del concepto."
+        },
+        "domain": { "type": "string" },
+        "definition_unit_id": {
+          "type": "string",
+          "description": "unit_id de la unidad definition del ledger que origina el nodo."
+        },
+        "section_path": { "type": "string" },
+        "label": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Texto de la definición (truncado a 80 chars para Mermaid)."
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_concept_id", "to_concept_id", "relation", "source_unit_id"],
+      "properties": {
+        "from_concept_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+        },
+        "to_concept_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+        },
+        "relation": {
+          "type": "string",
+          "const": "prerequisite",
+          "description": "Único tipo de arista en F39 (extensible en versiones futuras)."
+        },
+        "source_unit_id": { "type": "string" }
+      }
+    },
+    "cycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cycle", "policy", "resolved"],
+      "properties": {
+        "cycle": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,63}$" },
+          "minItems": 2,
+          "description": "Secuencia de concept_ids que forman el ciclo (el primero se repite al final)."
+        },
+        "policy": {
+          "type": "string",
+          "enum": ["block", "allow"]
+        },
+        "resolved": {
+          "type": "boolean",
+          "description": "true cuando el agente ha resuelto el ciclo manualmente (futuro; F39 siempre false)."
+        }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "goal_concept_id", "strategy", "path", "length"],
+      "properties": {
+        "domain": { "type": "string" },
+        "goal_concept_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+        },
+        "strategy": {
+          "type": "string",
+          "enum": ["shortest", "broadest"]
+        },
+        "path": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,63}$" },
+          "minItems": 1
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "danglingEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_concept_id", "to_concept_id", "source_unit_id"],
+      "properties": {
+        "from_concept_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+        },
+        "to_concept_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+        },
+        "source_unit_id": { "type": "string" }
+      }
+    }
+  }
+}

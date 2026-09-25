@@ -883,6 +883,21 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 
 ---
 
+## Fase 39 — Grafo de prerrequisitos **[mixta]**
+
+**Entregables:** `@/references/03-knowledge/concept-graph.md` + script.
+
+**Detalle:** construcción desde conceptos usados antes de definirse; detección y resolución de ciclos; rutas de lectura por objetivo; exportación a diagrama.
+
+**Criterios:**
+- [x] El grafo no tiene ciclos sin resolver.
+- [x] Todo concepto usado está definido o declarado como prerrequisito.
+- [x] Se generan al menos dos rutas por dominio.
+
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/03-knowledge/concept-graph.md` (200 líneas / 230, 11 §§, español, INV-06). §3 modelo (nodos desde `definition` units, aristas desde `cross-reference` con `content.relation: "prerequisite"` + `content.from_concept` + `content.target_concept`); §4 R1–R8 reglas cerradas; §5 shape JSON; §6 4 subcomandos; §7 detección DFS iterativo white/gray/black; §8 Dijkstra (shortest) + DFS con poda (broadest); §9 Mermaid `flowchart LR` con `-->|prereq|`. CLI en `skill/notemartin-study-notes/scripts/util/concept_graph.py` (~634 líneas, Python 3.9+ stdlib puro; PyYAML opcional; `jsonschema` opcional) con 4 subcomandos: `build` (deriva grafo desde ledger + SDM; respeta `profile.yaml::graph.cycle_policy`; exit 1 con `block` ante ciclo), `routes [--goal --domain --strategy]` (imprime las rutas calculadas), `export --out-dir` (genera `<dir>/<domain>/graph.mmd` con sintaxis Mermaid), `check [--strict]` (detecta ciclos y dangling sin escribir). Comparte `atomic_write_json` con `ledger.py` (F38) vía `scripts/util/_io.py` (refactor menor; sin regresión). Schema `schemas/concept-graph.schema.json` (Draft 2020-12, `schema_version: "1.0.0"` const, `additionalProperties: false` en root y en cada `$defs`; `$defs/{node,edge,cycle,route,danglingEdge}` con regex `^[a-z0-9][a-z0-9-]{0,63}$` para `concept_id`). **ADR-0003** justifica fuente única de nodos y aristas (ADR-0003 explicit `from_concept` y `term`; sin inferencia). **Eval battery** `evals/concept-graph-sample/` con `build_fixtures.py` (stdlib puro; 8 fixtures: 3 SDM, 3 ledgers pristine/cycle/orphan, 2 profiles) + 2 expected (`pristine-{nodes,edges}.json`) + `run_eval.py` con 7 sub-checks PASS: criterio 1 (sin ciclos: nodos + aristas coinciden con expected), criterio 2 (cycle_policy: `block` exit 1 + `allow` exit 0 con `cycles[]` poblado), criterio 3 (rutas shortest + broadest + Mermaid export con `flowchart LR` y `-->|prereq|`), extra (aristas colgantes: WARNING + `dangling_edges[]`), no-regresión F15/F37/F38. **Wirings**: `scripts/README.md` con tres entradas nuevas (`util/concept_graph.py`, `util/_io.py`, fila `util/` actualizada); `SKILL.md` fila `[pendiente F39]` → `F39` con referencias a F38/F37; `references/03-knowledge/README.md` `concept-graph.md` listado y fila `Produce` actualizada; `docs/adr/README.md` índice con ADR-0003. Verificación: `wc -l` 200 ≤ 230, 11 §§, 4 subcomandos en `--help`, schema JSON válido, eval PASS los 7 sub-checks, no-regresión F15/F37/F38 OK.
+
+---
+
 ## Fase 38 — Ledger operativo **[mixta] [núcleo]**
 
 **Entregables:** `@/scripts/util/ledger.py` + reporte.

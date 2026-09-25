@@ -1,0 +1,2 @@
+graph:
+  cycle_policy: allow

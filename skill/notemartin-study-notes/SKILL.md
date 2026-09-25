@@ -103,7 +103,7 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | Clasificación de regiones editoriales (Nota, Precaución, Ejemplo, Consejo, Novedad, Obsoleto) y convenciones por vendor | `references/02-source-model/editorial-semantics.md` | `references/03-knowledge/` (las cajas son prerrequisito del ledger si el bloque es una unidad) | F35 |
 | Extracción de unidades de información en L2 | `references/03-knowledge/information-units.md` | `references/04-authoring/` (no decidir tipo de nota antes de tener unidades) | F37 |
 | Cualquier operación sobre el Coverage Ledger (init, add, mark, report, check, manifest) | `references/03-knowledge/ledger-operativo.md` | `references/03-knowledge/ledger.md` (forma e invariantes), `references/03-knowledge/information-units.md` (taxonomía R1–R5) | F38 |
-| Construcción del grafo de prerrequisitos | `references/03-knowledge/concept-graph.md` | `references/04-authoring/` | [pendiente F39] |
+| Construcción del grafo de prerrequisitos (build, routes, export, check) | `references/03-knowledge/concept-graph.md` | `references/03-knowledge/ledger-operativo.md` (corre tras F38), `references/03-knowledge/information-units.md` (fuente de aristas) | F39 |
 | Resolución de términos canónicos y colisiones | `references/03-knowledge/terminology.md` | `references/04-authoring/` | [pendiente F40] |
 | Detección de contradicciones u obsolescencia | `references/03-knowledge/conflicts.md` | `references/04-authoring/` | [pendiente F41] |
 | División del trabajo en notas (Note Plan) | `references/03-knowledge/note-plan.md` | `references/04-authoring/` hasta cerrar el plan | [pendiente F44] |

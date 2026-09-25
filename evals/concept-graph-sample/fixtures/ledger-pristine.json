@@ -1,0 +1,199 @@
+{
+  "schema_version": "2.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "entries": [
+    {
+      "unit_id": "u_d_01",
+      "source_block_ids": [
+        "aaaaaaaaaaaa"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "term": "transaccion",
+        "text": "Una transacción es una unidad atómica de trabajo."
+      }
+    },
+    {
+      "unit_id": "u_d_02",
+      "source_block_ids": [
+        "bbbbbbbbbbbb"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "term": "mvcc",
+        "text": "MVCC es control de concurrencia multiversión."
+      }
+    },
+    {
+      "unit_id": "u_d_03",
+      "source_block_ids": [
+        "cccccccccccc"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "term": "wal",
+        "text": "WAL es el registro de escritura anticipada."
+      }
+    },
+    {
+      "unit_id": "u_d_04",
+      "source_block_ids": [
+        "dddddddddddd"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "term": "vista-materializada",
+        "text": "Una vista materializada almacena el resultado de una consulta."
+      }
+    },
+    {
+      "unit_id": "u_d_05",
+      "source_block_ids": [
+        "eeeeeeeeeeee"
+      ],
+      "source_section_path": "/ch02/transactions",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "term": "acid",
+        "text": "ACID son las propiedades de una transacción."
+      }
+    },
+    {
+      "unit_id": "u_d_06",
+      "source_block_ids": [
+        "ffffffffffff"
+      ],
+      "source_section_path": "/ch02/transactions",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "term": "aislamiento",
+        "text": "El aislamiento es el grado de interferencia entre transacciones."
+      }
+    },
+    {
+      "unit_id": "u_x_01",
+      "source_block_ids": [
+        "111111111111"
+      ],
+      "source_section_path": "/ch02/transactions",
+      "type": "cross-reference",
+      "criticality": "context",
+      "target_note": null,
+      "state": "written",
+      "content": {
+        "relation": "prerequisite",
+        "from_concept": "acid",
+        "target_concept": "mvcc",
+        "target": "/ch01/intro"
+      }
+    },
+    {
+      "unit_id": "u_x_02",
+      "source_block_ids": [
+        "222222222222"
+      ],
+      "source_section_path": "/ch02/transactions",
+      "type": "cross-reference",
+      "criticality": "context",
+      "target_note": null,
+      "state": "written",
+      "content": {
+        "relation": "prerequisite",
+        "from_concept": "acid",
+        "target_concept": "wal",
+        "target": "/ch01/intro"
+      }
+    },
+    {
+      "unit_id": "u_x_03",
+      "source_block_ids": [
+        "333333333333"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "cross-reference",
+      "criticality": "context",
+      "target_note": null,
+      "state": "written",
+      "content": {
+        "relation": "prerequisite",
+        "from_concept": "vista-materializada",
+        "target_concept": "wal",
+        "target": "/ch01/intro"
+      }
+    },
+    {
+      "unit_id": "u_x_04",
+      "source_block_ids": [
+        "444444444444"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "cross-reference",
+      "criticality": "context",
+      "target_note": null,
+      "state": "written",
+      "content": {
+        "relation": "prerequisite",
+        "from_concept": "vista-materializada",
+        "target_concept": "transaccion",
+        "target": "/ch01/intro"
+      }
+    },
+    {
+      "unit_id": "u_x_05",
+      "source_block_ids": [
+        "555555555555"
+      ],
+      "source_section_path": "/ch02/transactions",
+      "type": "cross-reference",
+      "criticality": "context",
+      "target_note": null,
+      "state": "written",
+      "content": {
+        "relation": "prerequisite",
+        "from_concept": "aislamiento",
+        "target_concept": "transaccion",
+        "target": "/ch01/intro"
+      }
+    },
+    {
+      "unit_id": "u_x_lateral",
+      "source_block_ids": [
+        "666666666666"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "cross-reference",
+      "criticality": "context",
+      "target_note": null,
+      "state": "written",
+      "content": {
+        "target": "/bibliography",
+        "label": "Ver refs."
+      }
+    }
+  ]
+}

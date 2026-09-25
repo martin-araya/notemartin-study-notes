@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "format": "pdf",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL",
+    "language": "en"
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Introduction",
+      "blocks": []
+    },
+    {
+      "section_path": "/ch02/transactions",
+      "title": "Transactions",
+      "blocks": []
+    }
+  ]
+}

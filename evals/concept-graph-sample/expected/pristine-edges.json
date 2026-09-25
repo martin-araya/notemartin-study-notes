@@ -1,0 +1,22 @@
+[
+  [
+    "acid",
+    "mvcc"
+  ],
+  [
+    "acid",
+    "wal"
+  ],
+  [
+    "aislamiento",
+    "transaccion"
+  ],
+  [
+    "vista-materializada",
+    "transaccion"
+  ],
+  [
+    "vista-materializada",
+    "wal"
+  ]
+]
