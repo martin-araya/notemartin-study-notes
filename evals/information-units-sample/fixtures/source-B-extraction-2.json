@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "02-postgres-intro",
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "agent": "B",
+  "units": [
+    {
+      "unit_id": "u_e85ef88ef550",
+      "source_block_ids": [
+        "e85ef88ef550"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "definition",
+      "content": {
+        "text": "Una transacción es una unidad atómica de trabajo."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_9f4dcc3668d4",
+      "source_block_ids": [
+        "9f4dcc3668d4"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "parameter",
+      "content": {
+        "name": "default_transaction_isolation",
+        "description": "Nivel de aislamiento por defecto."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R1",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_56b755e93e07",
+      "source_block_ids": [
+        "56b755e93e07"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "default",
+      "content": {
+        "name": "default_transaction_isolation",
+        "value": "read committed"
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R2",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_c5d2b63b9c8b",
+      "source_block_ids": [
+        "c5d2b63b9c8b"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "error-code",
+      "content": {
+        "code": "EIO",
+        "message": "Error de E/S de bajo nivel."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R3",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_1c766c6e5d8d",
+      "source_block_ids": [
+        "1c766c6e5d8d"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "warning",
+      "content": {
+        "text": "WARNING: las transacciones largas pueden bloquear el VACUUM.",
+        "severity": "caution"
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R4",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_5fb0c4104100",
+      "source_block_ids": [
+        "5fb0c4104100"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "formula",
+      "content": {
+        "latex": "n = r \\cdot w",
+        "numbered": true
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R5",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_ace758c71bae",
+      "source_block_ids": [
+        "ace758c71bae"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "example",
+      "content": {
+        "text": "Ejemplo: BEGIN; COMMIT; define una transacción vacía."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_4b7aec4bd9c4",
+      "source_block_ids": [
+        "4b7aec4bd9c4"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "mechanism",
+      "content": {
+        "text": "El aislamiento se implementa mediante MVCC."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_ef359237bdc2",
+      "source_block_ids": [
+        "ef359237bdc2"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "step",
+      "content": {
+        "ordinal": 1,
+        "text": "Iniciar la transacción con BEGIN."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_458aab823850",
+      "source_block_ids": [
+        "458aab823850"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "constraint",
+      "content": {
+        "text": "Una transacción no puede anidar BEGIN explícito."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_45d8429c35c9",
+      "source_block_ids": [
+        "45d8429c35c9"
+      ],
+      "source_section_path": "/ch01/intro",
+      "type": "tradeoff",
+      "content": {
+        "text": "Mayor aislamiento reduce anomalías pero baja el rendimiento."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    }
+  ]
+}

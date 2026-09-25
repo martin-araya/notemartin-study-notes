@@ -101,7 +101,7 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | Documento sin numeración o con numeración inconsistente | `references/02-source-model/anchors.md` | `references/03-knowledge/` (las anclas son prerrequisito del ledger) | F32 |
 | Extracción de metadatos editoriales de la fuente (version, vendor, ISBN…) y propagación read/inferred | `references/02-source-model/provenance.md` | `references/04-authoring/` (no redactar antes de tener la procedencia) | F34 |
 | Clasificación de regiones editoriales (Nota, Precaución, Ejemplo, Consejo, Novedad, Obsoleto) y convenciones por vendor | `references/02-source-model/editorial-semantics.md` | `references/03-knowledge/` (las cajas son prerrequisito del ledger si el bloque es una unidad) | F35 |
-| Extracción de unidades de información en L2 | `references/03-knowledge/information-units.md` | `references/04-authoring/` (no decidir tipo de nota antes de tener unidades) | [pendiente F37] |
+| Extracción de unidades de información en L2 | `references/03-knowledge/information-units.md` | `references/04-authoring/` (no decidir tipo de nota antes de tener unidades) | F37 |
 | Cualquier operación sobre el Coverage Ledger | `references/03-knowledge/ledger.md` | `references/04-authoring/`, `references/05-note-types/` | [pendiente F15] |
 | Construcción del grafo de prerrequisitos | `references/03-knowledge/concept-graph.md` | `references/04-authoring/` | [pendiente F39] |
 | Resolución de términos canónicos y colisiones | `references/03-knowledge/terminology.md` | `references/04-authoring/` | [pendiente F40] |

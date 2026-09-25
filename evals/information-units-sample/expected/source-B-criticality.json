@@ -1,0 +1,32 @@
+[
+  {
+    "unit_id": "u_9f4dcc3668d4",
+    "block_id": "9f4dcc3668d4",
+    "type": "parameter",
+    "rationale": "R1"
+  },
+  {
+    "unit_id": "u_56b755e93e07",
+    "block_id": "56b755e93e07",
+    "type": "default",
+    "rationale": "R2"
+  },
+  {
+    "unit_id": "u_c5d2b63b9c8b",
+    "block_id": "c5d2b63b9c8b",
+    "type": "error-code",
+    "rationale": "R3"
+  },
+  {
+    "unit_id": "u_1c766c6e5d8d",
+    "block_id": "1c766c6e5d8d",
+    "type": "warning",
+    "rationale": "R4"
+  },
+  {
+    "unit_id": "u_5fb0c4104100",
+    "block_id": "5fb0c4104100",
+    "type": "formula",
+    "rationale": "R5"
+  }
+]

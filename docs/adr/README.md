@@ -32,6 +32,6 @@ Qué se gana, qué se pierde, qué queda atado a esta decisión.
 
 ## ADRs ya registradas
 
-_(vacío al cierre de Fase 5)_
+- `ADR-0001-units-closed-enum.md` — F37: enum cerrado, criticidad derivada, fusión prohibida en must-keep.
 
 Las decisiones cerradas hasta ahora viven en `skills/AGENT.md` §8. Cuando una de ellas se reabre formalmente, se promueve a ADR aquí.

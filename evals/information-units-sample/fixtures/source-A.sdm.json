@@ -1,0 +1,460 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "01-postgres-config",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "format": "pdf",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL",
+    "language": "en"
+  },
+  "sections": [
+    {
+      "section_path": "/ch02/configuration",
+      "title": "Configuration Parameters",
+      "blocks": [
+        {
+          "id": "d7aeffd6ddf6",
+          "type": "prose",
+          "content": {
+            "text": "Este capítulo describe los parámetros principales del servidor PostgreSQL."
+          },
+          "anchor": {
+            "page": 10,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "7039b7f8071c",
+          "type": "parameter",
+          "content": {
+            "name": "shared_buffers",
+            "description": "Tamaño en MB del caché compartido."
+          },
+          "anchor": {
+            "page": 10,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "52bb2940530c",
+          "type": "parameter",
+          "content": {
+            "name": "work_mem",
+            "description": "Memoria asignada por operación de ordenamiento y hash antes de volcar a disco."
+          },
+          "anchor": {
+            "page": 10,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "34b74247e687",
+          "type": "parameter",
+          "content": {
+            "name": "maintenance_work_mem",
+            "description": "Memoria usada por operaciones de mantenimiento como VACUUM."
+          },
+          "anchor": {
+            "page": 10,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "addbe8889fb7",
+          "type": "parameter",
+          "content": {
+            "name": "effective_cache_size",
+            "description": "Estimación del tamaño del caché del sistema de archivos."
+          },
+          "anchor": {
+            "page": 11,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "e35b79b8385b",
+          "type": "parameter",
+          "content": {
+            "name": "wal_buffers",
+            "description": "Memoria para el Write-Ahead Log antes de volcar a disco."
+          },
+          "anchor": {
+            "page": 11,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "613a98a00c0b",
+          "type": "parameter",
+          "content": {
+            "name": "max_connections",
+            "description": "Número máximo de conexiones concurrentes al servidor."
+          },
+          "anchor": {
+            "page": 11,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "89492e042905",
+          "type": "default",
+          "content": {
+            "name": "shared_buffers",
+            "value": "128 MB"
+          },
+          "anchor": {
+            "page": 11,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "846b56fe6f87",
+          "type": "default",
+          "content": {
+            "name": "max_connections",
+            "value": "100"
+          },
+          "anchor": {
+            "page": 12,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "a7f1555494fa",
+          "type": "default",
+          "content": {
+            "name": "wal_buffers",
+            "value": "16 MB"
+          },
+          "anchor": {
+            "page": 12,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "2821ea2840b7",
+          "type": "definition",
+          "content": {
+            "text": "Una vista materializada es una relación almacenada que materializa el resultado de una consulta."
+          },
+          "anchor": {
+            "page": 12,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "2f24475ba101",
+          "type": "mechanism",
+          "content": {
+            "text": "El WAL previene la pérdida de datos porque cada cambio se fsyncea antes del COMMIT."
+          },
+          "anchor": {
+            "page": 12,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "f39807d1a9c4",
+          "type": "formula",
+          "content": {
+            "latex": "t = O(n \\log n)",
+            "numbered": true,
+            "label": "eq:heapsort"
+          },
+          "anchor": {
+            "page": 13,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "fc6f56899fe7",
+          "type": "formula",
+          "content": {
+            "latex": "h(x) = (ax + b) \\bmod p",
+            "numbered": false
+          },
+          "anchor": {
+            "page": 13,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "5203c3f8506c",
+          "type": "error-code",
+          "content": {
+            "code": "EADDRINUSE",
+            "message": "El puerto ya está en uso."
+          },
+          "anchor": {
+            "page": 13,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "2641413c0f2c",
+          "type": "error-code",
+          "content": {
+            "code": "ORA-00904",
+            "message": "Identificador no válido en la cláusula."
+          },
+          "anchor": {
+            "page": 13,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "b4f6ede3c12a",
+          "type": "warning",
+          "content": {
+            "text": "WARNING: este comando borra datos sin pedir confirmación.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 14,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "7d43b33b75ef",
+          "type": "warning",
+          "content": {
+            "text": "WARNING: una clave primaria no puede contener NULL.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 14,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "f5d3efeb286d",
+          "type": "step",
+          "content": {
+            "ordinal": 1,
+            "text": "Verificar el hash con `sha256sum archivo.iso`."
+          },
+          "anchor": {
+            "page": 14,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "db0b7edf81a6",
+          "type": "step",
+          "content": {
+            "ordinal": 2,
+            "text": "Montar la imagen con `mount -o loop archivo.iso /mnt`."
+          },
+          "anchor": {
+            "page": 14,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "98e2c9f02ebe",
+          "type": "example",
+          "content": {
+            "text": "Ejemplo: SELECT pg_reload_conf(); recarga la configuración sin reiniciar."
+          },
+          "anchor": {
+            "page": 15,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "5730987a8ff1",
+          "type": "constraint",
+          "content": {
+            "text": "Una clave primaria no puede contener NULL."
+          },
+          "anchor": {
+            "page": 15,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "a297cf2866ab",
+          "type": "syntax-rule",
+          "content": {
+            "rule": "Los identificadores válidos siguen `[a-zA-Z_][a-zA-Z0-9_]*`.",
+            "ebnf": "<identificador> ::= [a-zA-Z_][a-zA-Z0-9_]*"
+          },
+          "anchor": {
+            "page": 15,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "dee6fd33c4e7",
+          "type": "version-note",
+          "content": {
+            "text": "Desde PostgreSQL 13, wal_keep_size reemplaza a wal_keep_segments.",
+            "version_introduced": "13"
+          },
+          "anchor": {
+            "page": 15,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "7f1f26612b67",
+          "type": "tradeoff",
+          "content": {
+            "text": "Usar un índice acelera lecturas pero ralentiza escrituras."
+          },
+          "anchor": {
+            "page": 16,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "fd590ac3abbd",
+          "type": "cross-reference",
+          "content": {
+            "target": "/ch04/replication",
+            "label": "Ver §4 sobre replicación."
+          },
+          "anchor": {
+            "page": 16,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "9d7d8551da88",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio adicional sin unidades nuevas (26)."
+          },
+          "anchor": {
+            "page": 16,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "9da9a804dda8",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio adicional sin unidades nuevas (27)."
+          },
+          "anchor": {
+            "page": 16,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "f01eda121a43",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio adicional sin unidades nuevas (28)."
+          },
+          "anchor": {
+            "page": 17,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "59be93fe3973",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio adicional sin unidades nuevas (29)."
+          },
+          "anchor": {
+            "page": 17,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

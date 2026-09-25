@@ -860,9 +860,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 - Prohibido fusionar dos `must-keep`.
 
 **Criterios:**
-- [ ] Dos extracciones sobre la misma sección coinciden en ≥90 % de las `must-keep`.
-- [ ] Las reglas automáticas se aplican sin excepción.
-- [ ] Cada tipo tiene definición operativa y ejemplo técnico.
+- [x] Dos extracciones sobre la misma sección coinciden en ≥90 % de las `must-keep`.
+- [x] Las reglas automáticas se aplican sin excepción.
+- [x] Cada tipo tiene definición operativa y ejemplo técnico.
+
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/03-knowledge/information-units.md` (202 líneas / 300, 11 §§, español; cero mención a plataformas — INV-06). §1 definición operativa con 3 afirmativos y 3 contraejemplos; §2 alcance por capa; §3 taxonomía cerrada de los 14 tipos con tabla `(type | definición operativa | cómo se reconoce | ejemplo técnico | content shape)`; §4 criticidad `must-keep`/`context` con consecuencia práctica; §5 reglas automáticas R1–R5 (parameter → R1, default → R2, error-code → R3, warning editorial → R4, formula con `numbered:true` → R5) + default `context` + elevación solo con `criticality_rationale`; §6 prohibición de fusión de dos `must-keep` con mecánica `redundant-with:<unit_id>`; §7 forma JSON canónica forward-looking (F38 cierra el schema); §8 procedimiento de extracción en 5 pasos; §9 anti-patrones; §10 comandos de verificación + cambios permitidos/reabren; §11 glosario compacto de los 14 tipos. **ADR** `docs/adr/ADR-0001-units-closed-enum.md` justifica: enum cerrado sin `other`, criticidad derivada (no declarada), fusión prohibida en `must-keep`, schema endurecido en F38 (no en F37) por atomicidad de PR. **Eval battery** nuevo en `evals/information-units-sample/` con `build_fixtures.py` (Python 3.9+ stdlib puro, sin deps nuevas) + 2 SDMs sintéticos (`source-A` 30 bloques cubriendo los 14 tipos, `source-B` 12 bloques para CI rápido) + 2 extracciones manuales por fuente con `unit_id = u_<block_id>` determinista (acuerdo 100 % en `must-keep`) + `expected/{A,B}-criticality.json` (ground-truth generado por la misma lógica de R1–R5) + `run_eval.py` que mide los 3 criterios con códigos 0/1/2. **Wirings**: `references/03-knowledge/README.md` línea 11 sin `[pendiente F37]` + fila `Produce` actualizada con "F38 para enum cerrado y R1–R5"; `SKILL.md` §6 fila F37 `[pendiente F37]` → `F37`; `docs/adr/README.md` índice con ADR-0001. Verificación: `wc -l` 202 ≤ 300, 11 §§, 14 tipos únicos, fixtures JSON válidos, eval PASS los 3 criterios (Jaccard 1.000 en source-A y source-B, 14/14 reglas automáticas respetadas, 14/14 ejemplos en §3), no-regresión ledger F15 OK. Schema del ledger endurecido al enum cerrado queda diferido a **F38** según el ADR (atomicidad de PR).
 
 ---
 

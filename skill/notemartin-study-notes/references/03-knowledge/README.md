@@ -8,7 +8,7 @@ Cargar al construir el `knowledge/` del workdir (L2). Cada archivo se cita por s
 
 ## Estado actual
 
-- `information-units.md` `[pendiente F37]`
+- `information-units.md`
 - `ledger.md` `[pendiente F15]`
 - `concept-graph.md` `[pendiente F39]`
 - `terminology.md` `[pendiente F40]`
@@ -19,7 +19,7 @@ Cargar al construir el `knowledge/` del workdir (L2). Cada archivo se cita por s
 
 | Archivo | Lee | Produce |
 |---|---|---|
-| `information-units.md` | Agente al extraer unidades | F37 |
+| `information-units.md` | Agente al extraer unidades; F38 para enum cerrado y R1–R5 | F37 |
 | `ledger.md` | Agente y script del ledger (F38) | F15 |
 | `concept-graph.md` | Agente al construir grafo | F39 |
 | `terminology.md` | Agente al resolver términos | F40 |

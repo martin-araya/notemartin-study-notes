@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "02-postgres-intro",
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "format": "pdf",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL",
+    "language": "en"
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Introduction",
+      "blocks": [
+        {
+          "id": "e85ef88ef550",
+          "type": "definition",
+          "content": {
+            "text": "Una transacción es una unidad atómica de trabajo."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "9f4dcc3668d4",
+          "type": "parameter",
+          "content": {
+            "name": "default_transaction_isolation",
+            "description": "Nivel de aislamiento por defecto."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "56b755e93e07",
+          "type": "default",
+          "content": {
+            "name": "default_transaction_isolation",
+            "value": "read committed"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "c5d2b63b9c8b",
+          "type": "error-code",
+          "content": {
+            "code": "EIO",
+            "message": "Error de E/S de bajo nivel."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "1c766c6e5d8d",
+          "type": "warning",
+          "content": {
+            "text": "WARNING: las transacciones largas pueden bloquear el VACUUM.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "5fb0c4104100",
+          "type": "formula",
+          "content": {
+            "latex": "n = r \\cdot w",
+            "numbered": true
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "ace758c71bae",
+          "type": "example",
+          "content": {
+            "text": "Ejemplo: BEGIN; COMMIT; define una transacción vacía."
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "4b7aec4bd9c4",
+          "type": "mechanism",
+          "content": {
+            "text": "El aislamiento se implementa mediante MVCC."
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "ef359237bdc2",
+          "type": "step",
+          "content": {
+            "ordinal": 1,
+            "text": "Iniciar la transacción con BEGIN."
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "458aab823850",
+          "type": "constraint",
+          "content": {
+            "text": "Una transacción no puede anidar BEGIN explícito."
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "45d8429c35c9",
+          "type": "tradeoff",
+          "content": {
+            "text": "Mayor aislamiento reduce anomalías pero baja el rendimiento."
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "3fcf011133af",
+          "type": "cross-reference",
+          "content": {
+            "target": "/ch02/iso-levels"
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

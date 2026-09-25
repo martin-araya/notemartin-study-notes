@@ -1,0 +1,352 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "01-postgres-config",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "agent": "A",
+  "units": [
+    {
+      "unit_id": "u_7039b7f8071c",
+      "source_block_ids": [
+        "7039b7f8071c"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "parameter",
+      "content": {
+        "name": "shared_buffers",
+        "description": "Tamaño en MB del caché compartido."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R1",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_52bb2940530c",
+      "source_block_ids": [
+        "52bb2940530c"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "parameter",
+      "content": {
+        "name": "work_mem",
+        "description": "Memoria asignada por operación de ordenamiento y hash antes de volcar a disco."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R1",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_34b74247e687",
+      "source_block_ids": [
+        "34b74247e687"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "parameter",
+      "content": {
+        "name": "maintenance_work_mem",
+        "description": "Memoria usada por operaciones de mantenimiento como VACUUM."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R1",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_addbe8889fb7",
+      "source_block_ids": [
+        "addbe8889fb7"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "parameter",
+      "content": {
+        "name": "effective_cache_size",
+        "description": "Estimación del tamaño del caché del sistema de archivos."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R1",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_e35b79b8385b",
+      "source_block_ids": [
+        "e35b79b8385b"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "parameter",
+      "content": {
+        "name": "wal_buffers",
+        "description": "Memoria para el Write-Ahead Log antes de volcar a disco."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R1",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_613a98a00c0b",
+      "source_block_ids": [
+        "613a98a00c0b"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "parameter",
+      "content": {
+        "name": "max_connections",
+        "description": "Número máximo de conexiones concurrentes al servidor."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R1",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_89492e042905",
+      "source_block_ids": [
+        "89492e042905"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "default",
+      "content": {
+        "name": "shared_buffers",
+        "value": "128 MB"
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R2",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_846b56fe6f87",
+      "source_block_ids": [
+        "846b56fe6f87"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "default",
+      "content": {
+        "name": "max_connections",
+        "value": "100"
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R2",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_a7f1555494fa",
+      "source_block_ids": [
+        "a7f1555494fa"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "default",
+      "content": {
+        "name": "wal_buffers",
+        "value": "16 MB"
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R2",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_2821ea2840b7",
+      "source_block_ids": [
+        "2821ea2840b7"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "definition",
+      "content": {
+        "text": "Una vista materializada es una relación almacenada que materializa el resultado de una consulta."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_2f24475ba101",
+      "source_block_ids": [
+        "2f24475ba101"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "mechanism",
+      "content": {
+        "text": "El WAL previene la pérdida de datos porque cada cambio se fsyncea antes del COMMIT."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_f39807d1a9c4",
+      "source_block_ids": [
+        "f39807d1a9c4"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "formula",
+      "content": {
+        "latex": "t = O(n \\log n)",
+        "numbered": true,
+        "label": "eq:heapsort"
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R5",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_5203c3f8506c",
+      "source_block_ids": [
+        "5203c3f8506c"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "error-code",
+      "content": {
+        "code": "EADDRINUSE",
+        "message": "El puerto ya está en uso."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R3",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_2641413c0f2c",
+      "source_block_ids": [
+        "2641413c0f2c"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "error-code",
+      "content": {
+        "code": "ORA-00904",
+        "message": "Identificador no válido en la cláusula."
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R3",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_b4f6ede3c12a",
+      "source_block_ids": [
+        "b4f6ede3c12a"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "warning",
+      "content": {
+        "text": "WARNING: este comando borra datos sin pedir confirmación.",
+        "severity": "caution"
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R4",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_7d43b33b75ef",
+      "source_block_ids": [
+        "7d43b33b75ef"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "warning",
+      "content": {
+        "text": "WARNING: una clave primaria no puede contener NULL.",
+        "severity": "caution"
+      },
+      "criticality": "must-keep",
+      "criticality_rationale": "R4",
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_f5d3efeb286d",
+      "source_block_ids": [
+        "f5d3efeb286d"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "step",
+      "content": {
+        "ordinal": 1,
+        "text": "Verificar el hash con `sha256sum archivo.iso`."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_db0b7edf81a6",
+      "source_block_ids": [
+        "db0b7edf81a6"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "step",
+      "content": {
+        "ordinal": 2,
+        "text": "Montar la imagen con `mount -o loop archivo.iso /mnt`."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_98e2c9f02ebe",
+      "source_block_ids": [
+        "98e2c9f02ebe"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "example",
+      "content": {
+        "text": "Ejemplo: SELECT pg_reload_conf(); recarga la configuración sin reiniciar."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_5730987a8ff1",
+      "source_block_ids": [
+        "5730987a8ff1"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "constraint",
+      "content": {
+        "text": "Una clave primaria no puede contener NULL."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_a297cf2866ab",
+      "source_block_ids": [
+        "a297cf2866ab"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "syntax-rule",
+      "content": {
+        "rule": "Los identificadores válidos siguen `[a-zA-Z_][a-zA-Z0-9_]*`.",
+        "ebnf": "<identificador> ::= [a-zA-Z_][a-zA-Z0-9_]*"
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_dee6fd33c4e7",
+      "source_block_ids": [
+        "dee6fd33c4e7"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "version-note",
+      "content": {
+        "text": "Desde PostgreSQL 13, wal_keep_size reemplaza a wal_keep_segments.",
+        "version_introduced": "13"
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    },
+    {
+      "unit_id": "u_fd590ac3abbd",
+      "source_block_ids": [
+        "fd590ac3abbd"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "cross-reference",
+      "content": {
+        "target": "/ch04/replication",
+        "label": "Ver §4 sobre replicación."
+      },
+      "criticality": "context",
+      "criticality_rationale": null,
+      "state": "pending"
+    }
+  ]
+}
