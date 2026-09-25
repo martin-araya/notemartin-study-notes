@@ -1,0 +1,11 @@
+---
+title: "Parser sample — error"
+note-type: concept
+status: draft
+---
+
+# Error fixture
+
+:::unknown
+Esto debería fallar porque `unknown` no es una directiva válida.
+:::

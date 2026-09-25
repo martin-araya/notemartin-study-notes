@@ -1,0 +1,14 @@
+---
+title: "Parser sample — table"
+note-type: api-reference
+status: draft
+---
+
+# Tabla
+
+:::param-table
+| parametro | tipo | default |
+| --- | --- | --- |
+| max_connections | integer | 100 | {src:blk_a100000000001} |
+| shared_buffers | bytes | 128MB | {src:blk_a100000000002} |
+:::

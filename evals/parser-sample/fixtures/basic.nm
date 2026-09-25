@@ -1,0 +1,18 @@
+---
+title: "Parser sample — basic"
+note-type: concept
+status: draft
+---
+
+# Title
+
+Plain paragraph with `code` and *emphasis*.
+
+:::warning
+Cambiar `shared_buffers` requiere reinicio. {src:blk_a100000000001}
+:::
+
+[[term:hash-join]] es un algoritmo de PostgreSQL. {src:blk_a100000000002}
+
+- Item 1 {src:blk_a100000000003}
+- Item 2 {src:blk_a100000000004}
