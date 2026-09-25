@@ -1,0 +1,111 @@
+---
+title: "NoteMark — nota sonda de marcas inline (Fase 46)"
+note-type: probe
+tags: [type/probe, type/inline-marks-sample, f046]
+source: f046
+source-type: synthetic
+source-anchor: synthetic
+retrieved: 2026-09-25
+language: es
+coverage: full
+status: draft
+difficulty: intermediate
+review-next: none
+aliases: [probe-inline-marks]
+related:
+  - references/04-authoring/inline-marks.md
+  - references/04-authoring/notemark.md
+  - references/04-authoring/notemark.ebnf
+  - references/04-authoring/block-directives.md
+vendor: notemartin-study-notes
+product: notemartin-study-notes
+---
+
+# NoteMark — sonda de marcas inline (F46)
+
+Nota sonda que ejercita las 6 marcas inline obligatorias + sus 3 de apoyo en contexto,
+con densidad de citación 1.0 en bloques fácticos (todos los hechos del SDM ficticio
+llevan `{src:}`) y regla de primera aparición respetada (cada `[[term:x]]` aparece
+una sola vez por nota).
+
+## §1 · Configuración inicial
+
+El parámetro [[term:shared-buffers]] controla la memoria dedicada al caché de
+páginas en PostgreSQL. {src:blk_a10000010123}
+
+:::warning
+Cambiar `shared_buffers` requiere reiniciar el servidor. {src:blk_a10000020123}
+:::
+
+## §2 · Tabla de parámetros
+
+:::param-table
+| parametro | tipo | default | rango |
+| --- | --- | --- | --- |
+| max_connections | integer | 100 | 1-10000 | {src:blk_a20000010123} |
+| shared_buffers | bytes | 128MB | 8MB- | {src:blk_a20000020123} |
+| work_mem | bytes | 4MB | 64kB-2GB | {src:blk_a20000030123} |
+:::
+
+## §3 · Mensaje de error típico
+
+:::example
+```
+ERROR: out of memory
+DETAIL: Failed on request of size 67108864 in memory context "MessageContext".
+```
+{src:blk_a30000010123}
+:::
+
+## §4 · Procedimiento
+
+:::step n="1"
+### Levantar el servicio
+```bash
+systemctl start postgresql
+```
+{src:blk_a40000010123}
+:::
+
+:::step n="2"
+### Conectar al servidor
+Conectarse a `{{host}}:{{port}}` con el usuario `{{db-user}}`. {src:blk_a40000020123}
+:::
+
+## §5 · Sesión interactiva
+
+:::console
+$ psql -h {{host}} -U {{db-user}} -d {{db-name}}
+psql (16.1)
+postgres=# SELECT version();
+{src:blk_a50000010123}
+:::
+
+## §6 · Referencia cruzada
+
+Para más detalle sobre índices, ver la nota dedicada. [[note:hash-indexes]] {src:blk_a60000010123}
+
+## §7 · Analogía
+
+El optimizador de PostgreSQL funciona como un planificador de proyectos: cada
+consulta es un proyecto y el optimizador elige el orden de ejecución más barato
+según las estadísticas disponibles. {derived}
+
+## §8 · Conocimiento externo
+
+Esta analogía con sistemas de tickets como Jira es nuestra, no del libro. {external}
+
+## §9 · Atajos de teclado del lector
+
+En el editor de la base de datos, `[[kbd:Ctrl+S]]` guarda el cambio pendiente.
+
+## §10 · Texto eliminado
+
+Esta sección documenta la sintaxis obsoleta ~~`SELECT ... FOR UPDATE NOWAIT`~~ que
+fue reemplazada por SKIP LOCKED en PostgreSQL 9.5.
+
+## §11 · Nota al pie
+
+Este capítulo corresponde al manual de PostgreSQL 16.[^fn1]
+
+[^fn1]: [[fn:postgres-manual-16]] PostgreSQL 16 Official Documentation, chapter 14.
