@@ -15,7 +15,7 @@ Cargar al construir el `knowledge/` del workdir (L2). Cada archivo se cita por s
 - `terminology.md`
 - `conflicts.md` `[pendiente F41]`
 - `conflicts.md`
-- `note-plan.md` `[pendiente F44]`
+- `note-plan.md`
 
 ## Quién lee / quién produce
 
@@ -28,4 +28,5 @@ Cargar al construir el `knowledge/` del workdir (L2). Cada archivo se cita por s
 | `terminology.md` | Agente en L2 al construir y mantener glosario; F44 note-plan; F43 auditoría; F118 evals | F40 |
 | `conflicts.md` | Agente al detectar contradicciones | F41 |
 | `conflicts.md` | Agente en L2/L3 al detectar y documentar contradicciones; F43 auditoría; F118 evals | F41 |
-| `note-plan.md` | Agente al dividir el trabajo | F44 |
+| `conflicts.md` | Agente en L2/L3 al detectar y documentar contradicciones; F43 auditoría; F118 evals | F41 |
+| `note-plan.md` | Agente en L2 al dividir el trabajo; L3 (F45-F51) para redactar; F43 auditoría de cobertura; F118 evals | F44 |

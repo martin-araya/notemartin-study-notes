@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vendor": "PGDG",
+    "product": "PostgreSQL"
+  },
+  "notes": [
+    {
+      "note_id": "postgres-config",
+      "type": "configuration",
+      "title": "Postgres Config",
+      "unit_ids": [
+        "u_001",
+        "u_002",
+        "u_003",
+        "u_004"
+      ],
+      "block_ids": [
+        "214c586b7c7a"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-concept",
+      "type": "concept",
+      "title": "Postgres Concept",
+      "unit_ids": [
+        "u_005",
+        "u_006",
+        "u_007"
+      ],
+      "block_ids": [
+        "10024d1dcd1f"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-procedure",
+      "type": "procedure",
+      "title": "Postgres Procedure",
+      "unit_ids": [
+        "u_008",
+        "u_009",
+        "u_010"
+      ],
+      "block_ids": [
+        "e5c3bd0b4cd8"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    }
+  ],
+  "metadata": {
+    "total_must_keep": 10,
+    "assigned_must_keep": 10,
+    "unassigned_unit_ids": [],
+    "total_units": 10,
+    "total_blocks": 3,
+    "notes_planned": 3,
+    "threshold_exceeded": false,
+    "user_approval_required": false
+  }
+}

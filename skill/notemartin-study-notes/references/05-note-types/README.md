@@ -29,3 +29,7 @@ Los 15 archivos están pendientes:
 ## Quién lee / quién produce
 
 El agente lee el archivo del tipo elegido. Cada fase `F78`-`F92` produce su archivo.
+
+## Referencia cruzada
+
+Estos 15 tipos son los valores cerrados del campo `notes[].type` en `knowledge/note-plan.json` (F44, `references/03-knowledge/note-plan.md` §3). El plan asigna unidades del ledger a uno de estos tipos siguiendo las reglas de división semántica (F44 §4) y la resolución de colisiones (F44 §5).

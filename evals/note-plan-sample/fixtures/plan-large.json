@@ -1,0 +1,165 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vendor": "PGDG",
+    "product": "PostgreSQL"
+  },
+  "notes": [
+    {
+      "note_id": "postgres-note-0",
+      "type": "configuration",
+      "title": "Postgres Note 0",
+      "unit_ids": [
+        "u_000_00",
+        "u_000_01",
+        "u_000_02",
+        "u_000_03",
+        "u_000_04",
+        "u_mk_00"
+      ],
+      "block_ids": [
+        "820c894b632c"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-note-1",
+      "type": "configuration",
+      "title": "Postgres Note 1",
+      "unit_ids": [
+        "u_001_00",
+        "u_001_01",
+        "u_001_02",
+        "u_001_03",
+        "u_001_04",
+        "u_mk_01"
+      ],
+      "block_ids": [
+        "214c586b7c7a"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-note-2",
+      "type": "configuration",
+      "title": "Postgres Note 2",
+      "unit_ids": [
+        "u_002_00",
+        "u_002_01",
+        "u_002_02",
+        "u_002_03",
+        "u_002_04",
+        "u_mk_02"
+      ],
+      "block_ids": [
+        "4614950f2c64"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-note-3",
+      "type": "configuration",
+      "title": "Postgres Note 3",
+      "unit_ids": [
+        "u_003_00",
+        "u_003_01",
+        "u_003_02",
+        "u_003_03",
+        "u_003_04",
+        "u_mk_03"
+      ],
+      "block_ids": [
+        "c3d2f39b62df"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-note-4",
+      "type": "configuration",
+      "title": "Postgres Note 4",
+      "unit_ids": [
+        "u_004_00",
+        "u_004_01",
+        "u_004_02",
+        "u_004_03",
+        "u_004_04",
+        "u_mk_04"
+      ],
+      "block_ids": [
+        "410a2e35ac9f"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-note-5",
+      "type": "configuration",
+      "title": "Postgres Note 5",
+      "unit_ids": [
+        "u_005_00",
+        "u_005_01",
+        "u_005_02",
+        "u_005_03",
+        "u_005_04",
+        "u_mk_05"
+      ],
+      "block_ids": [
+        "b74388f6f673"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    }
+  ],
+  "metadata": {
+    "total_must_keep": 36,
+    "assigned_must_keep": 36,
+    "unassigned_unit_ids": [],
+    "total_units": 36,
+    "total_blocks": 6,
+    "notes_planned": 6,
+    "threshold_exceeded": true,
+    "user_approval_required": true
+  }
+}

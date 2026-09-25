@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/note-plan.schema.json",
+  "title": "Note Plan",
+  "description": "Contrato L2 → L3 (Fase 44): divide el corpus en notas asignando unidades del ledger a tipos cerrados (F78-F92). Documento normativo: references/03-knowledge/note-plan.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "notes", "metadata"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "vendor": { "type": ["string", "null"] },
+        "product": { "type": ["string", "null"] }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/note" }
+    },
+    "metadata": { "$ref": "#/$defs/metadata" }
+  },
+  "$defs": {
+    "note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["note_id", "type", "title", "unit_ids", "block_ids", "destination", "estimated_size"],
+      "properties": {
+        "note_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$",
+          "description": "Slug kebab-case único; usado como target_note en el ledger."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "concept",
+            "api-reference",
+            "procedure",
+            "configuration",
+            "error-troubleshooting",
+            "architecture",
+            "syntax",
+            "data-model",
+            "chapter-digest",
+            "comparison",
+            "version-delta",
+            "glossary-term",
+            "cheatsheet",
+            "index-moc",
+            "practice"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "unit_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "block_ids": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[0-9a-f]{12}$" }
+        },
+        "depends_on": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$" }
+        },
+        "destination": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "estimated_size": {
+          "type": "string",
+          "enum": ["small", "medium", "large"]
+        },
+        "rationale": { "type": "string" },
+        "collision_with": {
+          "type": ["string", "null"],
+          "pattern": "^([a-z0-9][a-z0-9_-]{0,63}|null)$"
+        },
+        "collision_decision": {
+          "type": ["string", "null"],
+          "enum": ["reuse", "new", null]
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total_must_keep",
+        "assigned_must_keep",
+        "total_units",
+        "notes_planned",
+        "threshold_exceeded",
+        "user_approval_required"
+      ],
+      "properties": {
+        "total_must_keep": { "type": "integer", "minimum": 0 },
+        "assigned_must_keep": { "type": "integer", "minimum": 0 },
+        "unassigned_unit_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "total_units": { "type": "integer", "minimum": 0 },
+        "total_blocks": { "type": "integer", "minimum": 0 },
+        "notes_planned": { "type": "integer", "minimum": 0 },
+        "threshold_exceeded": { "type": "boolean" },
+        "user_approval_required": { "type": "boolean" }
+      }
+    }
+  }
+}

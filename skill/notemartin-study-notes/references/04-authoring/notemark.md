@@ -60,6 +60,9 @@ Cada nodo del Note IR (Fase 14) tiene exactamente una sintaxis NoteMark. 20 nodo
 | `question` | `:::question` … `:::question`. |
 | `step` | `:::step` … `:::step`. |
 | `parameter-table` | `:::param-table` con tabla GFM dentro. |
+| `contradiction` | `:::contradiction id="c_001"` (apunta al registry `knowledge/conflicts.json`; Fase 41). |
+| `discrepancy` | `:::discrepancy source-says="X" model-says="Y"` (inline diff fuente vs modelo; Fase 41). |
+| `derived` | `:::derived` … `:::derived` (síntesis, analogías o diagramas propios del agente basados en la fuente; Fase 42). |
 
 ### 5.2 Inline (13)
 
@@ -157,6 +160,16 @@ Hecho externo al documento procesado (no respaldado por el SDM).
 Esta analogía con Git es nuestra, no del libro. {external}
 :::
 
+### :::derived
+Síntesis, analogía o diagrama del agente basado en la fuente. Nivel intermedio entre `source` (default, sin tag) y `external` (fuera de la fuente).
+````
+:::derived
+Diagrama que resume la arquitectura descrita en /ch02/intro:
+```mermaid
+flowchart LR
+    A[Cliente] --> B[Servidor]
+```
+:::
 ### :::collapsible
 Bloque plegable. Admite heading interno opcional.
 ````

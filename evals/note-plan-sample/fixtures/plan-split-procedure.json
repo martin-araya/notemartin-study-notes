@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vendor": "PGDG",
+    "product": "PostgreSQL"
+  },
+  "notes": [
+    {
+      "note_id": "postgres-step1",
+      "type": "procedure",
+      "title": "Postgres Step1",
+      "unit_ids": [
+        "u_001"
+      ],
+      "block_ids": [
+        "214c586b7c7a"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-step2",
+      "type": "procedure",
+      "title": "Postgres Step2",
+      "unit_ids": [
+        "u_002"
+      ],
+      "block_ids": [
+        "4614950f2c64"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-other",
+      "type": "concept",
+      "title": "Postgres Other",
+      "unit_ids": [
+        "u_003"
+      ],
+      "block_ids": [
+        "10024d1dcd1f"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    }
+  ],
+  "metadata": {
+    "total_must_keep": 3,
+    "assigned_must_keep": 3,
+    "unassigned_unit_ids": [],
+    "total_units": 3,
+    "total_blocks": 3,
+    "notes_planned": 3,
+    "threshold_exceeded": false,
+    "user_approval_required": false
+  }
+}

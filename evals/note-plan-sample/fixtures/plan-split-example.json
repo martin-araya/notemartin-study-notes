@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vendor": "PGDG",
+    "product": "PostgreSQL"
+  },
+  "notes": [
+    {
+      "note_id": "postgres-concept1",
+      "type": "concept",
+      "title": "Postgres Concept1",
+      "unit_ids": [
+        "u_definition_001"
+      ],
+      "block_ids": [
+        "214c586b7c7a"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "definición",
+      "collision_with": null,
+      "collision_decision": null
+    },
+    {
+      "note_id": "postgres-other",
+      "type": "procedure",
+      "title": "Postgres Other",
+      "unit_ids": [
+        "u_example_002"
+      ],
+      "block_ids": [
+        "4614950f2c64"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "ejemplo (debería ir con u_definition_001)",
+      "collision_with": null,
+      "collision_decision": null
+    }
+  ],
+  "metadata": {
+    "total_must_keep": 2,
+    "assigned_must_keep": 2,
+    "unassigned_unit_ids": [],
+    "total_units": 2,
+    "total_blocks": 2,
+    "notes_planned": 2,
+    "threshold_exceeded": false,
+    "user_approval_required": false
+  }
+}

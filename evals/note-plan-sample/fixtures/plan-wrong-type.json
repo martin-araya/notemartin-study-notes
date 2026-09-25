@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vendor": "PGDG",
+    "product": "PostgreSQL"
+  },
+  "notes": [
+    {
+      "note_id": "postgres-config",
+      "type": "wrong-type-not-in-enum",
+      "title": "Postgres Config",
+      "unit_ids": [
+        "u_001"
+      ],
+      "block_ids": [
+        "214c586b7c7a"
+      ],
+      "depends_on": [],
+      "destination": [
+        "obsidian"
+      ],
+      "estimated_size": "small",
+      "rationale": "test rationale",
+      "collision_with": null,
+      "collision_decision": null
+    }
+  ],
+  "metadata": {
+    "total_must_keep": 1,
+    "assigned_must_keep": 1,
+    "unassigned_unit_ids": [],
+    "total_units": 1,
+    "total_blocks": 1,
+    "notes_planned": 1,
+    "threshold_exceeded": false,
+    "user_approval_required": false
+  }
+}
