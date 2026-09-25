@@ -1,0 +1,99 @@
+{
+  "schema_version": "2.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "entries": [
+    {
+      "unit_id": "u_001",
+      "source_block_ids": [
+        "084a7571b285"
+      ],
+      "source_section_path": "/ch02/config",
+      "type": "parameter",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "name": "shared_buffers",
+        "description": "Tamaño del caché."
+      }
+    },
+    {
+      "unit_id": "u_002",
+      "source_block_ids": [
+        "5754d3f93b0b"
+      ],
+      "source_section_path": "/ch02/config",
+      "type": "default",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "name": "shared_buffers",
+        "value": "128 MB"
+      }
+    },
+    {
+      "unit_id": "u_003",
+      "source_block_ids": [
+        "f00173180864"
+      ],
+      "source_section_path": "/ch02/config",
+      "type": "error-code",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "code": "EADDRINUSE",
+        "message": "Puerto en uso."
+      }
+    },
+    {
+      "unit_id": "u_004",
+      "source_block_ids": [
+        "5e68b39a7e11"
+      ],
+      "source_section_path": "/ch02/config",
+      "type": "warning",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "text": "WARNING: este comando borra datos.",
+        "severity": "caution"
+      }
+    },
+    {
+      "unit_id": "u_005",
+      "source_block_ids": [
+        "8962d57ad8c0"
+      ],
+      "source_section_path": "/ch02/config",
+      "type": "formula",
+      "criticality": "must-keep",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "latex": "t = O(n log n)",
+        "numbered": true,
+        "label": "eq:1"
+      }
+    },
+    {
+      "unit_id": "u_006",
+      "source_block_ids": [
+        "d44baf379cbe"
+      ],
+      "source_section_path": "/ch02/intro",
+      "type": "definition",
+      "criticality": "context",
+      "target_note": "pg",
+      "state": "written",
+      "content": {
+        "text": "PostgreSQL es un ORDBMS."
+      }
+    }
+  ]
+}

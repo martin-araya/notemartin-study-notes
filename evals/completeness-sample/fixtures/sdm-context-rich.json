@@ -1,0 +1,754 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-rich",
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "format": "pdf",
+    "vendor": "PGDG",
+    "product": "PostgreSQL"
+  },
+  "sections": [
+    {
+      "section_path": "/ch03/prose",
+      "title": "Prose",
+      "blocks": [
+        {
+          "id": "56ab7f2dd70c",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 0."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "4c36ca2e7f32",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 1."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "7887d069d7a3",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 2."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "7afafa034c1c",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 3."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "43639f0621aa",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 4."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "8fc3bb376ad3",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 5."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "f4dbbdf85783",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 6."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "e6d605c97340",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 7."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "9fc14d4bac23",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 8."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "ef0e8caac5f7",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 9."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "f7358be0dc6a",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 10."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "1ba010b44d8f",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 11."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "0128c0e607ac",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 12."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "906701a56f3a",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 13."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "b8923d415359",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 14."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "b3f9d964cda8",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 15."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "8456280ee95f",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 16."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "2899bfb05ddf",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 17."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "738cbe4f82ec",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 18."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "bba8948753e4",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 19."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "9cb6d11dddbd",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 20."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "ade54b0829aa",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 21."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "03e624ccc147",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 22."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "74b2a24f555f",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 23."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "98149217b418",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 24."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "6d4d69ea0822",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 25."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "a7cf4d49d2a1",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 26."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "27e2ad3829ac",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 27."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "ea0491e710ff",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 28."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "9bfe7251de5b",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 29."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "c5d291148bce",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 30."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "b29bc7224022",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 31."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "a7b893b27922",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 32."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "77745e997593",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 33."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "6cde7ce017d2",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 34."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "e81abfa6567a",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 35."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "25615e8143e5",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 36."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "2c477705333e",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 37."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "03012248b7e5",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 38."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "08251a7c3b66",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 39."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "6ebe100614d0",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 40."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "fe5f1314a968",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 41."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "eaf1ebd60a52",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 42."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "d359fe6922a6",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 43."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "7c25b75a9eb6",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 44."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "bab22135ce29",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 45."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "4eaccff6b35f",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 46."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "8ed631703758",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 47."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "fd7654eca011",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 48."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "8a5786d83021",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio 49."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/prose",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    },
+    {
+      "section_path": "/ch03/extra",
+      "title": "Extra",
+      "blocks": [
+        {
+          "id": "07a8d9097b7c",
+          "type": "parameter",
+          "content": {
+            "name": "param_x",
+            "description": "Otro parámetro."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/extra",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "eb5a43ca8442",
+          "type": "default",
+          "content": {
+            "name": "param_x",
+            "value": "default"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch03/extra",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

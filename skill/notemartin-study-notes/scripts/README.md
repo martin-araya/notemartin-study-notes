@@ -399,6 +399,24 @@ CLI con 4 subcomandos que deriva `knowledge/concept-graph.json` desde el ledger 
 | Documentación | `references/03-knowledge/concept-graph.md` (normativa) |
 | Schema | `schemas/concept-graph.schema.json` |
 
+### `validate/completeness.py` — F43 · Auditoría de no-pérdida
+
+CLI con 4 subcomandos que audita ledger (F38) contra SDM (F13): forward pass (localización + no-mutilación), inverse sample (estratificado: 100% must-keep + 10% context con seed configurable), threshold gate (100% must-keep con estado terminal). Emite reporte JSON con lista accionable de hallazgos (anchor + severity + category + expected/actual + fix). Exit 1 con cualquier finding critical (criterio 3 del roadmap: no se puede cerrar con rojo). Comparte `atomic_write_json` con `ledger.py`/`concept_graph.py` vía `util/_io.py`. Validación opcional contra `schemas/ledger.schema.json` y `schemas/sdm.schema.json` con `jsonschema`.
+
+| Aspecto | Valor |
+|---|---|
+| CLI subcomandos | `audit` (default; emite JSON o `--out <path>`), `report` (humano), `check [--strict]` (aborta al primer critical), `fix` (solo lista accionable) |
+| Paths por defecto | `--workdir <PATH>`; `<workdir>/sdm.json` + `<workdir>/knowledge/ledger.json` |
+| Override | `--sdm`, `--ledger` |
+| Muestreo | `--sample-rate 0.10` (10% context), `--seed 0` (reproducible); 100% must-keep siempre |
+| Invocación | `python3 scripts/validate/completeness.py --workdir .notes-work/<hash> audit` |
+| Dependencias | Python 3.9+ stdlib; `jsonschema` opcional (validación contra schema) |
+| Comportamiento si falta `jsonschema` | Validación opcional desactivada con WARNING; exit codes iguales |
+| Códigos de salida | 0 PASS (sin critical) · 1 FAIL (≥1 critical; gate rojo) · 2 uso (paths faltantes) |
+| Escritura | Atómica con `--out <path>`: `tempfile` + `Path.replace` |
+| Constantes inline | `MUST_KEEP_TYPES_PLAIN`, `MUST_KEEP_TYPES_FORMULA_NUMBERED`, `EDITORIAL_SEVERITIES_MUST_KEEP`, `EXACT_MATCH_FIELDS`, `NORMALIZED_MATCH_FIELDS`, `DEFAULT_SAMPLE_RATE=0.10`, `DEFAULT_SEED=0` |
+| Documentación | `references/10-quality/completeness-audit.md` (normativa) |
+
 ### `util/_io.py` — F38/F39 · Utilidad I/O compartida (escritura atómica)
 
 Helper interno que codifica el patrón `tempfile` + `Path.replace` (L-04 de F15). Importado por `ledger.py` y `concept_graph.py`. Sin dependencias externas.

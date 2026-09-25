@@ -1,0 +1,39 @@
+{
+  "schema_version": "2.0.0",
+  "source": {
+    "id": "fixture-rich",
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "entries": [
+    {
+      "unit_id": "u_r_01",
+      "source_block_ids": [
+        "07a8d9097b7c"
+      ],
+      "source_section_path": "/ch03/extra",
+      "type": "parameter",
+      "criticality": "must-keep",
+      "target_note": "rich",
+      "state": "written",
+      "content": {
+        "name": "param_x",
+        "description": "Otro parámetro."
+      }
+    },
+    {
+      "unit_id": "u_r_02",
+      "source_block_ids": [
+        "eb5a43ca8442"
+      ],
+      "source_section_path": "/ch03/extra",
+      "type": "default",
+      "criticality": "must-keep",
+      "target_note": "rich",
+      "state": "written",
+      "content": {
+        "name": "param_x",
+        "value": "default"
+      }
+    }
+  ]
+}

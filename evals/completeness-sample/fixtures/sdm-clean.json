@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "format": "pdf",
+    "vendor": "PGDG",
+    "product": "PostgreSQL"
+  },
+  "sections": [
+    {
+      "section_path": "/ch02/config",
+      "title": "Config",
+      "blocks": [
+        {
+          "id": "084a7571b285",
+          "type": "parameter",
+          "content": {
+            "name": "shared_buffers",
+            "description": "Tamaño del caché."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/config",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "5754d3f93b0b",
+          "type": "default",
+          "content": {
+            "name": "shared_buffers",
+            "value": "128 MB"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/config",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "f00173180864",
+          "type": "error-code",
+          "content": {
+            "code": "EADDRINUSE",
+            "message": "Puerto en uso."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/config",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "5e68b39a7e11",
+          "type": "warning",
+          "content": {
+            "text": "WARNING: este comando borra datos.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/config",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "8962d57ad8c0",
+          "type": "formula",
+          "content": {
+            "latex": "t = O(n log n)",
+            "numbered": true,
+            "label": "eq:1"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/config",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    },
+    {
+      "section_path": "/ch02/intro",
+      "title": "Intro",
+      "blocks": [
+        {
+          "id": "d44baf379cbe",
+          "type": "definition",
+          "content": {
+            "text": "PostgreSQL es un ORDBMS."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "fc1319e316fd",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio sin info nueva."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}
