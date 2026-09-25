@@ -111,10 +111,10 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | División del trabajo en notas (Note Plan: 15 tipos cerrados + threshold de aprobación) | `references/03-knowledge/note-plan.md` | `references/03-knowledge/ledger.md` (F15 unidades a asignar), `references/03-knowledge/concept-graph.md` (F39 dependencias), `references/05-note-types/README.md` (F78-F92 tipos) | F44 |
 | Redacción de cualquier nota en NoteMark | `references/04-authoring/notemark.md` | el resto de `references/04-authoring/` (directivas/marcas/propiedades están cubiertos aquí) | [pendiente F12] |
 | Validación del IR o consulta del catálogo de nodos | `references/04-authoring/ir-spec.md` | `references/05-note-types/` (el catálogo de tipos decide qué nodos usar, no al revés) | [pendiente F14] |
-| Elección de directiva de bloque NoteMark | `references/04-authoring/block-directives.md` | `references/05-note-types/` (las plantillas fijan directivas por tipo) | [pendiente F45] |
-| Inserción de marcas inline en redacción | `references/04-authoring/inline-marks.md` | ninguno | [pendiente F46] |
-| Definición de propiedades YAML de una nota | `references/04-authoring/properties.md` | `references/05-note-types/` | [pendiente F47] |
-| Definir capas L1, L2, L3 de una nota | `references/04-authoring/depth-layers.md` | `references/05-note-types/` | [pendiente F51] |
+| Elección de directiva de bloque NoteMark | `references/04-authoring/block-directives.md` | `references/05-note-types/` (las plantillas fijan directivas por tipo) | F45 |
+| Inserción de marcas inline en redacción | `references/04-authoring/inline-marks.md` | ninguno | F46 |
+| Definición de propiedades YAML de una nota | `references/04-authoring/properties.md` | `references/05-note-types/` | F47 |
+| Definir capas L1, L2, L3 de una nota | `references/04-authoring/depth-layers.md` | `references/05-note-types/` | F51 |
 | Seleccionar el tipo de nota `concept` | `references/05-note-types/concept.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F78] |
 | Seleccionar el tipo de nota `api-reference` | `references/05-note-types/api-reference.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F79] |
 | Seleccionar el tipo de nota `procedure` | `references/05-note-types/procedure.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F80] |
@@ -211,7 +211,7 @@ Toca **solo L4**. Presupuesto: **2 archivos**. Disparador: el IR ya está valida
 
 Tres reglas que el agente lee en cada invocación. Refuerzan los invariantes de §2 y los enumera `AGENT.md` §14.
 
-- **No escribas Markdown de destino ni JSON de IR a mano.** Escribe NoteMark; deja que el parser (`scripts/authoring/parse_notemark.py` `[pendiente F48]`) y los renderers traduzcan. Saltarse esto rompe todos los destinos no-Obsidian en silencio (`INV-05`).
+- **No escribas Markdown de destino ni JSON de IR a mano.** Escribe NoteMark; deja que el parser (`scripts/authoring/parse_notemark.py`, F48) y los renderers traduzcan. Saltarse esto rompe todos los destinos no-Obsidian en silencio (`INV-05`).
 - **No embebas en `SKILL.md` plantillas, gramáticas, catálogos ni tablas de degradación.** Este archivo solo enruta. El detalle vive en `references/`. Si una sección se acerca a 30 líneas y es contenido N3, se mueve a `references/` (`INV-02`).
 - **No omitas unidades `must-keep` por prisa, peso o estilo.** La puerta de fidelidad no se salta en ningún modo (`INV-08`). Si la fuente no da la cobertura, la nota lo dice; no se rellena con conocimiento propio (`INV-03`, `INV-17`).
 

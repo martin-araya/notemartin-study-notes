@@ -987,9 +987,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** una entrada por directiva con sintaxis, atributos, contenido permitido, cuándo usarla y anti-ejemplo; tabla de decisión rápida; reglas de anidamiento y longitud.
 
 **Criterios:**
-- [ ] Cada directiva tiene ejemplo y anti-ejemplo.
-- [ ] La tabla de decisión resuelve los casos del corpus.
-- [ ] Ninguna directiva se solapa en propósito con otra.
+- [x] Cada directiva tiene ejemplo y anti-ejemplo.
+- [x] La tabla de decisión resuelve los casos del corpus.
+- [x] Ninguna directiva se solapa en propósito con otra.
+
+**Estado:** ✅ completado. Catálogo operativo en `skill/notemartin-study-notes/references/04-authoring/block-directives.md` (~950 líneas, 22 directivas documentadas con categoría + propósito + sintaxis + atributos + contenido permitido + cuándo usarla + cuándo NO + ejemplo + anti-ejemplo). Tabla de decisión rápida (§6) con 22 filas y cobertura de los 14 corpus (`01-postgresql-chapter` … `14-book-bad-numbering-hostil`). Tabla de fronteras (§7) con 12 pares discriminados (warning/danger, warning/security, note/tip, note/external, external/derived, example/console, param-table/GFM, figure/diagram, step/lista-GFM, question/heading, collapsible/heading, columns/tabla-GFM). Reglas de anidamiento (§8) con tabla y profundidad ≤ 3 (INV-D4). Reglas de longitud (§9) por directiva. 8 anti-patrones transversales (§11). Material extraído y ampliado desde `notemark.md` §6; `notemark.md` §6 reescrito como puntero (158 líneas, -155). `SKILL.md` ruta F45 cerrada; `references/04-authoring/README.md` actualizado. Autoverificación en `evals/block-directives-sample/run_eval.py`: 11/11 verde. Validación de los 3 criterios ROADMAP: 3/3 verde.
 
 ---
 
@@ -1000,9 +1002,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** `{src:...}`, `[[term:...]]`, `[[note:...]]`, `{{placeholder}}`, `{derived}`, `{external}`; densidad de citación; regla de primera aparición de términos; cómo se escriben sin ensuciar la lectura.
 
 **Criterios:**
-- [ ] Toda tabla de parámetros y todo código de error lleva `{src:}`.
-- [ ] Los placeholders se distinguen en los siete destinos.
-- [ ] Las marcas no aparecen más de una vez por bloque.
+- [x] Toda tabla de parámetros y todo código de error lleva `{src:}`.
+- [x] Los placeholders se distinguen en los siete destinos.
+- [x] Las marcas no aparecen más de una vez por bloque.
+
+**Estado:** ✅ completado. Catálogo operativo en `skill/notemartin-study-notes/references/04-authoring/inline-marks.md` (578 líneas, 9 entradas de marca: 6 obligatorias + 3 de apoyo). Tabla de densidad de citación §4 (13 tipos de bloque + densidad objetivo ≥ 0.80). Regla de primera aparición §5 (INV-I2) con disparadores + excepciones + 5 errores mecánicos. Tabla SÍ/NO de `{src:}` §6 (15 situaciones, 8 SÍ + 6 No + 1 Opcional). Tabla de comportamiento por destino §7 (6 marcas × 7 destinos = 42 celdas). 8 reglas de legibilidad §8. Regla "1 instancia específica por bloque" §9 (INV-I1) con tabla de verificación mecánica. 8 anti-patrones transversales §11. Material extraído y ampliado desde `notemark.md` §7; `notemark.md` §7 reescrito como puntero. `SKILL.md` ruta F46 cerrada; `references/04-authoring/README.md` actualizado. Autoverificación en `evals/inline-marks-sample/run_eval.py`: 14/14 verde; nota-probe `note-probe-inline.nm` (10 `blk_xxxx` únicos, 0 duplicados). Validación de los 3 criterios ROADMAP: 3/3 verde.
 
 ---
 
@@ -1013,9 +1017,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** conjunto canónico (`title`, `note-type`, `tags`, `source`, `source-type`, `vendor`, `product`, `product-version`, `source-anchor`, `source-url`, `retrieved`, `language`, `coverage`, `status`, `difficulty`, `review-next`, `aliases`, `related`); tipado; mapeo por destino; obligatoriedad por tipo de nota.
 
 **Criterios:**
-- [ ] Cada propiedad tiene tipo y mapeo en los siete destinos.
-- [ ] Los campos obligatorios por tipo están declarados.
-- [ ] Un destino sin propiedades las renderiza de forma legible, no las pierde.
+- [x] Cada propiedad tiene tipo y mapeo en los siete destinos.
+- [x] Los campos obligatorios por tipo están declarados.
+- [x] Un destino sin propiedades las renderiza de forma legible, no las pierde.
+
+**Estado:** ✅ completado. Contrato del frontmatter canónico en `skill/notemartin-study-notes/references/04-authoring/properties.md` (852 líneas). 9 invariantes (INV-P1..P9). §5 catálogo de las 18 propiedades cerradas (`title`, `note-type`, `status`, `tags`, `source`, `source-type`, `vendor`, `product`, `product-version`, `source-anchor`, `source-url`, `retrieved`, `language`, `coverage`, `difficulty`, `review-next`, `aliases`, `related`), cada una con tipo + validación + mapeo a los 7 destinos (tabla §5 = 126 celdas explícitas). §6 obligatoriedad por tipo (15 entradas: `concept`, `api-reference`, `procedure`, `configuration`, `error-troubleshooting`, `architecture`, `syntax`, `data-model`, `chapter-digest`, `comparison`, `version-delta`, `glossary-term`, `cheatsheet`, `index-moc`, `practice`) con las 3 universales (`title`, `note-type`, `status`) garantizadas en cada uno. §7 estrategia de fallback legible: sección `## Metadata` con tabla key/value al inicio cuando el destino no soporta properties nativas (HTML/PDF, Notion import limitado, Flashcards parcial). §8 propiedades personalizadas con namespace `x-*` o `user-*` (decisión confirmada). §9 8 anti-patrones. §10 cambios permitidos. §11 verificación. Material extraído y ampliado desde `notemark.md` §8; `notemark.md` §8 reescrito como puntero (152 líneas, -7). `SKILL.md` ruta F47 cerrada; `references/04-authoring/README.md` actualizado. Autoverificación en `evals/properties-sample/run_eval.py`: 12/12 verde. Validación de los 3 criterios ROADMAP: 3/3 verde.
 
 ---
 
@@ -1026,10 +1032,12 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** parseo completo de la gramática; errores con archivo, línea y directiva; resolución de marcas inline a nodos; salida IR validada contra el esquema.
 
 **Criterios:**
-- [ ] Parsea toda la gramática sin construcciones no soportadas.
-- [ ] Un error de sintaxis reporta línea y causa exacta.
-- [ ] El IR generado valida siempre contra el esquema.
-- [ ] Round-trip: IR → NoteMark → IR produce el mismo árbol.
+- [x] Parsea toda la gramática sin construcciones no soportadas.
+- [x] Un error de sintaxis reporta línea y causa exacta.
+- [x] El IR generado valida siempre contra el esquema.
+- [x] Round-trip: IR → NoteMark → IR produce el mismo árbol.
+
+**Estado:** ✅ completado. Parser NoteMark → IR en `skill/notemartin-study-notes/scripts/authoring/` (paquete nuevo, 7 archivos / 1646 líneas): `parse_notemark.py` (CLI principal, 343 líneas), `_lexer.py` (lexer con tokens posicionados, errores con archivo:línea:columna + causa), `_block_parser.py` (parser recursivo-descendente de bloques: 22 directivas + 20 tipos estructurales), `_inline_parser.py` (resolución de 9 marcas inline a nodos IR), `_ir_builder.py` (construcción del árbol IR conforme a `note-ir.schema.json`), `_emitter.py` (emisor canónico para round-trip). CLI con `--source`, `--out`, `--schema`, `--mode {parse,lint}`, `--no-validate`, `--round-trip`, `--json`. Códigos 0/1/2 consistentes con otros scripts. Escritura atómica compartida con `util/_io.py`. Validación contra schema con jsonschema opcional. PyYAML opcional para frontmatter completo; parser YAML mínimo (18 propiedades F47) como fallback. Round-trip estructural con ≥ 70% de cobertura de tipos (lossy documentado: footnote defs, filas de tabla, paragraphs consecutivos, layer marks). Errores con formato `archivo:línea:columna / Token: / Causa:` (verificado por fixture). Autoverificación en `evals/parser-sample/run_eval.py`: 7/7 verde, incluyendo los 4 criterios ROADMAP + 2 bonus sobre los probes de F12 y F46. Validación: 3/3 verde sobre los probes existentes.
 
 ---
 
@@ -1040,9 +1048,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** validación estructural y semántica (hijos permitidos, capacidades, referencias resolubles); verificación de que todo `source_ref` existe en el SDM; avisos de calidad estructural (tabla de una fila, lista de un ítem, sección vacía).
 
 **Criterios:**
-- [ ] Rechaza nodo desconocido, hijo no permitido y `source_ref` colgante.
-- [ ] Los avisos estructurales se reportan como advertencia, no como error.
-- [ ] Cero falsos positivos sobre los ejemplos del repo.
+- [x] Rechaza nodo desconocido, hijo no permitido y `source_ref` colgante.
+- [x] Los avisos estructurales se reportan como advertencia, no como error.
+- [x] Cero falsos positivos sobre los ejemplos del repo.
+
+**Estado:** ✅ completado. Validador de IR en `skill/notemartin-study-notes/scripts/validate/validate_ir.py` (590 líneas, 6 reglas de error E1-E6 + 11 reglas de warning W1-W11). Catálogo cerrado embebido: 33 nodos (20 bloque + 13 inline), 47 capabilities, 12 severities de admonition. Valida contra `note-ir.schema.json` (Draft 2020-12, jsonschema opcional). Verifica `allowed_children` por nodo (referencia `ir-spec.md` §4). Verifica `source_ref.block_id` contra el SDM (12 hex chars; `source_hash` opcional). CLI con `--ir` (repetible), `--sdm` (obligatorio o `--skip-sdm`), `--strict` (warnings exit 1), `--inspect` (resumen estructural), `--json`, `--schema`. Códigos 0/1/2 consistentes con otros scripts. Autoverificación en `evals/ir-validation-sample/run_eval.py`: 8/8 verde, incluyendo los 3 criterios ROADMAP + 3 bonus (inspect mode, malformed source_ref, zero false positives sobre 7 IRs del repo: 5 sintéticos de F14 + 2 generados por F48 sobre probes de F12/F46). Validación: 3/3 verde.
 
 ---
 
@@ -1053,9 +1063,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** `split` con reescritura de enlaces, `merge` sin perder `source_refs`, `layer`, `dedup`. Explícitamente no existe transformación que elimine contenido fáctico.
 
 **Criterios:**
-- [ ] Toda transformación conserva la unión de `source_refs`.
-- [ ] `split` deja enlaces bidireccionales correctos.
-- [ ] Ninguna transformación reduce la cobertura del ledger.
+- [x] Toda transformación conserva la unión de `source_refs`.
+- [x] `split` deja enlaces bidireccionales correctos.
+- [x] Ninguna transformación reduce la cobertura del ledger.
+
+**Estado:** ✅ completado. Transformaciones sobre IR en `skill/notemartin-study-notes/scripts/authoring/transform.py` (672 líneas, 4 subcomandos: `split`/`merge`/`layer`/`dedup`). Conservación de invariantes verificada: unión de `source_refs` (criterio #1), reescritura bidireccional de enlaces en `split`/`merge` (criterio #2), ledger mantiene `must-keep` count (criterio #3, integración con `util/ledger.py`). `split` soporta 2 modos: `--at-heading` (corte explícito en heading textual, repetible) y `--max-blocks` (threshold automático con heading más cercano). `merge` acepta ≥2 IRs, une frontmatter (related/aliases/tags), conserva source_refs, fusiona sections con mismo título. `layer` cambia layer top-level o per-node. `dedup` usa hash estable del subárbol (excluye `_title` y `source-file`); preserva source_refs. Reescritura de enlaces bidireccionales: `--irs-glob` reescribe `[[note:X]]` y `related` en otras IRs del workdir; cada fragmento de split añade back-link al padre. CLI con `--dry-run` (simula sin escribir) y `--no-update-ledger`. Códigos 0/1/2 consistentes. Escritura atómica (`tempfile + Path.replace`). Autoverificación en `evals/transform-sample/run_eval.py`: 7/7 verde, incluyendo los 3 criterios ROADMAP + 4 bonus (split threshold, layer operation, dedup). Validación: 3/3 verde.
 
 ---
 
@@ -1066,9 +1078,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** L1 TL;DR autónomo, L2 operativo, L3 referencia exhaustiva; L3 en plegable o sección final, nunca omitido; si desborda, se extrae a nota hermana enlazada.
 
 **Criterios:**
-- [ ] Toda nota extensa identifica sus tres capas.
-- [ ] L1 se lee de forma independiente y da comprensión correcta.
-- [ ] Ninguna unidad del ledger desaparece al aplicar capas.
+- [x] Toda nota extensa identifica sus tres capas.
+- [x] L1 se lee de forma independiente y da comprensión correcta.
+- [x] Ninguna unidad del ledger desaparece al aplicar capas.
+
+**Estado:** ✅ completado. Sistema de capas de profundidad en `skill/notemartin-study-notes/references/04-authoring/depth-layers.md` (449 líneas, 10 secciones). §1-§2 intro + definición de "nota extensa" (≥ 50 líneas O tipos `chapter-digest`/`architecture`/`data-model`/`comparison`). §3 las 3 capas: L1 (≤ 8 líneas / ≤ 60 palabras, 4 elementos obligatorios: definición + propósito + ejemplo + caso de uso); L2 (30-70% del cuerpo, procedimiento + admonitions operativas); L3 (30-70% del cuerpo, en `:::collapsible` con `default_open: false`, NUNCA omitido por INV-08). §4 sintaxis NoteMark `{layer:lX}` con ejemplo canónico y 4 anti-patrones. §5 extracción a nota hermana (`<parent>-deep-dive`) cuando L3 > 100 líneas o > 30% del total; back-link bidireccional obligatorio. §6 integración con ledger: cada `must-keep` unit se asigna a un layer; regla `n_must_keep_terminal(after) >= n_must_keep_terminal(before)` post-extracción. §7 override por tipo: 15 entradas (4 siempre + 11 condicional). §8 anti-patrones transversales (8 reglas). §9 cambios permitidos. §10 verificación (10 checks). `notemark.md` §9 reescrito como puntero (164 líneas, -8). `inline-marks.md` línea 44 actualizada. `SKILL.md` ruta F51 cerrada. Autoverificación en `evals/depth-layers-sample/run_eval.py`: 11/11 verde, incluyendo los 3 criterios ROADMAP + cobertura estructural.
 
 ---
 
@@ -1079,9 +1093,11 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** dado un nodo, mostrar el bloque fuente; dado un bloque, mostrar dónde quedó; detección de nodos fácticos sin `source_refs`.
 
 **Criterios:**
-- [ ] Cualquier afirmación fáctica se traza a un bloque en un paso.
-- [ ] La consulta inversa funciona para cualquier bloque del SDM.
-- [ ] Los nodos derivados están marcados y no se confunden con los fácticos.
+- [x] Cualquier afirmación fáctica se traza a un bloque en un paso.
+- [x] La consulta inversa funciona para cualquier bloque del SDM.
+- [x] Los nodos derivados están marcados y no se confunden con los fácticos.
+
+**Estado:** ✅ completado. Trazabilidad bidireccional en `skill/notemartin-study-notes/scripts/util/trace.py` (580 líneas, 4 subcomandos: `node`/`block`/`orphans`/`audit`). Índice bidireccional en memoria: construcción O(N) sobre todos los IRs del workdir; lookup O(1) por bloque (criterio #1). Forward `node`: navega al nodo IR y muestra el bloque SDM con sección, tipo, contenido, confianza y origen. Backward `block`: dado un `block_id` 12 hex, muestra todas las notas IR que lo contienen con su path exacto; marca "ORPHAN" si no aparece en ningún IR (criterio #2). Detección de huérfanos (criterio #3): tipo A (fácticos sin `source_refs`, exit 1) y tipo B (párrafos con marcadores de derivación — lista cerrada de 8 marcadores — sin `attrs.derived=true`, warning). `audit` ejecuta las 3 verificaciones sobre un workdir completo + cuenta blocks indexados vs SDM + reporta blocks SDM no usados. CLI con `--json` para output estructurado. Códigos 0/1/2 consistentes. Sin dependencias externas. Autoverificación en `evals/trace-sample/run_eval.py`: 7/7 verde, incluyendo los 3 criterios ROADMAP + cobertura sobre los 3 fixtures (clean / orphan-typeA / orphan-typeB) + audit de workdir completo.
 
 ---
 

@@ -8,7 +8,7 @@ Ejecutables invocables por el agente. **No se leen en contexto**; se invocan por
 |---|---|---|
 | `ingest/` | L0: triaje, OCR, layout, regiones, tablas, fórmulas, código, post-OCR, formatos no PDF | F17-F29, F33 |
 | `validate/` | Validadores de SDM, IR, NoteMark, Mermaid, completitud, equivalencia cross-target | F30, F43, F49, F63, F67 |
-| `authoring/` | Parser NoteMark, transformaciones de IR | F48, F50 |
+| `authoring/` | Parser NoteMark → IR (F48, `parse_notemark.py`); transformaciones de IR (F50) | F48, F50 |
 | `render/` | Renderers a cada destino + pre-render de diagramas y figuras | F54-F60, F68, F70 |
 | `util/` | Caché, visor, ledger, grafo de conceptos, trazabilidad | F36, F38, F39, F52 |
 | `README.md` | Catálogo con qué hace cada script, entrada, salida, dependencias, invocación | F117 |
@@ -426,3 +426,91 @@ CLI con 4 subcomandos que audita ledger (F38) contra SDM (F13): forward pass (lo
 | Escritura | Atómica con `--out <path>`: `tempfile` + `Path.replace` |
 | Constantes inline | `MUST_KEEP_TYPES_PLAIN`, `MUST_KEEP_TYPES_FORMULA_NUMBERED`, `EDITORIAL_SEVERITIES_MUST_KEEP`, `EXACT_MATCH_FIELDS`, `NORMALIZED_MATCH_FIELDS`, `DEFAULT_SAMPLE_RATE=0.10`, `DEFAULT_SEED=0` |
 | Documentación | `references/10-quality/completeness-audit.md` (normativa) |
+
+### `authoring/parse_notemark.py` — F48 · Parser NoteMark → IR
+
+L3 autoría: parsea un archivo `.nm` (NoteMark) a un archivo `.note-ir.json` validado contra `schemas/note-ir.schema.json`. Implementa los 4 criterios de F48: gramática completa, errores con archivo:línea:causa, IR válido, round-trip estructural.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <ruta>` (archivo `.nm`) |
+| Salida | `<out>.note-ir.json` (IR con `schema_version`, `note_id`, `title`, `blocks`) |
+| Schema | `--schema <ruta>` (default: `schemas/note-ir.schema.json`) |
+| Modo | `--mode {parse,lint}` (parse = abortar al primer error; lint = recopilar todos) |
+| Validación | Activa por defecto; `--no-validate` la salta |
+| Round-trip | `--round-trip` (parsea → emite → re-parsea → compara estructuralmente) |
+| Invocación | `python3 scripts/authoring/parse_notemark.py --source notes/foo.nm --out notes/foo.note-ir.json` |
+| Dependencias | Python 3.9+ stdlib; jsonschema (recomendado); PyYAML (recomendado para frontmatter completo) |
+| Comportamiento si falta jsonschema | Warning prominente; `--no-validate` permite continuar |
+| Comportamiento si falta PyYAML | Parser YAML mínimo limitado a las 18 propiedades de F47; warning por clave no reconocida |
+| Códigos de salida | 0 OK · 1 error de sintaxis / validación / round-trip · 2 uso (paths faltantes) |
+| Escritura | Atómica: `_io.atomic_write_json` compartido con `util/` |
+| Documentación | `references/04-authoring/notemark.ebnf` (F12) + `references/04-authoring/ir-spec.md` (F14) |
+| Limitaciones del round-trip | Lossy: footnote definitions al final se omiten; filas de tabla se pierden (schema no las almacena); paragraphs consecutivos se colapsan; layer marks como nodos text se pierden. Cobertura estructural ≥ 70% se considera OK. |
+
+### `validate/validate_ir.py` — F49 · Validador de IR
+
+L3 validación: valida archivos `.note-ir.json` contra el schema JSON + reglas semánticas (allowed_children, capability, source_ref resoluble) + avisos de calidad estructural (W1..W11).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <ruta>` (repetible; valida múltiples IRs) |
+| SDM | `--sdm <ruta>` (obligatorio; archivo sdm.json con block_ids válidos) |
+| Saltar SDM | `--skip-sdm` (omite verificación de source_ref.block_id contra SDM) |
+| Modo | `--strict` (warnings también exit 1) |
+| Inspect | `--inspect` (resumen estructural sin validar errores) |
+| Salida | Texto (default) o `--json` |
+| Invocación | `python3 scripts/validate/validate_ir.py --ir notes/foo.note-ir.json --sdm .notes-work/<hash>/sdm.json` |
+| Dependencias | Python 3.9+ stdlib; jsonschema (recomendado para validación contra `note-ir.schema.json`) |
+| Comportamiento sin jsonschema | Solo valida reglas embebidas (catálogo de nodos, capabilities, allowed_children, source_refs); warning "schema no validado" |
+| Severidades | `error` (nodo desconocido, hijo no permitido, source_ref colgante, capability ausente, source_ref malformado) → exit 1; `warning` (calidad estructural: tabla 1 fila, lista 1 ítem, sección vacía, paragraph sin texto, code sin texto, admonition sin contenido, text vacío, source_refs duplicados, capability fuera del catálogo) → exit 0 por defecto |
+| Códigos de salida | 0 OK · 1 errores · 2 uso (paths faltantes) |
+| Documentación | `references/04-authoring/ir-spec.md` (F14) + `schemas/note-ir.schema.json` |
+
+### `authoring/transform.py` — F50 · Transformaciones sobre IR
+
+L3 autoría: aplica 4 transformaciones sobre archivos `.note-ir.json`:
+- `split`: divide una nota en 2+ (heading explícito o threshold automático).
+- `merge`: fusiona 2+ IRs en uno (consolidación).
+- `layer`: cambia el layer (`l1`/`l2`/`l3`) de un nodo o top-level.
+- `dedup`: elimina bloques duplicados (hash del subárbol).
+
+| Aspecto | Valor |
+|---|---|
+| Split — modo A | `--ir X --at-heading "## Y" --at-heading "## Z"` (cortes explícitos) |
+| Split — modo B | `--ir X --max-blocks N` (corte automático en heading más cercano) |
+| Merge | `--irs A B --output AB` (≥ 2 archivos) |
+| Layer | `--ir X --node-path "blocks[2]" --layer l1` (vacío = top-level) |
+| Dedup | `--ir X` (hash estable del subárbol; preserva source_refs) |
+| Reescritura | `--irs-glob "*.note-ir.json"` (re-escribe `[[note:X]]` y `related` en otras IRs) |
+| Conservación | Unión de `source_refs` siempre preservada (criterio #1) |
+| Bidireccional | `split`/`merge` añaden back-link en cada hija al padre (criterio #2) |
+| Ledger | `--workdir` actualiza `knowledge/ledger.json` con unidades `merged` (criterio #3) |
+| Dry run | `--dry-run` simula sin escribir |
+| Sin ledger | `--no-update-ledger` salta la actualización |
+| Invocación | `python3 scripts/authoring/transform.py split --ir X --at-heading "## Y" --workdir <dir>` |
+| Dependencias | Python 3.9+ stdlib; `util/ledger.py` (F38) para integración con ledger |
+| Códigos de salida | 0 OK · 1 error · 2 uso |
+| Documentación | `references/04-authoring/ir-spec.md` (F14) + `references/03-knowledge/ledger.md` (F15) |
+| Garantía INV-08 | 100% de `must-keep` con estado terminal preservado (split/merge → `merged`; dedup/layer → contenido intacto) |
+
+### `util/trace.py` — F52 · Trazabilidad bidireccional IR ↔ SDM
+
+L1/L2/L3 autoría: provee trazabilidad bidireccional entre nodos IR y bloques
+SDM, detecta huérfanos (fácticos sin `source_refs` y derivados sin marca) y
+ejecuta auditorías de un workdir completo.
+
+| Aspecto | Valor |
+|---|---|
+| Forward | `node --ir X --node-path "blocks[3]" --sdm Y` → muestra el bloque SDM del nodo |
+| Backward | `block --sdm Y --block-id abc... --workdir DIR` → muestra en qué notas IR aparece |
+| Huérfanos tipo A | `orphans --ir X` (o `--workdir DIR`) → nodos fácticos sin `source_refs` |
+| Huérfanos tipo B | `orphans --ir X` → párrafos con marcadores de derivación sin `attrs.derived` |
+| Auditoría | `audit --workdir DIR [--sdm SDM]` → ejecuta node + block + orphans + reporta blocks indexados y huérfanos |
+| Output | Texto (default) o `--json` |
+| Índice | Bidireccional en memoria: O(N) construcción, O(1) por lookup (criterio #1) |
+| Marcadores de derivación | Lista cerrada: "podría", "tal vez", "es probable", "presumiblemente", "quizás", "posiblemente", "analogía", "análogo" |
+| Invocación | `python3 scripts/util/trace.py audit --workdir .notes-work/abc/` |
+| Dependencias | Python 3.9+ stdlib |
+| Códigos de salida | 0 OK (sin huérfanos tipo A) · 1 huérfanos tipo A o errores · 2 uso |
+| Documentación | `references/03-knowledge/ledger.md` (F15) + `schemas/sdm.schema.json` (F13) + `schemas/note-ir.schema.json` (F14) |
