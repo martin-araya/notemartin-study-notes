@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-A",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "format": "pdf"
+  },
+  "sections": [
+    {
+      "section_path": "/ch02/configuration",
+      "title": "Configuration",
+      "blocks": [
+        {
+          "id": "158d9f80d141",
+          "type": "definition",
+          "content": {
+            "text": "Una vista materializada."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "9b97a523433d",
+          "type": "parameter",
+          "content": {
+            "name": "shared_buffers",
+            "description": "Tamaño del caché."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "4d0d3ed1912f",
+          "type": "default",
+          "content": {
+            "name": "shared_buffers",
+            "value": "128 MB"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "9ffafa76cd68",
+          "type": "warning",
+          "content": {
+            "text": "WARNING: este comando borra datos.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "dea46bb618df",
+          "type": "error-code",
+          "content": {
+            "code": "EADDRINUSE",
+            "message": "Puerto en uso."
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "17d3a6480311",
+          "type": "example",
+          "content": {
+            "text": "Ejemplo: SELECT pg_reload_conf();"
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "5ae7e7d5439b",
+          "type": "step",
+          "content": {
+            "ordinal": 1,
+            "text": "Verificar hash."
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "6c361cdcd619",
+          "type": "formula",
+          "content": {
+            "latex": "t = O(n log n)",
+            "numbered": true
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "786bb470edf1",
+          "type": "prose",
+          "content": {
+            "text": "Texto introductorio sin info nueva."
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "c98619433fbc",
+          "type": "tradeoff",
+          "content": {
+            "text": "Índice acelera lecturas pero ralentiza escrituras."
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

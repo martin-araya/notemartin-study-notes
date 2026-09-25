@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "source": {
     "id": "01-postgresql-chapter",
     "hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657"
@@ -15,7 +15,10 @@
       "criticality": "must-keep",
       "target_note": "postgres-shared-buffers",
       "target_section": "Configuration",
-      "state": "written"
+      "state": "written",
+      "content": {
+        "text": "Una vista materializada es una relación almacenada."
+      }
     },
     {
       "unit_id": "u_002",
@@ -27,7 +30,11 @@
       "criticality": "must-keep",
       "target_note": "postgres-shared-buffers",
       "target_section": "Configuration",
-      "state": "written"
+      "state": "written",
+      "content": {
+        "name": "shared_buffers",
+        "description": "Tamaño del caché compartido."
+      }
     },
     {
       "unit_id": "u_003",
@@ -39,7 +46,11 @@
       "criticality": "must-keep",
       "target_note": "postgres-shared-buffers",
       "target_section": "Warnings",
-      "state": "merged"
+      "state": "merged",
+      "content": {
+        "text": "WARNING: este comando borra datos.",
+        "severity": "caution"
+      }
     },
     {
       "unit_id": "u_004",
@@ -51,7 +62,11 @@
       "criticality": "must-keep",
       "target_note": "postgres-wal",
       "target_section": "Procedure",
-      "state": "written"
+      "state": "written",
+      "content": {
+        "ordinal": 1,
+        "text": "Activar WAL."
+      }
     },
     {
       "unit_id": "u_005",
@@ -72,11 +87,14 @@
         "70ae70589b7d"
       ],
       "source_section_path": "/ch02/intro",
-      "type": "note",
+      "type": "definition",
       "criticality": "context",
       "target_note": null,
       "target_section": null,
-      "state": "written"
+      "state": "written",
+      "content": {
+        "text": "Nota auxiliar de contexto."
+      }
     },
     {
       "unit_id": "u_007",
@@ -84,7 +102,7 @@
         "628579f49982"
       ],
       "source_section_path": "/ch02/intro",
-      "type": "tip",
+      "type": "version-note",
       "criticality": "context",
       "target_note": null,
       "target_section": null,

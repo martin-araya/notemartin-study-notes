@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "source": {
     "id": "03-rfc-7231",
     "hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
@@ -15,7 +15,10 @@
       "criticality": "must-keep",
       "target_note": "rfc7231-overview",
       "target_section": "Intro",
-      "state": "written"
+      "state": "written",
+      "content": {
+        "text": "RFC 7231 define la semántica de HTTP/1.1."
+      }
     },
     {
       "unit_id": "u_021",
@@ -27,7 +30,11 @@
       "criticality": "must-keep",
       "target_note": "rfc7231-overview",
       "target_section": "Methods",
-      "state": "written"
+      "state": "written",
+      "content": {
+        "name": "method",
+        "description": "Verbo HTTP."
+      }
     },
     {
       "unit_id": "u_022",
@@ -39,7 +46,11 @@
       "criticality": "must-keep",
       "target_note": "rfc7231-overview",
       "target_section": "Semantics",
-      "state": "written"
+      "state": "written",
+      "content": {
+        "ordinal": 1,
+        "text": "GET recupera una representación."
+      }
     },
     {
       "unit_id": "u_023",
@@ -51,7 +62,10 @@
       "criticality": "must-keep",
       "target_note": "rfc7231-overview",
       "target_section": "Semantics",
-      "state": "merged"
+      "state": "merged",
+      "content": {
+        "text": "GET no debe tener efectos colaterales."
+      }
     },
     {
       "unit_id": "u_024",
@@ -63,7 +77,10 @@
       "criticality": "must-keep",
       "target_note": "rfc7231-overview",
       "target_section": "Appendix",
-      "state": "written"
+      "state": "written",
+      "content": {
+        "text": "Cambios respecto a RFC 2616."
+      }
     }
   ]
 }

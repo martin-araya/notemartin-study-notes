@@ -350,3 +350,32 @@ Genera un archivo HTML único con CSS + JS inline (sin assets externos). Jerarqu
 | Constantes inline | 16 BLOCK_TYPES, lista cerrada de clases para dropdown |
 | Límites | Sin paginación; para SDMs > 100k bloques el visor puede ralentizar (DOM completo); fuera del scope F36 | |
 | Documentación | `references/02-source-model/build-sdm.md` (normativa) |
+
+### `util/ledger.py` — F38 · CLI operativo del Coverage Ledger
+
+CLI con 6 subcomandos para mantener `knowledge/ledger.json` desde L2: `init`, `add` (aplica R1–R5 mecánicamente), `mark` (transiciona estados), `report` (4 vistas de cobertura, funciona en cualquier punto), `check` (detecta huérfanos y gaps; `--strict` rompe con desviaciones; `--include-prose` cuenta bloques `prose` como gap), `manifest` (parchea `manifest.json::units_processed + last_modified` sin tocar otros campos; `--dry-run` muestra el patch). Convierte cada `add`/`mark` en escritura atómica `tempfile + Path.replace` (L-04). Aplica las reglas automáticas R1–R5 importadas de `util/unit_rules.py` (F37). Endurece el `entries[].type` al enum cerrado de 14 tipos (F37/ADR-0001).
+
+| Aspecto | Valor |
+|---|---|
+| CLI subcomandos | `init [--force]`, `add --unit-id ... --source-block-ids ... --type ... [--content ...] [--section-path ...] [--criticality ...] [--rationale ...]`, `mark <id> --state {written,merged,discarded} [--target-note ...] [--target-section ...] [--discard-reason ...]`, `report`, `check [--strict] [--include-prose]`, `manifest [--dry-run]` |
+| Paths por defecto | `--workdir <PATH>`; `<workdir>/sdm.json` + `<workdir>/knowledge/ledger.json` + `<workdir>/manifest.json` |
+| Override de paths | `--sdm`, `--ledger`, `--manifest` |
+| Invocación | `python3 scripts/util/ledger.py --workdir .notes-work/<hash> add --unit-id u_001 --source-block-ids a8f4ce140580 --type parameter --section-path /ch02 --content '{"name":"shared_buffers"}'` |
+| Validación | Schema (`schemas/ledger.schema.json` v2.0.0) vía `jsonschema` opcional; invariantes L-04/L-05 del spec `references/03-knowledge/ledger.md`; reglas R1–R5 vía `util/unit_rules.py` |
+| Dependencias | Python 3.9+ stdlib; `jsonschema` opcional (validación contra el schema) |
+| Comportamiento si falta `jsonschema` | Validación opcional desactivada; las invariantes L-04/L-05 siguen activas; exit codes iguales |
+| Códigos de salida | 0 OK · 1 validación (schema/invariantes/--strict) · 2 uso (paths faltantes) |
+| Escritura | Atómica: `tempfile` + `Path.replace` (L-04) |
+| Constantes inline | `TERMINAL_STATES`, `ALLOWED_DISCARD_REASONS`, `ALLOWED_TYPES` (los 14 tipos de F37 §3) |
+| Documentación | `references/03-knowledge/ledger-operativo.md` (normativa) |
+
+### `util/unit_rules.py` — F37/F38 · Reglas automáticas R1–R5 (fuente única)
+
+Módulo compartido que codifica `AUTO_RULES` (R1–R4 por tipo) y la condición adicional de R5 (`formula` con `content.numbered == true`). Exporta `is_must_keep(block) -> Optional[str]` que devuelve el id de regla o `None`. Importado por `evals/information-units-sample/{build_fixtures,run_eval}.py` (vía shim) y por `util/ledger.py` (F38). Cero dependencias.
+
+| Aspecto | Valor |
+|---|---|
+| API | `is_must_keep(block)`, `AUTO_RULES: dict[str, str]` |
+| Bloque/unidad aceptado | dict con `type: string` y `content: dict` |
+| Invocación | `from unit_rules import is_must_keep` |
+| Documentación | `references/03-knowledge/information-units.md` §5 (normativa) |

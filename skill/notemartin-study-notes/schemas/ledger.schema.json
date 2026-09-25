@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://notemartin.study/schemas/ledger.schema.json",
   "title": "Coverage Ledger",
-  "description": "Registro fuente→nota que hace verificable la cobertura. Cada entrada es una unidad de información extraída del SDM; el estado y el destino conectan con la nota final. El ledger es la fuente de verdad de la puerta de fidelidad (architecture.md §3.3); las notas NO lo son. Documento normativo de Fase 15.",
+  "description": "Registro fuente→nota que hace verificable la cobertura. Cada entrada es una unidad de información extraída del SDM; el estado y el destino conectan con la nota final. El ledger es la fuente de verdad de la puerta de fidelidad (architecture.md §3.3); las notas NO lo son. Documento normativo de Fase 15; endurecido al enum cerrado de 14 tipos en Fase 38 (ADR-0001).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "source", "entries"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.0.0",
+      "const": "2.0.0",
       "description": "Versión del esquema. Mayor en cambios incompatibles; menor en campo opcional nuevo."
     },
     "source": {
@@ -48,17 +48,25 @@
           "description": "Ruta canónica de la sección en el SDM; habilita el query '¿dónde quedó la sección X?' (criterio 3)."
         },
         "type": {
-          "type": "string",
-          "description": "Tipo semántico de la unidad: parameter, step, definition, error, warning, example, etc."
+          "$ref": "#/$defs/unitType",
+          "description": "Tipo semántico cerrado de la unidad (Fase 37 §3; endurecido en Fase 38)."
+        },
+        "content": {
+          "type": "object",
+          "description": "Contenido específico del tipo (Fase 37 §3 columna derecha)."
         },
         "criticality": {
           "type": "string",
           "enum": ["must-keep", "context"],
-          "description": "must-keep: la unidad no puede omitirse (puerta de fidelidad). context: aporta color pero puede fusionarse o descartarse con motivo."
+          "description": "must-keep: la unidad no puede omitirse (puerta de fidelidad). context: aporta color pero puede fusionarse o descartarse con motivo. Calculada por R1–R5 salvo override con criticality_rationale."
+        },
+        "criticality_rationale": {
+          "type": ["string", "null"],
+          "description": "Id de regla (R1..R5) si aplica R1–R5; texto libre si es elevación a must-keep; null si es context por default."
         },
         "target_note": {
           "type": ["string", "null"],
-          "description": "note_id destino. Obligatorio para must-keep."
+          "description": "note_id destino. Obligatorio para must-keep (L-05)."
         },
         "target_section": {
           "type": ["string", "null"],
@@ -94,6 +102,26 @@
           "then": { "required": ["target_note"] }
         }
       ]
+    },
+    "unitType": {
+      "type": "string",
+      "enum": [
+        "definition",
+        "mechanism",
+        "parameter",
+        "default",
+        "constraint",
+        "step",
+        "example",
+        "warning",
+        "error-code",
+        "tradeoff",
+        "version-note",
+        "syntax-rule",
+        "cross-reference",
+        "formula"
+      ],
+      "description": "Enum cerrado de los 14 tipos de unidades (Fase 37 §3). Endurecido en Fase 38 — version 2.0.0."
     }
   }
 }

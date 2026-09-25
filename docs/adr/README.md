@@ -33,5 +33,6 @@ Qué se gana, qué se pierde, qué queda atado a esta decisión.
 ## ADRs ya registradas
 
 - `ADR-0001-units-closed-enum.md` — F37: enum cerrado, criticidad derivada, fusión prohibida en must-keep.
+- `ADR-0002-ledger-split.md` — F38: `validate_ledger.py` (linter read-only) y `ledger.py` (operador read+write) conviven con responsabilidades distintas.
 
 Las decisiones cerradas hasta ahora viven en `skills/AGENT.md` §8. Cuando una de ellas se reabre formalmente, se promueve a ADR aquí.

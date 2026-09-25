@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "source": {
     "id": "06-kubernetes-api-ref",
     "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
@@ -15,7 +15,10 @@
       "criticality": "must-keep",
       "target_note": "kubernetes-pod-v1",
       "target_section": "Overview",
-      "state": "written"
+      "state": "written",
+      "content": {
+        "text": "Un Pod es la unidad mínima de despliegue."
+      }
     },
     {
       "unit_id": "u_011",
@@ -27,7 +30,11 @@
       "criticality": "must-keep",
       "target_note": "kubernetes-pod-v1",
       "target_section": "Spec",
-      "state": "written"
+      "state": "written",
+      "content": {
+        "name": "restartPolicy",
+        "description": "Política de reinicio."
+      }
     },
     {
       "unit_id": "u_012",
@@ -39,7 +46,10 @@
       "criticality": "must-keep",
       "target_note": "kubernetes-pod-v1",
       "target_section": "Examples",
-      "state": "merged"
+      "state": "merged",
+      "content": {
+        "text": "Ejemplo de Pod con initContainer."
+      }
     },
     {
       "unit_id": "u_013",
@@ -51,7 +61,11 @@
       "criticality": "must-keep",
       "target_note": "kubernetes-pod-v1",
       "target_section": "Setup",
-      "state": "merged"
+      "state": "merged",
+      "content": {
+        "ordinal": 1,
+        "text": "kubectl apply -f pod.yaml."
+      }
     },
     {
       "unit_id": "u_014",
@@ -59,11 +73,15 @@
         "b47f4f37b6cc"
       ],
       "source_section_path": "/toc",
-      "type": "navigation",
+      "type": "cross-reference",
       "criticality": "must-keep",
       "target_note": "kubernetes-pod-v1",
       "target_section": null,
       "state": "discarded",
+      "content": {
+        "target": "/workload/pod-v1",
+        "label": "Ver Pod v1."
+      },
       "discard_reason": "navigation"
     },
     {
@@ -77,6 +95,9 @@
       "target_note": "kubernetes-pod-v1",
       "target_section": null,
       "state": "discarded",
+      "content": {
+        "text": "Duplicado de u_010."
+      },
       "discard_reason": "redundant-with:u_010"
     }
   ]

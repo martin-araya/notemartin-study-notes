@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "source": {
     "id": "14-book-bad-numbering-hostil",
     "hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
@@ -16,6 +16,9 @@
       "target_note": null,
       "target_section": null,
       "state": "discarded",
+      "content": {
+        "text": "Pasaje descartado por obsoleto (motivo fuera de lista)."
+      },
       "discard_reason": "outdated"
     }
   ]

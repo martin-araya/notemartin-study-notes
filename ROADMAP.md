@@ -875,6 +875,21 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** el agente decide unidades y criticidad; el script contabiliza, valida transiciones y genera el reporte; detección de unidades huérfanas y de contenido sin respaldo.
 
 **Criterios:**
+- [x] El reporte se genera en cualquier punto del proceso.
+- [x] Detecta huérfanos y contenido sin respaldo.
+- [x] El estado persiste en el manifiesto.
+
+**Estado:** ✅ completado. CLI en `skill/notemartin-study-notes/scripts/util/ledger.py` (~520 líneas, Python 3.9+ stdlib puro; `jsonschema` opcional para validación) con 6 subcomandos: `init` (crea `knowledge/ledger.json` desde SDM), `add` (aplica R1–R5 vía `util/unit_rules.py` y exige `criticality_rationale` en override), `mark` (transiciona estados con validación de `discard_reason` lista cerrada), `report` (4 vistas: global / por estado / por motivo / top secciones pending — funciona en cualquier punto), `check` (detecta huérfanos y gaps; `--include-prose` cuenta bloques `prose` como gap; `--strict` rompe con desviaciones), `manifest` (parchea `units_processed + last_modified` sin tocar otros campos; `--dry-run` muestra el patch). Escritura atómica `tempfile + Path.replace` (L-04). Módulo compartido `util/unit_rules.py` con `AUTO_RULES` + `is_must_keep(block)` (fuente única de R1–R5, consumido por F37 vía shim y por F38 directamente). Spec operativa `references/03-knowledge/ledger-operativo.md` (200 líneas / 230, 11 §§, español, INV-06). **Schema endurecido**: `schemas/ledger.schema.json` bumpea a `2.0.0` con `$defs/unitType` enum cerrado de los 14 tipos (cierra ADR-0001); `additionalProperties: false` mantenido; `criticality_rationale` añadido como opcional; 5 fixtures de `evals/ledger-sample/` regenerados con tipos re-mapeados (`note` → `definition`, `tip` → `version-note`, `navigation` → `cross-reference`). **ADR-0002** justifica la separación `validate_ledger.py` (linter read-only de F15) vs `ledger.py` (operador read+write de F38). **Eval battery** `evals/ledger-operativo-sample/` (8 fixtures + 4 expected + `run_eval.py`) verifica los 3 criterios + no-regresión F15/F37 con 5 sub-checks PASS (reporte en cualquier punto, huérfanos, gaps con y sin prose, `--strict` exit 1, manifest sync con `--dry-run` no escribe, no-regresión F15 + F37). **Wirings**: `scripts/README.md` con dos entradas nuevas (`util/ledger.py`, `util/unit_rules.py`); `SKILL.md` fila de enrutado `[pendiente F15]` → `F38`; `references/03-knowledge/README.md` `ledger-operativo.md` listado; `docs/adr/README.md` índice con ADR-0002.
+
+---
+
+## Fase 38 — Ledger operativo **[mixta] [núcleo]**
+
+**Entregables:** `@/scripts/util/ledger.py` + reporte.
+
+**Detalle:** el agente decide unidades y criticidad; el script contabiliza, valida transiciones y genera el reporte; detección de unidades huérfanas y de contenido sin respaldo.
+
+**Criterios:**
 - [ ] El reporte se genera en cualquier punto del proceso.
 - [ ] Detecta huérfanos y contenido sin respaldo.
 - [ ] El estado persiste en el manifiesto.

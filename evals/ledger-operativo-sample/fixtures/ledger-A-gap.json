@@ -1,0 +1,93 @@
+{
+  "schema_version": "2.0.0",
+  "source": {
+    "id": "fixture-A",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "entries": [
+    {
+      "unit_id": "u_001",
+      "source_block_ids": [
+        "158d9f80d141"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "definition",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "target_section": null,
+      "state": "written"
+    },
+    {
+      "unit_id": "u_002",
+      "source_block_ids": [
+        "9b97a523433d"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "parameter",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "target_section": null,
+      "state": "written"
+    },
+    {
+      "unit_id": "u_003",
+      "source_block_ids": [
+        "4d0d3ed1912f"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "default",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "target_section": null,
+      "state": "written"
+    },
+    {
+      "unit_id": "u_004",
+      "source_block_ids": [
+        "9ffafa76cd68"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "warning",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "target_section": null,
+      "state": "written"
+    },
+    {
+      "unit_id": "u_005",
+      "source_block_ids": [
+        "dea46bb618df"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "error-code",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "target_section": null,
+      "state": "written"
+    },
+    {
+      "unit_id": "u_007",
+      "source_block_ids": [
+        "5ae7e7d5439b"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "step",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "target_section": null,
+      "state": "written"
+    },
+    {
+      "unit_id": "u_008",
+      "source_block_ids": [
+        "6c361cdcd619"
+      ],
+      "source_section_path": "/ch02/configuration",
+      "type": "formula",
+      "criticality": "must-keep",
+      "target_note": "postgres-config",
+      "target_section": null,
+      "state": "written"
+    }
+  ]
+}

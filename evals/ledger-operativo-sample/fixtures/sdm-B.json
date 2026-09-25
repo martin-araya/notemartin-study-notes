@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-B",
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "format": "pdf"
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/intro",
+      "title": "Introduction",
+      "blocks": [
+        {
+          "id": "1830d62fd308",
+          "type": "definition",
+          "content": {
+            "text": "Una transacción es una unidad atómica."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "0c641019a690",
+          "type": "parameter",
+          "content": {
+            "name": "default_transaction_isolation",
+            "description": "Nivel de aislamiento."
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "e268f6b4f643",
+          "type": "default",
+          "content": {
+            "name": "default_transaction_isolation",
+            "value": "read committed"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "4730bff0e33a",
+          "type": "warning",
+          "content": {
+            "text": "WARNING: transacciones largas.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "82083afa70f8",
+          "type": "error-code",
+          "content": {
+            "code": "EIO",
+            "message": "Error de E/S."
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "74c4d750bd39",
+          "type": "formula",
+          "content": {
+            "latex": "n = r * w",
+            "numbered": true
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/intro",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

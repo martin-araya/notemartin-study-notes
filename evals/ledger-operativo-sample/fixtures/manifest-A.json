@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-A",
+    "path": "/tmp/fixture-A.pdf",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "algorithm": "sha256"
+  },
+  "current_stage": "l2",
+  "stage_progress": {
+    "l0": "done",
+    "l1": "done",
+    "l2": "in_progress",
+    "l3": "pending",
+    "l4": "pending"
+  },
+  "units_processed": 0,
+  "published_notes": [],
+  "glossary": {
+    "view": "Vista materializada"
+  },
+  "naming_decisions": [
+    {
+      "entity": "note-id",
+      "decision": "kebab-case"
+    }
+  ],
+  "link_debt": [],
+  "hash_mismatch": false,
+  "last_modified": "2026-09-24T00:00:00+00:00"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "source": {
     "id": "13-internet-archive-scan-hostil",
     "hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
@@ -15,7 +15,10 @@
       "criticality": "must-keep",
       "target_note": null,
       "target_section": null,
-      "state": "pending"
+      "state": "pending",
+      "content": {
+        "text": "Fragmento OCR pendiente."
+      }
     }
   ]
 }
