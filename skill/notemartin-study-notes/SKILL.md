@@ -107,6 +107,7 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | Resolución de términos canónicos, aliases y colisiones entre dominios | `references/03-knowledge/terminology.md` | `references/03-knowledge/information-units.md` (tipo `definition`), `references/03-knowledge/concept-graph.md` (related_concepts) | F40 |
 | Detección de contradicciones u obsolescencia | `references/03-knowledge/conflicts.md` | `references/04-authoring/` | [pendiente F41] |
 | División del trabajo en notas (Note Plan) | `references/03-knowledge/note-plan.md` | `references/04-authoring/` hasta cerrar el plan | [pendiente F44] |
+| Detección de contradicciones u obsolescencia (registry + directivas `:::contradiction` y `:::discrepancy`) | `references/03-knowledge/conflicts.md` | `references/04-authoring/notemark.md` (directivas F12), `references/03-knowledge/information-units.md` (version-note), `references/03-knowledge/terminology.md` (deprecation_status cross-cutting) | F41 |
 | Redacción de cualquier nota en NoteMark | `references/04-authoring/notemark.md` | el resto de `references/04-authoring/` (directivas/marcas/propiedades están cubiertos aquí) | [pendiente F12] |
 | Validación del IR o consulta del catálogo de nodos | `references/04-authoring/ir-spec.md` | `references/05-note-types/` (el catálogo de tipos decide qué nodos usar, no al revés) | [pendiente F14] |
 | Elección de directiva de bloque NoteMark | `references/04-authoring/block-directives.md` | `references/05-note-types/` (las plantillas fijan directivas por tipo) | [pendiente F45] |

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "conflicts": [],
+  "build_metadata": {
+    "built_at": "2026-09-25T15:22:46.932261+00:00",
+    "conflict_count": 0
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "2.0.0",
+  "source": {
+    "id": "fixture-legacy",
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "entries": [
+    {
+      "unit_id": "u_dep_00",
+      "source_block_ids": [
+        "c30c908ec9c5"
+      ],
+      "source_section_path": "/ch02/legacy",
+      "type": "warning",
+      "criticality": "context",
+      "target_note": null,
+      "state": "discarded",
+      "discard_reason": "out-of-scope-by-user",
+      "deprecation_status": "deprecated"
+    },
+    {
+      "unit_id": "u_dep_01",
+      "source_block_ids": [
+        "5169a728672f"
+      ],
+      "source_section_path": "/ch02/legacy",
+      "type": "warning",
+      "criticality": "context",
+      "target_note": null,
+      "state": "discarded",
+      "discard_reason": "out-of-scope-by-user",
+      "deprecation_status": "deprecated"
+    }
+  ],
+  "build_metadata": {
+    "version": "1.0",
+    "built_at": "2026-09-25T15:22:46.934730+00:00"
+  }
+}

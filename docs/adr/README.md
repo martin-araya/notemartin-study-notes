@@ -38,3 +38,4 @@ Qué se gana, qué se pierde, qué queda atado a esta decisión.
 - `ADR-0004-glossary-model.md` — F40: `knowledge/glossary.json` separado de `manifest.glossary`; sufijos `-<vendor>` para colisiones; definitions array para detectar redefiniciones.
 
 Las decisiones cerradas hasta ahora viven en `skills/AGENT.md` §8. Cuando una de ellas se reabre formalmente, se promueve a ADR aquí.
+- `ADR-0005-conflicts-model.md` — F41: storage dual JSON registry + directivas inline `:::contradiction`/`:::discrepancy`; taxonomía cross-cutting de obsolescencia; fuente gana sin excepciones.

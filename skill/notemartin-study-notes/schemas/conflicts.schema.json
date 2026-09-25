@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/conflicts.schema.json",
+  "title": "Conflicts Registry",
+  "description": "Registro canónico de contradicciones detectadas en el corpus (Fase 41). Convive con manifest y ledger; complementa terminology (F40), concept-graph (F39) y editorial-semantics (F35). Documento normativo: references/03-knowledge/conflicts.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "conflicts", "build_metadata"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "hash"],
+      "properties": {
+        "id": { "type": "string" },
+        "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/conflict" }
+    },
+    "build_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["built_at", "conflict_count"],
+      "properties": {
+        "built_at": { "type": "string", "format": "date-time" },
+        "conflict_count": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "$defs": {
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "anchors", "description", "status", "first_seen_at"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^c_[0-9]{3,}$",
+          "description": "Identificador del conflicto (c_001, c_002, ...)."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["source-vs-source", "source-vs-derived", "source-vs-external", "deprecation-mismatch", "version-mismatch"]
+        },
+        "anchors": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/anchor" }
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "status": {
+          "type": "string",
+          "enum": ["open", "resolved", "unresolved"]
+        },
+        "resolution": {
+          "type": ["string", "null"],
+          "description": "Texto libre cuando status=resolved."
+        },
+        "model_says": {
+          "type": ["string", "null"],
+          "description": "Derivación del modelo cuando type=source-vs-derived."
+        },
+        "first_seen_at": { "type": "string", "format": "date-time" },
+        "deprecation_status": {
+          "type": ["string", "null"],
+          "enum": ["current", "preview", "deprecated", "legacy", "removed", null]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "resolved" } } },
+          "then": {
+            "required": ["resolution"],
+            "properties": { "resolution": { "type": "string", "minLength": 1 } }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "source-vs-derived" } } },
+          "then": {
+            "required": ["model_says"],
+            "properties": { "model_says": { "type": "string", "minLength": 1 } }
+          }
+        }
+      ]
+    },
+    "anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["block", "note", "concept"]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "block.id (sha1 hex 12) | target_note | concept_id"
+        }
+      }
+    }
+  }
+}

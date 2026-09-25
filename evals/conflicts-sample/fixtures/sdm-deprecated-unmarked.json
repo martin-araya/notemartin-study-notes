@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-legacy",
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "format": "pdf"
+  },
+  "sections": [
+    {
+      "section_path": "/ch02/legacy",
+      "title": "Legacy",
+      "blocks": [
+        {
+          "id": "c30c908ec9c5",
+          "type": "warning",
+          "content": {
+            "text": "WARNING: este comando está deprecated.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/legacy",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "5169a728672f",
+          "type": "parameter",
+          "content": {
+            "name": "old_param",
+            "description": "deprecated"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/legacy",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "6d797f02075f",
+          "type": "example",
+          "content": {
+            "text": "ejemplo"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/legacy",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "64e9cb06afd0",
+          "type": "prose",
+          "content": {
+            "text": "intro"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/legacy",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

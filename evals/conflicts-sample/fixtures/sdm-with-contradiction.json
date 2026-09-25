@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "format": "pdf"
+  },
+  "sections": [
+    {
+      "section_path": "/ch02/configuration",
+      "title": "Configuration",
+      "blocks": [
+        {
+          "id": "a2ae25f4c960",
+          "type": "parameter",
+          "content": {
+            "name": "shared_buffers",
+            "description": "default 128 MB"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "857f16accf75",
+          "type": "parameter",
+          "content": {
+            "name": "shared_buffers",
+            "description": "default 64 MB"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "9ab27afa2554",
+          "type": "warning",
+          "content": {
+            "text": "WARNING: ajuste este parámetro.",
+            "severity": "caution"
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "65dcda3b7a64",
+          "type": "example",
+          "content": {
+            "text": "Ejemplo de configuración."
+          },
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/configuration",
+            "bbox": null
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

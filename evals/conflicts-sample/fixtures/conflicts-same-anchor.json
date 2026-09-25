@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "fixture-pg",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "conflicts": [
+    {
+      "id": "c_001",
+      "type": "source-vs-source",
+      "anchors": [
+        {
+          "type": "block",
+          "id": "a8f4ce140580"
+        },
+        {
+          "type": "block",
+          "id": "a8f4ce140580"
+        }
+      ],
+      "description": "El parámetro `shared_buffers` aparece con default 128 MB en /ch02 y 64 MB en /ch07.",
+      "status": "open",
+      "resolution": null,
+      "model_says": null,
+      "first_seen_at": "2026-09-25T15:22:46.932118+00:00",
+      "deprecation_status": null
+    },
+    {
+      "id": "c_002",
+      "type": "source-vs-derived",
+      "anchors": [
+        {
+          "type": "block",
+          "id": "c1d2e3f40506"
+        },
+        {
+          "type": "concept",
+          "id": "mvcc"
+        }
+      ],
+      "description": "El modelo infiere serializable snapshot isolation; la fuente no lo nombra explícitamente.",
+      "status": "resolved",
+      "resolution": "Cuerpo refleja la fuente; modelo_says documenta la inferencia.",
+      "model_says": "MVCC implementa serializable snapshot isolation desde PG 9.1.",
+      "first_seen_at": "2026-09-25T15:22:46.932120+00:00",
+      "deprecation_status": null
+    },
+    {
+      "id": "c_003",
+      "type": "deprecation-mismatch",
+      "anchors": [
+        {
+          "type": "block",
+          "id": "d1e2f3a40506"
+        },
+        {
+          "type": "note",
+          "id": "postgres-wal"
+        }
+      ],
+      "description": "WAL aparece como current en /ch02 y como deprecated en /ch09.",
+      "status": "open",
+      "resolution": null,
+      "model_says": null,
+      "first_seen_at": "2026-09-25T15:22:46.932121+00:00",
+      "deprecation_status": "deprecated"
+    }
+  ],
+  "build_metadata": {
+    "built_at": "2026-09-25T15:22:46.932122+00:00",
+    "conflict_count": 3
+  }
+}
