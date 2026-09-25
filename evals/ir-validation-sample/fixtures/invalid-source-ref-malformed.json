@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "invalid-source-ref-malformed",
+  "title": "Invalid source_ref malformed block_id",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "blk_xyz_invalid",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        }
+      ]
+    }
+  ]
+}

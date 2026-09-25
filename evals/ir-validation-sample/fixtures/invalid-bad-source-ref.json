@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "invalid-dangling-source-ref",
+  "title": "Invalid IR with dangling source_ref",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {"text": "Some text ", "capability": "text"},
+              "source_refs": []
+            },
+            {
+              "node": "source-ref",
+              "attrs": {
+                "block_id": "fffefdfc0000",
+                "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+                "capability": "source-ref"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

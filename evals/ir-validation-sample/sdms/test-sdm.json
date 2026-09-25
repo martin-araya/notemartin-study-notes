@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "blocks": [
+    {"id": "deadbeef1234", "kind": "p", "text": "fake SDM block 1"},
+    {"id": "cafebabe5678", "kind": "p", "text": "fake SDM block 2"}
+  ]
+}

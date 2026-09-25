@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "invalid-unknown-node",
+  "title": "Invalid IR with unknown node",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "weirdo",
+      "attrs": {"capability": "weirdo-cap"},
+      "source_refs": [],
+      "children": []
+    }
+  ]
+}

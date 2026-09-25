@@ -1,0 +1,689 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "notemark-—-nota-sonda-de-marcas-inline-(fase-46)",
+  "title": "NoteMark — nota sonda de marcas inline (Fase 46)",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1,
+        "capability": "section",
+        "_title": "NoteMark — sonda de marcas inline (F46)"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Nota sonda que ejercita las 6 marcas inline obligatorias + sus 3 de apoyo en contexto, con densidad de citación 1.0 en bloques fácticos (todos los hechos del SDM ficticio llevan ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "{src:}",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ") y regla de primera aparición respetada (cada `",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "x",
+            "term_id": "x",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "` aparece una sola vez por nota).",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§1 · Configuración inicial"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "El parámetro ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "shared-buffers",
+            "term_id": "shared-buffers",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " controla la memoria dedicada al caché de páginas en PostgreSQL. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "a10000010123",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "warning",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Cambiar ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "shared_buffers",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " requiere reiniciar el servidor. ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "source-ref",
+              "attrs": {
+                "block_id": "a10000020123",
+                "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+                "capability": "source-ref"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§2 · Tabla de parámetros"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "parameter-table",
+      "attrs": {
+        "columns": [
+          "name",
+          "type",
+          "default",
+          "range"
+        ],
+        "capability": "parameter-table"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "table",
+          "attrs": {
+            "headers": [
+              "parametro",
+              "tipo",
+              "default",
+              "rango"
+            ],
+            "capability": "table"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§3 · Mensaje de error típico"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "code",
+          "attrs": {
+            "lang": "text",
+            "text": "ERROR: out of memory\nDETAIL: Failed on request of size 67108864 in memory context \"MessageContext\".",
+            "capability": "code"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "source-ref",
+              "attrs": {
+                "block_id": "a30000010123",
+                "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+                "capability": "source-ref"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§4 · Procedimiento"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "step",
+      "attrs": {
+        "index": 1,
+        "capability": "step"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "section",
+          "attrs": {
+            "level": 3,
+            "capability": "section",
+            "_title": "Levantar el servicio"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code",
+          "attrs": {
+            "lang": "bash",
+            "text": "systemctl start postgresql",
+            "capability": "code"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "source-ref",
+              "attrs": {
+                "block_id": "a40000010123",
+                "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+                "capability": "source-ref"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "step",
+      "attrs": {
+        "index": 2,
+        "capability": "step"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "section",
+          "attrs": {
+            "level": 3,
+            "capability": "section",
+            "_title": "Conectar al servidor"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Conectarse a `",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "placeholder",
+              "attrs": {
+                "text": "host",
+                "capability": "placeholder"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ":",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "placeholder",
+              "attrs": {
+                "text": "port",
+                "capability": "placeholder"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": " con el usuario ",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "placeholder",
+              "attrs": {
+                "text": "db-user",
+                "capability": "placeholder"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": "`. ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "source-ref",
+              "attrs": {
+                "block_id": "a40000020123",
+                "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+                "capability": "source-ref"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§5 · Sesión interactiva"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "console",
+      "attrs": {
+        "lines": [
+          "$ psql -h {{host}} -U {{db-user}} -d {{db-name}}",
+          "psql (16.1)",
+          "postgres=# SELECT version();",
+          "{src:blk_a50000010123}"
+        ],
+        "capability": "console"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§6 · Referencia cruzada"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Para más detalle sobre índices, ver la nota dedicada. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "link-note",
+          "attrs": {
+            "text": "hash-indexes",
+            "target": "hash-indexes",
+            "capability": "link-note"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "a60000010123",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§7 · Analogía"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "El optimizador de PostgreSQL funciona como un planificador de proyectos: cada consulta es un proyecto y el optimizador elige el orden de ejecución más barato según las estadísticas disponibles. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "derived": true
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§8 · Conocimiento externo"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Esta analogía con sistemas de tickets como Jira es nuestra, no del libro. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "external": true
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§9 · Atajos de teclado del lector"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "En el editor de la base de datos, `",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "keyboard",
+          "attrs": {
+            "text": "Ctrl+S",
+            "capability": "keyboard"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "` guarda el cambio pendiente.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§10 · Texto eliminado"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Esta sección documenta la sintaxis obsoleta ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "deleted",
+          "attrs": {
+            "capability": "deleted"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " que fue reemplazada por SKIP LOCKED en PostgreSQL 9.5.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "§11 · Nota al pie"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Este capítulo corresponde al manual de PostgreSQL 16.[^fn1]",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[^fn1]: ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "footnote-ref",
+          "attrs": {
+            "ref_id": "postgres-manual-16",
+            "capability": "footnote-ref"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " PostgreSQL 16 Official Documentation, chapter 14.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    }
+  ],
+  "source_file": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/inline-marks-sample/note-probe-inline.nm"
+}

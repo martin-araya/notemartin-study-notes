@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "valid-basic",
+  "title": "Valid basic IR",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {"text": "Hello world.", "capability": "text"},
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

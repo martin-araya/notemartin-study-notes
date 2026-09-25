@@ -1,0 +1,2968 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "notemark-—-nota-sonda-ampliada-(fase-12)",
+  "title": "NoteMark — nota sonda ampliada (Fase 12)",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1,
+        "capability": "section",
+        "_title": "NoteMark — nota sonda ampliada (Fase 12)"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Esta nota ejercita ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "strong",
+          "attrs": {
+            "capability": "strong"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ", las ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "strong",
+          "attrs": {
+            "capability": "strong"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ", los ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "strong",
+          "attrs": {
+            "capability": "strong"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " y el ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "strong",
+          "attrs": {
+            "capability": "strong"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " definido en ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "references/04-authoring/notemark.md",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ". Existe como evidencia ejecutable del criterio 4 del roadmap: un agente puede escribir una nota de 400 líneas en NoteMark sin ambigüedad sintáctica.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Resumen en una capa"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l1"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "NoteMark es el formato de autoría de la skill ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "notemartin-study-notes",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ". El agente escribe prosa + directivas en este formato; un parser lo convierte al Note IR; los renderers traducen al dialecto de cada destino (Obsidian, Notion, AppFlowy, Markdown, HTML, PDF, Anki). Este documento NO contiene sintaxis de ninguna plataforma; cualquier marca de Obsidian, Notion o AppFlowy es aquí un anti-ejemplo tachado.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "PostgreSQL 16 — `shared_buffers` y WAL"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l2"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "PostgreSQL reserva una región de memoria compartida para el buffer pool. El tamaño se controla con el parámetro ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "shared_buffers",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ". ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "shared-buffers",
+            "term_id": "shared-buffers",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " {src:blk_b123} El valor por defecto es 128 MB en una instalación por defecto, pero la documentación de producto recomienda un 25 % de la RAM del servidor para cargas típicas. {src:blk_b124}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Configuración recomendada"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "parameter-table",
+      "attrs": {
+        "columns": [
+          "name",
+          "type",
+          "default",
+          "range"
+        ],
+        "capability": "parameter-table"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "table",
+          "attrs": {
+            "headers": [
+              "parametro",
+              "tipo",
+              "default",
+              "rango",
+              "versión"
+            ],
+            "capability": "table"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "El cambio de ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "shared_buffers",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " requiere reinicio del servidor. {src:blk_b125}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "warning",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Si aumentas ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "shared_buffers",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " por encima del 40 % de RAM, considera bajar ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "work_mem",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " para evitar OOM. {src:blk_b126}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Write-Ahead Log (WAL)"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "El log de escritura anticipada garantiza durabilidad y permite la recuperación tras un crash. Cada cambio se escribe primero al WAL antes de tocar las páginas de datos. {src:blk_c234}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "performance",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Con ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "synchronous_commit = off",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " reduces la latencia de commit a costa de perder hasta 0.5 s de transacciones en un crash. {src:blk_c235}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "console",
+      "attrs": {
+        "lines": [
+          "$ pg_ctl reload",
+          "$ psql -c \"SHOW synchronous_commit\"",
+          " synchronous_commit",
+          "--------------------",
+          " on"
+        ],
+        "capability": "console"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Para verificar el flujo WAL en producción: ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "SELECT * FROM pg_stat_wal;",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " muestra la cantidad de registros escritos y reciclados.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "code",
+          "attrs": {
+            "lang": "sql",
+            "text": "-- Configurar WAL level a replica para streaming replication\nALTER SYSTEM SET wal_level = 'replica';\nSELECT pg_reload_conf();",
+            "capability": "code"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "note",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "El nombre \"WAL\" es histórico; internamente son archivos segmentados en ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "pg_wal/",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ".",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "PostgreSQL 16 — MVCC y aislamiento"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l2"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "El control de concurrencia multiversión (",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "mvcc",
+            "term_id": "mvcc",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ") hace que cada transacción vea un snapshot consistente de la base de datos al inicio. {src:blk_d345} Los conflictos de escritura se resuelven al commit con un chequeo de visibilidad, no con locks de lectura.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "version",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "PostgreSQL 15 → 16: el planificador ahora considera ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "pg_stat_io",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " para latencia de I/O en decisiones de ordenación. {src:blk_d346}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "security",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "CVE-2024-1234: bypass de autenticación en el endpoint ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "pg_stat_statements",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " cuando ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "shared_preload_libraries",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " está mal configurado. Parchear a 16.3 o superior. {src:blk_e456}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "danger",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Nunca ejecutar ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "DROP TABLE",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " sin antes verificar dependencias y tener un backup verificado. La operación es irreversible fuera de un PITR reciente.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "deprecated",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "El tipo ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "json",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " (sin la ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "b",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ") se conserva por compatibilidad pero ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "jsonb",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " lo reemplaza desde 9.4. Usar ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "jsonb",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " para datos nuevos. {src:blk_f567}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "question",
+      "attrs": {
+        "prompt": "¿Qué es un \"xmin\"?",
+        "capability": "question"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Cada fila lleva el id de la transacción que la insertó (",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "xmin",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": "). Vacuum compara ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "xmin",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " con ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "xmax",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " para detectar versiones obsoletas. {src:blk_g678}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Procedimiento de vacuum"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "step",
+      "attrs": {
+        "index": 1,
+        "capability": "step"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "section",
+          "attrs": {
+            "level": 3,
+            "capability": "section",
+            "_title": "Detectar tablas con mucha tupla muerta"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Ejecutar ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "SELECT relname, n_dead_tup FROM pg_stat_user_tables WHERE n_dead_tup > 10000 ORDER BY n_dead_tup DESC;",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ". {src:blk_h789}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "step",
+      "attrs": {
+        "index": 1,
+        "capability": "step"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "section",
+          "attrs": {
+            "level": 3,
+            "capability": "section",
+            "_title": "Programar vacuum manual si es urgente"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "VACUUM (VERBOSE, ANALYZE) nombre_tabla;",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " no bloquea lecturas pero sí escribe. {src:blk_h790}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "step",
+      "attrs": {
+        "index": 1,
+        "capability": "step"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "section",
+          "attrs": {
+            "level": 3,
+            "capability": "section",
+            "_title": "Configurar autovacuum si no estaba"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "ALTER TABLE nombre_tabla SET (autovacuum_vacuum_scale_factor = 0.05);",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " reduce el umbral al 5 %. {src:blk_h791}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "collapsible",
+      "attrs": {
+        "title": "Detalle extendido sobre visibilidad",
+        "default_open": false,
+        "capability": "collapsible"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "section",
+          "attrs": {
+            "level": 3,
+            "capability": "section",
+            "_title": "Detalle extendido sobre visibilidad"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "La visibilidad de una fila para una transacción T depende de si ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "xmin <= T.snapshot.xmin",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " y ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "xmax > T.snapshot.xmax",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ". Este detalle raramente se necesita en operación normal, pero explica por qué un ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "SELECT",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " post-transaction puede ver filas distintas. {src:blk_h792}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Kubernetes — `Pod` v1 API Reference"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l2"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Un ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "pod",
+            "term_id": "pod",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " es la unidad mínima desplegable en Kubernetes; contiene uno o más contenedores que comparten red y almacenamiento. {src:blk_j012} La especificación del Pod se describe en ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "core/v1",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ".",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Especificación mínima"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "yaml",
+        "text": "apiVersion: v1\nkind: Pod\nmetadata:\n  name: {{nombre_del_pod}}\nspec:\n  containers:\n    - name: app\n      image: nginx:1.27\n      ports:\n        - containerPort: 80",
+        "capability": "code"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Sustituye ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "placeholder",
+          "attrs": {
+            "text": "nombre_del_pod",
+            "capability": "placeholder"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " por el nombre de tu pod antes de aplicar.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Parámetros clave"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "parameter-table",
+      "attrs": {
+        "columns": [
+          "name",
+          "type",
+          "default",
+          "range"
+        ],
+        "capability": "parameter-table"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "table",
+          "attrs": {
+            "headers": [
+              "parametro",
+              "tipo",
+              "default",
+              "descripción"
+            ],
+            "capability": "table"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "warning",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Si el contenedor necesita más de 1 GB de memoria, configura ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "resources.requests",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " y ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "resources.limits",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " explícitamente. Sin límites, Kubernetes puede programarlo en un nodo sin RAM. {src:blk_k123}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "performance",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "El campo ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "imagePullPolicy: Always",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " añade una verificación de hash en cada arranque de pod. Para imágenes inmutables usa ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "IfNotPresent",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " y reduce latencia de scheduling. {src:blk_k124}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Para debugging rápido: `kubectl describe pod ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "placeholder",
+              "attrs": {
+                "text": "nombre_del_pod",
+                "capability": "placeholder"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": "` muestra eventos ordenados del ciclo de vida.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "external",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Esta analogía con un \"proceso Unix con namespace propio\" es nuestra; el manual oficial no la usa. ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": "",
+                "capability": "text"
+              },
+              "source_refs": [],
+              "external": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "RFC 7231 — HTTP Semantics"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l2"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[[term:http-1.1]] es la versión mayor de HTTP publicada en 2014 como RFC 7230-7235. La semántica de métodos y headers se describe en RFC 7231. {src:blk_l234}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Métodos"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "parameter-table",
+      "attrs": {
+        "columns": [
+          "name",
+          "type",
+          "default",
+          "range"
+        ],
+        "capability": "parameter-table"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "table",
+          "attrs": {
+            "headers": [
+              "método",
+              "seguro",
+              "idempotente",
+              "descripción"
+            ],
+            "capability": "table"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "note",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Un método idempotente puede repetirse sin efecto adicional tras la primera aplicación. PUT y DELETE lo son; POST no.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "security",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Los métodos no listados en la tabla (",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "TRACE",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ", ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "CONNECT",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ", custom) requieren configuración explícita del servidor para evitar CSRF amplification attacks. {src:blk_m345}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Status codes"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "columns",
+      "attrs": {
+        "count": 2,
+        "capability": "columns"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "strong",
+              "attrs": {
+                "capability": "strong"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ": 100 Continue, 101 Switching Protocols, 103 Early Hints.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        },
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "strong",
+              "attrs": {
+                "capability": "strong"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ": 200 OK, 201 Created, 204 No Content, 206 Partial Content.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "code",
+          "attrs": {
+            "lang": "http",
+            "text": "HTTP/1.1 200 OK\nContent-Type: application/json\nCache-Control: max-age=3600\n\n{\"id\": 42, \"name\": \"probe\"}",
+            "capability": "code"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "question",
+      "attrs": {
+        "prompt": "¿Por qué 404 y no 410?",
+        "capability": "question"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "404 indica \"no encontrado ahora\"; 410 indica \"fue aquí pero se fue intencionalmente\". Para SEO se recomienda 410 cuando se sabe que el recurso no volverá. {src:blk_n456}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "console",
+      "attrs": {
+        "lines": [
+          "$ curl -I https://example.com/api/v1/health",
+          "HTTP/2 200",
+          "server: nginx/1.27.0",
+          "content-type: application/json"
+        ],
+        "capability": "console"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "conflict",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "La RFC 7231 dice que 303 See Other debe usarse tras un POST para forzar GET al Location. La práctica común usa 302 Found para lo mismo, aunque técnicamente es incorrecto. {src:blk_p567} vs práctica común.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Database Internals (libro escaneado) — B-Trees"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l2"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Capítulo 3 de \"Database Internals\" (Petrov, 2019). El capítulo cubre la estructura de ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "b-tree",
+            "term_id": "b-tree",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " y sus variantes para almacenamiento en disco. {src:blk_q678}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Estructura de página"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cada nodo de un B-tree ocupa una página de tamaño fijo (típicamente 4 KB o 16 KB). Los nodos hoja contienen las tuplas; los internos contienen separadores. {src:blk_r789}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "note",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Una página de 16 KB con separadores de 8 bytes puede contener ~2000 punteros por nodo, dando árboles con factor de ramificación suficiente para que 4 niveles cubran hasta ~10^13 registros. {src:blk_r790}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "El parámetro ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "merge_threshold",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": " (default 50 %) controla cuándo nodos vecinos se fusionan tras un delete. Subirlo a 75 % reduce fragmentación en workloads con muchos updates pequeños.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "collapsible",
+      "attrs": {
+        "title": "Variantes cubiertas en el capítulo",
+        "default_open": false,
+        "capability": "collapsible"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "section",
+          "attrs": {
+            "level": 3,
+            "capability": "section",
+            "_title": "Variantes cubiertas en el capítulo"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "list",
+          "attrs": {
+            "ordered": false,
+            "capability": "list"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "B+ tree: solo hojas contienen datos; internos solo claves y punteros.",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": "B-link tree: punteros laterales entre hojas para concurrencia.",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Concurrent B-tree: lock-coupling con hand-over-hand locking.",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Lazy B-tree: actualizaciones bufferadas y aplicadas en batches.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Diagramas"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "diagram",
+      "attrs": {
+        "kind": "mermaid",
+        "text": "graph TD\n  R[Root] --> I1[Interno 1]\n  R --> I2[Interno 2]\n  I1 --> L1[Hoja 1]\n  I1 --> L2[Hoja 2]\n  I2 --> L3[Hoja 3]\n  I2 --> L4[Hoja 4]\n  L1 -.->|link| L2\n  L2 -.->|link| L3\n  L3 -.->|link| L4",
+        "capability": "diagram"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "figure",
+      "attrs": {
+        "src": "",
+        "alt": "",
+        "capability": "figure"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "equation",
+      "attrs": {
+        "latex": "",
+        "display": true,
+        "capability": "equation-block"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Para calcular el factor de ramificación efectivo en un B-tree real: ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "code-inline",
+              "attrs": {
+                "text": "tamaño_página / (tamaño_clave + tamaño_puntero)",
+                "capability": "code-inline"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": ". {src:blk_s890}",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "console",
+      "attrs": {
+        "lines": [
+          "$ python3 -c \"print(16 * 1024 / (8 + 8))\"",
+          "1024.0"
+        ],
+        "capability": "console"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Glosario acumulativo"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "shared-buffers",
+            "term_id": "shared-buffers",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ": región de memoria compartida usada como buffer pool por PostgreSQL. {src:blk_b123}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "mvcc",
+            "term_id": "mvcc",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ": control de concurrencia multiversión; cada transacción ve un snapshot. {src:blk_d345}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "pod",
+            "term_id": "pod",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ": unidad mínima desplegable en Kubernetes, encapsula uno o más contenedores. {src:blk_j012}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[[term:http-1.1]]: revisión mayor de HTTP especificada en RFC 7230-7235. {src:blk_l234}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "b-tree",
+            "term_id": "b-tree",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ": estructura de árbol balanceado usada como índice en bases de datos relacionales. {src:blk_q678}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "hash-join",
+            "term_id": "hash-join",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ": algoritmo de join que usa una tabla hash en memoria. {src:blk_l234}",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Notas derivadas y externas"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "external",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "La analogía del \"WAL como bitácora de barco\" es nuestra, no del manual de PostgreSQL. La fuente usa metáforas más técnicas (write-ahead = \"escribe antes\"). ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": "",
+                "capability": "text"
+              },
+              "source_refs": [],
+              "external": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Párrafo derivado: para entender MVCC es útil pensarlo como un sistema de versiones de archivos donde cada commit crea una versión nueva, pero el rendimiento real requiere comprensión del ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "xmin",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "/",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "xmax",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ". ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "derived": true
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "external",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "La sección \"RFC 7231 — HTTP Semantics\" incluye una interpretación nuestra del status 303 vs 302; la fuente oficial es la RFC misma, no este resumen. ",
+                "capability": "text"
+              },
+              "source_refs": []
+            },
+            {
+              "node": "text",
+              "attrs": {
+                "text": "",
+                "capability": "text"
+              },
+              "source_refs": [],
+              "external": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Placeholders pendientes"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Antes de publicar esta nota, sustituye:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "list",
+      "attrs": {
+        "ordered": false,
+        "capability": "list"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "placeholder",
+          "attrs": {
+            "text": "nombre_del_pod",
+            "capability": "placeholder"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " en el ejemplo de Kubernetes.",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "placeholder",
+          "attrs": {
+            "text": "nombre_del_tablespace",
+            "capability": "placeholder"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " (si aparece en otra nota relacionada).",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "placeholder",
+          "attrs": {
+            "text": "url_del_repositorio",
+            "capability": "placeholder"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " en la sección de related.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Anti-patrones tachados (recordatorio)"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "list",
+      "attrs": {
+        "ordered": false,
+        "capability": "list"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "deleted",
+          "attrs": {
+            "capability": "deleted"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " → usar ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": ":::warning",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ".",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "deleted",
+          "attrs": {
+            "capability": "deleted"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " → `",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "link-note",
+          "attrs": {
+            "text": "id",
+            "target": "id",
+            "capability": "link-note"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "`.",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "deleted",
+          "attrs": {
+            "capability": "deleted"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " → ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": ":::collapsible",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ".",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "deleted",
+          "attrs": {
+            "capability": "deleted"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " → tokens via ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "assets/tokens.json",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ".",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Verificación de cierre"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l3"
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Esta nota es evidencia de los criterios 1-4 de Fase 12:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "list",
+      "attrs": {
+        "ordered": false,
+        "capability": "list"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Criterio 1 (cobertura IR): cada una de las 20 directivas aparece al menos una vez en el cuerpo de la nota.",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Criterio 2 (sin plataforma): ningún bloque positivo usa sintaxis de Obsidian, Notion o AppFlowy. Los anti-ejemplos están tachados.",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Criterio 3 (ejemplos documentados): ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "references/04-authoring/notemark.md",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " §6 contiene 20 subsecciones con ejemplo por directiva.",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Criterio 4 (nota de 400 líneas sin ambigüedad): esta nota tiene ~400 líneas y se tokeniza con la gramática EBNF sin ambigüedad.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    }
+  ],
+  "source_file": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/notemark-sample/full-note.nm"
+}
