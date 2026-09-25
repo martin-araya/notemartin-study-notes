@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "corta-l2",
+  "title": "Nota corta solo L2",
+  "note-type": "concept",
+  "status": "draft",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1", "_title": "Concepto breve", "layer": "l2"},
+      "source_refs": [],
+      "children": [
+        {"node": "paragraph", "attrs": {"capability": "paragraph"}, "source_refs": [],
+         "children": [{"node": "text", "attrs": {"text": "Contenido de la nota corta. Solo L2.", "capability": "text"}, "source_refs": []}]}
+      ]
+    }
+  ]
+}

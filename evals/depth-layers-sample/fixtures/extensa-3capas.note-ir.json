@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "extensa-3capas",
+  "title": "Nota extensa con 3 capas",
+  "note-type": "architecture",
+  "status": "published",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1", "_title": "Title", "layer": "l1"},
+      "source_refs": [],
+      "children": [
+        {"node": "paragraph", "attrs": {"capability": "paragraph"}, "source_refs": [],
+         "children": [{"node": "text", "attrs": {"text": "Definición breve del concepto. Propósito principal. Ejemplo: SELECT * FROM t. Caso de uso: sistemas transaccionales.", "capability": "text"}, "source_refs": []}]}
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {"level": 2, "capability": "section-h2", "_title": "Operativo", "layer": "l2"},
+      "source_refs": [],
+      "children": [
+        {"node": "paragraph", "attrs": {"capability": "paragraph"}, "source_refs": [],
+         "children": [{"node": "text", "attrs": {"text": "Para configurar el sistema, primero editar el archivo de configuración. Luego reiniciar el servicio.", "capability": "text"}, "source_refs": []}]}
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {"level": 2, "capability": "section-h2", "_title": "Detalle", "layer": "l3"},
+      "source_refs": [],
+      "children": [
+        {"node": "paragraph", "attrs": {"capability": "paragraph"}, "source_refs": [],
+         "children": [{"node": "text", "attrs": {"text": "Detalle exhaustivo: parámetros, edge cases, troubleshooting.", "capability": "text"}, "source_refs": []}]}
+      ]
+    }
+  ]
+}
