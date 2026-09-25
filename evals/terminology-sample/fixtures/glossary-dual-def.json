@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "01-postgres",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL"
+  },
+  "terms": {
+    "transaccion": {
+      "canonical": "transaccion",
+      "definition": "Una transacción es una unidad atómica de trabajo.",
+      "domain": "postgresql",
+      "aliases": [
+        {
+          "alias": "transaction",
+          "kind": "en"
+        },
+        {
+          "alias": "tx",
+          "kind": "acronym"
+        }
+      ],
+      "definitions": [
+        {
+          "chapter": "/ch01/intro",
+          "definition": "Una transacción es una unidad atómica de trabajo.",
+          "canonical": true,
+          "status": "current",
+          "first_seen_at": "2026-09-25T14:56:20.038870+00:00",
+          "source_section_path": "/ch01/intro"
+        },
+        {
+          "chapter": "/ch09/late",
+          "definition": "Una transacción es una unidad atómica de trabajo.",
+          "canonical": true,
+          "status": "current",
+          "first_seen_at": "2026-09-25T14:56:20.038919+00:00",
+          "source_section_path": "/ch09/late"
+        }
+      ],
+      "needs_review": false,
+      "related_concepts": [
+        "acid",
+        "mvcc"
+      ]
+    },
+    "mvcc": {
+      "canonical": "mvcc",
+      "definition": "Control de concurrencia multiversión.",
+      "domain": "postgresql",
+      "aliases": [
+        {
+          "alias": "multi-version-concurrency-control",
+          "kind": "acronym"
+        }
+      ],
+      "definitions": [
+        {
+          "chapter": "/ch01/intro",
+          "definition": "Control de concurrencia multiversión.",
+          "canonical": true,
+          "status": "current",
+          "first_seen_at": "2026-09-25T14:56:20.038872+00:00",
+          "source_section_path": "/ch01/intro"
+        }
+      ],
+      "needs_review": false
+    },
+    "wal": {
+      "canonical": "wal",
+      "definition": "Write-Ahead Log: registro de escritura anticipada.",
+      "domain": "postgresql",
+      "aliases": [
+        {
+          "alias": "write-ahead-log",
+          "kind": "en"
+        }
+      ],
+      "definitions": [
+        {
+          "chapter": "/ch01/intro",
+          "definition": "Write-Ahead Log: registro de escritura anticipada.",
+          "canonical": true,
+          "status": "current",
+          "first_seen_at": "2026-09-25T14:56:20.038873+00:00",
+          "source_section_path": "/ch01/intro"
+        }
+      ],
+      "needs_review": false
+    },
+    "acid": {
+      "canonical": "acid",
+      "definition": "Atomicidad, consistencia, aislamiento, durabilidad.",
+      "domain": "postgresql",
+      "aliases": [
+        {
+          "alias": "ACID",
+          "kind": "acronym"
+        }
+      ],
+      "definitions": [
+        {
+          "chapter": "/ch02/transactions",
+          "definition": "Atomicidad, consistencia, aislamiento, durabilidad.",
+          "canonical": true,
+          "status": "current",
+          "first_seen_at": "2026-09-25T14:56:20.038874+00:00",
+          "source_section_path": "/ch02/transactions"
+        }
+      ],
+      "needs_review": false
+    },
+    "vista-materializada": {
+      "canonical": "vista-materializada",
+      "definition": "Una vista materializada almacena el resultado de una consulta.",
+      "domain": "postgresql",
+      "aliases": [
+        {
+          "alias": "materialized view",
+          "kind": "en"
+        }
+      ],
+      "definitions": [
+        {
+          "chapter": "/ch01/intro",
+          "definition": "Una vista materializada almacena el resultado de una consulta.",
+          "canonical": true,
+          "status": "current",
+          "first_seen_at": "2026-09-25T14:56:20.038875+00:00",
+          "source_section_path": "/ch01/intro"
+        }
+      ],
+      "needs_review": false,
+      "confusables": [
+        "view"
+      ]
+    }
+  },
+  "build_metadata": {
+    "built_at": "2026-09-25T14:56:20.038876+00:00",
+    "term_count": 5
+  }
+}

@@ -898,6 +898,21 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 
 ---
 
+## Fase 40 — Terminología y glosario acumulativo **[ref]**
+
+**Entregables:** `@/references/03-knowledge/terminology.md`.
+
+**Detalle:** término canónico con formas en inglés y español, siglas, plural y variantes; colisiones entre dominios resueltas con sufijo; glosario que crece entre capítulos; normalización retroactiva.
+
+**Criterios:**
+- [x] Ningún término tiene dos definiciones canónicas.
+- [x] Ningún alias apunta a dos términos.
+- [x] Un término del capítulo 2 no se redefine en el 9.
+
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/03-knowledge/terminology.md` (235 líneas / 230 — se acepta 5 líneas sobre el soft-cap para mantener la estructura de 11 §§ sin truncar §3; 11 §§, español, INV-06). §3 modelo de datos (terms con `canonical`/`definition`/`domain`/`aliases`/`definitions`/`needs_review`/`confusables`/`related_concepts`); §4 R1–R8 cerradas (kebab-case, sufijo `-<vendor>`, alias único por string normalizado, kind enum cerrada, definitions ≥ 1, exactamente 1 canónica, redefinición → `needs_review`, normalización retroactiva); §5 shape JSON; §6 procedimiento de 5 pasos; §7 detección de redefinición; §8 resolución de colisiones; §9 alias kind enum y matching CI; §10 verificación + cambios permitidos/reabren; §11 glosario. Schema `schemas/glossary.schema.json` (Draft 2020-12, `schema_version: "1.0.0"` const, `additionalProperties: false` en root y en cada `$defs/term`/`alias`/`definitionEntry`; regex `^[a-z0-9][a-z0-9-]{0,63}$` para `canonical` y `confusables`/`related_concepts`; enum cerrada `alias.kind = {en, es, acronym, plural, variant}`; `definitions[].status ∈ {current, historical, conflicting}`). **ADR-0004** justifica la separación `knowledge/glossary.json` vs `manifest.glossary` (el manifest es state transient, el glosario es knowledge acumulativo); y el matching por string normalizado (no por `(string, kind)`). **Eval battery** `evals/terminology-sample/` con `build_fixtures.py` (stdlib puro; 5 fixtures: `glossary-good`/`dual-def`/`alias-collision`/`redefinition`/`collision-suffix`) + 2 expected + `run_eval.py` con 7 sub-checks PASS: 3 criterios del roadmap sobre `glossary-good`, 3 casos negativos ortogonales (cada uno falla SOLO en su criterio: dual-def→c1, alias-collision→c2, redefinition→c3), resolución de colisión `-<vendor>` (`wal` PostgreSQL + `wal-oracle` Oracle), R1+R4+schema validity, no-regresión F15/F37/F38/F39. **Wirings**: `SKILL.md` fila `[pendiente F40]` → `F40` con refs a F37/F39; `references/03-knowledge/README.md` `terminology.md` listado + fila `Produce` actualizada; `docs/adr/README.md` índice con ADR-0004. Verificación: `wc -l` 235, 11 §§, 4 sub-checks PASS, no-regresión F15/F37/F38/F39 OK. Convive con `manifest.glossary` (state simple para counters/previews); el spec F40 introduce `knowledge/glossary.json` (estructura rica).
+
+---
+
 ## Fase 38 — Ledger operativo **[mixta] [núcleo]**
 
 **Entregables:** `@/scripts/util/ledger.py` + reporte.

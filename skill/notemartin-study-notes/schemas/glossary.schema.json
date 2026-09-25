@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/glossary.schema.json",
+  "title": "Glossary",
+  "description": "Glosario acumulativo de términos entre capítulos, mantenido por el agente en L2 (Fase 40). Convive con manifest.schema.json::glossary (que sigue siendo un mapa plano). Generado por el agente siguiendo references/03-knowledge/terminology.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "terms", "build_metadata"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del esquema. Mayor en cambios incompatibles; menor en campo opcional nuevo."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "vendor": { "type": ["string", "null"] },
+        "product": { "type": ["string", "null"] }
+      }
+    },
+    "terms": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/term" },
+      "description": "Mapa canónico → término. Cada clave es un canonical kebab-case; cada valor es el término completo."
+    },
+    "build_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["built_at", "term_count"],
+      "properties": {
+        "built_at": { "type": "string", "format": "date-time" },
+        "term_count": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "$defs": {
+    "term": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical", "definition", "domain", "aliases", "definitions"],
+      "properties": {
+        "canonical": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+          "description": "Slug kebab-case; con sufijo -<vendor> en colisiones (R2)."
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Definición canónica (R6: coincide con la definitions[canonical=true].definition)."
+        },
+        "domain": {
+          "type": "string",
+          "description": "vendor, vendor+product, o 'unknown'."
+        },
+        "aliases": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/alias" }
+        },
+        "definitions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/definitionEntry" }
+        },
+        "needs_review": {
+          "type": "boolean",
+          "default": false
+        },
+        "confusables": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+          }
+        },
+        "related_concepts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+            "description": "concept_ids del grafo (F39) relacionados."
+          }
+        }
+      },
+      "allOf": [
+        {
+          "description": "R6: exactamente una definition con canonical=true.",
+          "if": {
+            "properties": {
+              "definitions": {
+                "type": "array",
+                "minItems": 1
+              }
+            },
+            "required": ["definitions"]
+          },
+          "then": {
+            "properties": {
+              "definitions": {
+                "contains": {
+                  "type": "object",
+                  "properties": { "canonical": { "const": true } },
+                  "required": ["canonical"]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "alias": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["alias", "kind"],
+      "properties": {
+        "alias": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["en", "es", "acronym", "plural", "variant"]
+        }
+      }
+    },
+    "definitionEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chapter", "definition", "canonical", "status", "first_seen_at"],
+      "properties": {
+        "chapter": {
+          "type": "string",
+          "pattern": "^/[a-z0-9][a-z0-9/_-]*$",
+          "description": "Ruta canónica del capítulo (e.g., /ch01/intro)."
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "canonical": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["current", "historical", "conflicting"]
+        },
+        "first_seen_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source_section_path": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
