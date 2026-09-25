@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "dup",
+  "title": "Dedup test",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1", "_title": "Dedup test"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [{"block_id": "ccc000000001", "source_hash": "0000000000000000000000000000000000000000000000000000000000000000"}],
+          "children": [
+            {"node": "text", "attrs": {"text": "Repeated text. ", "capability": "text"}, "source_refs": []},
+            {"node": "text", "attrs": {"text": "Repeated text. ", "capability": "text"}, "source_refs": []},
+            {"node": "text", "attrs": {"text": "Unique text. ", "capability": "text"}, "source_refs": []}
+          ]
+        }
+      ]
+    }
+  ]
+}

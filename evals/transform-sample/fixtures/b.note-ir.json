@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "b",
+  "title": "Note B",
+  "layer": "l2",
+  "related": ["foo"],
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1", "_title": "Note B"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [{"block_id": "bbb000000002", "source_hash": "0000000000000000000000000000000000000000000000000000000000000000"}],
+          "children": [
+            {"node": "text", "attrs": {"text": "B content. ", "capability": "text"}, "source_refs": []}
+          ]
+        }
+      ]
+    }
+  ]
+}

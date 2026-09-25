@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "foo",
+  "title": "Foo Note",
+  "layer": "l2",
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {"level": 1, "capability": "section-h1", "_title": "Foo Note"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [{"block_id": "aaa000000001", "source_hash": "0000000000000000000000000000000000000000000000000000000000000000"}],
+          "children": [
+            {"node": "text", "attrs": {"text": "Intro text. ", "capability": "text"}, "source_refs": []}
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {"level": 2, "capability": "section-h2", "_title": "Chapter 2"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [{"block_id": "aaa000000002", "source_hash": "0000000000000000000000000000000000000000000000000000000000000000"}],
+          "children": [
+            {"node": "text", "attrs": {"text": "Chapter 2 text. ", "capability": "text"}, "source_refs": []}
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {"level": 2, "capability": "section-h2", "_title": "Chapter 3"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [{"block_id": "aaa000000003", "source_hash": "0000000000000000000000000000000000000000000000000000000000000000"}],
+          "children": [
+            {"node": "text", "attrs": {"text": "Chapter 3 text. ", "capability": "text"}, "source_refs": []}
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {"level": 2, "capability": "section-h2", "_title": "Chapter 4"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [{"block_id": "aaa000000004", "source_hash": "0000000000000000000000000000000000000000000000000000000000000000"}],
+          "children": [
+            {"node": "text", "attrs": {"text": "Chapter 4 text. ", "capability": "text"}, "source_refs": []}
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {"level": 2, "capability": "section-h2", "_title": "Chapter 5"},
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {"capability": "paragraph"},
+          "source_refs": [{"block_id": "aaa000000005", "source_hash": "0000000000000000000000000000000000000000000000000000000000000000"}],
+          "children": [
+            {"node": "text", "attrs": {"text": "Chapter 5 text. ", "capability": "text"}, "source_refs": []}
+          ]
+        }
+      ]
+    }
+  ]
+}
