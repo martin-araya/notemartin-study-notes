@@ -1,0 +1,6 @@
+schema_version: "1.0.0"
+targets:
+  active:
+    - markdown
+  markdown:
+    enabled: true
