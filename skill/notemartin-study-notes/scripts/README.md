@@ -399,14 +399,14 @@ CLI con 4 subcomandos que deriva `knowledge/concept-graph.json` desde el ledger 
 | Documentación | `references/03-knowledge/concept-graph.md` (normativa) |
 | Schema | `schemas/concept-graph.schema.json` |
 
-### `util/_io.py` — F38/F39 · Utilidad I/O compartida (escritura atómica)
+### `util/_io.py` — F38/F39/F54 · Utilidad I/O compartida (escritura atómica)
 
-Helper interno que codifica el patrón `tempfile` + `Path.replace` (L-04 de F15). Importado por `ledger.py` y `concept_graph.py`. Sin dependencias externas.
+Helper interno que codifica el patrón `tempfile` + `Path.replace` (L-04 de F15). Importado por `ledger.py`, `concept_graph.py` y `render/obsidian.py`. Sin dependencias externas.
 
 | Aspecto | Valor |
 |---|---|
-| API | `atomic_write_json(path: Path, payload: Any) -> None` |
-| Garantía | El path destino siempre queda con un JSON válido (o no se toca) |
+| API | `atomic_write_json(path: Path, payload: Any) -> None` · `atomic_write_text(path: Path, payload: str\|bytes) -> None` (añadida en F54) |
+| Garantía | El path destino siempre queda con un JSON válido o un texto UTF-8 (o no se toca) |
 | Documentación | (helper interno; sin spec normativa) |
 
 ### `validate/completeness.py` — F43 · Auditoría de no-pérdida
@@ -426,6 +426,113 @@ CLI con 4 subcomandos que audita ledger (F38) contra SDM (F13): forward pass (lo
 | Escritura | Atómica con `--out <path>`: `tempfile` + `Path.replace` |
 | Constantes inline | `MUST_KEEP_TYPES_PLAIN`, `MUST_KEEP_TYPES_FORMULA_NUMBERED`, `EDITORIAL_SEVERITIES_MUST_KEEP`, `EXACT_MATCH_FIELDS`, `NORMALIZED_MATCH_FIELDS`, `DEFAULT_SAMPLE_RATE=0.10`, `DEFAULT_SEED=0` |
 | Documentación | `references/10-quality/completeness-audit.md` (normativa) |
+
+### `render/obsidian.py` — F54 · Renderer Obsidian
+
+L4 renderer: traduce el Note IR validado a Markdown nativo de Obsidian 1.5+. Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Para Obsidian: 13 capacidades ✅ (admonition → callout nativo, collapsible → callout plegable, link-note → wikilink, propiedades → YAML frontmatter, diagram → bloque Mermaid, equation, code, table simple, list, checklist, figure, step, divider) + 1 ❌ (celdas combinadas → degradación elegante con `<details>`). Dataview es opt-in (`--enable-dataview`); por defecto las consultas se degradan a admonition estática para cumplir el criterio 1 ("sin ningún plugin").
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <path>` (archivo `.json` o directorio de IRs); `--profile <path>` (YAML); `--out-dir <dir>` (raíz del workdir) |
+| Salida | `<out-dir>/render/obsidian/<folder>/<note-id>.md` por nota (cabecera YAML §8); `<out-dir>/reports/render-degradation.json` + `.md` siempre (RC-03) |
+| Matriz | `--matrix <path>` (default: `references/08-render/capability-matrix.md`) |
+| Source hash | `--source-hash <hex64>` (override; si no, se lee de `<out-dir>/manifest.json`) |
+| Dataview opt-in | `--enable-dataview` (default off: admonition estática; on: bloque ```dataview dentro de admonition) |
+| Renderer version | `--renderer-version <semver>` (default `0.1.0`); bumpear implica regenerar |
+| Folder | `profile.targets.obsidian.folder` (default `notes/`) |
+| Invocación | `python3 scripts/render/obsidian.py --ir evals/obsidian-render-sample/fixtures --profile <profile> --out-dir /tmp/workdir` |
+| Dependencias | Python 3.9+ stdlib puro (sin paquetes externos); parser YAML mínimo propio para `targets.obsidian.*` |
+| Comportamiento si falta input | Error fatal con código 1 |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (severidad desconocida, wikilinks sin resolver) |
+| Escritura | Atómica: `tempfile` + `Path.replace` (compartido con F38/F39 vía `util/_io.py`) |
+| Constantes inline | `SEVERITY_TO_CALLOUT` (20 severidades → 13 callout types), `NATIVE_CALLOUTS` (13), `OPEN_SUFFIX="+"`, `CLOSED_SUFFIX="-"`, `DEFAULT_SEVERITY="note"` |
+| Tabla de degradación | `references/08-render/contract.md §6` fila 1 (Obsidian/Celdas combinadas) |
+| Documentación | `references/08-render/contract.md` (F53, contrato) + docstring del script |
+| Schema del reporte | `evals/render-contract-sample/schema/report.schema.json` (Draft 2020-12) |
+
+### `render/notion_api.py` — F55 · Renderer Notion API
+
+L4 renderer: traduce el Note IR validado a páginas de Notion vía la API REST (`https://api.notion.com/v1`, version `2022-06-28`). Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Cubre las 14 capacidades de Notion API: 13 nativas ✅ (admonition → callout con icon+color, collapsible → toggle, link-note → mention, propiedades → database properties con tipo correcto, diagram Mermaid → code lang=mermaid, equation, code, table simple, list, checklist, figure, step, divider, quote, columns) + 1 ❌ (celdas combinadas → fila 2 §6 contract). Troceo en chunks de 100 bloques/petición (capability-matrix §4). Anidamiento en 2 pasadas con `_nested` placeholder para > 2 niveles. Reintentos con backoff exponencial 5s/30s/2m/10m ante 429 o 5xx (architecture.md §8). Idempotencia por búsqueda de `notemartin_note_id` property (D4 ADR-0010). Cliente HTTP con `urllib.request` stdlib puro.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <path>`; `--profile <path>`; `--out-dir <dir>`; `--notion-token <token>` (o env `NOTION_TOKEN`) |
+| Salida | `<out-dir>/render/notion_api/payloads/<note-id>-NNN.json` por chunk (dry-run); `<out-dir>/reports/render-degradation.{json,md}` siempre |
+| Database | `--database-id <hex>` (o env `NOTION_DATABASE_ID` o `profile.targets.notion.database_id`); si no, `--page-parent-id` |
+| Matriz | `--matrix <path>` (default: `08-render/capability-matrix.md`) |
+| Dry-run | `--dry-run` (default off): no HTTP; escribe payloads a disco para inspección/testing |
+| Pre-render diagrams | `--pre-render-diagrams` (default off): activa F70 cuando exista |
+| API base override | `--api-base <url>` o env `NOTION_API_BASE` (testing con mock) |
+| Renderer version | `--renderer-version <semver>` (default `0.1.0`) |
+| Invocación | `python3 scripts/render/notion_api.py --ir <path> --profile <yaml> --out-dir <dir> --notion-token <token> [--database-id <hex>] [--dry-run]` |
+| Dependencias | Python 3.9+ stdlib puro (`urllib.request`, `urllib.error`); parser YAML mínimo propio |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (nota > 2000 bloques, retries) |
+| Escritura | Atómica: `tempfile` + `Path.replace` (compartido con F38/F39/F54 vía `util/_io.py`) |
+| Constantes inline | `BLOCKS_PER_REQUEST=100`, `RICH_TEXT_MAX_CHARS=2000`, `MAX_NESTING_DEPTH=2`, `INTER_REQUEST_DELAY=0.333s`, `RETRY_DELAYS=[5,30,120,600]`, `SEVERITY_TO_CALLOUT` (19), `PROPERTY_TYPE_MAP` (14) |
+| Tabla de degradación | `references/08-render/contract.md §6` fila 2 (Notion API / Celdas combinadas) |
+| Documentación | `references/08-render/contract.md` (F53) + `docs/adr/ADR-0010-notion-renderer.md` |
+| Schema del reporte | `evals/render-contract-sample/schema/report.schema.json` |
+
+### `render/appflowy.py` — F57 · Renderer AppFlowy
+
+L4 renderer: genera archivos Markdown optimizados para la importación a AppFlowy (File → Import → Markdown). Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Cubre las 14 capacidades con 13 ✅ nativas (encabezados, tablas simples, código con lenguaje, callouts `> [!type]` con color, plegables `<details>`, ecuaciones LaTeX, Mermaid nativo, enlaces, propiedades en frontmatter, imágenes, etc.) + 1 ❌ (fila 4 §6 contract: celdas combinadas → tabla vacía + `<details>` con matriz original). Pre-render de diagramas opt-in con `--pre-render-diagrams` que activa F70 (`scripts/render/diagram_image.py`) si está disponible; sin F70, fallback a bloque ` ```mermaid ` nativo (con warning en el reporte).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <path>`; `--profile <path>`; `--out-dir <dir>` |
+| Salida | `<out-dir>/render/appflowy/<note-id>.md` por nota (cabecera YAML §8 + cuerpo); `<out-dir>/render/appflowy/diagrams/<note-id>-N.svg` si pre-render activo; `<out-dir>/reports/render-degradation.{json,md}` siempre |
+| Pre-render diagrams | `--pre-render-diagrams` (default off): invoca F70; sin F70, fallback a mermaid nativo + warning |
+| Instrucciones de importación | `--include-import-instructions` (default off): escribe `render/appflowy/IMPORT_INSTRUCTIONS.md` |
+| Renderer version | `--renderer-version <semver>` (default `0.1.0`) |
+| Invocación | `python3 scripts/render/appflowy.py --ir evals/appflowy-render-sample/fixtures --profile <yaml> --out-dir /tmp/workdir [--pre-render-diagrams] [--include-import-instructions]` |
+| Dependencias | Python 3.9+ stdlib puro (parser YAML mínimo propio para `targets.appflowy.*`; subprocess opcional para F70) |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (wikilinks sin resolver, F70 ausente) |
+| Escritura | Atómica: `tempfile` + `Path.replace` (compartido vía `util/_io.py`) |
+| Constantes inline | `SEVERITY_TO_CALLOUT` (19 severidades → 6 tipos AppFlowy nativos: note/info/warning/danger/success/question), `LANG_MAP` (compatible AppFlowy importer) |
+| Tabla de degradación | `references/08-render/contract.md §6` fila 4 (AppFlowy / Celdas combinadas) |
+| Documentación | `references/08-render/contract.md` (F53) + docstring del script |
+| Schema del reporte | `evals/render-contract-sample/schema/report.schema.json` |
+
+### `render/markdown.py` — F58 · Renderer Markdown estándar (GFM)
+
+L4 renderer: genera archivos GitHub-Flavored Markdown optimizados para visualización en GitHub. Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Cubre las 14 capacidades con 9 ✅ nativas (encabezados `#`/`##`/`###`, listas, checklists, tablas simples, code blocks, plegables `<details>`, ecuaciones LaTeX inline/bloque, imágenes con rutas relativas, Mermaid nativo) + 5 ❌ (filas 5/7/12/16/20 de contract §6: Celdas combinadas → `<details>` con matriz; Callouts → blockquote con emoji + CSS class `callout-<severity>`; Backlinks → sección `## Referenciado por` generada en build; Consultas dinámicas → tabla estática `## Consultas habituales`; Colores semánticos → emoji + CSS class `semantic-<token>`). Diagramas: bloque ` ```mermaid ` (GitHub nativo) + imagen SVG pre-renderizada como fallback cuando F70 está disponible. Rutas relativas (`[text](<note-id>.md)`) resuelven en la estructura generada (criterio 3).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <path>`; `--profile <path>`; `--out-dir <dir>` |
+| Salida | `<out-dir>/render/markdown/<note-id>.md` por nota (cabecera YAML §8 + cuerpo + sección backlinks si hay); `<out-dir>/render/markdown/diagrams/<note-id>-N.svg` si pre-render activo; `<out-dir>/reports/render-degradation.{json,md}` siempre |
+| Base URL | `--base-url <url>` (vacío por defecto): prefijo absoluto para wikilinks resueltos (e.g. `https://github.com/user/repo/blob/main/`); sin él, paths relativos `<note-id>.md` (criterio 3) |
+| Backlinks | `--generate-backlinks` (default ON): inserta `## Referenciado por` al final (fila 7 §6) |
+| Queries table | `--generate-queries-table` (default ON): inserta tabla estática `## Consultas habituales` para queries (fila 16 §6) |
+| Pre-render diagrams | `--pre-render-diagrams` (default off): invoca F70 si existe; fallback a ` ```mermaid ` nativo |
+| Renderer version | `--renderer-version <semver>` (default `0.1.0`) |
+| Invocación | `python3 scripts/render/markdown.py --ir evals/markdown-render-sample/fixtures --profile <yaml> --out-dir /tmp/workdir [--base-url <url>] [--pre-render-diagrams]` |
+| Dependencias | Python 3.9+ stdlib puro (parser YAML mínimo propio para `targets.markdown.*`; subprocess opcional para F70) |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (wikilinks sin resolver) |
+| Escritura | Atómica: `tempfile` + `Path.replace` (compartido vía `util/_io.py`) |
+| Constantes inline | `SEVERITY_TO_EMOJI` (19 → 5 emoji principales), `SEMANTIC_TOKENS` (5), `LANG_MAP` (subset GFM), `BACKLINK_HEADING`, `QUERIES_HEADING` |
+| Tabla de degradación | `references/08-render/contract.md §6` filas 5/7/12/16/20 (Markdown) |
+| Documentación | `references/08-render/contract.md` (F53) + docstring del script |
+| Schema del reporte | `evals/render-contract-sample/schema/report.schema.json` |
+
+### `render/notion_md.py` — F56 · Renderer Notion por importación
+
+L4 renderer: genera archivos Markdown optimizados para la importación a Notion vía UI (Settings → Import → Markdown). Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Cubre las 14 capacidades con 10 ✅ nativas (encabezados, tablas simples, código con lenguaje, listas, checklists, ecuaciones LaTeX, imágenes, Mermaid, links externos, dividers, quotes, steps, parameters) + 4 ❌ (filas 3, 11, 15, 19 de contract §6: Celdas combinadas → `<details>` con matriz; Callouts semánticos → blockquote con emoji prefijo; Propiedades → YAML frontmatter; Colores semánticos → emoji semántico). El reporte incluye campo `vs_notion_api` por entrada + sección `cross_target_diff` que documenta qué se degradó respecto a la ruta API (F55). Sin HTTP.
+
+| Aspecto | Valor |
+|---|---|---|
+| Entrada | `--ir <path>`; `--profile <path>`; `--out-dir <dir>` |
+| Salida | `<out-dir>/render/notion_md/<note-id>.md` por nota (cabecera YAML §8 + cuerpo); `<out-dir>/reports/render-degradation.{json,md}` |
+| Instrucciones de importación | `--include-import-instructions` (default off): escribe `render/notion_md/IMPORT_INSTRUCTIONS.md` con el procedimiento UI |
+| Renderer version | `--renderer-version <semver>` (default `0.1.0`) |
+| Invocación | `python3 scripts/render/notion_md.py --ir evals/notion-md-render-sample/fixtures --profile <yaml> --out-dir /tmp/workdir [--include-import-instructions]` |
+| Dependencias | Python 3.9+ stdlib puro (parser YAML mínimo propio para `targets.notion_md.*`) |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (wikilinks sin resolver) |
+| Escritura | Atómica: `tempfile` + `Path.replace` (compartido con F38/F39/F54/F55 vía `util/_io.py`) |
+| Constantes inline | `SEVERITY_TO_EMOJI` (19 entradas), `LANG_MAP` (compatible Notion importer), `CROSS_TARGET_DIFF` (resumen vs notion_api) |
+| Tabla de degradación | `references/08-render/contract.md §6` filas 3, 11, 15, 19 |
+| Documentación | `references/08-render/contract.md` (F53) + docstring del script |
+| Schema del reporte | `evals/render-contract-sample/schema/report.schema.json` (con extensión `cross_target_diff` propia) |
 
 ### `authoring/parse_notemark.py` — F48 · Parser NoteMark → IR
 
