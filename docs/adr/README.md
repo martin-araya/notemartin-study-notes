@@ -40,5 +40,7 @@ Qué se gana, qué se pierde, qué queda atado a esta decisión.
 - `ADR-0006-fidelity-levels.md` — F42: tres niveles source/derived/external; tagging dual `:::external`+`:::derived`; prohibiciones absolutas sobre 7 categorías de valores técnicos; regla de la duda.
 - `ADR-0007-completeness-audit.md` — F43: forward pass + inverse sample estratificado (100% must-keep + 10% context) + threshold gate 100%; sin flag `--allow-critical`.
 - `ADR-0008-note-plan-model.md` — F44: enum cerrada de 15 tipos (F78-F92); división semántica (no por conteo); umbral combinado (notes_planned > 5 OR total_must_keep > 30); resolución de colisiones con `reuse`/`new`.
+- `ADR-0009-render-contract.md` — F53: contrato del renderer (interfaz pura + tabla cerrada de degradación 20 filas); cinco invariantes RC-01…RC-05; reporte doble JSON+Markdown generado siempre.
+- `ADR-0010-notion-renderer.md` — F55: renderer Notion API; dialecto canónico `notion_api` (D1, cierra discrepancia F53↔F11); cliente HTTP `urllib.request` stdlib puro (D2); anidamiento en 2 pasadas con placeholders (D3); idempotencia por `notemartin_note_id` property (D4).
 
 Las decisiones cerradas hasta ahora viven en `skills/AGENT.md` §8. Cuando una de ellas se reabre formalmente, se promueve a ADR aquí.
