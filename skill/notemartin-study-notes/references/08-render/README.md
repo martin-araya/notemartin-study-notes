@@ -8,8 +8,8 @@ Cargar al renderizar o re-renderizar. `contract.md` siempre; el resto según el 
 
 ## Estado actual
 
-- `capability-matrix.md` `[pendiente F8]`
-- `contract.md` `[pendiente F53]`
+- `capability-matrix.md` `[existente]` — F8: matriz 14×7 con cero ⚠.
+- `contract.md` `[existente]` — F53: contrato del renderer + tabla cerrada de degradación (20 filas = 20 celdas ❌ de F8).
 - `linking.md` `[pendiente F61]`
 - `publishing.md` `[pendiente F62]`
 - `migration.md` `[pendiente F64]`
