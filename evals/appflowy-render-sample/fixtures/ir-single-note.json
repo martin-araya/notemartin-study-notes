@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "dd0000000001",
+  "title": "Nota simple AppFlowy",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Título"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Párrafo."
+          }
+        }
+      ]
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "python",
+        "text": "print('hi')"
+      },
+      "capability": "code-block-fenced",
+      "source_refs": [],
+      "children": []
+    }
+  ]
+}

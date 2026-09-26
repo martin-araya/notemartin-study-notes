@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "dd0000000004",
+  "title": "Nota con diagrama",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Diagrama"
+          }
+        }
+      ]
+    },
+    {
+      "node": "diagram",
+      "attrs": {
+        "kind": "mermaid",
+        "text": "graph TD\n  A-->B\n  B-->C",
+        "alt": "Flujo A->B->C"
+      },
+      "capability": "diagram-mermaid-block",
+      "source_refs": [],
+      "children": []
+    }
+  ]
+}

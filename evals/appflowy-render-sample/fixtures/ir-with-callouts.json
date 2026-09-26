@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "dd0000000002",
+  "title": "Cobertura callouts AppFlowy",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Callouts"
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "note",
+        "title": "Test note"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de note."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "info",
+        "title": "Test info"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de info."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "warning",
+        "title": "Test warning"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de warning."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "danger",
+        "title": "Test danger"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de danger."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "success",
+        "title": "Test success"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de success."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "question",
+        "title": "Test question"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de question."
+          }
+        }
+      ]
+    }
+  ]
+}
