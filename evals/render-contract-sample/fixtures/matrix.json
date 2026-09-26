@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "capabilities": {
+    "table-merged-cells": {
+      "obsidian": "❌",
+      "notion_api": "❌",
+      "notion_md": "❌",
+      "appflowy": "❌",
+      "markdown": "❌",
+      "html_pdf": "✅",
+      "flashcards": "❌"
+    },
+    "callout": {
+      "obsidian": "✅",
+      "notion_api": "✅",
+      "notion_md": "❌",
+      "appflowy": "✅",
+      "markdown": "❌",
+      "html_pdf": "✅",
+      "flashcards": "❌"
+    },
+    "collapsible": {
+      "obsidian": "✅",
+      "notion_api": "✅",
+      "notion_md": "✅",
+      "appflowy": "✅",
+      "markdown": "✅",
+      "html_pdf": "✅",
+      "flashcards": "❌"
+    },
+    "link-note": {
+      "obsidian": "✅",
+      "notion_api": "✅",
+      "notion_md": "✅",
+      "appflowy": "✅",
+      "markdown": "✅",
+      "html_pdf": "✅",
+      "flashcards": "❌"
+    },
+    "backlink": {
+      "obsidian": "✅",
+      "notion_api": "✅",
+      "notion_md": "✅",
+      "appflowy": "✅",
+      "markdown": "❌",
+      "html_pdf": "❌",
+      "flashcards": "❌"
+    },
+    "property-block": {
+      "obsidian": "✅",
+      "notion_api": "✅",
+      "notion_md": "❌",
+      "appflowy": "✅",
+      "markdown": "✅",
+      "html_pdf": "✅",
+      "flashcards": "✅"
+    },
+    "query": {
+      "obsidian": "✅",
+      "notion_api": "✅",
+      "notion_md": "✅",
+      "appflowy": "✅",
+      "markdown": "❌",
+      "html_pdf": "❌",
+      "flashcards": "❌"
+    },
+    "semantic-color": {
+      "obsidian": "✅",
+      "notion_api": "✅",
+      "notion_md": "❌",
+      "appflowy": "✅",
+      "markdown": "❌",
+      "html_pdf": "✅",
+      "flashcards": "✅"
+    }
+  }
+}

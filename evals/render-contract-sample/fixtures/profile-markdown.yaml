@@ -1,0 +1,8 @@
+schema_version: "1.0.0"
+targets:
+  active:
+    - markdown
+  markdown:
+    enabled: true
+    output_dir: ./render/markdown
+    include_backlinks: true

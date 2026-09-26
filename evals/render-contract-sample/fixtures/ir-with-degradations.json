@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "note-001",
+  "title": "Tabla con celdas combinadas y admonitions",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Capítulo X"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [
+        {
+          "block_id": "a1b2c3d4e5f6",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Texto introductorio con dato fáctico."
+          }
+        }
+      ]
+    },
+    {
+      "node": "table",
+      "attrs": {
+        "headers": [
+          "Col A",
+          "Col B",
+          "Col C"
+        ],
+        "rowspan": [
+          [
+            0,
+            0,
+            2
+          ]
+        ],
+        "colspan": [
+          [
+            0,
+            1,
+            3
+          ]
+        ]
+      },
+      "capability": "table-merged-cells",
+      "source_refs": [
+        {
+          "block_id": "b2c3d4e5f6a7",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "children": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Más prosa."
+          }
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2
+      },
+      "capability": "section-h2",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Sección H2"
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "warning",
+        "title": "Atención"
+      },
+      "capability": "callout",
+      "source_refs": [
+        {
+          "block_id": "c3d4e5f6a7b8",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Este es el contenido del callout."
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Texto intermedio."
+          }
+        }
+      ]
+    },
+    {
+      "node": "table",
+      "attrs": {
+        "headers": [
+          "Query",
+          "Resultado"
+        ],
+        "query": "SELECT * FROM notes WHERE status='open'"
+      },
+      "capability": "query",
+      "source_refs": [
+        {
+          "block_id": "d4e5f6a7b8c9",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "children": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Más texto."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "danger",
+        "title": "Error crítico"
+      },
+      "capability": "semantic-color",
+      "source_refs": [
+        {
+          "block_id": "e5f6a7b8c9d0",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Color rojo semántico."
+          }
+        }
+      ]
+    }
+  ]
+}

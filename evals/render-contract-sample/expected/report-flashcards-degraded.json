@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "target": "flashcards",
+  "source_hash": "1111111111111111111111111111111111111111111111111111111111111111",
+  "generated_at": "2026-09-25T22:00:00Z",
+  "totals": {
+    "ir_nodes": 12,
+    "degradations": 6,
+    "content_loss": 0
+  },
+  "degradations": [
+    {
+      "id": "deg-aabbccdd0001",
+      "node_path": "none",
+      "node_type": "table",
+      "capability": "table-merged-cells",
+      "alternative": "no-op",
+      "evidence": "not_applicable",
+      "content_intact": true
+    },
+    {
+      "id": "deg-aabbccdd0002",
+      "node_path": "none",
+      "node_type": "admonition",
+      "capability": "callout",
+      "alternative": "no-op",
+      "evidence": "not_applicable",
+      "content_intact": true
+    },
+    {
+      "id": "deg-aabbccdd0003",
+      "node_path": "none",
+      "node_type": "collapsible",
+      "capability": "collapsible",
+      "alternative": "no-op",
+      "evidence": "not_applicable",
+      "content_intact": true
+    },
+    {
+      "id": "deg-aabbccdd0004",
+      "node_path": "none",
+      "node_type": "link-note",
+      "capability": "link-note",
+      "alternative": "no-op",
+      "evidence": "not_applicable",
+      "content_intact": true
+    },
+    {
+      "id": "deg-aabbccdd0005",
+      "node_path": "none",
+      "node_type": "section",
+      "capability": "backlink",
+      "alternative": "no-op",
+      "evidence": "not_applicable",
+      "content_intact": true
+    },
+    {
+      "id": "deg-aabbccdd0006",
+      "node_path": "none",
+      "node_type": "table",
+      "capability": "query",
+      "alternative": "no-op",
+      "evidence": "not_applicable",
+      "content_intact": true
+    }
+  ]
+}

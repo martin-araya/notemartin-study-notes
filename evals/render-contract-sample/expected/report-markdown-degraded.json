@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "target": "markdown",
+  "source_hash": "a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f90",
+  "generated_at": "2026-09-25T22:00:00Z",
+  "totals": {
+    "ir_nodes": 10,
+    "degradations": 4,
+    "content_loss": 0
+  },
+  "degradations": [
+    {
+      "id": "deg-aabbccddee01",
+      "node_path": "ir/notes/note-001.json#0/children/2",
+      "node_type": "table",
+      "capability": "table-merged-cells",
+      "alternative": "Tabla Markdown con celdas vacías replicando la estructura; <details> con la matriz completa rowspan/colspan",
+      "evidence": "rg -c '<td' render/markdown/note-001.md >= celdas_con_contenido(IR); <details> contiene el árbol",
+      "content_intact": true
+    },
+    {
+      "id": "deg-aabbccddee02",
+      "node_path": "ir/notes/note-001.json#0/children/5",
+      "node_type": "admonition",
+      "capability": "callout",
+      "alternative": "Bloque > con emoji + texto + CSS class opcional",
+      "evidence": "grep -c '^> ' render/markdown/note-001.md >= admonitions_count(IR)",
+      "content_intact": true
+    },
+    {
+      "id": "deg-aabbccddee03",
+      "node_path": "ir/notes/note-001.json#0/children/7",
+      "node_type": "table",
+      "capability": "query",
+      "alternative": "Tabla estática ## Consultas habituales con las filas que la consulta habría producido en build-time",
+      "evidence": "grep '^## Consultas habituales' render/markdown/note-001.md exit 0",
+      "content_intact": true
+    },
+    {
+      "id": "deg-aabbccddee04",
+      "node_path": "ir/notes/note-001.json#0/children/9",
+      "node_type": "admonition",
+      "capability": "semantic-color",
+      "alternative": "Emoji semántico prefijo + clase CSS inline opcional",
+      "evidence": "grep -cE '(⚠️|ℹ️|❌|💡|✅)' render/markdown/note-001.md >= admonitions_count(IR)",
+      "content_intact": true
+    }
+  ]
+}

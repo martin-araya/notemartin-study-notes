@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "note-002",
+  "title": "Nota simple sin degradaciones",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Título"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [
+        {
+          "block_id": "fa1b2c3d4e5f",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Texto simple."
+          }
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2
+      },
+      "capability": "section-h2",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Subtítulo"
+          }
+        }
+      ]
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "python",
+        "text": "print('hello')"
+      },
+      "capability": "code-block-fenced",
+      "source_refs": [
+        {
+          "block_id": "fb2c3d4e5f6a",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "children": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [
+        {
+          "block_id": "fc3d4e5f6a7b",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cierre."
+          }
+        }
+      ]
+    }
+  ]
+}
