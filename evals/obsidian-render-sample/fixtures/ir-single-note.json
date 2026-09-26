@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "aabbccddee01",
+  "title": "Nota con 14 capacidades",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Título principal"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [
+        {
+          "block_id": "b1c2d3e4f5a6",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Párrafo introductorio con "
+          }
+        },
+        {
+          "node": "strong",
+          "attrs": {},
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "negrita"
+              }
+            }
+          ]
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " y "
+          }
+        },
+        {
+          "node": "em",
+          "attrs": {},
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "cursiva"
+              }
+            }
+          ]
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "."
+          }
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "b1c2d3e4f5a6",
+            "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        }
+      ]
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "python",
+        "text": "def hello():\n    return 'world'"
+      },
+      "capability": "code-block-fenced",
+      "source_refs": [],
+      "children": []
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "warning",
+        "title": "Atención"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuidado con esto."
+          }
+        }
+      ]
+    },
+    {
+      "node": "collapsible",
+      "attrs": {
+        "title": "Detalles avanzados",
+        "default_open": false
+      },
+      "capability": "collapsible",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Contenido oculto."
+          }
+        }
+      ]
+    },
+    {
+      "node": "diagram",
+      "attrs": {
+        "kind": "mermaid",
+        "text": "graph TD\n  A-->B"
+      },
+      "capability": "diagram-mermaid-block",
+      "source_refs": [],
+      "children": []
+    },
+    {
+      "node": "equation",
+      "attrs": {
+        "latex": "E = mc^2",
+        "display": true
+      },
+      "capability": "equation-block",
+      "source_refs": [],
+      "children": []
+    },
+    {
+      "node": "list",
+      "attrs": {
+        "ordered": false
+      },
+      "capability": "list",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "list-item",
+          "attrs": {},
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Item 1"
+              }
+            }
+          ]
+        },
+        {
+          "node": "list-item",
+          "attrs": {},
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Item 2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "checklist",
+      "attrs": {},
+      "capability": "checklist",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "list-item",
+          "attrs": {
+            "done": false
+          },
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Pendiente"
+              }
+            }
+          ]
+        },
+        {
+          "node": "list-item",
+          "attrs": {
+            "done": true
+          },
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Hecho"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "table",
+      "attrs": {
+        "headers": [
+          "Col A",
+          "Col B"
+        ],
+        "rows": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "capability": "table",
+      "source_refs": [],
+      "children": []
+    },
+    {
+      "node": "property-block",
+      "attrs": {
+        "name": "version",
+        "value": "1.0.0"
+      },
+      "capability": "property-table",
+      "source_refs": [],
+      "children": []
+    },
+    {
+      "node": "figure",
+      "attrs": {
+        "src": "assets/diagram.png",
+        "alt": "Diagrama",
+        "caption": "Figura 1"
+      },
+      "capability": "figure",
+      "source_refs": [],
+      "children": []
+    },
+    {
+      "node": "step",
+      "attrs": {
+        "index": 1
+      },
+      "capability": "step",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Primer paso."
+          }
+        }
+      ]
+    },
+    {
+      "node": "divider",
+      "attrs": {},
+      "capability": "divider",
+      "source_refs": [],
+      "children": []
+    }
+  ]
+}

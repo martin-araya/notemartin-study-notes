@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "aabbccddee04",
+  "title": "Severidad desconocida",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Sev"
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "fictional-severity",
+        "title": "Test"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Body"
+          }
+        }
+      ]
+    }
+  ]
+}

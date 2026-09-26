@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "aabbccddee03",
+  "title": "Nota con Dataview",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "DV"
+          }
+        }
+      ]
+    },
+    {
+      "node": "table",
+      "attrs": {
+        "headers": [],
+        "query": "TABLE field FROM #note WHERE status='open'"
+      },
+      "capability": "query",
+      "source_refs": [],
+      "children": []
+    }
+  ]
+}

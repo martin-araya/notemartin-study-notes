@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "aa0000000002",
+  "title": "Nota B",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "B"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Enlace a "
+          }
+        },
+        {
+          "node": "link-note",
+          "attrs": {
+            "target": "aa0000000003",
+            "text": "Nota C"
+          }
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " y a "
+          }
+        },
+        {
+          "node": "link-note",
+          "attrs": {
+            "target": "aa0000000001",
+            "text": "Nota A"
+          }
+        }
+      ]
+    }
+  ]
+}

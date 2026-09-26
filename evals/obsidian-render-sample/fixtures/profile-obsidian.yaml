@@ -1,0 +1,8 @@
+schema_version: "1.0.0"
+targets:
+  active:
+    - obsidian
+  obsidian:
+    enabled: true
+    vault: ~/Documents/vault
+    folder: notes/
