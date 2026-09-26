@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "cc0000000002",
+  "title": "Cobertura de admonitions",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Admonitions"
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "note",
+        "title": "Test note"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de note."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "title": "Test tip"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de tip."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "info",
+        "title": "Test info"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de info."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "warning",
+        "title": "Test warning"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de warning."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "caution",
+        "title": "Test caution"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de caution."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "danger",
+        "title": "Test danger"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de danger."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "example",
+        "title": "Test example"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de example."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "success",
+        "title": "Test success"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de success."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "bug",
+        "title": "Test bug"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cuerpo de bug."
+          }
+        }
+      ]
+    }
+  ]
+}

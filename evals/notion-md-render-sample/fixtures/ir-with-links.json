@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "cc0000000006",
+  "title": "Nota con links",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Links"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Enlace a "
+          }
+        },
+        {
+          "node": "link-note",
+          "attrs": {
+            "target": "cc9999999999",
+            "text": "existente"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Otro a "
+          }
+        },
+        {
+          "node": "link-note",
+          "attrs": {
+            "target": "cc0000000001",
+            "text": "single"
+          }
+        }
+      ]
+    }
+  ]
+}
