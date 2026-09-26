@@ -1,0 +1,7 @@
+schema_version: "1.0.0"
+targets:
+  active:
+    - notion_api
+  notion_api:
+    enabled: true
+    database_id: "00000000-0000-0000-0000-000000000abc"

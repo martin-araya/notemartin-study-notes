@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "bb0000000004",
+  "title": "Nota con propiedades",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Props"
+          }
+        }
+      ]
+    },
+    {
+      "node": "property-block",
+      "attrs": {
+        "name": "author",
+        "value": "alice",
+        "type": "string"
+      },
+      "capability": "property-table",
+      "source_refs": [],
+      "children": []
+    },
+    {
+      "node": "property-block",
+      "attrs": {
+        "name": "priority",
+        "value": 3,
+        "type": "number"
+      },
+      "capability": "property-table",
+      "source_refs": [],
+      "children": []
+    },
+    {
+      "node": "property-block",
+      "attrs": {
+        "name": "is_published",
+        "value": true,
+        "type": "bool"
+      },
+      "capability": "property-table",
+      "source_refs": [],
+      "children": []
+    },
+    {
+      "node": "property-block",
+      "attrs": {
+        "name": "url_field",
+        "value": "https://example.com",
+        "type": "url"
+      },
+      "capability": "property-table",
+      "source_refs": [],
+      "children": []
+    }
+  ]
+}
