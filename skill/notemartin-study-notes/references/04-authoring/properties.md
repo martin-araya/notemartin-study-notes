@@ -69,7 +69,8 @@ soporte nativo (criterio #3).
 | **INV-P2** *(F47)* | Las claves se escriben en **kebab-case** sin espacios, sin underscores, sin CamelCase. Las claves de namespace `x-*` o `user-*` también en kebab-case. | El parser (F48) rechaza claves que no coincidan con `^[a-z][a-z0-9-]*$`. |
 | **INV-P3** *(F47)* | Cero colores literales en valores de propiedades. Tokens via `assets/tokens.json` (F72). | INV-14 violación. |
 | **INV-P4** *(F47)* | Ninguna clave duplicada dentro del mismo frontmatter. | El parser rechaza el YAML. |
-| **INV-P5** *(F47)* | Las 3 propiedades universales (`title`, `note-type`, `status`) son obligatorias en **todos** los tipos de nota. | El validador (F49) bloquea el cierre de la nota. |
+| **INV-P5** *(F47, F75)* | Las 5 propiedades universales (`title`, `note-type`, `status`, `summary`, `reading-time-minutes`) son obligatorias en `status: published`. En `status: draft`, `summary` y `reading-time-minutes` son opcionales. | El validador (F49) bloquea el cierre de la nota publicada. |
+| **INV-P10** *(F75)* | `summary` ≤ 200 chars, 1 línea, sin caracteres de control. `reading-time-minutes` es int ≥ 1. | El validador rechaza el cierre con tipo no entero o valor ≤ 0. |
 | **INV-P6** *(F47)* | `retrieved` y `review-next` usan exclusivamente formato `YYYY-MM-DD` (ISO 8601 sin hora). | El parser rechaza formatos con hora, zona, o separadores distintos. |
 | **INV-P7** *(F47)* | `source-url` debe ser URL válida (`http://` o `https://`). | El validador (F49) lo reporta como warning; el parser no rechaza (algunos corpus sintéticos no la tienen). |
 | **INV-P8** *(F47)* | Los valores de los enums cerrados (`note-type`, `status`, `source-type`, `language`, `coverage`, `difficulty`) deben pertenecer exactamente a la lista de §5. | El parser rechaza valores fuera del enum. |
@@ -77,29 +78,30 @@ soporte nativo (criterio #3).
 
 ## §4 · Conjunto canónico (resumen)
 
-Las 18 propiedades cerradas. Las 3 primeras (universales) son obligatorias en todos
-los tipos; el resto tiene obligatoriedad variable según §6.
+Las 20 propiedades cerradas. Las 5 primeras (universales) son obligatorias en notas con `status: published`; el resto tiene obligatoriedad variable según §6. Las universales son obligatorias en `status: draft` solo las 3 primeras (title, note-type, status) — `summary` y `reading-time-minutes` se difieren hasta el cierre (F75).
 
 | # | Propiedad | Tipo | Universal |
 |---|---|---|---|
 | 1 | `title` | string | ✅ |
 | 2 | `note-type` | enum (15) | ✅ |
 | 3 | `status` | enum (3) | ✅ |
-| 4 | `tags` | array of string | |
-| 5 | `source` | string | |
-| 6 | `source-type` | enum (6) | |
-| 7 | `vendor` | string | |
-| 8 | `product` | string | |
-| 9 | `product-version` | string | |
-| 10 | `source-anchor` | string | |
-| 11 | `source-url` | URL | |
-| 12 | `retrieved` | date ISO 8601 | |
-| 13 | `language` | enum (4) | |
-| 14 | `coverage` | enum (3) | |
-| 15 | `difficulty` | enum (1-5) | |
-| 16 | `review-next` | date ISO 8601 | |
-| 17 | `aliases` | array of string | |
-| 18 | `related` | array of string (note_id o term_id) | |
+| 4 | `summary` | string (≤ 200 chars) | ✅ (en published) |
+| 5 | `reading-time-minutes` | int ≥ 1 | ✅ (en published) |
+| 6 | `tags` | array of string | |
+| 7 | `source` | string | |
+| 8 | `source-type` | enum (6) | |
+| 9 | `vendor` | string | |
+| 10 | `product` | string | |
+| 11 | `product-version` | string | |
+| 12 | `source-anchor` | string | |
+| 13 | `source-url` | URL | |
+| 14 | `retrieved` | date ISO 8601 | |
+| 15 | `language` | enum (4) | |
+| 16 | `coverage` | enum (3) | |
+| 17 | `difficulty` | enum (1-5) |
+| 18 | `review-next` | date ISO 8601 | |
+| 19 | `aliases` | array of string | |
+| 20 | `related` | array of string (note_id o term_id) | |
 
 Detalle de cada una en **§5**. Para propiedades personalizadas fuera de esta lista,
 ver **§8**.
@@ -467,13 +469,69 @@ validación → mapeo por destino (7) → notas.
 - **Notas:** un `id` que no existe genera warning (F49 §11.5) pero no
   bloquea; el renderer marca el enlace como roto.
 
+### 5.19 `summary`  {#prop-summary}
+
+- **Tipo:** string (1 línea, ≤ 200 chars, sin saltos de línea, sin caracteres de control).
+- **Universalidad:** obligatoria en `status: published`; opcional en `status: draft` (F75).
+- **Descripción:** el TL;DR de la nota en una línea. Aparece en la primera fila de la
+  cabecera `## Cabecera` (definida en `references/07-visual/note-templates.md` §2).
+  Es el campo más visible tras `title`; el agente debe generarlo como destilación
+  semántica del `## TL;DR` (L1) o reescribirlo manualmente si la nota es muy densa.
+- **Validación:** ≤ 200 chars; sin `\n`, `\r`, `\t`; sin caracteres de control
+  (rangos U+0000-U+001F y U+007F-U+009F). El parser rechaza silenciosamente
+  caracteres de control pero NO los imprime (INV-P10).
+- **Mapeo por destino:**
+  - Obsidian → `Properties.summary` (visible en el panel); también se renderiza
+    en la `## Cabecera` (F75) como bloque visible.
+  - Notion API → `page.properties.summary` (columna `rich_text`).
+  - Notion import → literal YAML al inicio.
+  - AppFlowy → `Properties.summary`.
+  - MD → literal YAML; el renderer también emite `## Cabecera` con tabla 2-col.
+  - HTML/PDF → celda `summary` de `## Cabecera` (fusionada con la tabla
+    `## Metadata` existente per F75 D6).
+  - Flashcards → descartado en el anverso; aparece como hint opcional
+    en el reverso de la card (debajo de la respuesta, en letra pequeña).
+- **Notas:** si la nota es muy corta (un solo bloque párrafo), el `summary`
+  puede coincidir con el `## TL;DR` literal. El agente nunca debe truncar
+  a media frase; prefiere indicar el corte con `…` o reescribir.
+
+### 5.20 `reading-time-minutes`  {#prop-reading-time}
+
+- **Tipo:** int ≥ 1.
+- **Universalidad:** obligatoria en `status: published`; opcional en
+  `status: draft` (F75).
+- **Descripción:** tiempo estimado de lectura en minutos. Aparece en la
+  última fila de la cabecera `## Cabecera` como "Tiempo de lectura: N min".
+  Se calcula al cierre de la nota a 200 palabras/minuto (F75 §8.1) y se
+  almacena como propiedad; el agente puede sobreescribirlo manualmente
+  si la nota requiere más tiempo (lectura densa con muchos ejemplos o
+  cuadros).
+- **Validación:** int ≥ 1; sin valores fraccionarios. El parser rechaza
+  con error si llega un string, float, o int ≤ 0 (INV-P10). El warning
+  R3 del plan F75 (drift > 50% vs cálculo actual) se difiere a F77.
+- **Mapeo por destino:**
+  - Obsidian → `Properties.reading-time-minutes`; también se renderiza
+    en la `## Cabecera` (F75) como bloque visible.
+  - Notion API → `page.properties.reading-time-minutes` (columna `number`).
+  - Notion import → literal YAML al inicio.
+  - AppFlowy → `Properties.reading-time-minutes`.
+  - MD → literal YAML; el renderer también emite `## Cabecera` con tabla 2-col.
+  - HTML/PDF → celda `reading-time-minutes` de `## Cabecera`.
+  - Flashcards → descartado (no aporta a la memorización).
+- **Notas:** la fórmula canónica es `ceil(palabras_cuerpo / 200)` con
+  mínimo 1. El script `scripts/util/reading_time.py` (F75-FUERA) la
+  implementa; hasta entonces, el validador acepta cualquier int ≥ 1
+  escrito por el agente. El override manual se usa cuando la nota tiene
+  tablas densas que el ojo lee más lento que la prosa (factor 1.5x típico).
+
 ---
 
 ## §6 · Obligatoriedad por tipo de nota
 
-Una entrada por cada uno de los 15 tipos cerrados (F78-F92). Las 3 propiedades
-universales (`title`, `note-type`, `status`) son obligatorias en **todos** los
-tipos (INV-P5) y no se repiten aquí.
+Una entrada por cada uno de los 15 tipos cerrados (F78-F92). Las 5 propiedades
+universales (`title`, `note-type`, `status`, `summary`, `reading-time-minutes`)
+son obligatorias en `status: published` (INV-P5) y no se repiten aquí; en
+`status: draft` solo las 3 primeras son obligatorias (F75).
 
 ### 6.1 `concept`  {#type-concept}
 
