@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "sample-concept",
+  "title": "Arrays in PostgreSQL",
+  "layer": "l2",
+  "frontmatter": {
+    "title": "Arrays in PostgreSQL",
+    "note-type": "concept",
+    "status": "published",
+    "summary": "PostgreSQL arrays are 1-dimensional lists of values of the same type, useful for many-to-one relationships.",
+    "reading-time-minutes": 5,
+    "tags": [
+      "type/concept",
+      "domain/database"
+    ],
+    "source": "PostgreSQL 16 Documentation",
+    "source-type": "manual",
+    "source-anchor": "8.15",
+    "source-url": "https://www.postgresql.org/docs/16/arrays.html",
+    "retrieved": "2026-09-15",
+    "language": "en",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL",
+    "product-version": "16"
+  },
+  "blocks": []
+}

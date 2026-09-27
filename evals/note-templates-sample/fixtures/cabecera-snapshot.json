@@ -1,0 +1,122 @@
+{
+  "obsidian": "> [!info] **Cabecera**\n>\n> **Resumen**: PostgreSQL arrays are 1-dimensional lists of values of the same type, useful for many-to-one relationships.\n> **Procedencia**: PostgreSQL 16 Documentation · (manual) · §8.15 · https://www.postgresql.org/docs/16/arrays.html · recuperado 2026-09-15\n> **Versión**: PostgreSQL 16\n> **Estado**: Publicado (published)\n> **Tiempo de lectura**: 5 min\n>\n",
+  "notion_api": {
+    "type": "callout",
+    "callout": {
+      "icon": {
+        "type": "emoji",
+        "emoji": "📋"
+      },
+      "color": "default",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Resumen: "
+          },
+          "annotations": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "PostgreSQL arrays are 1-dimensional lists of values of the same type, useful for many-to-one relationships."
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "\n"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "Procedencia: "
+          },
+          "annotations": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "PostgreSQL 16 Documentation · (manual) · §8.15 · https://www.postgresql.org/docs/16/arrays.html · recuperado 2026-09-15"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "\n"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "Versión: "
+          },
+          "annotations": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "PostgreSQL 16"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "\n"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "Estado: "
+          },
+          "annotations": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "Publicado (published)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "\n"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "Tiempo de lectura: "
+          },
+          "annotations": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "5 min"
+          }
+        }
+      ]
+    }
+  },
+  "notion_md": "## Cabecera\n\n| Campo | Valor |\n| --- | --- |\n| **Resumen** | PostgreSQL arrays are 1-dimensional lists of values of the same type, useful for many-to-one relationships. |\n| **Procedencia** | PostgreSQL 16 Documentation · (manual) · §8.15 · https://www.postgresql.org/docs/16/arrays.html · recuperado 2026-09-15 |\n| **Versión** | PostgreSQL 16 |\n| **Estado** | Publicado (published) |\n| **Tiempo de lectura** | 5 min |\n",
+  "appflowy": "> [!info] **Cabecera**\n>\n> **Resumen**: PostgreSQL arrays are 1-dimensional lists of values of the same type, useful for many-to-one relationships.\n> **Procedencia**: PostgreSQL 16 Documentation · (manual) · §8.15 · https://www.postgresql.org/docs/16/arrays.html · recuperado 2026-09-15\n> **Versión**: PostgreSQL 16\n> **Estado**: Publicado (published)\n> **Tiempo de lectura**: 5 min\n>\n",
+  "markdown": "## Cabecera\n\n| Campo | Valor |\n| --- | --- |\n| **Resumen** | PostgreSQL arrays are 1-dimensional lists of values of the same type, useful for many-to-one relationships. |\n| **Procedencia** | PostgreSQL 16 Documentation · (manual) · §8.15 · https://www.postgresql.org/docs/16/arrays.html · recuperado 2026-09-15 |\n| **Versión** | PostgreSQL 16 |\n| **Estado** | Publicado (published) |\n| **Tiempo de lectura** | 5 min |\n",
+  "html_pdf": "<table class=\"cabecera\">\n  <thead><tr><th>Campo</th><th>Valor</th></tr></thead>\n  <tbody>\n    <tr><th scope=\"row\">Resumen</th><td>PostgreSQL arrays are 1-dimensional lists of values of the same type, useful for many-to-one relationships.</td></tr>\n    <tr><th scope=\"row\">Procedencia</th><td>PostgreSQL 16 Documentation · (manual) · §8.15 · https://www.postgresql.org/docs/16/arrays.html · recuperado 2026-09-15</td></tr>\n    <tr><th scope=\"row\">Versión</th><td>PostgreSQL 16</td></tr>\n    <tr><th scope=\"row\">Estado</th><td>Publicado (published)</td></tr>\n    <tr><th scope=\"row\">Tiempo de lectura</th><td>5 min</td></tr>\n  </tbody>\n</table>",
+  "flashcards": {
+    "anverso": "",
+    "reverso": "PostgreSQL arrays are 1-dimensional lists of values of the same type, useful for many-to-one relationships."
+  }
+}
