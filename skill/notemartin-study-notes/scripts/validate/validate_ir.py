@@ -95,6 +95,142 @@ ADMONITION_SEVERITIES: Set[str] = {
 
 
 # ──────────────────────────────────────────────────────────────────────
+# Frontmatter (F47 + F75)
+# ──────────────────────────────────────────────────────────────────────
+
+# 5 propiedades universales obligatorias en `status: published` (F75 INV-P5).
+UNIVERSAL_PROPERTIES_F75: tuple[str, ...] = (
+    "title", "note-type", "status", "summary", "reading-time-minutes",
+)
+# 3 propiedades universales estrictas (cualquier status, F47).
+UNIVERSAL_PROPERTIES_STRICT: tuple[str, ...] = (
+    "title", "note-type", "status",
+)
+# 18 propiedades no-universales (F47); no cambian con F75.
+NON_UNIVERSAL_PROPERTIES_F47: tuple[str, ...] = (
+    "tags", "source", "source-type", "vendor", "product", "product-version",
+    "source-anchor", "source-url", "retrieved", "language", "coverage",
+    "difficulty", "review-next", "aliases", "related",
+)
+# 20 propiedades canónicas totales (F75).
+CANONICAL_PROPERTIES_F75: tuple[str, ...] = (
+    UNIVERSAL_PROPERTIES_F75 + NON_UNIVERSAL_PROPERTIES_F47
+)
+MAX_SUMMARY_LENGTH = 200
+MAX_SUMMARY_CHARS = (
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "0123456789 .,:;/-_()[]?!'\""
+)
+
+
+def validate_frontmatter(frontmatter: dict) -> list:
+    """Valida el frontmatter de una nota (F47 INV-P5 + F75 INV-P10).
+
+    Returns:
+        Lista de objetos Issue (severity "error" o "warning") con:
+        - E01xx: universales faltantes (error si status=published, warning si draft)
+        - E02xx: tipos de valor incorrectos
+        - E03xx: longitud / formato de campos
+    """
+    issues: list = []
+    status = (frontmatter or {}).get("status", "")
+    is_published = status == "published"
+    fm = frontmatter or {}
+
+    # E01xx: universales faltantes.
+    required = UNIVERSAL_PROPERTIES_F75 if is_published else UNIVERSAL_PROPERTIES_STRICT
+    for prop in required:
+        if prop not in fm or fm[prop] in (None, ""):
+            issues.append(Issue(
+                severity="error" if is_published else "warning",
+                path="/frontmatter",
+                node="",
+                rule=f"E01{prop[:2].upper()}",
+                message=(
+                    f"Falta la propiedad universal `{prop}` "
+                    f"(obligatoria en `status: published`; ver properties.md §5 "
+                    f"y F75 INV-P5)."
+                ),
+            ))
+
+    # E02xx: tipos de valor incorrectos.
+    if "summary" in fm and fm["summary"] is not None:
+        summary = fm["summary"]
+        if not isinstance(summary, str):
+            issues.append(Issue(
+                severity="error",
+                path="/frontmatter/summary",
+                node="",
+                rule="E02SU",
+                message=f"`summary` debe ser string, recibido {type(summary).__name__}",
+            ))
+        elif len(summary) > MAX_SUMMARY_LENGTH:
+            issues.append(Issue(
+                severity="error",
+                path="/frontmatter/summary",
+                node="",
+                rule="E03SU",
+                message=(
+                    f"`summary` excede {MAX_SUMMARY_LENGTH} chars "
+                    f"(actual: {len(summary)}); ver properties.md §5.19."
+                ),
+            ))
+        else:
+            # F75 INV-P10: sin caracteres de control.
+            if any(ord(c) < 0x20 for c in summary) or any(0x7F <= ord(c) <= 0x9F for c in summary):
+                issues.append(Issue(
+                    severity="error",
+                    path="/frontmatter/summary",
+                    node="",
+                    rule="E03SC",
+                    message=(
+                        "`summary` contiene caracteres de control no permitidos "
+                        "(INV-P10); ver properties.md §5.19."
+                    ),
+                ))
+
+    if "reading-time-minutes" in fm and fm["reading-time-minutes"] is not None:
+        rtm = fm["reading-time-minutes"]
+        # Aceptar int nativo y str convertible (algunos parsers YAML pasan str).
+        if isinstance(rtm, bool) or not isinstance(rtm, (int, str)):
+            issues.append(Issue(
+                severity="error",
+                path="/frontmatter/reading-time-minutes",
+                node="",
+                rule="E02RT",
+                message=(
+                    f"`reading-time-minutes` debe ser int ≥ 1, recibido "
+                    f"{type(rtm).__name__}={rtm!r}"
+                ),
+            ))
+        else:
+            try:
+                rtm_int = int(rtm)
+            except (TypeError, ValueError):
+                issues.append(Issue(
+                    severity="error",
+                    path="/frontmatter/reading-time-minutes",
+                    node="",
+                    rule="E02RT",
+                    message=f"`reading-time-minutes` no convertible a int: {rtm!r}",
+                ))
+            else:
+                if rtm_int < 1:
+                    issues.append(Issue(
+                        severity="error",
+                        path="/frontmatter/reading-time-minutes",
+                        node="",
+                        rule="E03RT",
+                        message=(
+                            f"`reading-time-minutes` debe ser ≥ 1, recibido {rtm_int} "
+                            "(F75 INV-P10)."
+                        ),
+                    ))
+
+    return issues
+
+
+# ──────────────────────────────────────────────────────────────────────
 # Validador
 # ──────────────────────────────────────────────────────────────────────
 
@@ -475,12 +611,16 @@ def main(argv: list[str]) -> int:
         # Validación contra schema (opcional, requiere jsonschema).
         schema_errors = _validate_against_schema(ir, schema_path)
 
+        # Validación de frontmatter (F47 INV-P5 + F75 INV-P10).
+        frontmatter = ir.get("frontmatter", {}) or {}
+        frontmatter_issues = validate_frontmatter(frontmatter)
+
         validator = IRValidator(
             sdm_blocks=sdm_blocks,
             sdm_source_hash=sdm_hash,
             skip_sdm=args.skip_sdm,
         )
-        issues = validator.validate(ir)
+        issues = validator.validate(ir) + frontmatter_issues
 
         n_errors = sum(1 for i in issues if i.severity == "error")
         n_warnings = sum(1 for i in issues if i.severity == "warning")
