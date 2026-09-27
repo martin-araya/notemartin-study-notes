@@ -24,7 +24,7 @@
 
 - Reconstrucción de diagramas → `reconstruction.md` (F71).
 - Sintaxis de directivas visuales → `notemark.md` (F12 §10).
-- Tokens de color → `tokens.md` (F72, pendiente).
+- Tokens de color → `tokens.md` (F72).
 
 ---
 
@@ -305,7 +305,7 @@ Si alguna falla, corregir antes de publicar.
 - **F67** `scripts/validate/mermaid.py`: regla L-06 (alt ausente) implementada; ampliar para detectar "derivado" en alt sin `derived="true"`.
 - **F69** `monospace-diagrams.md`: monoespaciado no requiere color (cumple §4 trivialmente); pero tamaño mínimo aplica (§3).
 - **F70** `scripts/render/make_figure.py`: paleta Okabe-Ito + `verify_palette_colorblind_safe()` (ver §8); alt text auto-generado.
-- **F72** `tokens.md` (pendiente): proveerá la paleta canónica con ratios WCAG pre-validados.
+- **F72** `tokens.md` (F72): provee la paleta canónica con ratios WCAG pre-validados (18/18 AA en ambos temas, 14/18 AAA; `assets/tokens.json` + `scripts/util/tokens.py` + `scripts/validate/contrast_check.py`).
 
 ---
 
