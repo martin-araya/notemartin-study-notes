@@ -9,7 +9,7 @@ Ejecutables invocables por el agente. **No se leen en contexto**; se invocan por
 | `ingest/` | L0: triaje, OCR, layout, regiones, tablas, fórmulas, código, post-OCR, formatos no PDF | F17-F29, F33 |
 | `validate/` | Validadores de SDM, IR, NoteMark, Mermaid, completitud, equivalencia cross-target | F30, F43, F49, F63, F67 |
 | `authoring/` | Parser NoteMark → IR (F48, `parse_notemark.py`); transformaciones de IR (F50) | F48, F50 |
-| `render/` | Renderers a cada destino + pre-render de diagramas y figuras | F54-F60, F68, F70 |
+| `render/` | Renderers a cada destino + pre-render de diagramas y figuras | F54-F60, F68, F68 |
 | `util/` | Caché, visor, ledger, grafo de conceptos, trazabilidad | F36, F38, F39, F52 |
 | `README.md` | Catálogo con qué hace cada script, entrada, salida, dependencias, invocación | F117 |
 
@@ -461,7 +461,7 @@ L4 renderer: traduce el Note IR validado a páginas de Notion vía la API REST (
 | Database | `--database-id <hex>` (o env `NOTION_DATABASE_ID` o `profile.targets.notion.database_id`); si no, `--page-parent-id` |
 | Matriz | `--matrix <path>` (default: `08-render/capability-matrix.md`) |
 | Dry-run | `--dry-run` (default off): no HTTP; escribe payloads a disco para inspección/testing |
-| Pre-render diagrams | `--pre-render-diagrams` (default off): activa F70 cuando exista |
+| Pre-render diagrams | `--pre-render-diagrams` (default off): activa F68 cuando exista |
 | API base override | `--api-base <url>` o env `NOTION_API_BASE` (testing con mock) |
 | Renderer version | `--renderer-version <semver>` (default `0.1.0`) |
 | Invocación | `python3 scripts/render/notion_api.py --ir <path> --profile <yaml> --out-dir <dir> --notion-token <token> [--database-id <hex>] [--dry-run]` |
@@ -475,18 +475,18 @@ L4 renderer: traduce el Note IR validado a páginas de Notion vía la API REST (
 
 ### `render/appflowy.py` — F57 · Renderer AppFlowy
 
-L4 renderer: genera archivos Markdown optimizados para la importación a AppFlowy (File → Import → Markdown). Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Cubre las 14 capacidades con 13 ✅ nativas (encabezados, tablas simples, código con lenguaje, callouts `> [!type]` con color, plegables `<details>`, ecuaciones LaTeX, Mermaid nativo, enlaces, propiedades en frontmatter, imágenes, etc.) + 1 ❌ (fila 4 §6 contract: celdas combinadas → tabla vacía + `<details>` con matriz original). Pre-render de diagramas opt-in con `--pre-render-diagrams` que activa F70 (`scripts/render/diagram_image.py`) si está disponible; sin F70, fallback a bloque ` ```mermaid ` nativo (con warning en el reporte).
+L4 renderer: genera archivos Markdown optimizados para la importación a AppFlowy (File → Import → Markdown). Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Cubre las 14 capacidades con 13 ✅ nativas (encabezados, tablas simples, código con lenguaje, callouts `> [!type]` con color, plegables `<details>`, ecuaciones LaTeX, Mermaid nativo, enlaces, propiedades en frontmatter, imágenes, etc.) + 1 ❌ (fila 4 §6 contract: celdas combinadas → tabla vacía + `<details>` con matriz original). Pre-render de diagramas opt-in con `--pre-render-diagrams` que activa F68 (`scripts/render/diagram_image.py`) si está disponible; sin F68, fallback a bloque ` ```mermaid ` nativo (con warning en el reporte).
 
 | Aspecto | Valor |
 |---|---|
 | Entrada | `--ir <path>`; `--profile <path>`; `--out-dir <dir>` |
 | Salida | `<out-dir>/render/appflowy/<note-id>.md` por nota (cabecera YAML §8 + cuerpo); `<out-dir>/render/appflowy/diagrams/<note-id>-N.svg` si pre-render activo; `<out-dir>/reports/render-degradation.{json,md}` siempre |
-| Pre-render diagrams | `--pre-render-diagrams` (default off): invoca F70; sin F70, fallback a mermaid nativo + warning |
+| Pre-render diagrams | `--pre-render-diagrams` (default off): invoca F68; sin F68, fallback a mermaid nativo + warning |
 | Instrucciones de importación | `--include-import-instructions` (default off): escribe `render/appflowy/IMPORT_INSTRUCTIONS.md` |
 | Renderer version | `--renderer-version <semver>` (default `0.1.0`) |
 | Invocación | `python3 scripts/render/appflowy.py --ir evals/appflowy-render-sample/fixtures --profile <yaml> --out-dir /tmp/workdir [--pre-render-diagrams] [--include-import-instructions]` |
-| Dependencias | Python 3.9+ stdlib puro (parser YAML mínimo propio para `targets.appflowy.*`; subprocess opcional para F70) |
-| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (wikilinks sin resolver, F70 ausente) |
+| Dependencias | Python 3.9+ stdlib puro (parser YAML mínimo propio para `targets.appflowy.*`; subprocess opcional para F68) |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (wikilinks sin resolver, F68 ausente) |
 | Escritura | Atómica: `tempfile` + `Path.replace` (compartido vía `util/_io.py`) |
 | Constantes inline | `SEVERITY_TO_CALLOUT` (19 severidades → 6 tipos AppFlowy nativos: note/info/warning/danger/success/question), `LANG_MAP` (compatible AppFlowy importer) |
 | Tabla de degradación | `references/08-render/contract.md §6` fila 4 (AppFlowy / Celdas combinadas) |
@@ -495,7 +495,7 @@ L4 renderer: genera archivos Markdown optimizados para la importación a AppFlow
 
 ### `render/markdown.py` — F58 · Renderer Markdown estándar (GFM)
 
-L4 renderer: genera archivos GitHub-Flavored Markdown optimizados para visualización en GitHub. Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Cubre las 14 capacidades con 9 ✅ nativas (encabezados `#`/`##`/`###`, listas, checklists, tablas simples, code blocks, plegables `<details>`, ecuaciones LaTeX inline/bloque, imágenes con rutas relativas, Mermaid nativo) + 5 ❌ (filas 5/7/12/16/20 de contract §6: Celdas combinadas → `<details>` con matriz; Callouts → blockquote con emoji + CSS class `callout-<severity>`; Backlinks → sección `## Referenciado por` generada en build; Consultas dinámicas → tabla estática `## Consultas habituales`; Colores semánticos → emoji + CSS class `semantic-<token>`). Diagramas: bloque ` ```mermaid ` (GitHub nativo) + imagen SVG pre-renderizada como fallback cuando F70 está disponible. Rutas relativas (`[text](<note-id>.md)`) resuelven en la estructura generada (criterio 3).
+L4 renderer: genera archivos GitHub-Flavored Markdown optimizados para visualización en GitHub. Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Cubre las 14 capacidades con 9 ✅ nativas (encabezados `#`/`##`/`###`, listas, checklists, tablas simples, code blocks, plegables `<details>`, ecuaciones LaTeX inline/bloque, imágenes con rutas relativas, Mermaid nativo) + 5 ❌ (filas 5/7/12/16/20 de contract §6: Celdas combinadas → `<details>` con matriz; Callouts → blockquote con emoji + CSS class `callout-<severity>`; Backlinks → sección `## Referenciado por` generada en build; Consultas dinámicas → tabla estática `## Consultas habituales`; Colores semánticos → emoji + CSS class `semantic-<token>`). Diagramas: bloque ` ```mermaid ` (GitHub nativo) + imagen SVG pre-renderizada como fallback cuando F68 está disponible. Rutas relativas (`[text](<note-id>.md)`) resuelven en la estructura generada (criterio 3).
 
 | Aspecto | Valor |
 |---|---|
@@ -504,10 +504,10 @@ L4 renderer: genera archivos GitHub-Flavored Markdown optimizados para visualiza
 | Base URL | `--base-url <url>` (vacío por defecto): prefijo absoluto para wikilinks resueltos (e.g. `https://github.com/user/repo/blob/main/`); sin él, paths relativos `<note-id>.md` (criterio 3) |
 | Backlinks | `--generate-backlinks` (default ON): inserta `## Referenciado por` al final (fila 7 §6) |
 | Queries table | `--generate-queries-table` (default ON): inserta tabla estática `## Consultas habituales` para queries (fila 16 §6) |
-| Pre-render diagrams | `--pre-render-diagrams` (default off): invoca F70 si existe; fallback a ` ```mermaid ` nativo |
+| Pre-render diagrams | `--pre-render-diagrams` (default off): invoca F68 si existe; fallback a ` ```mermaid ` nativo |
 | Renderer version | `--renderer-version <semver>` (default `0.1.0`) |
 | Invocación | `python3 scripts/render/markdown.py --ir evals/markdown-render-sample/fixtures --profile <yaml> --out-dir /tmp/workdir [--base-url <url>] [--pre-render-diagrams]` |
-| Dependencias | Python 3.9+ stdlib puro (parser YAML mínimo propio para `targets.markdown.*`; subprocess opcional para F70) |
+| Dependencias | Python 3.9+ stdlib puro (parser YAML mínimo propio para `targets.markdown.*`; subprocess opcional para F68) |
 | Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (wikilinks sin resolver) |
 | Escritura | Atómica: `tempfile` + `Path.replace` (compartido vía `util/_io.py`) |
 | Constantes inline | `SEVERITY_TO_EMOJI` (19 → 5 emoji principales), `SEMANTIC_TOKENS` (5), `LANG_MAP` (subset GFM), `BACKLINK_HEADING`, `QUERIES_HEADING` |
@@ -732,3 +732,89 @@ desde artifacts existentes. 3 sub-comandos:
 | Códigos de salida | 0 OK · 1 fatal · 2 warnings (migration con degradaciones) |
 | Dependencias | Python 3.9+ stdlib puro |
 
+
+### `validate/mermaid.py` — F67 · Validador de diagramas Mermaid
+
+CLI que extrae bloques `:::diagram` de archivos NoteMark (`.nm`/`.md`) y los
+valida contra el catálogo portable de F66 (`mermaid-portable.md`) y las
+reglas de legibilidad de F65 (`diagram-catalog.md` §6). Parser ad-hoc para
+los 9 tipos portables (WP-1..WP-9) sin dependencias externas. Cubre los 3
+criterios de la Fase 67: detecta el 100 % de los 20 diagramas rotos a
+propósito, cero falsos positivos sobre los diagramas válidos del repo,
+y reporta violaciones de portabilidad además de errores de sintaxis.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <path>` (archivo único) o `--glob <pattern>` (múltiples) |
+| Salida | `--out-dir <dir>` escribe `validate-report.{json,md}`; sin `--out-dir` imprime a stdout (Markdown por defecto o JSON con `--json`) |
+| Reglas sintaxis | S-01..S-08: tipo desconocido, dirección inválida, corchetes desbalanceados, participante inválido, mensaje sin `:`, `[*]` ausente, cardinalidad er inválida, gantt sin dateFormat |
+| Reglas portabilidad | P-01..P-06: etiqueta sin comillas (R-MP-01), ID Unicode (R-MP-02), `style X fill:#hex` (R-MP-04), `click`/`linkStyle` (R-MP-06), `init` con theme (R-MP-06), HTML inline complejo |
+| Reglas legibilidad | L-01..L-06: >15 nodos, gantt >25 hitos, jerarquía >25 profundidad ≤4, etiqueta >40/60 chars, subgraphs anidados >2 niveles, `:::diagram` sin `alt=` |
+| Severidades | `error` (criterios duros) · `warning` (recomendaciones) · `info` (informativo: ej. gantt con 16-25 hitos) |
+| Thresholds | `--max-nodes` (default 15) · `--max-label-len` (default 40) · `--severity` mínimo (default info) · `--fail-on` (default error) |
+| Filtro por tipo | `--include-types WP-1,WP-2,...` (default: todos) |
+| Reporte | JSON con `schema_version: 1.0.0`, `file`, `block_index`, `directive_src`, `directive_alt`, `diagram_type`, `violations[]` (rule_id, severity, node_id, line, column, message, fix_hint) |
+| Códigos de salida | 0 OK · 1 FAIL (≥1 violación ≥ `--fail-on`) · 2 uso incorrecto |
+| Escritura | Atómica vía `util/_io.py:atomic_write_json` |
+| Constantes inline | `PORTABLE_TYPES` (11), `SEVERITY_ORDER`, `EXIT_*`, `RULES` (20 reglas) |
+| Tabla de degradación | `references/07-visual/mermaid-portable.md §6` (reglas R-MP-01..R-MP-06) y `diagram-catalog.md §6` (regla R-D-02 sobre 15 nodos) |
+| Documentación | `references/07-visual/diagram-catalog.md` (F65) + `references/07-visual/mermaid-portable.md` (F66) + docstring del script |
+| Dependencias | Python 3.9+ stdlib puro |
+
+### `render/diagram_image.py` — F68 · Pre-renderizado de diagramas
+
+CLI que extrae bloques `:::diagram` de archivos NoteMark (`.nm`/`.md`) y los
+pre-renderiza a SVG (y opcionalmente PNG) en tema claro y oscuro usando el
+binario `mmdc` (`@mermaid-js/mermaid-cli`). Cuando `mmdc` no está disponible,
+degrada a `native_mermaid` (criterio D-01): el bloque ```mermaid ``` queda
+tal cual y el código fuente plegable se incluye en el manifest.
+
+Cubre los 3 criterios de F68: todo diagrama tiene versión imagen disponible
+(criterio 1); el mismo código produce el mismo archivo (criterio 2, hash
+determinista + caché por hash); el código fuente plegable (`source_code`)
+acompaña siempre a la imagen en el `manifest.json` (criterio 3). Stdlib puro.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--source <path>` (archivo único) o `--glob <pattern>` (múltiples) |
+| Salida | `<out-dir>/manifest-<stem>.{json,md}` (uno por archivo × tema) + `<out-dir>/render-degradation.{json,md}`; `<out-dir>/diagrams/<note-id>-<block_idx>-<theme>.{svg,png}` |
+| Caché | `<cache-dir>/<hash>-<theme>.json` (index) + archivos `<hash>.{svg,png}`; `--force` ignora caché, `--cache-clear` la vacía |
+| Hash determinista | `sha256(diagram_code \|\| theme \|\| format \|\| ir_sha256)` — incluye `ir_sha256` para invalidar caché cuando cambia el IR aunque el código del diagrama sea idéntico |
+| Tema | `light` (default), `dark`, `both` (genera `*-light.svg` + `*-dark.svg`) |
+| Formato | `svg` (default), `png`, `both` |
+| mmdc invocation | `mmdc --input X.mmd --output Y.svg --configFile config.json --puppeteerConfig '{...}' --quiet`; Puppeteer config: `{"args": ["--no-sandbox", "--disable-setuid-sandbox"]}` |
+| Fallback D-01 | Cuando `mmdc` no está disponible: `fallback_used: "native_mermaid"`; manifest incluye `source_code` (criterio 3) y `errors: []`; renderer L4 embebe ```mermaid ``` nativo |
+| API importable | `render_block(block, out_dir, cache, mmdc_path, mmdc_version, theme, format_, ir_sha256, force, no_fallback, max_width, max_height, timeout)` — usada por appflowy/markdown/html_pdf vía `--pre-render-diagrams` |
+| Códigos de salida | 0 OK · 1 degradación parcial · 2 fatal (mmdc no disponible + `--no-fallback` o paths faltantes) |
+| Escritura | Atómica vía `util/_io.py:atomic_write_json` |
+| Tabla de degradación | `references/08-render/capability-matrix.md` fila 8 (Mermaid) — Notion API / AppFlowy / HTML-PDF / Flashcards pre-renderizan via F68; Obsidian / Notion import / Markdown estándar usan nativo |
+| Documentación | `references/08-render/capability-matrix.md` (F8) + `references/07-visual/diagram-catalog.md` (F65) + docstring del script |
+| Dependencias | Python 3.9+ stdlib puro + `mmdc` opcional (subprocess); Puppeteer + Chrome implícitos cuando `mmdc` está disponible |
+
+### `render/make_figure.py` — F70 · Figuras de datos
+
+CLI que renderiza figuras de datos en SVG vectorial a partir de un JSON
+spec. Cubre los 3 criterios de F70: las 6 figuras (bar, line, heatmap,
+confusion_matrix, distribution, before_after) se leen bien en tema claro
+y oscuro (ejes grises neutros, paleta Okabe-Ito, fondo configurable); la
+paleta pasa verificación de daltonismo con ΔE CIEL76 ≥ 20; toda serie
+tiene `source_refs` no vacío (regla F70-SR-01, exit 1 si falta).
+
+Stdlib puro. Genera alt text automáticamente; exige reading_phrase no vacío.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--input <spec.json>` (archivo único) o `--input-dir <dir>` (varios specs) |
+| Salida | `<out-dir>/<slug>.svg` + `<out-dir>/<slug>.manifest.json` + `<out-dir>/render-degradation.{json,md}` |
+| Tipos | `bar`, `line`, `heatmap`, `confusion_matrix`, `distribution`, `before_after` |
+| Paleta | Okabe-Ito (8 colores) invertida para tema dark; verificada con ΔE CIEL76 ≥ 20 |
+| Ejes neutros | `#666666` axis / `#E0E0E0` gridline / `#333333` text en light; `#A0A0A0` / `#404040` / `#CCCCCC` en dark |
+| Source refs | Validación obligatoria por serie; `--allow-missing-refs` para modo draft |
+| Alt text | Auto-generado por tipo; sobrescribible vía spec |
+| Reading phrase | Obligatorio no vacío (≤ 280 chars recomendado) |
+| Manifest | `schema_version: 1.0.0`; `ir_sha256`; `palette_colorblind_safe`; `palette_min_delta_e`; `source_refs_total` |
+| Códigos de salida | 0 OK · 1 con violaciones ≥ `--fail-on` · 2 fatal |
+| Escritura | Atómica vía `util/_io.py:atomic_write_json/text` |
+| Tabla de degradación | `references/08-render/contract.md` §6 — figuras como capacidad; obsidian/no, notion_api/svg-inline, notion_md/svg-embed, appflowy/svg-inline, html_pdf/svg-inline, markdown/svg-embed, flashcards/png-raster |
+| Documentación | `references/07-visual/tokens.md` (F72 provee la paleta canónica — F70 incluye seed Okabe-Ito) + docstring del script |
+| Dependencias | Python 3.9+ stdlib puro (Pillow opcional para `--format png\|both`) |

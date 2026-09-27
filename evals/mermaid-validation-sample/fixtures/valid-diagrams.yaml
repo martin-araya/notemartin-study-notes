@@ -1,0 +1,68 @@
+# 20+ diagramas válidos del repo (F67 criterio 2 — cero falsos positivos).
+# Cada entrada es el path a un bloque Mermaid del repo que el validador debe
+# aceptar sin violaciones.
+#
+# Los paths se resuelven relativos a la raíz del repo. La batería se ejecuta
+# con `build_fixtures.py` que verifica que cada path exista y extrae los
+# bloques :::diagram.
+diagramas_validos:
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 0
+    descripcion: "Ejemplo T1 — Sobrecarga C++"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 1
+    descripcion: "Ejemplo T2 — Query PostgreSQL"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 2
+    descripcion: "Ejemplo T3 — Pod Kubernetes"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 3
+    descripcion: "Ejemplo T4 — Jerarquía Kubernetes"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 4
+    descripcion: "Ejemplo T5 — Catálogo SQL"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 5
+    descripcion: "Ejemplo T6 — PostgreSQL capas"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 6
+    descripcion: "Ejemplo T7 — Dependencias PostgreSQL"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 7
+    descripcion: "Ejemplo T8 — Cronología HTTP"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 8
+    descripcion: "Ejemplo T9 — Memoria del motor BD"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 9
+    descripcion: "Ejemplo T10 — expression C++"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 1
+    descripcion: "Plantilla genérica WP-1"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 2
+    descripcion: "Plantilla WP-2 sequenceDiagram"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 3
+    descripcion: "Plantilla WP-3 stateDiagram-v2"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 4
+    descripcion: "Plantilla WP-4 erDiagram"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 5
+    descripcion: "Plantilla WP-5 classDiagram"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 6
+    descripcion: "Plantilla WP-6 gantt"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 7
+    descripcion: "Plantilla WP-7 gitGraph"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 8
+    descripcion: "Plantilla WP-8 pie"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 9
+    descripcion: "Plantilla WP-9 subgraph"
+  - path: "skill/notemartin-study-notes/references/04-authoring/block-directives.md"
+    bloque_esperado_idx: 0
+    descripcion: "Ejemplo :::diagram en block-directives"

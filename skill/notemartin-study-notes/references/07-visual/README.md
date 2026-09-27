@@ -10,9 +10,9 @@ Cargar al elegir tipo de diagrama o estilo visual; cargar `tokens.md` antes de c
 
 - `diagram-catalog.md` `[existente]` — F65 ✅
 - `mermaid-portable.md` `[existente]` — F66 ✅
-- `monospace-diagrams.md` `[pendiente F69]`
-- `reconstruction.md` `[pendiente F71]`
-- `accessibility.md` `[pendiente F71]`
+- `monospace-diagrams.md` `[existente]` — F69 ✅
+- `reconstruction.md` `[existente]` — F71 ✅
+- `accessibility.md` `[existente]` — F71 ✅
 - `tokens.md` `[pendiente F72]`
 - `style-mapping.md` `[pendiente F73]`
 - `note-templates.md` `[pendiente F75]`
@@ -22,11 +22,11 @@ Cargar al elegir tipo de diagrama o estilo visual; cargar `tokens.md` antes de c
 
 | Archivo | Lee | Produce |
 |---|---|---|
-| `diagram-catalog.md` | Agente al elegir diagrama | F65 |
+| `diagram-catalog.md` | Agente al elegir diagrama; F67 (validador) | F65 |
 | `mermaid-portable.md` | Agente y F67 (validador) | F66 |
 | `monospace-diagrams.md` | Agente al decidir entre tipos | F69 |
-| `reconstruction.md` | Agente ante diagrama impreso | F71 |
-| `accessibility.md` | Agente y revisor visual | F71 |
+| `reconstruction.md` | Agente y F67 (validador) ante diagrama impreso | F71 |
+| `accessibility.md` | Agente, revisor visual, F67 (L-06 alt), F70 (paleta) | F71 |
 | `tokens.md` | Cualquier archivo que cite color | F72 |
 | `style-mapping.md` | Renderers L4 | F73 |
 | `note-templates.md` | Agente al redactar cabecera | F75 |

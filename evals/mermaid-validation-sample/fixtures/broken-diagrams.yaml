@@ -1,0 +1,172 @@
+# 20 diagramas Mermaid con violaciones a propósito (F67 criterio 1).
+# Cada entrada tiene id, tipo de violación, contenido Mermaid, regla esperada.
+# Los bloques están envueltos en `:::diagram` con `alt` y `src` para que el
+# validador los parsee.
+diagramas_rotos:
+  - id: "broken-01"
+    clase: "sintaxis"
+    regla_esperada: "S-01"
+    contenido: |
+      unknownDiagram
+          A --> B
+  - id: "broken-02"
+    clase: "sintaxis"
+    regla_esperada: "S-02"
+    contenido: |
+      flowchart
+          A["x"] --> B["y"]
+  - id: "broken-03"
+    clase: "sintaxis"
+    regla_esperada: "S-03"
+    contenido: |
+      flowchart TD
+          A["texto sin cerrar
+  - id: "broken-04"
+    clase: "sintaxis"
+    regla_esperada: "S-05"
+    contenido: |
+      sequenceDiagram
+          participant A as Cliente
+          A->>B
+  - id: "broken-05"
+    clase: "sintaxis"
+    regla_esperada: "S-07"
+    contenido: |
+      erDiagram
+          A ??--o{ B : "test"
+  - id: "broken-06"
+    clase: "sintaxis"
+    regla_esperada: "S-08"
+    contenido: |
+      gantt
+          title Tareas
+          Tarea A :a1, 2026-01-01, 5d
+  - id: "broken-07"
+    clase: "sintaxis"
+    regla_esperada: "S-06"
+    contenido: |
+      stateDiagram-v2
+          A --> B
+          B --> C
+  - id: "broken-08"
+    clase: "sintaxis"
+    regla_esperada: "S-04"
+    contenido: |
+      sequenceDiagram
+          participant 1A as Uno
+          1A->>B:X
+  - id: "broken-09"
+    clase: "portabilidad"
+    regla_esperada: "P-01"
+    contenido: |
+      flowchart TD
+          A[Texto sin comillas]
+  - id: "broken-10"
+    clase: "portabilidad"
+    regla_esperada: "P-02"
+    contenido: |
+      flowchart TD
+          Acción["X"]
+  - id: "broken-11"
+    clase: "portabilidad"
+    regla_esperada: "P-03"
+    contenido: |
+      flowchart TD
+          style A fill:#ff0000
+          A["X"] --> B["Y"]
+  - id: "broken-12"
+    clase: "portabilidad"
+    regla_esperada: "P-04"
+    contenido: |
+      flowchart TD
+          A["X"] --> B["Y"]
+          click A "https://example.com"
+  - id: "broken-13"
+    clase: "portabilidad"
+    regla_esperada: "P-05"
+    contenido: |
+      %%{init: {'theme':'dark'}}%%
+      flowchart TD
+          A["X"] --> B["Y"]
+  - id: "broken-14"
+    clase: "portabilidad"
+    regla_esperada: "P-06"
+    contenido: |
+      flowchart TD
+          A["<b><i>texto</i></b>"]
+  - id: "broken-15"
+    clase: "legibilidad"
+    regla_esperada: "L-01"
+    contenido: |
+      flowchart TD
+          N1["a"] --> N2["b"] --> N3["c"] --> N4["d"] --> N5["e"] --> N6["f"] --> N7["g"] --> N8["h"] --> N9["i"] --> N10["j"] --> N11["k"] --> N12["l"] --> N13["m"] --> N14["n"] --> N15["o"] --> N16["p"] --> N17["q"] --> N18["r"] --> N19["s"] --> N20["t"]
+  - id: "broken-16"
+    clase: "legibilidad"
+    regla_esperada: "L-04"
+    contenido: |
+      flowchart TD
+          A["texto de más de 40 caracteres en una sola línea sin break"]
+  - id: "broken-17"
+    clase: "legibilidad"
+    regla_esperada: "L-05"
+    contenido: |
+      flowchart TB
+          subgraph X
+              subgraph Y
+                  subgraph Z
+                      A["x"]
+                  end
+              end
+          end
+  - id: "broken-18"
+    clase: "legibilidad"
+    regla_esperada: "L-01"
+    contenido: |
+      gantt
+          dateFormat YYYY-MM-DD
+          title Con 30 hitos
+          T01 :t01, 2026-01-01, 1d
+          T02 :t02, 2026-01-02, 1d
+          T03 :t03, 2026-01-03, 1d
+          T04 :t04, 2026-01-04, 1d
+          T05 :t05, 2026-01-05, 1d
+          T06 :t06, 2026-01-06, 1d
+          T07 :t07, 2026-01-07, 1d
+          T08 :t08, 2026-01-08, 1d
+          T09 :t09, 2026-01-09, 1d
+          T10 :t10, 2026-01-10, 1d
+          T11 :t11, 2026-01-11, 1d
+          T12 :t12, 2026-01-12, 1d
+          T13 :t13, 2026-01-13, 1d
+          T14 :t14, 2026-01-14, 1d
+          T15 :t15, 2026-01-15, 1d
+          T16 :t16, 2026-01-16, 1d
+          T17 :t17, 2026-01-17, 1d
+          T18 :t18, 2026-01-18, 1d
+          T19 :t19, 2026-01-19, 1d
+          T20 :t20, 2026-01-20, 1d
+          T21 :t21, 2026-01-21, 1d
+          T22 :t22, 2026-01-22, 1d
+          T23 :t23, 2026-01-23, 1d
+          T24 :t24, 2026-01-24, 1d
+          T25 :t25, 2026-01-25, 1d
+          T26 :t26, 2026-01-26, 1d
+          T27 :t27, 2026-01-27, 1d
+          T28 :t28, 2026-01-28, 1d
+          T29 :t29, 2026-01-29, 1d
+          T30 :t30, 2026-01-30, 1d
+  - id: "broken-19"
+    clase: "sintaxis"
+    regla_esperada: "S-05"
+    contenido: |
+      sequenceDiagram
+          A->>B:X
+          alt Condición
+              B-->>A:Y
+          end
+  - id: "broken-20"
+    clase: "accesibilidad"
+    regla_esperada: "L-06"
+    contenido: |
+      flowchart TD
+          A["X"] --> B["Y"]

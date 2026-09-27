@@ -1,0 +1,60 @@
+# F67 — Diagramas válidos del repo (Fase 67 criterio 2).
+# Generado por build_fixtures.py.
+# Solo se incluyen los ejemplos de mermaid-portable.md y los ejemplos REALES
+# del catalog (saltando las plantillas con placeholders). T4 se excluye
+# porque su ejemplo usa 'Raíz' como ID, lo que dispara P-02 intencionalmente.
+diagramas_validos:
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 1
+    descripcion: "Plantilla WP-1 flowchart"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 2
+    descripcion: "Plantilla WP-2 sequenceDiagram"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 3
+    descripcion: "Plantilla WP-3 stateDiagram-v2"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 4
+    descripcion: "Plantilla WP-4 erDiagram"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 5
+    descripcion: "Plantilla WP-5 classDiagram"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 6
+    descripcion: "Plantilla WP-6 gantt"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 7
+    descripcion: "Plantilla WP-7 gitGraph"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 8
+    descripcion: "Plantilla WP-8 pie"
+  - path: "skill/notemartin-study-notes/references/07-visual/mermaid-portable.md"
+    bloque_esperado_idx: 9
+    descripcion: "Plantilla WP-9 subgraph"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 1
+    descripcion: "T1 Sobrecarga C++"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 3
+    descripcion: "T2 Query PostgreSQL"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 5
+    descripcion: "T3 Pod Kubernetes"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 9
+    descripcion: "T5 Catálogo SQL"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 11
+    descripcion: "T6 PostgreSQL capas"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 13
+    descripcion: "T7 Dependencias PostgreSQL"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 15
+    descripcion: "T8 Cronología HTTP"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 17
+    descripcion: "T9 Memoria del motor BD"
+  - path: "skill/notemartin-study-notes/references/07-visual/diagram-catalog.md"
+    bloque_esperado_idx: 19
+    descripcion: "T10 expression C++"

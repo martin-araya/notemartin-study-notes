@@ -1,0 +1,189 @@
+# F67 — 20 diagramas rotos a propósito (Fase 67 criterio 1)
+# Cada bloque :::diagram contiene una violación específica.
+
+:::diagram src="blk_broken-01" alt="Diagrama roto broken-01"
+```mermaid
+unknownDiagram
+    A --> B
+```
+:::
+
+:::diagram src="blk_broken-02" alt="Diagrama roto broken-02"
+```mermaid
+flowchart
+    A["x"] --> B["y"]
+```
+:::
+
+:::diagram src="blk_broken-03" alt="Diagrama roto broken-03"
+```mermaid
+flowchart TD
+    A["texto sin cerrar
+```
+:::
+
+:::diagram src="blk_broken-04" alt="Diagrama roto broken-04"
+```mermaid
+sequenceDiagram
+    participant A as Cliente
+    A->>B
+```
+:::
+
+:::diagram src="blk_broken-05" alt="Diagrama roto broken-05"
+```mermaid
+erDiagram
+    A ??--o{ B : "test"
+```
+:::
+
+:::diagram src="blk_broken-06" alt="Diagrama roto broken-06"
+```mermaid
+gantt
+    title Tareas
+    Tarea A :a1, 2026-01-01, 5d
+```
+:::
+
+:::diagram src="blk_broken-07" alt="Diagrama roto broken-07"
+```mermaid
+stateDiagram-v2
+    A --> B
+    B --> C
+```
+:::
+
+:::diagram src="blk_broken-08" alt="Diagrama roto broken-08"
+```mermaid
+sequenceDiagram
+    participant 1A as Uno
+    1A->>B:X
+```
+:::
+
+:::diagram src="blk_broken-09" alt="Diagrama roto broken-09"
+```mermaid
+flowchart TD
+    A[Texto sin comillas]
+```
+:::
+
+:::diagram src="blk_broken-10" alt="Diagrama roto broken-10"
+```mermaid
+flowchart TD
+    Acción["X"]
+```
+:::
+
+:::diagram src="blk_broken-11" alt="Diagrama roto broken-11"
+```mermaid
+flowchart TD
+    style A fill:#ff0000
+    A["X"] --> B["Y"]
+```
+:::
+
+:::diagram src="blk_broken-12" alt="Diagrama roto broken-12"
+```mermaid
+flowchart TD
+    A["X"] --> B["Y"]
+    click A "https://example.com"
+```
+:::
+
+:::diagram src="blk_broken-13" alt="Diagrama roto broken-13"
+```mermaid
+%%{init: {'theme':'dark'}}%%
+flowchart TD
+    A["X"] --> B["Y"]
+```
+:::
+
+:::diagram src="blk_broken-14" alt="Diagrama roto broken-14"
+```mermaid
+flowchart TD
+    A["<b><i>texto</i></b>"]
+```
+:::
+
+:::diagram src="blk_broken-15" alt="Diagrama roto broken-15"
+```mermaid
+flowchart TD
+    N1["a"] --> N2["b"] --> N3["c"] --> N4["d"] --> N5["e"] --> N6["f"] --> N7["g"] --> N8["h"] --> N9["i"] --> N10["j"] --> N11["k"] --> N12["l"] --> N13["m"] --> N14["n"] --> N15["o"] --> N16["p"] --> N17["q"] --> N18["r"] --> N19["s"] --> N20["t"]
+```
+:::
+
+:::diagram src="blk_broken-16" alt="Diagrama roto broken-16"
+```mermaid
+flowchart TD
+    A["texto de más de 40 caracteres en una sola línea sin break"]
+```
+:::
+
+:::diagram src="blk_broken-17" alt="Diagrama roto broken-17"
+```mermaid
+flowchart TB
+    subgraph X
+        subgraph Y
+            subgraph Z
+                A["x"]
+            end
+        end
+    end
+```
+:::
+
+:::diagram src="blk_broken-18" alt="Diagrama roto broken-18"
+```mermaid
+gantt
+    dateFormat YYYY-MM-DD
+    title Con 30 hitos
+    T01 :t01, 2026-01-01, 1d
+    T02 :t02, 2026-01-02, 1d
+    T03 :t03, 2026-01-03, 1d
+    T04 :t04, 2026-01-04, 1d
+    T05 :t05, 2026-01-05, 1d
+    T06 :t06, 2026-01-06, 1d
+    T07 :t07, 2026-01-07, 1d
+    T08 :t08, 2026-01-08, 1d
+    T09 :t09, 2026-01-09, 1d
+    T10 :t10, 2026-01-10, 1d
+    T11 :t11, 2026-01-11, 1d
+    T12 :t12, 2026-01-12, 1d
+    T13 :t13, 2026-01-13, 1d
+    T14 :t14, 2026-01-14, 1d
+    T15 :t15, 2026-01-15, 1d
+    T16 :t16, 2026-01-16, 1d
+    T17 :t17, 2026-01-17, 1d
+    T18 :t18, 2026-01-18, 1d
+    T19 :t19, 2026-01-19, 1d
+    T20 :t20, 2026-01-20, 1d
+    T21 :t21, 2026-01-21, 1d
+    T22 :t22, 2026-01-22, 1d
+    T23 :t23, 2026-01-23, 1d
+    T24 :t24, 2026-01-24, 1d
+    T25 :t25, 2026-01-25, 1d
+    T26 :t26, 2026-01-26, 1d
+    T27 :t27, 2026-01-27, 1d
+    T28 :t28, 2026-01-28, 1d
+    T29 :t29, 2026-01-29, 1d
+    T30 :t30, 2026-01-30, 1d
+```
+:::
+
+:::diagram src="blk_broken-19" alt="Diagrama roto broken-19"
+```mermaid
+sequenceDiagram
+    A->>B:X
+    alt Condición
+        B-->>A:Y
+    end
+```
+:::
+
+:::diagram src="blk_broken-20"
+```mermaid
+flowchart TD
+    A["X"] --> B["Y"]
+```
+:::
