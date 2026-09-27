@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "figure_type": "bar",
+  "title": "Rendimiento PostgreSQL vs MySQL",
+  "theme": "light",
+  "x_axis_label": "X",
+  "y_axis_label": "Y",
+  "series": [
+    {
+      "name": "PostgreSQL 16",
+      "color_token": "okabe-ito-blue",
+      "source_refs": [
+        "blk_pg_001",
+        "blk_pg_002"
+      ],
+      "data": [
+        {
+          "category": "SELECT",
+          "value": 12.3,
+          "source_ref": "blk_pg_001"
+        },
+        {
+          "category": "INSERT",
+          "value": 45.6,
+          "source_ref": "blk_pg_002"
+        }
+      ]
+    },
+    {
+      "name": "MySQL 8",
+      "color_token": "okabe-ito-vermillion",
+      "source_refs": [
+        "blk_my_001"
+      ],
+      "data": [
+        {
+          "category": "SELECT",
+          "value": 45.0,
+          "source_ref": "blk_my_001"
+        },
+        {
+          "category": "INSERT",
+          "value": 70.0,
+          "source_ref": "blk_my_001"
+        }
+      ]
+    }
+  ],
+  "alt_text": "Alt text auto-generado para Rendimiento PostgreSQL vs MySQL.",
+  "reading_phrase": "Frase de lectura para Rendimiento PostgreSQL vs MySQL."
+}

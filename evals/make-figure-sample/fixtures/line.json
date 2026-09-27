@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0.0",
+  "figure_type": "line",
+  "title": "Tendencia de latencia",
+  "theme": "light",
+  "x_axis_label": "Mes",
+  "y_axis_label": "Latencia (ms)",
+  "series": [
+    {
+      "name": "API A",
+      "color_token": "okabe-ito-blue",
+      "source_refs": [
+        "blk_api_a_001"
+      ],
+      "data": [
+        {
+          "category": "Ene",
+          "value": 100,
+          "source_ref": "blk_api_a_001"
+        },
+        {
+          "category": "Feb",
+          "value": 80,
+          "source_ref": "blk_api_a_001"
+        },
+        {
+          "category": "Mar",
+          "value": 60,
+          "source_ref": "blk_api_a_001"
+        }
+      ]
+    },
+    {
+      "name": "API B",
+      "color_token": "okabe-ito-vermillion",
+      "source_refs": [
+        "blk_api_b_001"
+      ],
+      "data": [
+        {
+          "category": "Ene",
+          "value": 90,
+          "source_ref": "blk_api_b_001"
+        },
+        {
+          "category": "Feb",
+          "value": 85,
+          "source_ref": "blk_api_b_001"
+        },
+        {
+          "category": "Mar",
+          "value": 75,
+          "source_ref": "blk_api_b_001"
+        }
+      ]
+    }
+  ],
+  "alt_text": "Alt text auto-generado para Tendencia de latencia.",
+  "reading_phrase": "Frase de lectura para Tendencia de latencia."
+}

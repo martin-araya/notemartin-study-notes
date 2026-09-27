@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "figure_type": "distribution",
+  "title": "Distribución de latencia",
+  "theme": "light",
+  "x_axis_label": "Latencia (ms)",
+  "y_axis_label": "Frecuencia",
+  "series": [
+    {
+      "name": "Count",
+      "color_token": "okabe-ito-blue",
+      "source_refs": [
+        "blk_dist_001"
+      ],
+      "data": [
+        {
+          "category": "0-10",
+          "value": 5,
+          "source_ref": "blk_dist_001"
+        },
+        {
+          "category": "10-20",
+          "value": 12,
+          "source_ref": "blk_dist_001"
+        },
+        {
+          "category": "20-30",
+          "value": 25,
+          "source_ref": "blk_dist_001"
+        },
+        {
+          "category": "30-40",
+          "value": 30,
+          "source_ref": "blk_dist_001"
+        },
+        {
+          "category": "40-50",
+          "value": 18,
+          "source_ref": "blk_dist_001"
+        },
+        {
+          "category": "50-60",
+          "value": 10,
+          "source_ref": "blk_dist_001"
+        }
+      ]
+    }
+  ],
+  "alt_text": "Alt text auto-generado para Distribución de latencia.",
+  "reading_phrase": "Frase de lectura para Distribución de latencia."
+}

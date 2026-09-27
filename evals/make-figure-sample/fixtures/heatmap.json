@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "figure_type": "heatmap",
+  "title": "Correlación variables",
+  "theme": "light",
+  "x_axis_label": "X",
+  "y_axis_label": "Y",
+  "series": [
+    {
+      "name": "Correlación",
+      "color_token": "okabe-ito-blue",
+      "source_refs": [
+        "blk_corr_001"
+      ],
+      "data": [
+        {
+          "category": "A,A",
+          "value": 1.0,
+          "source_ref": "blk_corr_001"
+        },
+        {
+          "category": "A,B",
+          "value": 0.5,
+          "source_ref": "blk_corr_001"
+        },
+        {
+          "category": "A,C",
+          "value": 0.3,
+          "source_ref": "blk_corr_001"
+        },
+        {
+          "category": "B,A",
+          "value": 0.5,
+          "source_ref": "blk_corr_001"
+        },
+        {
+          "category": "B,B",
+          "value": 1.0,
+          "source_ref": "blk_corr_001"
+        },
+        {
+          "category": "B,C",
+          "value": 0.7,
+          "source_ref": "blk_corr_001"
+        }
+      ]
+    }
+  ],
+  "alt_text": "Alt text auto-generado para Correlación variables.",
+  "reading_phrase": "Frase de lectura para Correlación variables."
+}

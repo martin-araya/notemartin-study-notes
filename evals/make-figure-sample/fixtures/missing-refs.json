@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "figure_type": "bar",
+  "title": "Test missing refs",
+  "theme": "light",
+  "x_axis_label": "X",
+  "y_axis_label": "Y",
+  "series": [
+    {
+      "name": "BadSeries",
+      "color_token": "okabe-ito-blue",
+      "source_refs": [],
+      "data": [
+        {
+          "category": "A",
+          "value": 1.0,
+          "source_ref": ""
+        }
+      ]
+    }
+  ],
+  "alt_text": "Alt text auto-generado para Test missing refs.",
+  "reading_phrase": "Frase de lectura para Test missing refs."
+}

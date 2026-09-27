@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "figure_type": "confusion_matrix",
+  "title": "Matriz de confusión",
+  "theme": "light",
+  "x_axis_label": "X",
+  "y_axis_label": "Y",
+  "series": [
+    {
+      "name": "Counts",
+      "color_token": "okabe-ito-blue",
+      "source_refs": [
+        "blk_cm_001"
+      ],
+      "data": [
+        {
+          "category": "cat,cat",
+          "value": 80,
+          "source_ref": "blk_cm_001"
+        },
+        {
+          "category": "cat,dog",
+          "value": 5,
+          "source_ref": "blk_cm_001"
+        },
+        {
+          "category": "dog,cat",
+          "value": 10,
+          "source_ref": "blk_cm_001"
+        },
+        {
+          "category": "dog,dog",
+          "value": 90,
+          "source_ref": "blk_cm_001"
+        }
+      ]
+    }
+  ],
+  "alt_text": "Alt text auto-generado para Matriz de confusión.",
+  "reading_phrase": "Frase de lectura para Matriz de confusión."
+}

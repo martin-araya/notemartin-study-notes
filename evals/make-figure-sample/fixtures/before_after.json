@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0.0",
+  "figure_type": "before_after",
+  "title": "Antes/después de optimización",
+  "theme": "light",
+  "x_axis_label": "Categoría",
+  "y_axis_label": "Tiempo (s)",
+  "series": [
+    {
+      "name": "Antes",
+      "color_token": "okabe-ito-vermillion",
+      "source_refs": [
+        "blk_before_001"
+      ],
+      "data": [
+        {
+          "category": "Query 1",
+          "value": 5.0,
+          "source_ref": "blk_before_001"
+        },
+        {
+          "category": "Query 2",
+          "value": 8.0,
+          "source_ref": "blk_before_001"
+        },
+        {
+          "category": "Query 3",
+          "value": 3.0,
+          "source_ref": "blk_before_001"
+        }
+      ]
+    },
+    {
+      "name": "Después",
+      "color_token": "okabe-ito-bluish-green",
+      "source_refs": [
+        "blk_after_001"
+      ],
+      "data": [
+        {
+          "category": "Query 1",
+          "value": 1.5,
+          "source_ref": "blk_after_001"
+        },
+        {
+          "category": "Query 2",
+          "value": 2.0,
+          "source_ref": "blk_after_001"
+        },
+        {
+          "category": "Query 3",
+          "value": 0.8,
+          "source_ref": "blk_after_001"
+        }
+      ]
+    }
+  ],
+  "alt_text": "Alt text auto-generado para Antes/después de optimización.",
+  "reading_phrase": "Frase de lectura para Antes/después de optimización."
+}
