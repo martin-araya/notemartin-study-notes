@@ -66,6 +66,28 @@ _spec.loader.exec_module(_io_mod)
 _atomic_write_json = _io_mod.atomic_write_json
 _atomic_write_text = _io_mod.atomic_write_text
 
+# Helper `## Cabecera` (F75): callout nativo de AppFlowy con los 5 campos.
+_HEADER_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.render._header",
+    Path(__file__).resolve().parent / "_header.py",
+)
+_header_mod = _importlib_util.module_from_spec(_HEADER_SPEC)
+sys.modules.setdefault("scripts.render._header", _header_mod)
+_HEADER_SPEC.loader.exec_module(_header_mod)
+_emit_cabecera = _header_mod.emit_cabecera
+
+# Tabla canónica severidad → estilo por destino (F73). El renderer consume
+# solo el helper de callout AppFlowy.
+_STYLE_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.util.style_mapping",
+    Path(__file__).resolve().parent.parent / "util" / "style_mapping.py",
+)
+sys.modules.setdefault("scripts.util.style_mapping",
+                       _importlib_util.module_from_spec(_STYLE_SPEC))
+_style_mod = _importlib_util.module_from_spec(_STYLE_SPEC)
+_STYLE_SPEC.loader.exec_module(_style_mod)
+appflowy_callout_for = _style_mod.appflowy_callout_for
+
 
 EXIT_OK = 0
 EXIT_FATAL = 1
@@ -76,28 +98,9 @@ EXIT_WARN = 2
 # Constantes inline
 # ---------------------------------------------------------------------------
 
-# Severidad IR → tipo de callout AppFlowy (6 nativos).
-SEVERITY_TO_CALLOUT: Dict[str, str] = {
-    "note": "note",
-    "tip": "info",
-    "info": "info",
-    "warning": "warning",
-    "caution": "warning",
-    "danger": "danger",
-    "example": "info",
-    "question": "question",
-    "success": "success",
-    "failure": "danger",
-    "bug": "danger",
-    "quote": "info",
-    "abstract": "info",
-    "security": "danger",
-    "performance": "info",
-    "version": "info",
-    "deprecated": "warning",
-    "conflict": "warning",
-    "external": "info",
-}
+# Severidad IR → tipo de callout AppFlowy (6 nativos): vive en
+# scripts/util/style_mapping.py (F73). Esta sección solo conserva el default
+# visible al módulo.
 
 DEFAULT_SEVERITY = "note"
 
@@ -515,16 +518,16 @@ def _emit_admonition(node: Dict[str, Any],
     title = str(attrs.get("title", "") or "")
     body = _emit_inline(node.get("children", []))
 
-    callout_type = SEVERITY_TO_CALLOUT.get(severity)
-    if callout_type is None:
+    try:
+        callout_type = appflowy_callout_for(severity)
+    except KeyError as e:
         degradations.append({
             "id": f"deg-{_sha256_hex((node_path + 'sev').encode())[:12]}",
             "node_path": node_path,
             "node_type": "admonition",
             "capability": "callout",
             "alternative": (
-                f"callout 'note' (severity='{severity}' no en SEVERITY_TO_CALLOUT; "
-                f"default aplicado)"
+                f"callout 'note' ({e}; default aplicado)"
             ),
             "evidence": "rg '^> \\[!note\\]' render/appflowy/<id>.md exit 0",
             "content_intact": True,
@@ -795,6 +798,11 @@ def emit_artifact(ir_obj: Dict[str, Any], ir_sha256: str,
     body_parts: List[str] = []
     if title:
         body_parts.append(f"# {title}\n")
+    # Cabecera visual F75: callout nativo con los 5 campos.
+    cabecera_md = _emit_cabecera(ir_obj.get("frontmatter", {}) or {},
+                                 dest="appflowy")
+    if cabecera_md:
+        body_parts.append(cabecera_md.rstrip())
     for path, node in ir_nodes:
         rendered = _emit_node(
             node, degradations=degradations,
