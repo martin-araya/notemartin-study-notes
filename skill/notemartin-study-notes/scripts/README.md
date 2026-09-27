@@ -714,3 +714,21 @@ los 3 criterios del roadmap. Stdlib puro.
 | Códigos de salida | 0 OK (sin pérdidas reales) · 1 FAIL (al menos 1 pérdida real) · 2 uso incorrecto |
 | Dependencias | Python 3.9+ stdlib puro |
 
+### `render/migrate.py` — F64 · Re-render y migración
+
+CLI para migrar entre destinos sin volver a la fuente y reconstruir IR
+desde artifacts existentes. 3 sub-comandos:
+  - `re-render`: lee IRs persistidos e invoca el renderer del destino nuevo.
+  - `reverse-import`: parsea un artifact (md/html) y reconstruye un IR
+    estructural (jerarquía de headings, listas, admonitions, code, wikilinks).
+  - `diff-capabilities`: muestra gains/losses entre dos destinos sin migrar.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir-source <path>`; `--out-dir <dir>`; `--from <dest>`; `--to <dest>` |
+| Salida | `reports/migration-report.json` con summary {notes_total, notes_created, notes_updated, notes_errors, capabilities_gained, capabilities_lost} + capability_diff {gains, losses}; `migration-report.md` legible |
+| Reverse input | `--input <file>`; `--output-ir <path>`; `--format md\|html`; confidence high\|medium\|low |
+| Capacidad diff | Basado en CAPABILITY_SUPPORT (subset F8): 7 destinos × 7 capabilities |
+| Códigos de salida | 0 OK · 1 fatal · 2 warnings (migration con degradaciones) |
+| Dependencias | Python 3.9+ stdlib puro |
+
