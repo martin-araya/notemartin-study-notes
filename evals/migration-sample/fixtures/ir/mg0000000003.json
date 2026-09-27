@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "mg0000000003",
+  "title": "Third Migration Note",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Third Migration Note"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Yet another paragraph."
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "More text."
+          }
+        }
+      ]
+    }
+  ]
+}

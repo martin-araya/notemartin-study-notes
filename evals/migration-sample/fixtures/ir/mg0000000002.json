@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "mg0000000002",
+  "title": "Second Migration Note",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Second Migration Note"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Another paragraph here."
+          }
+        }
+      ]
+    }
+  ]
+}
