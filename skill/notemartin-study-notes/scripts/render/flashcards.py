@@ -99,6 +99,9 @@ class Card:
     back: str
     extra_tags: List[str] = field(default_factory=list)
     discarded_reason: Optional[str] = None
+    # F75: hint del `summary` del frontmatter, se muestra en el reverso
+    # de la card como contexto adicional (debajo de la respuesta).
+    summary_hint: Optional[str] = None
 
     @property
     def is_valid(self) -> bool:
@@ -283,7 +286,8 @@ def _word_count(text: str) -> int:
 def _extract_from_question(node: Dict[str, Any], note_id: str,
                             source_hash: str, max_clauses: int,
                             degradations: List[Dict[str, Any]],
-                            node_path: str) -> Optional[Card]:
+                            node_path: str,
+                            summary_hint: str = "") -> Optional[Card]:
     attrs = node.get("attrs", {}) or {}
     prompt = str(attrs.get("prompt", "") or "").strip()
     if not prompt:
@@ -315,16 +319,19 @@ def _extract_from_question(node: Dict[str, Any], note_id: str,
         })
         return Card(note_id=note_id, source_hash=source_hash,
                     front=front, back=back, extra_tags=extra_tags,
+                    summary_hint=summary_hint,
                     discarded_reason=REASON_COMPOUND)
 
     return Card(note_id=note_id, source_hash=source_hash,
-                front=front, back=back, extra_tags=extra_tags)
+                front=front, back=back, extra_tags=extra_tags,
+                summary_hint=summary_hint)
 
 
 def _extract_from_atomic(node: Dict[str, Any], note_id: str,
                           source_hash: str, max_clauses: int,
                           degradations: List[Dict[str, Any]],
-                          node_path: str) -> Optional[Card]:
+                          node_path: str,
+                          summary_hint: str = "") -> Optional[Card]:
     """Genera tarjeta desde definition/formula/glossary-term/key-fact."""
     kind = node.get("node", "")
     attrs = node.get("attrs", {}) or {}
@@ -367,16 +374,19 @@ def _extract_from_atomic(node: Dict[str, Any], note_id: str,
         })
         return Card(note_id=note_id, source_hash=source_hash,
                     front=front, back=back, extra_tags=extra_tags,
+                    summary_hint=summary_hint,
                     discarded_reason=REASON_COMPOUND)
 
     return Card(note_id=note_id, source_hash=source_hash,
-                front=front, back=back, extra_tags=extra_tags)
+                front=front, back=back, extra_tags=extra_tags,
+                summary_hint=summary_hint)
 
 
 def _extract_from_merged_table(node: Dict[str, Any], note_id: str,
                                 source_hash: str,
                                 degradations: List[Dict[str, Any]],
-                                node_path: str) -> List[Card]:
+                                node_path: str,
+                                summary_hint: str = "") -> List[Card]:
     """Fila 6 contract §6: linearización de tabla con celdas combinadas."""
     attrs = node.get("attrs", {}) or {}
     cells = attrs.get("cells", []) or []
@@ -413,6 +423,7 @@ def _extract_from_merged_table(node: Dict[str, Any], note_id: str,
                 front=v_str,
                 back=f"celda de tabla con celdas combinadas en nota {note_id}",
                 extra_tags=[f"cell-of:{note_id}:{r_idx}"],
+                summary_hint=summary_hint,
             ))
             degradations.append({
                 "id": f"deg-{_sha256_hex((node_path + f'{r_idx}-{c_idx}lin').encode())[:12]}",
@@ -443,6 +454,11 @@ def collect_cards_from_ir(
 ) -> List[Card]:
     """Recorre el IR y extrae tarjetas. Maneja prosa, atomic, questions, merged."""
     note_id = str(ir_obj.get("note_id", ""))
+    # F75: el `summary` del frontmatter se usa como hint en el reverso
+    # de cada card. No se filtra por nota — todas las cards de la misma
+    # nota comparten el mismo hint.
+    fm = ir_obj.get("frontmatter", {}) or {}
+    summary_hint = str(fm.get("summary", "") or "")
     cards: List[Card] = []
     nodes = traverse_ir(ir_obj)
 
@@ -461,12 +477,14 @@ def collect_cards_from_ir(
             if is_merged:
                 cards.extend(_extract_from_merged_table(
                     node, note_id, ir_sha256, degradations, path,
+                    summary_hint=summary_hint,
                 ))
                 continue
 
         if kind == "question":
             card = _extract_from_question(
                 node, note_id, ir_sha256, max_clauses, degradations, path,
+                summary_hint=summary_hint,
             )
             if card is None:
                 continue
@@ -489,6 +507,7 @@ def collect_cards_from_ir(
         if kind in ATOMIC_NODE_KINDS and _is_atomic_node(node):
             card = _extract_from_atomic(
                 node, note_id, ir_sha256, max_clauses, degradations, path,
+                summary_hint=summary_hint,
             )
             if card is None:
                 continue
