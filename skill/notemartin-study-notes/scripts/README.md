@@ -621,3 +621,24 @@ ejecuta auditorías de un workdir completo.
 | Dependencias | Python 3.9+ stdlib |
 | Códigos de salida | 0 OK (sin huérfanos tipo A) · 1 huérfanos tipo A o errores · 2 uso |
 | Documentación | `references/03-knowledge/ledger.md` (F15) + `schemas/sdm.schema.json` (F13) + `schemas/note-ir.schema.json` (F14) |
+### `render/html_pdf.py` — F59 · Renderer HTML y PDF
+
+L4 renderer: genera HTML5 autocontenido (CSS inline, sin recursos externos) con TOC lateral, SVG embebido para diagramas, y opcionalmente PDF via `weasyprint`. Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Cubre las 14 capacidades con 12 ✅ nativas (encabezados con id+anchor, listas, checklists, tablas con rowspan/colspan nativos, code blocks, plegables `<details>`, ecuaciones `<span class="math">`, imágenes con rutas relativas, Mermaid pre-renderizado a SVG o `<pre class="mermaid">` fallback, callouts `<aside class="callout-*">` con 8 colores semánticos, quotes `<blockquote><cite>` con cita preservada) + 2 ❌ (filas 8/17 de contract §6: Backlinks → `<aside class="backlinks">`; Consultas dinámicas → `<section class="queries">`). Self-contained: sin `<link rel="stylesheet" href="http">`, sin `<script src="http">`, sin `@import url(http)`, sin `<img src="http">` (criterio 1).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <path>`; `--profile <path>`; `--out-dir <dir>` |
+| Salida | `<out-dir>/render/html_pdf/<note-id>.html` por nota (HTML5 completo con `<style>` inline); `<out-dir>/render/html_pdf/diagrams/<note-id>-N.svg` si pre-render; `<out-dir>/render/html_pdf/<note-id>.pdf` si weasyprint disponible; `<out-dir>/reports/render-degradation.{json,md}` siempre |
+| Plantilla CSS | `references/08-render/html_pdf.template.css` (362 líneas, self-contained) |
+| PDF | weasyprint opcional (soft-dep). Sin weasyprint: HTML + warning en reporte + exit WARN. `--no-pdf` salta el intento. `--print-instructions` escribe `PRINT_INSTRUCTIONS.md` |
+| Print CSS | `@media print` con `page-break-inside: avoid` para `table, pre, code, figure, aside, blockquote, dl, details` (criterio 2). `@page { @top-left { source; } @bottom-right { counter(page); } }` para weasyprint |
+| Renderer version | `--renderer-version <semver>` (default `0.1.0`) |
+| Invocación | `python3 scripts/render/html_pdf.py --ir <path> --profile <yaml> --out-dir <dir> [--no-pdf] [--print-instructions]` |
+| Dependencias | Python 3.9+ stdlib puro; `weasyprint` soft-dep opcional |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (PDF skipped, etc.) |
+| Escritura | Atómica: `tempfile` + `Path.replace` (compartido vía `util/_io.py`) |
+| Constantes inline | `SEVERITY_TO_CSS_CLASS` (19 → 8 clases CSS), `SEVERITY_TO_EMOJI` (19), `LANG_MAP` (compatible con highlight.js) |
+| Tabla de degradación | `references/08-render/contract.md §6` filas 8/17 (HTML/PDF) |
+| Documentación | `references/08-render/contract.md` (F53) + `references/08-render/html_pdf.template.css` (comentarios inline) |
+| Schema del reporte | `evals/render-contract-sample/schema/report.schema.json` |
+
