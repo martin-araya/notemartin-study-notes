@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "fa0000000001",
+  "title": "Una pregunta simple",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Pregunta"
+          }
+        }
+      ]
+    },
+    {
+      "node": "question",
+      "attrs": {
+        "prompt": "¿Cuál es la capital de Francia?"
+      },
+      "capability": "question",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "París"
+          }
+        }
+      ]
+    }
+  ]
+}

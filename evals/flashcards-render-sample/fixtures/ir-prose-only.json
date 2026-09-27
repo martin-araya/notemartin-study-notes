@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "fa0000000004",
+  "title": "Solo prosa narrativa",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Sec"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Esta es una prosa narrativa larga que no debería generar tarjetas de repaso porque contiene múltiples hechos mezclados en una sola descripción."
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Otro párrafo narrativo extenso con varios hechos entrelazados."
+          }
+        }
+      ]
+    }
+  ]
+}

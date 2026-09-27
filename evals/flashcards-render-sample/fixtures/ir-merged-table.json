@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "fa0000000006",
+  "title": "Tabla con celdas combinadas",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Tabla"
+          }
+        }
+      ]
+    },
+    {
+      "node": "table",
+      "attrs": {
+        "headers": [
+          "A",
+          "B",
+          "C"
+        ],
+        "cells": [
+          [
+            "X",
+            "",
+            ""
+          ],
+          [
+            "X",
+            "Y",
+            "Z"
+          ]
+        ]
+      },
+      "capability": "table-merged-cells",
+      "source_refs": [],
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "fa0000000003",
+  "title": "Glosario atómico",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Glosario"
+          }
+        }
+      ]
+    },
+    {
+      "node": "definition",
+      "attrs": {
+        "term": "Función",
+        "is_atomic_card": true
+      },
+      "capability": "definition",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Relación entre conjuntos."
+          }
+        }
+      ]
+    },
+    {
+      "node": "definition",
+      "attrs": {
+        "term": "Algoritmo",
+        "is_atomic_card": true
+      },
+      "capability": "definition",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Secuencia finita de pasos."
+          }
+        }
+      ]
+    },
+    {
+      "node": "formula",
+      "attrs": {
+        "name": "E=mc²",
+        "latex": "E = mc^2",
+        "is_atomic_card": true
+      },
+      "capability": "formula",
+      "source_refs": [],
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "fa0000000005",
+  "title": "Hecho compuesto",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Comp"
+          }
+        }
+      ]
+    },
+    {
+      "node": "question",
+      "attrs": {
+        "prompt": "Uno, dos, tres, cuatro"
+      },
+      "capability": "question",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "x"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "fa0000000007",
+  "title": "Mezcla",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Mix"
+          }
+        }
+      ]
+    },
+    {
+      "node": "question",
+      "attrs": {
+        "prompt": "¿Verdadero o falso: el agua hierve a 100°C?"
+      },
+      "capability": "question",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Verdadero (a nivel del mar)"
+          }
+        }
+      ]
+    },
+    {
+      "node": "definition",
+      "attrs": {
+        "term": "pKa",
+        "is_atomic_card": true
+      },
+      "capability": "definition",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Medida de acidez."
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Prosa que debería descartarse por no ser atómica."
+          }
+        }
+      ]
+    }
+  ]
+}

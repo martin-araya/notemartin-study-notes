@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "fa0000000002",
+  "title": "Tres preguntas",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Quiz"
+          }
+        }
+      ]
+    },
+    {
+      "node": "question",
+      "attrs": {
+        "prompt": "¿2+2?"
+      },
+      "capability": "question",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "4"
+          }
+        }
+      ]
+    },
+    {
+      "node": "question",
+      "attrs": {
+        "prompt": "¿Capital de España?"
+      },
+      "capability": "question",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Madrid"
+          }
+        }
+      ]
+    },
+    {
+      "node": "question",
+      "attrs": {
+        "prompt": "¿Quién escribió Don Quijote?"
+      },
+      "capability": "question",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cervantes"
+          }
+        }
+      ]
+    }
+  ]
+}
