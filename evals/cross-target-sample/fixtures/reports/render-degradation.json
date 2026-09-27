@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "target": "obsidian",
+  "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "totals": {
+    "ir_nodes": 2,
+    "degradations": 0,
+    "content_loss": 0
+  },
+  "degradations": []
+}

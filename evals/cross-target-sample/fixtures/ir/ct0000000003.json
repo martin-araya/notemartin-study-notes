@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "ct0000000003",
+  "title": "Clean Note Three",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Clean Note Three"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Paragraph in third note."
+          }
+        }
+      ]
+    }
+  ]
+}

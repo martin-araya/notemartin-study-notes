@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "ct0000000020",
+  "title": "Lossy Note",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Lossy Note"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Real critical content that should appear."
+          }
+        }
+      ]
+    }
+  ]
+}

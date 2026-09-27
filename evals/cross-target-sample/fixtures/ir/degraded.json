@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "ct0000000010",
+  "title": "Degraded Note",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Degraded Note"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "This paragraph has a special token XYZ123."
+          }
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "warning",
+        "title": "Heads up"
+      },
+      "capability": "callout",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Be careful."
+          }
+        }
+      ]
+    }
+  ]
+}
