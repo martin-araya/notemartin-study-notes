@@ -11,7 +11,7 @@ Cargar al renderizar o re-renderizar. `contract.md` siempre; el resto según el 
 - `capability-matrix.md` `[existente]` — F8: matriz 14×7 con cero ⚠.
 - `contract.md` `[existente]` — F53: contrato del renderer + tabla cerrada de degradación (20 filas = 20 celdas ❌ de F8).
 - `linking.md` `[existente]` — F61: spec de resolución de enlaces por destino + 2 pasadas + link debt registry + tabla de backlinks por destino.
-- `publishing.md` `[pendiente F62]`
+- `publishing.md` `[existente]` — F62: spec de publicación idempotente con manifest por destino, detección de ediciones manuales (hash comparison), preservación de comentarios via `<!-- user-content -->`, workflow CLI plan/publish/status/mark-edited.
 - `migration.md` `[pendiente F64]`
 
 ## Quién lee / quién produce

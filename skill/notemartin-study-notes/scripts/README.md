@@ -681,3 +681,20 @@ API centralizada (`LinkTarget`, `LinkReport`, `LinkGraph`, `resolve_links`,
 | Códigos de salida | 0 OK · 1 error fatal · 2 OK con deuda residual |
 | Documentación | `references/08-render/linking.md` (F61) + docstring |
 
+### `publish/publishing.py` — F62 · Publicación idempotente
+
+CLI de publicación que orquesta los renderers con un manifest de IDs remotos.
+Implementa los 3 criterios: republicar N notas actualiza N, no crea N (post-primer-publish);
+páginas editadas a mano bloqueadas sin `--confirm-overwrite`; publicación parcial solo toca lo
+cambiado. 4 sub-comandos: `plan`, `publish`, `status`, `mark-edited`. Módulo compartido
+`_manifest.py` con dataclasses `PublishEntry` y `Manifest`.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <path>`; `--out-dir <dir>`; `--destinations <csv>`; `--confirm-overwrite`; `--force-manual-keep-comments`; `--notion-token <token>` |
+| Salida | `reports/publish-report.{json,md}` con summary {created, updated, skipped, blocked, errors} |
+| Manifest | `<out-dir>/.publish/manifest.json` con `{note_id × destination → remote_id, remote_hash, ir_sha256, last_published_at, edited_by_hand, user_content}`; backup automático `manifest.json.bak` |
+| Detección manual | `sha256(remote_file) != manifest_entry.remote_hash` → `edited_by_hand=true` |
+| Códigos de salida | 0 OK · 1 fatal · 2 OK con bloqueos |
+| Dependencias | Python 3.9+ stdlib puro |
+
