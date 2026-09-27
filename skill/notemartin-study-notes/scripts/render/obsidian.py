@@ -60,6 +60,31 @@ _spec.loader.exec_module(_io_mod)
 _atomic_write_json = _io_mod.atomic_write_json
 _atomic_write_text = _io_mod.atomic_write_text
 
+# Helper `## Cabecera` (F75): el módulo carga desde `assets/tokens.json`/tokens y
+# emite el bloque cabecera para los 7 destinos. Single source of truth.
+_HEADER_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.render._header",
+    Path(__file__).resolve().parent / "_header.py",
+)
+_header_mod = _importlib_util.module_from_spec(_HEADER_SPEC)
+sys.modules.setdefault("scripts.render._header", _header_mod)
+_HEADER_SPEC.loader.exec_module(_header_mod)
+_emit_cabecera = _header_mod.emit_cabecera
+
+# Tabla canónica severidad → estilo por destino (F73). Fuente única: el módulo
+# valida su tabla al import (20 entradas, Notion color ∈ lista cerrada, sin
+# campos vacíos). El renderer consume solo los helpers que necesita.
+_STYLE_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.util.style_mapping",
+    Path(__file__).resolve().parent.parent / "util" / "style_mapping.py",
+)
+sys.modules.setdefault("scripts.util.style_mapping",
+                       _importlib_util.module_from_spec(_STYLE_SPEC))
+_style_mod = _importlib_util.module_from_spec(_STYLE_SPEC)
+_STYLE_SPEC.loader.exec_module(_style_mod)
+obsidian_callout_for = _style_mod.obsidian_callout_for
+icon_for = _style_mod.icon_for
+
 
 EXIT_OK = 0
 EXIT_FATAL = 1
@@ -70,36 +95,14 @@ EXIT_WARN = 2
 # Constantes inline (no YAML externo)
 # ---------------------------------------------------------------------------
 
-# Tabla cerrada de severidades del IR → tipo de callout nativo Obsidian (13).
-# Severidades no nativas se mapean al callout semánticamente más cercano.
-SEVERITY_TO_CALLOUT: Dict[str, str] = {
-    "note": "note",
-    "tip": "tip",
-    "info": "info",
-    "warning": "warning",
-    "caution": "caution",
-    "danger": "danger",
-    "example": "example",
-    "question": "question",
-    "success": "success",
-    "failure": "failure",
-    "bug": "bug",
-    "quote": "quote",
-    "abstract": "abstract",
-    # Severidades no nativas → equivalente semántico (preserva INV-07).
-    "security": "warning",
-    "performance": "note",
-    "version": "info",
-    "deprecated": "warning",
-    "conflict": "warning",
-    "external": "quote",
-}
-
 # Los 13 tipos de callout soportados nativamente por Obsidian 1.5+.
-NATIVE_CALLOUTS: frozenset = frozenset(
+NATIVE_CALLOUTS = frozenset(
     {"note", "tip", "info", "warning", "caution", "danger", "example",
      "question", "success", "failure", "bug", "quote", "abstract"}
 )
+
+# Los 13 tipos de callout soportados nativamente por Obsidian 1.5+ (definidos arriba
+# en la sección "Constantes inline").
 
 DEFAULT_SEVERITY = "note"
 
@@ -475,16 +478,16 @@ def _emit_admonition(node: Dict[str, Any], degradations: List[Dict[str, Any]],
     severity = str(attrs.get("severity", DEFAULT_SEVERITY) or DEFAULT_SEVERITY)
     title = str(attrs.get("title", "") or "")
 
-    # Mapeo a callout nativo.
-    callout_type = SEVERITY_TO_CALLOUT.get(severity)
-    if callout_type is None:
+    # Mapeo a callout nativo via tabla canónica F73.
+    try:
+        callout_type = obsidian_callout_for(severity)
+    except KeyError as e:
         degradations.append({
             "node_path": node_path,
             "node_type": "admonition",
             "capability": "callout",
             "alternative": (
-                f"callout nativo '{DEFAULT_SEVERITY}' (severity='{severity}' no en "
-                f"SEVERITY_TO_CALLOUT; default aplicado)"
+                f"callout nativo '{DEFAULT_SEVERITY}' ({e}; default aplicado)"
             ),
             "evidence": (
                 f"rg '^> \\[!{DEFAULT_SEVERITY}\\]' <artifact>  exit 0; severidad "
@@ -493,8 +496,9 @@ def _emit_admonition(node: Dict[str, Any], degradations: List[Dict[str, Any]],
             "content_intact": True,
         })
         callout_type = DEFAULT_SEVERITY
-    elif callout_type not in NATIVE_CALLOUTS:
-        # No debería ocurrir (SEVERITY_TO_CALLOUT ya mapea a nativos), pero defensa.
+    if callout_type not in NATIVE_CALLOUTS:
+        # Defensa: si style_mapping.py devolviera un callout_type no nativo
+        # (no debería ocurrir), caer al default.
         degradations.append({
             "node_path": node_path,
             "node_type": "admonition",
@@ -982,6 +986,12 @@ def emit_artifact(
         "---\n"
     )
 
+    # Cabecera visual `## Cabecera` con 5 campos (F75). El panel nativo de
+    # Obsidian (Properties) muestra las propiedades; esta sección es la
+    # fuente de verdad humana y aparece duplicada por diseño (D6).
+    cabecera_md = _emit_cabecera(ir_obj.get("frontmatter", {}) or {},
+                                 dest="obsidian")
+
     # Cuerpo: aplicar degradaciones primero.
     ir_nodes = traverse_ir(ir_obj)
     matrix = matrix if matrix is not None else {}
@@ -993,6 +1003,8 @@ def emit_artifact(
     body_parts: List[str] = []
     if title:
         body_parts.append(f"# {title}\n")
+    if cabecera_md:
+        body_parts.append(cabecera_md.rstrip())
     for _path, node in ir_nodes:
         rendered = _emit_node(node, degradations=degradations, node_path=_path,
                               enable_dataview=enable_dataview)
