@@ -1,0 +1,171 @@
+/* Auto-generated from assets/tokens.json — DO NOT EDIT.
+ * $version: 1.0.0
+ * Regenerate: python3 -m scripts.render.css_from_tokens --out <path>
+ * Source: F72 tokens.json (assets/tokens.json)
+ * Wiring: references/07-visual/tokens.md §10
+ */
+
+/* === Tipografía, espaciado, radios (mode-agnostic) === */
+:root {
+  --typography-families-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+  --typography-families-sans: "Inter", "Helvetica Neue", "Arial", sans-serif;
+  --typography-families-serif: "Lora", "IBM Plex Serif", "Georgia", "Times New Roman", serif;
+  --typography-scale-2xl: 2.2rem;
+  --typography-scale-3xl: 2.8rem;
+  --typography-scale-base: 1rem;
+  --typography-scale-lg: 1.25rem;
+  --typography-scale-md: 1rem;
+  --typography-scale-sm: 0.875rem;
+  --typography-scale-xl: 1.6rem;
+  --typography-scale-xs: 0.75rem;
+  --typography-weights-bold: 700;
+  --typography-weights-medium: 500;
+  --typography-weights-regular: 400;
+  --typography-weights-semibold: 600;
+  --typography-lineheights-loose: 2.0;
+  --typography-lineheights-normal: 1.7;
+  --typography-lineheights-snug: 1.4;
+  --typography-lineheights-tight: 1.25;
+  --spacing-scale-0: 0;
+  --spacing-scale-1: 0.25rem;
+  --spacing-scale-2: 0.5rem;
+  --spacing-scale-3: 0.75rem;
+  --spacing-scale-4: 1rem;
+  --spacing-scale-5: 1.5rem;
+  --spacing-scale-6: 2rem;
+  --spacing-scale-7: 2.5rem;
+  --spacing-scale-8: 3rem;
+  --spacing-density-compact-list-item: 0.5rem;
+  --spacing-density-compact-paragraph: 0.25rem;
+  --spacing-density-compact-section: 1.5rem;
+  --spacing-density-normal-list-item: 1rem;
+  --spacing-density-normal-paragraph: 1rem;
+  --spacing-density-normal-section: 2rem;
+  --spacing-density-spacious-list-item: 1.5rem;
+  --spacing-density-spacious-paragraph: 2rem;
+  --spacing-density-spacious-section: 2.5rem;
+  --radii-lg: 6px;
+  --radii-md: 4px;
+  --radii-none: 0;
+  --radii-pill: 9999px;
+  --radii-sm: 2px;
+  --radii-xl: 12px;
+}
+
+/* === Tema claro (default) === */
+:root {
+  --_neutral-background: #FFFFFF;
+  --_neutral-border: #DDE2E8;
+  --_neutral-code: #F5F5F5;
+  --_neutral-codeText: #1F2328;
+  --_neutral-quote: #FAFBFC;
+  --_neutral-quoteBorder: #B0BEC5;
+  --_neutral-surface: #F5F7FA;
+  --_neutral-text: #1F2328;
+  --_neutral-textMuted: #57606A;
+  --semantic-danger-fg: #B71C1C;
+  --semantic-danger-bg: #FFEBEE;
+  --semantic-danger-border: #C62828;
+  --semantic-danger-fgOnBg: #B71C1C;
+  --semantic-danger-borderContrast: #B71C1C;
+  --semantic-deprecated-fg: #4A148C;
+  --semantic-deprecated-bg: #F3E5F5;
+  --semantic-deprecated-border: #7B1FA2;
+  --semantic-deprecated-fgOnBg: #4A148C;
+  --semantic-deprecated-borderContrast: #4A148C;
+  --semantic-example-fg: #263238;
+  --semantic-example-bg: #FAFAFA;
+  --semantic-example-border: #757575;
+  --semantic-example-fgOnBg: #263238;
+  --semantic-example-borderContrast: #37474F;
+  --semantic-info-fg: #0D47A1;
+  --semantic-info-bg: #E3F2FD;
+  --semantic-info-border: #1976D2;
+  --semantic-info-fgOnBg: #0D47A1;
+  --semantic-info-borderContrast: #0D47A1;
+  --semantic-note-fg: #212121;
+  --semantic-note-bg: #F5F5F5;
+  --semantic-note-border: #616161;
+  --semantic-note-fgOnBg: #212121;
+  --semantic-note-borderContrast: #424242;
+  --semantic-performance-fg: #92400E;
+  --semantic-performance-bg: #FFFBEA;
+  --semantic-performance-border: #F9A825;
+  --semantic-performance-fgOnBg: #92400E;
+  --semantic-performance-borderContrast: #B45309;
+  --semantic-security-fg: #B71C1C;
+  --semantic-security-bg: #FFEBEE;
+  --semantic-security-border: #C62828;
+  --semantic-security-fgOnBg: #B71C1C;
+  --semantic-security-borderContrast: #B71C1C;
+  --semantic-success-fg: #1B5E20;
+  --semantic-success-bg: #E8F5E9;
+  --semantic-success-border: #2E7D32;
+  --semantic-success-fgOnBg: #1B5E20;
+  --semantic-success-borderContrast: #1B5E20;
+  --semantic-warning-fg: #5D2E00;
+  --semantic-warning-bg: #FFF8E1;
+  --semantic-warning-border: #F57C00;
+  --semantic-warning-fgOnBg: #5D2E00;
+  --semantic-warning-borderContrast: #E65100;
+}
+
+/* === Tema oscuro (prefers-color-scheme: dark) === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --_neutral-background: #1E1E1E;
+    --_neutral-border: #3A3A3A;
+    --_neutral-code: #1E1E2E;
+    --_neutral-codeText: #CDD6F4;
+    --_neutral-quote: #2A2A2A;
+    --_neutral-quoteBorder: #546E7A;
+    --_neutral-surface: #252525;
+    --_neutral-text: #E6E6E6;
+    --_neutral-textMuted: #A8B0B8;
+    --semantic-danger-fg: #EF9A9A;
+    --semantic-danger-bg: #3A0F0F;
+    --semantic-danger-border: #C62828;
+    --semantic-danger-fgOnBg: #FFEBEE;
+    --semantic-danger-borderContrast: #EF9A9A;
+    --semantic-deprecated-fg: #CE93D8;
+    --semantic-deprecated-bg: #2A0F38;
+    --semantic-deprecated-border: #7B1FA2;
+    --semantic-deprecated-fgOnBg: #F3E5F5;
+    --semantic-deprecated-borderContrast: #CE93D8;
+    --semantic-example-fg: #B0BEC5;
+    --semantic-example-bg: #263238;
+    --semantic-example-border: #78909C;
+    --semantic-example-fgOnBg: #ECEFF1;
+    --semantic-example-borderContrast: #B0BEC5;
+    --semantic-info-fg: #82B1FF;
+    --semantic-info-bg: #0D2747;
+    --semantic-info-border: #1976D2;
+    --semantic-info-fgOnBg: #E3F2FD;
+    --semantic-info-borderContrast: #82B1FF;
+    --semantic-note-fg: #BDBDBD;
+    --semantic-note-bg: #2A2A2A;
+    --semantic-note-border: #757575;
+    --semantic-note-fgOnBg: #E0E0E0;
+    --semantic-note-borderContrast: #BDBDBD;
+    --semantic-performance-fg: #FBBF24;
+    --semantic-performance-bg: #3A2A05;
+    --semantic-performance-border: #F9A825;
+    --semantic-performance-fgOnBg: #FFFBEA;
+    --semantic-performance-borderContrast: #FBBF24;
+    --semantic-security-fg: #EF9A9A;
+    --semantic-security-bg: #3A0F0F;
+    --semantic-security-border: #C62828;
+    --semantic-security-fgOnBg: #FFEBEE;
+    --semantic-security-borderContrast: #EF9A9A;
+    --semantic-success-fg: #81C784;
+    --semantic-success-bg: #10331A;
+    --semantic-success-border: #2E7D32;
+    --semantic-success-fgOnBg: #E8F5E9;
+    --semantic-success-borderContrast: #81C784;
+    --semantic-warning-fg: #FFB74D;
+    --semantic-warning-bg: #3A2A0A;
+    --semantic-warning-border: #F57C00;
+    --semantic-warning-fgOnBg: #FFF8E1;
+    --semantic-warning-borderContrast: #FFB74D;
+  }
+}
