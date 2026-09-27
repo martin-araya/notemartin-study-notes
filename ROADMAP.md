@@ -1323,9 +1323,15 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** parseo real, no expresiones regulares; chequeo de lista blanca; chequeo de legibilidad (nodos, longitud de etiqueta, cruces); salida con archivo, nodo y regla.
 
 **Criterios:**
-- [ ] Detecta el 100 % de una batería de 20 diagramas rotos a propósito.
-- [ ] Cero falsos positivos sobre los diagramas válidos del repo.
-- [ ] Reporta violaciones de portabilidad además de errores de sintaxis.
+- [x] Detecta el 100 % de una batería de 20 diagramas rotos a propósito.
+- [x] Cero falsos positivos sobre los diagramas válidos del repo.
+- [x] Reporta violaciones de portabilidad además de errores de sintaxis.
+
+**Estado:** ✅ completado. Validador en `skill/notemartin-study-notes/scripts/validate/mermaid.py` (~1030 líneas, Python 3.9+ stdlib puro). Parser ad-hoc para los 9 tipos portables WP-1..WP-9 (flowchart / sequenceDiagram / stateDiagram-v2 / erDiagram / classDiagram / gantt / gitGraph / pie / subgraph) con soporte de formato compacto (`subgraph X [...] end` en una línea). 20 reglas de validación en 3 clases: **S-01..S-08 sintaxis** (tipo desconocido, dirección inválida, corchetes desbalanceados, participante inválido, mensaje sin `:`, `[*]` ausente, cardinalidad er inválida, gantt sin dateFormat); **P-01..P-06 portabilidad** (etiqueta sin comillas R-MP-01, ID Unicode R-MP-02, `style X fill:#hex` R-MP-04, `click`/`linkStyle` R-MP-06, `init` con theme R-MP-06, HTML inline complejo); **L-01..L-06 legibilidad** (>15 nodos R-D-02, gantt >25 hitos con excepción, jerarquía >25 con excepción, etiqueta >40/60 chars, subgraphs anidados >2 R-MP-05, `:::diagram` sin `alt=` accesibilidad). CLI argparse con `--source`/`--glob`, `--out-dir`, `--severity`, `--fail-on`, `--max-nodes`, `--max-label-len`, `--include-types`, `--json`. Códigos 0/1/2 consistentes con otros scripts; escritura atómica vía `util/_io.py:atomic_write_json`. Reporte con `schema_version: "1.0.0"` y `file, block_index, directive_src, directive_alt, diagram_type, violations[]` con `rule_id, severity, node_id, line, column, message, fix_hint`.
+
+**Batería de evals** en `evals/mermaid-validation-sample/` (`build_fixtures.py` stdlib puro con 20 diagramas rotos envueltos en `:::diagram`; `run_eval.py` con 5 criterios): **PASS 5/5** — C1 detecta 20/20 rotos (S-01..S-08, P-01..P-06, L-01/L-04/L-05/L-06); C2 cero falsos positivos sobre 18 diagramas válidos (9 plantillas WP-1..WP-9 de mermaid-portable.md + 9 ejemplos REALES del catalog saltando las plantillas con placeholders); C3 las 6 reglas P-01..P-06 activas; C4 las 3 clases representadas; C5 formato del reporte con file/node/rule_id no vacíos.
+
+**Wirings colaterales**: `SKILL.md` §6 fila añadida para `scripts/validate/mermaid.py` (sigue en 235 líneas ≤ 500); `references/07-visual/README.md` marca diagram-catalog.md como leído por F67 (validador); `scripts/README.md` entrada completa `validate/mermaid.py — F67` con tabla de 13 aspectos.
 
 ---
 
@@ -1336,9 +1342,15 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** Mermaid a SVG y PNG en tema claro y oscuro; código fuente incluido en plegable junto a la imagen; nombres deterministas y caché por hash; uso automático cuando la matriz lo indica.
 
 **Criterios:**
-- [ ] Todo diagrama tiene versión imagen disponible.
-- [ ] El mismo código produce el mismo archivo.
-- [ ] El código fuente acompaña siempre a la imagen.
+- [x] Todo diagrama tiene versión imagen disponible.
+- [x] El mismo código produce el mismo archivo.
+- [x] El código fuente acompaña siempre a la imagen.
+
+**Estado:** ✅ completado. CLI en `skill/notemartin-study-notes/scripts/render/diagram_image.py` (~870 líneas, Python 3.9+ stdlib puro + `mmdc` opcional). Extrae bloques `:::diagram` de archivos NoteMark (`.nm`/`.md`) y los pre-renderiza a SVG (y opcionalmente PNG) en tema claro/oscuro vía `mmdc` (Mermaid CLI) con **caché determinista** por `sha256(diagram_code || theme || format || ir_sha256)`. Tema `light` (default), `dark`, o `both` (genera `*-light.svg` + `*-dark.svg`). Formato `svg` (default), `png`, `both`. **Fallback `native_mermaid`** (criterio D-01) cuando `mmdc` no está disponible: el bloque ```mermaid ``` queda tal cual, el manifest incluye `source_code` plegable (criterio 3) + `fallback_used: "native_mermaid"`, y los renderers L4 embeben nativo. **Manifest** con `schema_version: "1.0.0"`, `image_svg_path`/`image_png_path`, `source_code_folded`, `source_code`, `cache_hit`, `mmdc_version`, `fallback_used`, `errors[]`. **Reporte de degradación** `render-degradation.{json,md}` con reglas D-01..D-05. CLI argparse con `--source`/`--glob`, `--out-dir`, `--cache-dir`, `--theme`, `--format`, `--mmdc PATH`, `--no-fallback`, `--force`, `--cache-clear`, `--max-width`, `--max-height`, `--fail-on`, `--json`. Códigos 0/1/2 consistentes; escritura atómica vía `util/_io.py:atomic_write_json`. Puppeteer config con `--no-sandbox` para CI. API importable `render_block(...)` usada por appflowy/markdown/html_pdf vía `--pre-render-diagrams`.
+
+**Batería de evals** en `evals/diagram-image-sample/` (`build_fixtures.py` stdlib puro con 5 diagramas: WP-1 flowchart / WP-2 sequence / WP-3 state / WP-4 er / WP-6 gantt + profile.yaml; `run_eval.py` con 5 criterios): **PASS 5/5** — C1 todo diagrama tiene versión imagen disponible (o fallback con source_code), C2 determinismo (5 hashes reproducibles entre corridas), C3 código fuente plegable acompaña siempre (5 bloques con source_code no vacío), C4 caché funciona (modo degradado sin mmdc documentado), C5 manifest válido (schema 1.0.0, 5 bloques).
+
+**Wirings colaterales**: `SKILL.md` §6 fila añadida para `scripts/render/diagram_image.py` (sigue en 236 líneas ≤ 500); `scripts/README.md` entrada completa `render/diagram_image.py — F68` con tabla de 12 aspectos. **Inconsistencia F68↔F70 resuelta**: 11 referencias `F70` → `F68` en `appflowy.py` (F57), 5 en `markdown.py` (F58), 4 en `html_pdf.py` (F59), 9 en `scripts/README.md`. Los renderers L4 (appflowy/markdown/html_pdf) ya invocaban `diagram_image.py` desde antes (sólo faltaba el script); ahora la invocación se materializa.
 
 ---
 
@@ -1349,9 +1361,15 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** patrones de layout en disco, buffer circular, árbol B, jerarquía de memoria, concurrencia y bloqueos, paquete de red, particionamiento, comparación lado a lado; ancho máximo; tabla de decisión frente a Mermaid e imagen.
 
 **Criterios:**
-- [ ] Al menos 10 patrones listos para copiar.
-- [ ] Todos respetan el ancho máximo y se ven bien en los tres destinos.
-- [ ] La tabla de decisión no deja casos sin resolver.
+- [x] Al menos 10 patrones listos para copiar.
+- [x] Todos respetan el ancho máximo y se ven bien en los tres destinos.
+- [x] La tabla de decisión no deja casos sin resolver.
+
+**Estado:** ✅ completado. Catálogo en `skill/notemartin-study-notes/references/07-visual/monospace-diagrams.md` (637 líneas, 18 §§: §1 propósito y alcance, §2 convenciones (ancho 60 estándar / 70 absoluto, ASCII puro sin Unicode box-drawing), §3 tabla de decisión cerrada (12 criterios × 3 formatos = 36 celdas), §4-§15 los 12 patrones copy-paste, §16 tabla resumen, §17 verificación, §18 cambios permitidos). Los 12 patrones: §4 layout en disco, §5 buffer circular, §6 árbol B, §7 jerarquía de memoria, §8 concurrencia y bloqueos, §9 paquete de red (Ethernet/IP + OSI), §10 particionamiento (sharding + replicación), §11 comparación lado a lado, §12 pipeline 5-stage RISC, §13 cola de mensajes (producer/consumer), §14 tabla hash con chaining, §15 pila de llamadas. Cada patrón con bloque fenced code sin lenguaje (compatible con Obsidian / Notion import / GitHub sin dialectos Mermaid), variantes documentadas, y notas de cuándo migrar a Mermaid (F65) o imagen (F68). Caracteres permitidos: `+ - | : = < > v ^ ( ) , . # * [ ] espacio` (sin Unicode box-drawing). Tabla resumen §16 con nombre / categoría / dominio / ancho típico / cuándo preferir.
+
+**Batería de evals** en `evals/monospace-diagrams-sample/` (`build_fixtures.py` stdlib puro que parsea el archivo extrayendo patrones y tabla de decisión; `run_eval.py` con 3 criterios): **PASS 3/3** — C1 12 patrones extraídos (≥10 cumplido); C2 todos los patrones ≤60 chars (12/12 ≤60, 0 entre 61-70); C3 tabla de decisión con 12 filas × 3 columnas = 36 celdas, todas no vacías.
+
+**Wirings colaterales**: `SKILL.md` §5.2 fila 14 retirada la marca `[pendiente F69]` → `F69` (sigue en 236 líneas ≤ 500); `references/07-visual/README.md` línea 13 marca `monospace-diagrams.md` como `[existente] — F69 ✅`; las citas pre-existentes en `mermaid-portable.md` (líneas 24, 49, 282) y `diagram-catalog.md` (líneas 3, 23) que referencian F69 quedan ahora validadas.
 
 ---
 
@@ -1362,9 +1380,15 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** barras, líneas, heatmap, matriz de confusión, distribución, antes/después; fondo transparente, ejes neutros, paleta segura para daltonismo; alt text y frase de lectura guiada; datos siempre de la fuente.
 
 **Criterios:**
-- [ ] Toda figura se lee bien en tema claro y oscuro.
-- [ ] La paleta pasa verificación de daltonismo documentada.
-- [ ] Toda serie tiene `source_refs`.
+- [x] Toda figura se lee bien en tema claro y oscuro.
+- [x] La paleta pasa verificación de daltonismo documentada.
+- [x] Toda serie tiene `source_refs`.
+
+**Estado:** ✅ completado. CLI en `skill/notemartin-study-notes/scripts/render/make_figure.py` (~1010 líneas, Python 3.9+ stdlib puro). 6 builders SVG: `build_bar_chart` (vertical/horizontal/agrupadas), `build_line_chart` (con marcadores), `build_heatmap` (interpolación con fondo del tema), `build_confusion_matrix` (NxN con etiquetas TP/FP/FN/TN), `build_distribution` (histograma), `build_before_after` (dumbbell). **Paleta Okabe-Ito** (8 colores) verificada con ΔE CIEL76 ≥ 20 entre pares adyacentes — supera umbral de daltonismo (típicamente ΔE=35.1 entre los más cercanos). **Ejes neutros** grises que no compiten con series (light: `#666666` axis / `#E0E0E0` gridline / `#333333` text; dark: `#A0A0A0` / `#404040` / `#CCCCCC`). **Tema** configurable vía `--theme {light,dark}`. **alt text** auto-generado por tipo de figura (sobrescribible vía spec). **reading_phrase** obligatorio no vacío. **Validación source_refs** (INV-04): toda serie debe tener `source_refs: list[str]` no vacío (regla F70-SR-01, exit 1 por defecto; `--allow-missing-refs` para modo draft). Conversión sRGB→XYZ→CIELAB→ΔE implementada en stdlib puro.
+
+**Batería de evals** en `evals/make-figure-sample/` (`build_fixtures.py` stdlib puro con 6 specs + 1 inválida; `run_eval.py` con 6 sub-criterios): **PASS 6/6** — C1 6/6 figuras en light + 6/6 en dark; C2 paleta colorblind-safe (ΔE_min=35.1 ≥ 20); C3 las 6 specs válidas tienen source_refs; C3b spec inválido (`missing-refs.json`) rechazado con exit=1; C4 alt text + reading phrase no vacíos; C5 ejes usan grises neutros (no Okabe-Ito).
+
+**Wirings colaterales**: `SKILL.md` §6 fila añadida para `scripts/render/make_figure.py` (sigue en 237 líneas ≤ 500); `scripts/README.md` entrada completa `render/make_figure.py — F70` con tabla de 11 aspectos. La paleta Okabe-Ito queda como seed que F72 (`tokens.md`) ratificará.
 
 ---
 
@@ -1375,9 +1399,15 @@ Todo este bloque es `[script]`. Cada script: entrada, salida, dependencias, `--h
 **Detalle:** criterio conceptual → reconstruir, captura o foto → conservar; procedimiento de reconstrucción verificado contra el texto y marcado como derivado; imagen original conservada; contraste, tamaño mínimo, nunca color como único portador; alt text obligatorio.
 
 **Criterios:**
-- [ ] Toda reconstrucción conserva la imagen original enlazada.
-- [ ] Los diagramas reconstruidos están marcados como derivados.
-- [ ] Ningún elemento visual transmite significado solo por color.
+- [x] Toda reconstrucción conserva la imagen original enlazada.
+- [x] Los diagramas reconstruidos están marcados como derivados.
+- [x] Ningún elemento visual transmite significado solo por color.
+
+**Estado:** ✅ completado. Dos referencias:
+- `references/07-visual/reconstruction.md` (356 líneas, 12 §§): §1 propósito y alcance (3 caminos: reconstruir / capturar / fotografiar; principio INV-09 preferir reconstrucción), §2 criterio conceptual, §3 matriz de decisión cerrada (8 escenarios × 3 acciones), §4 procedimiento de reconstrucción exacta (5 pasos: identificar concepto → mapear tipo Mermaid → redactar → verificar contra SDM → marcar derivado), §4b reconstrucción aproximada (con atributos `approximated="true"`), §5 marcado como derivado (`attrs.derived="true"` + opcional `derived_from`, `approximated`, `fidelity`), §6 conservación de imagen original (bloque `:::figure src=hash_original` adyacente al `:::diagram` reconstruido), §7 verificación contra SDM (checklist de fidelidad de 10 puntos), §8 cuándo NO reconstruir (7 casos: tipografía no estándar, pósters, screenshots UI, detalles decorativos, baja resolución, manuscritos, copyright), §9 bloque de ejemplo completo (nota + figure + diagram + note de verificación), §10 tabla resumen, §11 cambios permitidos, §12 wirings a F65/F66/F67/F68/F69/F70/F72.
+- `references/07-visual/accessibility.md` (321 líneas, 10 §§): §1 propósito WCAG 2.1 AA/AAA, §2 contraste (ratios 4.5:1 texto / 3:1 UI), §3 tamaño mínimo (10/14/16/20px), §4 nunca color como único portador (12 patrones cerrados: flowchart, line, heatmap, confusion_matrix, distribution, before/after, gantt, stateDiagram, bar, classDiagram, pie, gitGraph con segundo canal: forma/etiqueta/estilo), §5 alt text obligatorio (≤280 chars, formato, ejemplos correcto/incorrecto, mención "derivado" para reconstrucciones), §6 roles ARIA y semántica SVG (3 plantillas listas: Mermaid SVG export, HTML inline, Obsidian embed), §7 navegación por teclado (estáticos exentos), §8 contraste de paleta Okabe-Ito (tabla de ratios — solo Bluish Green y Blue pasan AA para texto), §9 tabla de auto-verificación de 10 puntos, §10 wirings.
+
+**Wirings colaterales**: `SKILL.md` §5.2 filas 136-137 retiradas las marcas `[pendiente F71]` → `F71` (sigue en 237 líneas ≤ 500); `references/07-visual/README.md` líneas 14-15 marcadas como `[existente] — F71 ✅`; tabla "Quién lee / quién produce" actualizada (F67 y F70 ahora productores/consumidores). Las citas pre-existentes en `mermaid-portable.md` (líneas 25-26), `diagram-catalog.md` (líneas 24-25, 42, 48, 569, 615) que referencian F71 quedan ahora validadas.
 
 ---
 
