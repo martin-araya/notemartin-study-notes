@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "pc0000000001",
+  "title": "Changed V2",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Changed"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Body."
+          }
+        }
+      ]
+    }
+  ]
+}

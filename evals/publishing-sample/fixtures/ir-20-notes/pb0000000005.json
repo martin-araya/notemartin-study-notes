@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "pb0000000005",
+  "title": "Modified Note 05",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Note 05"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Body."
+          }
+        }
+      ]
+    }
+  ]
+}
