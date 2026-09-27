@@ -77,7 +77,7 @@ otros 11 solo las requieren si ≥ 50 líneas.
 **Propósito:** lectura independiente en ≤ 30 segundos; comprensión correcta
 sin leer nada más.
 
-**Tamaño objetivo:** ≤ 8 líneas / ≤ 60 palabras.
+**Tamaño objetivo:** ≤ 8 líneas / ≤ 60 palabras. (Ver `references/07-visual/density.md` R1; F76 formaliza la tabla cerrada de longitudes por capa.)
 
 **Contenido obligatorio:**
 
