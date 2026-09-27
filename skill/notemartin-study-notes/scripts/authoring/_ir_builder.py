@@ -88,6 +88,7 @@ class IRBuilder:
             "note_id": note_id,
             "title": title,
             "layer": "l2",
+            "frontmatter": dict(self.frontmatter),
             "blocks": tree,
         }
 
