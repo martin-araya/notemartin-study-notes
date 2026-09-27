@@ -1,0 +1,206 @@
+{
+  "validate_table_ok": true,
+  "mapping_size": 20,
+  "mappings": [
+    {
+      "severity": "note",
+      "semantic_token": "_neutral.quote",
+      "icon": "📝",
+      "obsidian_callout": "note",
+      "notion_icon": "📝",
+      "notion_color": "default",
+      "appflowy_callout": "note",
+      "html_css_class": "callout-note"
+    },
+    {
+      "severity": "tip",
+      "semantic_token": "semantic.info",
+      "icon": "💡",
+      "obsidian_callout": "tip",
+      "notion_icon": "💡",
+      "notion_color": "green_background",
+      "appflowy_callout": "info",
+      "html_css_class": "callout-tip"
+    },
+    {
+      "severity": "info",
+      "semantic_token": "semantic.info",
+      "icon": "ℹ️",
+      "obsidian_callout": "info",
+      "notion_icon": "ℹ️",
+      "notion_color": "blue_background",
+      "appflowy_callout": "info",
+      "html_css_class": "callout-info"
+    },
+    {
+      "severity": "warning",
+      "semantic_token": "semantic.warning",
+      "icon": "⚠️",
+      "obsidian_callout": "warning",
+      "notion_icon": "⚠️",
+      "notion_color": "yellow_background",
+      "appflowy_callout": "warning",
+      "html_css_class": "callout-warning"
+    },
+    {
+      "severity": "caution",
+      "semantic_token": "semantic.warning",
+      "icon": "⚠️",
+      "obsidian_callout": "warning",
+      "notion_icon": "⚠️",
+      "notion_color": "orange_background",
+      "appflowy_callout": "warning",
+      "html_css_class": "callout-warning"
+    },
+    {
+      "severity": "danger",
+      "semantic_token": "semantic.danger",
+      "icon": "🚫",
+      "obsidian_callout": "danger",
+      "notion_icon": "🚫",
+      "notion_color": "red_background",
+      "appflowy_callout": "danger",
+      "html_css_class": "callout-danger"
+    },
+    {
+      "severity": "example",
+      "semantic_token": "semantic.example",
+      "icon": "📋",
+      "obsidian_callout": "example",
+      "notion_icon": "📋",
+      "notion_color": "gray_background",
+      "appflowy_callout": "info",
+      "html_css_class": "callout-example"
+    },
+    {
+      "severity": "question",
+      "semantic_token": "semantic.info",
+      "icon": "❓",
+      "obsidian_callout": "question",
+      "notion_icon": "❓",
+      "notion_color": "purple_background",
+      "appflowy_callout": "question",
+      "html_css_class": "callout-question"
+    },
+    {
+      "severity": "success",
+      "semantic_token": "semantic.success",
+      "icon": "✅",
+      "obsidian_callout": "success",
+      "notion_icon": "✅",
+      "notion_color": "green_background",
+      "appflowy_callout": "success",
+      "html_css_class": "callout-success"
+    },
+    {
+      "severity": "failure",
+      "semantic_token": "semantic.danger",
+      "icon": "❌",
+      "obsidian_callout": "danger",
+      "notion_icon": "❌",
+      "notion_color": "red_background",
+      "appflowy_callout": "danger",
+      "html_css_class": "callout-danger"
+    },
+    {
+      "severity": "bug",
+      "semantic_token": "semantic.danger",
+      "icon": "🐛",
+      "obsidian_callout": "danger",
+      "notion_icon": "🐛",
+      "notion_color": "red_background",
+      "appflowy_callout": "danger",
+      "html_css_class": "callout-danger"
+    },
+    {
+      "severity": "quote",
+      "semantic_token": "_neutral.quote",
+      "icon": "💬",
+      "obsidian_callout": "quote",
+      "notion_icon": "💬",
+      "notion_color": "gray_background",
+      "appflowy_callout": "info",
+      "html_css_class": "callout-note"
+    },
+    {
+      "severity": "abstract",
+      "semantic_token": "_neutral.quote",
+      "icon": "📑",
+      "obsidian_callout": "abstract",
+      "notion_icon": "📑",
+      "notion_color": "gray_background",
+      "appflowy_callout": "info",
+      "html_css_class": "callout-note"
+    },
+    {
+      "severity": "security",
+      "semantic_token": "semantic.security",
+      "icon": "🔒",
+      "obsidian_callout": "danger",
+      "notion_icon": "🔒",
+      "notion_color": "red_background",
+      "appflowy_callout": "danger",
+      "html_css_class": "callout-danger"
+    },
+    {
+      "severity": "performance",
+      "semantic_token": "semantic.performance",
+      "icon": "⚡",
+      "obsidian_callout": "warning",
+      "notion_icon": "⚡",
+      "notion_color": "orange_background",
+      "appflowy_callout": "warning",
+      "html_css_class": "callout-warning"
+    },
+    {
+      "severity": "version",
+      "semantic_token": "semantic.info",
+      "icon": "🏷️",
+      "obsidian_callout": "info",
+      "notion_icon": "🏷️",
+      "notion_color": "blue_background",
+      "appflowy_callout": "info",
+      "html_css_class": "callout-info"
+    },
+    {
+      "severity": "deprecated",
+      "semantic_token": "semantic.deprecated",
+      "icon": "⛔",
+      "obsidian_callout": "warning",
+      "notion_icon": "⛔",
+      "notion_color": "gray_background",
+      "appflowy_callout": "warning",
+      "html_css_class": "callout-warning"
+    },
+    {
+      "severity": "conflict",
+      "semantic_token": "semantic.warning",
+      "icon": "⚠️",
+      "obsidian_callout": "warning",
+      "notion_icon": "⚠️",
+      "notion_color": "orange_background",
+      "appflowy_callout": "warning",
+      "html_css_class": "callout-warning"
+    },
+    {
+      "severity": "external",
+      "semantic_token": "_neutral.quote",
+      "icon": "🔗",
+      "obsidian_callout": "quote",
+      "notion_icon": "🔗",
+      "notion_color": "gray_background",
+      "appflowy_callout": "info",
+      "html_css_class": "callout-info"
+    },
+    {
+      "severity": "derived",
+      "semantic_token": "_neutral.quote",
+      "icon": "✨",
+      "obsidian_callout": "quote",
+      "notion_icon": "✨",
+      "notion_color": "gray_background",
+      "appflowy_callout": "info",
+      "html_css_class": "callout-info"
+    }
+  ]
+}
