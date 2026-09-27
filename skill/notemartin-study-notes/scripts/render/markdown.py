@@ -15,7 +15,7 @@ Detalles:
   - collapsible → <details markdown="1"> con <summary>
   - link-note → [text](<note-id>.md) (ruta relativa, criterio 3)
   - propiedades → YAML frontmatter (key: value)
-  - diagram → ```mermaid block (GitHub nativo) + imagen pre-renderizada (F70 opt-in)
+  - diagram → ```mermaid block (GitHub nativo) + imagen pre-renderizada (F68 opt-in)
   - backlinks → sección "## Referenciado por" al final (fila 7 §6)
   - queries → tabla estática "## Consultas habituales" (fila 16 §6)
 
@@ -329,7 +329,7 @@ def build_backlinks_section(note_id: str,
 
 
 # ---------------------------------------------------------------------------
-# Pre-render de diagramas (F70 opcional)
+# Pre-render de diagramas (F68 opcional)
 # ---------------------------------------------------------------------------
 
 
@@ -560,7 +560,7 @@ def _emit_diagram(node: Dict[str, Any], note_id: str, idx: int,
         "capability": "diagram-mermaid-block",
         "alternative": (
             "bloque ```mermaid nativo (GitHub renderiza); sin imagen de respaldo "
-            "porque F70 no está disponible o flag --pre-render-diagrams inactivo"
+            "porque F68 no está disponible o flag --pre-render-diagrams inactivo"
         ),
         "evidence": "rg '^```mermaid' render/markdown/<id>.md exit 0",
         "content_intact": True,
@@ -1087,7 +1087,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                         action="store_false",
                         help="No insertar tabla de queries.")
     parser.add_argument("--pre-render-diagrams", action="store_true",
-                        help="Pre-renderiza Mermaid a SVG vía F70 si está disponible.")
+                        help="Pre-renderiza Mermaid a SVG vía F68 si está disponible.")
 
     args = parser.parse_args(argv)
 
@@ -1136,7 +1136,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     # Estrategia de diagramas.
     f70 = Path(__file__).resolve().parent / "diagram_image.py"
     diagram_strategy = (
-        "mermaid + image-fallback (F70 active)" if args.pre_render_diagrams and f70.exists()
+        "mermaid + image-fallback (F68 active)" if args.pre_render_diagrams and f70.exists()
         else "mermaid-only (no pre-render)"
     )
 

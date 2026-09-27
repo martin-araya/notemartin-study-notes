@@ -13,7 +13,7 @@ Detalles:
   - admonition → <aside class="callout callout-<severity>">
   - collapsible → <details><summary>title</summary>...</details>
   - link-note → <a href="<note-id>.html">text</a> (path relativo, criterio 1)
-  - diagram → <figure><svg>...</svg></figure> inline (con F70) o <pre class="mermaid">
+  - diagram → <figure><svg>...</svg></figure> inline (con F68) o <pre class="mermaid">
   - quote → <blockquote><cite>...</cite>body</blockquote> (criterio 3)
   - table con rowspan/colspan → <table> nativo HTML (sin degradación)
   - backlinks → <aside class="backlinks"> al final (fila 8 §6)
@@ -290,7 +290,7 @@ def resolve_links(ir_list: List[Dict[str, Any]], note_ids: Set[str],
 
 
 # ---------------------------------------------------------------------------
-# Pre-render de diagramas (F70 opcional)
+# Pre-render de diagramas (F68 opcional)
 # ---------------------------------------------------------------------------
 
 
@@ -466,7 +466,7 @@ def _emit_diagram(node: Dict[str, Any], note_id: str, idx: int,
                 "capability": "diagram-mermaid-block",
                 "alternative": (
                     f"<figure><svg>...</svg></figure> inline (SVG pre-renderizado "
-                    f"por F70 en {img_path.name})"
+                    f"por F68 en {img_path.name})"
                 ),
                 "evidence": f"test -f render/html_pdf/diagrams/{note_id}-{idx}.svg exit 0",
                 "content_intact": True,
@@ -486,7 +486,7 @@ def _emit_diagram(node: Dict[str, Any], note_id: str, idx: int,
         "capability": "diagram-mermaid-block",
         "alternative": (
             "<pre class='mermaid'> con código fuente Mermaid verbatim "
-            "(F70 ausente o flag --pre-render-diagrams inactivo)"
+            "(F68 ausente o flag --pre-render-diagrams inactivo)"
         ),
         "evidence": "rg 'class=\"mermaid\"' render/html_pdf/<id>.html exit 0",
         "content_intact": True,
@@ -1177,7 +1177,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--print-instructions", action="store_true",
                         help="Escribe PRINT_INSTRUCTIONS.md.")
     parser.add_argument("--pre-render-diagrams", action="store_true",
-                        help="Pre-renderiza Mermaid a SVG vía F70 si está disponible.")
+                        help="Pre-renderiza Mermaid a SVG vía F68 si está disponible.")
 
     args = parser.parse_args(argv)
 

@@ -14,7 +14,7 @@ Detalles:
   - collapsible → <details markdown="1"> (AppFlowy convierte a toggle)
   - link-note → [[target|alias]]
   - propiedades → YAML frontmatter (inline properties en AppFlowy)
-  - diagram Mermaid → ```mermaid nativo; --pre-render-diagrams activa F70 si existe
+  - diagram Mermaid → ```mermaid nativo; --pre-render-diagrams activa F68 si existe
   - equation → $$ latex $$
 
 Diferencias vs obsidian (F54) y notion_md (F56):
@@ -261,27 +261,27 @@ def collect_link_targets(ir: Dict[str, Any]) -> List[Tuple[str, str]]:
 
 
 # ---------------------------------------------------------------------------
-# Pre-render de diagramas (F70 opcional)
+# Pre-render de diagramas (F68 opcional)
 # ---------------------------------------------------------------------------
 
 
 def _pre_render_diagram(text: str, out_path: Path) -> Optional[str]:
-    """Invoca scripts/render/diagram_image.py (F70) si está disponible.
+    """Invoca scripts/render/diagram_image.py (F68) si está disponible.
 
-    Devuelve el path al SVG/PNG generado, o None si F70 no está disponible
+    Devuelve el path al SVG/PNG generado, o None si F68 no está disponible
     o falla. El error se registra en `degradations` por el caller.
     """
-    f70 = Path(__file__).resolve().parent / "diagram_image.py"
-    if not f70.exists():
+    f68 = Path(__file__).resolve().parent / "diagram_image.py"
+    if not f68.exists():
         return None
     try:
-        # Escribir el código fuente a un temporal; F70 lee --input <path>.
+        # Escribir el código fuente a un temporal; F68 lee --input <path>.
         with tempfile.NamedTemporaryFile("w", suffix=".mmd",
                                          delete=False, encoding="utf-8") as f:
             f.write(text)
             in_path = Path(f.name)
         try:
-            cmd = [sys.executable, str(f70),
+            cmd = [sys.executable, str(f68),
                    "--input", str(in_path),
                    "--output", str(out_path),
                    "--format", "svg"]
@@ -452,7 +452,7 @@ def _emit_diagram(node: Dict[str, Any], note_id: str, idx: int,
                   pre_render: bool, out_dir: Path,
                   degradations: List[Dict[str, Any]],
                   node_path: str) -> str:
-    """Diagram Mermaid: pre-render si flag y F70 disponible; si no, nativo."""
+    """Diagram Mermaid: pre-render si flag y F68 disponible; si no, nativo."""
     attrs = node.get("attrs", {}) or {}
     text = attrs.get("text", "") or ""
     alt = attrs.get("alt", "") or ""
@@ -495,7 +495,7 @@ def _emit_diagram(node: Dict[str, Any], note_id: str, idx: int,
         "capability": "diagram-mermaid-block",
         "alternative": (
             "bloque ```mermaid nativo; AppFlowy renderiza nativamente. "
-            "Sin pre-render (flag --pre-render-diagrams no activo o F70 no "
+            "Sin pre-render (flag --pre-render-diagrams no activo o F68 no "
             "disponible)."
         ),
         "evidence": "rg '^```mermaid' render/appflowy/<id>.md exit 0",
@@ -976,9 +976,9 @@ def emit_import_instructions(workdir: Path, note_count: int,
 
         ## Pre-render de diagramas
 
-        Si F70 (`scripts/render/diagram_image.py`) está disponible, ejecuta con
+        Si F68 (`scripts/render/diagram_image.py`) está disponible, ejecuta con
         `--pre-render-diagrams` para que cada `diagram` Mermaid se emita como
-        `<img src="...svg">` + `<details>` con el código fuente. Sin F70, el
+        `<img src="...svg">` + `<details>` con el código fuente. Sin F68, el
         bloque ` ```mermaid ` es la única forma visible.
 
         ## Limitaciones conocidas
@@ -1056,8 +1056,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--source-hash", type=str, default=None)
     parser.add_argument("--renderer-version", type=str, default="0.1.0")
     parser.add_argument("--pre-render-diagrams", action="store_true",
-                        help="Pre-renderiza Mermaid a SVG vía F70 si está disponible. "
-                             "Sin F70, fallback a bloque ```mermaid nativo.")
+                        help="Pre-renderiza Mermaid a SVG vía F68 si está disponible. "
+                             "Sin F68, fallback a bloque ```mermaid nativo.")
     parser.add_argument("--include-import-instructions", action="store_true",
                         help="Escribe render/appflowy/IMPORT_INSTRUCTIONS.md.")
 
@@ -1105,7 +1105,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     # Determinar estrategia de diagramas.
     f70 = Path(__file__).resolve().parent / "diagram_image.py"
     diagram_strategy = (
-        "pre-render (F70 active)" if args.pre_render_diagrams and f70.exists()
+        "pre-render (F68 active)" if args.pre_render_diagrams and f70.exists()
         else "native mermaid (no pre-render)"
     )
 

@@ -1,0 +1,8 @@
+---
+name: diagram-image-test
+targets:
+  appflowy:
+    output_dir: appflowy
+  markdown:
+    output_dir: markdown
+profile_version: "1.0.0"
