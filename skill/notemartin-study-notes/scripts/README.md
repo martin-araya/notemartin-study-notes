@@ -698,3 +698,19 @@ cambiado. 4 sub-comandos: `plan`, `publish`, `status`, `mark-edited`. Módulo co
 | Códigos de salida | 0 OK · 1 fatal · 2 OK con bloqueos |
 | Dependencias | Python 3.9+ stdlib puro |
 
+### `validate/cross_target.py` — F63 · Equivalencia entre destinos
+
+Script de validación que compara el contenido textual de cada IR contra el
+artifact renderizado por cada destino y verifica que toda unidad del IR
+aparezca en el artifact (criterio 1) o esté cubierta por una degradación
+declarada (criterio 1), con cero pérdidas reales (criterio 2). Implementa
+los 3 criterios del roadmap. Stdlib puro.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <path>`; `--out-dir <dir>`; `--destinations <csv>` (default: todos) |
+| Salida | `<out-dir>/reports/cross-target-report.{json,md}` con summary {total_units, units_present, units_justified, units_lost, notes, destinations} |
+| Matching | Canonical text extraction del IR + normalized substring match contra artifact + degradation lookup |
+| Códigos de salida | 0 OK (sin pérdidas reales) · 1 FAIL (al menos 1 pérdida real) · 2 uso incorrecto |
+| Dependencias | Python 3.9+ stdlib puro |
+
