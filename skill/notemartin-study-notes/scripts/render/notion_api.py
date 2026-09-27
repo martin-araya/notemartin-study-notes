@@ -10,7 +10,7 @@ Capacidades (per `references/08-render/capability-matrix.md` §2.1):
   Notion API = 13 ✅ + 1 ❌ (Celdas combinadas → degradación fila 2 contract §6).
 
 Detalles:
-  - admonition → callout con icon + color (tabla cerrada `SEVERITY_TO_CALLOUT`)
+  - admonition → callout con icon + color (tabla canónica `scripts/util/style_mapping.py` per F73)
   - collapsible → toggle (hijos en pass 2)
   - link-note → rich_text mention (resolve en pass 1 vía search)
   - propiedades → properties de database (mapping en `PROPERTY_TYPE_MAP`)
@@ -74,6 +74,29 @@ _spec.loader.exec_module(_io_mod)
 _atomic_write_json = _io_mod.atomic_write_json
 _atomic_write_text = _io_mod.atomic_write_text
 
+# Helper `## Cabecera` (F75): emite un callout block para el destino `notion_api`
+# con los 5 campos canónicos. Single source of truth.
+_HEADER_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.render._header",
+    Path(__file__).resolve().parent / "_header.py",
+)
+_header_mod = _importlib_util.module_from_spec(_HEADER_SPEC)
+sys.modules.setdefault("scripts.render._header", _header_mod)
+_HEADER_SPEC.loader.exec_module(_header_mod)
+_emit_cabecera = _header_mod.emit_cabecera
+
+# Tabla canónica severidad → estilo por destino (F73). Fuente única: el módulo
+# valida su tabla al import.
+_STYLE_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.util.style_mapping",
+    Path(__file__).resolve().parent.parent / "util" / "style_mapping.py",
+)
+sys.modules.setdefault("scripts.util.style_mapping",
+                       _importlib_util.module_from_spec(_STYLE_SPEC))
+_style_mod = _importlib_util.module_from_spec(_STYLE_SPEC)
+_STYLE_SPEC.loader.exec_module(_style_mod)
+notion_callout_for = _style_mod.notion_callout_for
+
 
 EXIT_OK = 0
 EXIT_FATAL = 1
@@ -108,29 +131,9 @@ def _resolve_api_base() -> str:
 # Tablas cerradas
 # ---------------------------------------------------------------------------
 
-# Severidad del IR → icon (emoji) + color (Notion). 13 canónicas + 6 fallback.
-SEVERITY_TO_CALLOUT: Dict[str, Dict[str, str]] = {
-    "note":         {"icon": "📝", "color": "default"},
-    "tip":          {"icon": "💡", "color": "yellow_background"},
-    "info":         {"icon": "ℹ️",  "color": "blue_background"},
-    "warning":      {"icon": "⚠️", "color": "yellow_background"},
-    "caution":      {"icon": "⚠️", "color": "orange_background"},
-    "danger":       {"icon": "🚫", "color": "red_background"},
-    "example":      {"icon": "📋", "color": "gray_background"},
-    "question":     {"icon": "❓", "color": "purple_background"},
-    "success":      {"icon": "✅", "color": "green_background"},
-    "failure":      {"icon": "❌", "color": "red_background"},
-    "bug":          {"icon": "🐛", "color": "red_background"},
-    "quote":        {"icon": "💬", "color": "gray_background"},
-    "abstract":     {"icon": "📑", "color": "gray_background"},
-    "security":     {"icon": "🔒", "color": "red_background"},
-    "performance":  {"icon": "⚡", "color": "orange_background"},
-    "version":      {"icon": "🏷️",  "color": "blue_background"},
-    "deprecated":   {"icon": "⛔", "color": "gray_background"},
-    "conflict":     {"icon": "⚠️", "color": "orange_background"},
-    "external":     {"icon": "🔗", "color": "gray_background"},
-}
-
+# Severidad del IR → icon (emoji) + color (Notion): vive en
+# scripts/util/style_mapping.py (F73). Esta sección se mantiene como
+# referencia y para mantener DEFAULT_SEVERITY visible al módulo.
 DEFAULT_SEVERITY = "note"
 
 # Tipo Python-style → tipo Notion API para database properties.
@@ -716,19 +719,20 @@ def _emit_callout(node: dict, **ctx) -> dict:
     degradations = ctx.get("degradations", [])
     node_path = ctx.get("node_path", "")
 
-    mapping = SEVERITY_TO_CALLOUT.get(severity)
-    if mapping is None:
+    try:
+        icon_emoji, color_name = notion_callout_for(severity)
+    except KeyError as e:
         degradations.append({
             "node_path": node_path,
             "node_type": "admonition",
             "capability": "callout",
             "alternative": (
-                f"callout 'note' (severity='{severity}' no en SEVERITY_TO_CALLOUT; default aplicado)"
+                f"callout 'note' ({e}; default aplicado)"
             ),
             "evidence": "POST /v1/blocks with callout (icon='📝', color='default')",
             "content_intact": True,
         })
-        mapping = SEVERITY_TO_CALLOUT[DEFAULT_SEVERITY]
+        icon_emoji, color_name = notion_callout_for(DEFAULT_SEVERITY)
 
     body_rich = _rich_text_from_inline(
         node.get("children", []),
@@ -744,8 +748,8 @@ def _emit_callout(node: dict, **ctx) -> dict:
     return {
         "type": "callout",
         "callout": {
-            "icon": {"type": "emoji", "emoji": mapping["icon"]},
-            "color": mapping["color"],
+            "icon": {"type": "emoji", "emoji": icon_emoji},
+            "color": color_name,
             "rich_text": rich_text,
         }
     }
@@ -1175,6 +1179,11 @@ def _render_ir(ir: dict, ctx: _RenderContext) -> Optional[str]:
         "degradations": ctx.degradations,
         "current_depth": 0,
     }
+    # Cabecera visual F75: callout nativo de Notion con los 5 campos.
+    cabecera_block = _emit_cabecera(ir.get("frontmatter", {}) or {},
+                                     dest="notion_api")
+    if cabecera_block and isinstance(cabecera_block, dict):
+        blocks.append(cabecera_block)
     children = ir.get("children", []) or []
     for i, child in enumerate(children):
         blocks.extend(_emit_node_blocks(child, i, block_ctx))
