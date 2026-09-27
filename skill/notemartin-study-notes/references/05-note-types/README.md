@@ -8,7 +8,11 @@ Cargar cuando el agente ya ha decidido el tipo de nota (F93 selector).
 
 ## Estado actual
 
-Los 15 archivos están pendientes:
+Los 15 archivos están pendientes (F78-F92). Cada uno instancia el patrón canónico de
+`references/07-visual/note-templates.md` (F75), que define la cabecera común, el
+patrón de apertura/cierre y la jerarquía visual por tipo. La densidad por tipo
+se mide contra la tabla cerrada R1-R8 de `references/07-visual/density.md` (F76),
+con exenciones explícitas para glossary-term, cheatsheet e index-moc.
 
 - `concept.md` `[pendiente F78]`
 - `api-reference.md` `[pendiente F79]`
