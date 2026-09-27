@@ -9,7 +9,7 @@ Cargar al elegir tipo de diagrama o estilo visual; cargar `tokens.md` antes de c
 ## Estado actual
 
 - `diagram-catalog.md` `[existente]` — F65 ✅
-- `mermaid-portable.md` `[pendiente F66]`
+- `mermaid-portable.md` `[existente]` — F66 ✅
 - `monospace-diagrams.md` `[pendiente F69]`
 - `reconstruction.md` `[pendiente F71]`
 - `accessibility.md` `[pendiente F71]`

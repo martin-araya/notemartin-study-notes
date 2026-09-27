@@ -131,7 +131,7 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | Seleccionar el tipo de nota `index-moc` | `references/05-note-types/index-moc.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F91] |
 | Seleccionar el tipo de nota `practice` o lab | `references/05-note-types/practice.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F92] |
 | Elegir el tipo de diagrama para una intención | `references/07-visual/diagram-catalog.md` | `references/04-authoring/` | F65 |
-| Escribir un bloque Mermaid portable | `references/07-visual/mermaid-portable.md` | `references/08-render/` (la portabilidad es decisión de L3, no de L4) | [pendiente F66] |
+| Escribir un bloque Mermaid portable | `references/07-visual/mermaid-portable.md` | `references/08-render/` (la portabilidad es decisión de L3, no de L4) | F66 |
 | Decidir entre diagrama monoespaciado, Mermaid o imagen | `references/07-visual/monospace-diagrams.md` | `references/08-render/` | [pendiente F69] |
 | Decidir si reconstruir un diagrama impreso o conservar la captura | `references/07-visual/reconstruction.md` | `references/08-render/` | [pendiente F71] |
 | Verificación de accesibilidad visual | `references/07-visual/accessibility.md` | `references/08-render/` | [pendiente F71] |
