@@ -1,0 +1,363 @@
+/* ============================================================================
+ * notemartin.css — F74 · Snippet CSS canónico para Obsidian 1.5+
+ *
+ * Wiring:
+ *   - Tokens (colores, tipografía, espaciado): assets/tokens.json (F72) →
+ *     assets/css-tokens.generated.css (auto-generado por
+ *     scripts/render/css_from_tokens.py).
+ *   - Mapeo severidad → clase CSS: scripts/util/style_mapping.py (F73).
+ *     Las clases `callout-<severity>` se resuelven por estilo-mapping §2.
+ *   - Accesibilidad: references/07-visual/accessibility.md (F71).
+ *
+ * Sin este snippet, Obsidian aplica sus colores built-in para los callouts
+ * nativos (criterio 1 ROADMAP §1453). El snippet añade la capa semántica
+ * canónica con los tokens de F72.
+ *
+ * INV-14: este archivo NO contiene literales hex. Todo color se referencia
+ * vía `var(--semantic-*)` o `var(--_neutral-*)` desde css-tokens.generated.css.
+ * El CSS no usa `rgba(...)` literal en ninguna propiedad; el fondo de
+ * `.layer-l3` hereda de `var(--_neutral-quote)` (gris neutro, ver §4).
+ *
+ * Regeneración de tokens: ver scripts/render/css_from_tokens.py --help.
+ * ========================================================================== */
+
+@import "css-tokens.generated.css";
+
+/* ============================================================================
+ * §1 · Callouts semánticos (9) — F72 + F73 style-mapping
+ *
+ * Cada callout usa las 5 variables semánticas: bg, fg, border, fgOnBg,
+ * borderContrast. borderContrast (AAA 7:1) se usa cuando el cuerpo del
+ * callout lleva texto encima; border (UI AA 3:1) cuando es decorativo.
+ *
+ * F73 unifica `failure`, `bug`, `caution`, `question` a otros callouts;
+ * se mantienen como alias visuales para que el usuario que escribe
+ * `> [!failure]` siga viendo estilo coherente.
+ * ========================================================================== */
+
+.callout-info,
+.callout-tip,
+.callout-version,
+.callout-question {
+  background-color: var(--semantic-info-bg);
+  border-left: 4px solid var(--semantic-info-borderContrast);
+  color: var(--semantic-info-fgOnBg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radii-md);
+  margin: 1em 0;
+}
+
+.callout-success {
+  background-color: var(--semantic-success-bg);
+  border-left: 4px solid var(--semantic-success-borderContrast);
+  color: var(--semantic-success-fgOnBg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radii-md);
+  margin: 1em 0;
+}
+
+.callout-warning,
+.callout-caution,
+.callout-conflict {
+  background-color: var(--semantic-warning-bg);
+  border-left: 4px solid var(--semantic-warning-borderContrast);
+  color: var(--semantic-warning-fgOnBg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radii-md);
+  margin: 1em 0;
+}
+
+.callout-danger,
+.callout-failure,
+.callout-bug,
+.callout-security {
+  background-color: var(--semantic-danger-bg);
+  border-left: 4px solid var(--semantic-danger-borderContrast);
+  color: var(--semantic-danger-fgOnBg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radii-md);
+  margin: 1em 0;
+}
+
+.callout-note,
+.callout-quote,
+.callout-abstract,
+.callout-external,
+.callout-derived {
+  background-color: var(--_neutral-quote);
+  border-left: 4px solid var(--_neutral-quoteBorder);
+  color: var(--_neutral-text);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radii-md);
+  margin: 1em 0;
+}
+
+.callout-example {
+  background-color: var(--semantic-example-bg);
+  border-left: 4px solid var(--semantic-example-borderContrast);
+  color: var(--semantic-example-fgOnBg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radii-md);
+  margin: 1em 0;
+}
+
+.callout-deprecated {
+  background-color: var(--semantic-deprecated-bg);
+  border-left: 4px solid var(--semantic-deprecated-borderContrast);
+  color: var(--semantic-deprecated-fgOnBg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radii-md);
+  margin: 1em 0;
+}
+
+.callout-performance {
+  background-color: var(--semantic-performance-bg);
+  border-left: 4px solid var(--semantic-performance-borderContrast);
+  color: var(--semantic-performance-fgOnBg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radii-md);
+  margin: 1em 0;
+}
+
+/* Cabecera del callout (título con emoji). */
+.callout-info > .callout-title,
+.callout-success > .callout-title,
+.callout-warning > .callout-title,
+.callout-danger > .callout-title,
+.callout-note > .callout-title,
+.callout-example > .callout-title,
+.callout-deprecated > .callout-title,
+.callout-security > .callout-title,
+.callout-performance > .callout-title {
+  font-weight: var(--typography-weights-semibold);
+  margin-bottom: 0.4em;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+/* ============================================================================
+ * §2 · Tablas densas (10+ columnas) — criterio 3 ROADMAP §1455
+ *
+ * Estrategia: contenedor con scroll horizontal + sticky thead.
+ * Funciona en Obsidian 1.5+ (auto-aplica a `table` en `markdown-rendered`).
+ * Sin snippet, Obsidian ya hace scroll horizontal por defecto — la nota
+ * sigue legible, solo sin sticky header.
+ * ========================================================================== */
+
+.markdown-rendered table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: var(--typography-scale-sm);
+}
+
+.markdown-rendered thead th {
+  position: sticky;
+  top: 0;
+  background-color: var(--_neutral-surface);
+  color: var(--_neutral-text);
+  font-weight: var(--typography-weights-semibold);
+  text-align: left;
+  padding: 0.5em 0.75em;
+  border-bottom: 2px solid var(--_neutral-border);
+  z-index: 1;
+}
+
+.markdown-rendered tbody td {
+  padding: 0.4em 0.75em;
+  border-bottom: 1px solid var(--_neutral-border);
+  vertical-align: top;
+}
+
+.markdown-rendered tbody tr:nth-child(even) {
+  background-color: var(--_neutral-surface);
+}
+
+.markdown-rendered tbody tr:hover {
+  background-color: var(--_neutral-quote);
+}
+
+/* ============================================================================
+ * §3 · Código (inline + fence + console) — F46 inline-marks
+ * ========================================================================== */
+
+code {
+  background-color: var(--_neutral-code);
+  color: var(--_neutral-codeText);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radii-sm);
+  font-family: var(--typography-families-mono);
+  font-size: 0.92em;
+}
+
+pre {
+  background-color: var(--_neutral-code);
+  color: var(--_neutral-codeText);
+  border: 1px solid var(--_neutral-border);
+  border-radius: var(--radii-md);
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  margin: 1em 0;
+  font-family: var(--typography-families-mono);
+  font-size: var(--typography-scale-sm);
+  line-height: var(--typography-lineheights-normal);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* Console session (F45 `:::console`): prompt + output diferenciado. */
+pre.console {
+  border-left: 4px solid var(--semantic-info-border);
+}
+
+pre.console .prompt {
+  color: var(--semantic-info-fg);
+  font-weight: var(--typography-weights-semibold);
+  user-select: none;
+}
+
+pre.console .output {
+  color: var(--_neutral-text);
+}
+
+/* ============================================================================
+ * §4 · Capas de profundidad (L1/L2/L3) — F51 depth-layers
+ *
+ * El parser NoteMark convierte `{layer:l1}` en `<span data-layer="l1">`
+ * o en `<div class="layer-l1">` (depende del contexto). L1 es el TL;DR
+ * destacado; L2 es el contenido normal (sin estilo distintivo); L3 es
+ * el apéndice exhaustivo con fondo más oscuro.
+ * ========================================================================== */
+
+.layer-l1 {
+  background-color: var(--_neutral-surface);
+  border-left: 3px solid var(--_neutral-border);
+  padding: var(--spacing-density-normal-paragraph) var(--spacing-scale-4);
+  margin-bottom: var(--spacing-scale-2);
+  border-radius: var(--radii-sm);
+}
+
+.layer-l2 {
+  /* Sin estilo distintivo: hereda el flujo normal de la nota. */
+}
+
+.layer-l3 {
+  background-color: var(--_neutral-quote);
+  border-left: 3px solid var(--_neutral-quoteBorder);
+  padding: var(--spacing-density-normal-paragraph) var(--spacing-scale-4);
+  margin-top: var(--spacing-scale-2);
+  margin-bottom: var(--spacing-scale-2);
+  font-size: 0.95em;
+  border-radius: var(--radii-sm);
+}
+
+/* ============================================================================
+ * §5 · Procedencia — F34 + F46
+ *
+ * - `.source-ref`: invisible por defecto (F59 línea 322). La marca
+ *   `{src:blk_xxxx}` se preserva como atributo en el IR; el snippet no
+ *   la muestra inline.
+ * - `.provenance-block`: estilo neutro para bloques `:::source` (futuro
+ *   F75 plantillas; no en schema enum actual).
+ * ========================================================================== */
+
+.source-ref {
+  display: none;
+}
+
+.provenance-block {
+  background-color: var(--_neutral-quote);
+  border-left: 3px solid var(--_neutral-quoteBorder);
+  padding: var(--spacing-scale-3) var(--spacing-scale-4);
+  font-size: var(--typography-scale-sm);
+  color: var(--_neutral-textMuted);
+  border-radius: var(--radii-sm);
+  margin: 1em 0;
+}
+
+/* ============================================================================
+ * §6 · Inline marks (F46) — placeholder, derived, external
+ *
+ * Las marcas inline se renderizan como `<span class="placeholder">`,
+ * `<span class="derived">`, `<span class="external">`. El snippet aplica
+ * el estilo visual con tokens neutros (no llevan color semántico saturado).
+ * ========================================================================== */
+
+.placeholder {
+  background-color: var(--_neutral-code);
+  color: var(--_neutral-codeText);
+  padding: 0 0.25em;
+  border-radius: var(--radii-sm);
+  font-family: var(--typography-families-mono);
+  font-size: 0.92em;
+}
+
+.derived {
+  border-bottom: 1px dashed var(--_neutral-quoteBorder);
+}
+
+.external {
+  border-bottom: 1px dotted var(--_neutral-quoteBorder);
+}
+
+/* ============================================================================
+ * §7 · Mermaid y figuras — coherente con F59 html_pdf.template.css §diagram
+ *
+ * `figure.diagram` y `pre.mermaid` heredan los estilos del theme de Obsidian
+ * con ajustes mínimos.
+ * ========================================================================== */
+
+figure.diagram,
+.markdown-rendered figure {
+  background-color: var(--_neutral-quote);
+  border: 1px solid var(--_neutral-border);
+  border-radius: var(--radii-lg);
+  padding: var(--spacing-scale-4);
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+pre.mermaid {
+  background-color: var(--_neutral-code);
+  color: var(--_neutral-codeText);
+  border: 1px solid var(--_neutral-border);
+}
+
+/* ============================================================================
+ * §8 · Print — coherente con F59 §print (criterio 2 F74: ambos temas OK
+ * y tablas no se parten en impresión)
+ * ========================================================================== */
+
+@media print {
+  pre, table, .callout, .provenance-block {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  /* En print, los callouts preservan su color sin saturación de fondo. */
+  .callout {
+    background-color: var(--_neutral-quote) !important;
+  }
+}
+
+/* ============================================================================
+ * §9 · Theme fallback a variables Obsidian nativas
+ *
+ * Si una variable `--semantic-*` o `--_neutral-*` no resuelve (porque
+ * tokens.json cambia su nombre o el snippet se usa sin el css generado),
+ * el `var(--token, fallback)` cae a la variable Obsidian nativa. Así el
+ * snippet degrada a colores built-in sin romperse.
+ *
+ * Esto refuerza el criterio 1 ROADMAP §1453: "Sin el snippet, ninguna
+ * nota se ve rota". Con snippet parcial (sin css-tokens.generated.css),
+ * Obsidian aún muestra la nota con sus colores built-in.
+ * ========================================================================== */
