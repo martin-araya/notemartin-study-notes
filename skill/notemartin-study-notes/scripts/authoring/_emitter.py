@@ -9,14 +9,23 @@ Sin dependencias externas. Python 3.9+ stdlib.
 
 from typing import List
 
-# Orden canónico de las 18 propiedades del frontmatter (F47 §5).
+# Orden canónico de las 20 propiedades del frontmatter (F47 §5; F75 añade
+# `summary` en posición 4 y `reading-time-minutes` en posición 5, ambos
+# universales en `status: published`).
 FRONTMATTER_ORDER = [
-    "title", "note-type", "status", "tags",
+    "title", "note-type", "status", "summary", "reading-time-minutes",
+    "tags",
     "source", "source-type", "vendor", "product", "product-version",
     "source-anchor", "source-url", "retrieved",
     "language", "coverage", "difficulty", "review-next",
     "aliases", "related",
 ]
+
+# 5 propiedades universales (F75): obligatorias en `status: published`.
+UNIVERSAL_PROPERTIES = ("title", "note-type", "status", "summary", "reading-time-minutes")
+
+# 3 propiedades universales estrictas (F47): obligatorias en cualquier `status`.
+UNIVERSAL_PROPERTIES_STRICT = ("title", "note-type", "status")
 
 
 class CanonicalEmitter:
