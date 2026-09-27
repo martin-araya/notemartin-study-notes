@@ -340,7 +340,7 @@ flowchart TB
 - **F68** `scripts/render/diagram_image.py`: pre-renderizado a SVG/PNG; alternativa cuando la reconstrucción Mermaid no es factible.
 - **F69** `monospace-diagrams.md`: alternativa para reconstrucciones tabulares o layout de memoria.
 - **F70** `scripts/render/make_figure.py`: pre-renderizado de figuras de datos.
-- **F72** `tokens.md` (pendiente): provee la paleta de colores canónica; la reconstrucción usa los tokens para `classDef` y `style`.
+- **F72** `tokens.md` (F72): provee la paleta de colores canónica en `assets/tokens.json`; la reconstrucción usa los tokens semánticos para `classDef` y `style` (9 intenciones × light/dark, 18/18 AA WCAG).
 
 ---
 
