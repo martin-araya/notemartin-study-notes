@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "lk0000000010",
+  "title": "Con term-ref",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Gl"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Término "
+          }
+        },
+        {
+          "node": "term-ref",
+          "attrs": {
+            "term_id": "LGTM",
+            "text": "LGTM"
+          }
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " se define así."
+          }
+        }
+      ]
+    }
+  ]
+}

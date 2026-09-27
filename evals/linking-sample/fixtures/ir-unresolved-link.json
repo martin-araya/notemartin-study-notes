@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "lk0000000099",
+  "title": "Link a nota inexistente",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "X"
+          }
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {},
+      "capability": "paragraph",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Enlace a "
+          }
+        },
+        {
+          "node": "link-note",
+          "attrs": {
+            "target": "lk-not-existe",
+            "text": "fantasma"
+          }
+        }
+      ]
+    }
+  ]
+}
