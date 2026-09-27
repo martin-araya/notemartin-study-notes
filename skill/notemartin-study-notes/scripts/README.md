@@ -642,3 +642,23 @@ L4 renderer: genera HTML5 autocontenido (CSS inline, sin recursos externos) con 
 | Documentación | `references/08-render/contract.md` (F53) + `references/08-render/html_pdf.template.css` (comentarios inline) |
 | Schema del reporte | `evals/render-contract-sample/schema/report.schema.json` |
 
+### `render/flashcards.py` — F60 · Renderer de repaso espaciado
+
+L4 renderer: genera tarjetas de repaso desde nodos IR atómicos. Implementa el contrato `render(ir, profile, matrix) → (artifacts, degradation_report)` definido en `references/08-render/contract.md` (F53). Salida en dos formatos: Obsidian (Spaced Repetition plugin) con líneas `Pregunta:: Respuesta` y CSV para Anki. Cubre 7 ✅ nativas + 6 ❌ (filas 6/9/10/13/14/18 de contract §6). Reglas duras: **D1** solo `question` o nodos con `is_atomic_card=true`; **D2** una tarjeta = un hecho (heurística de cláusulas; descarta si >2); **D3** trazabilidad con `note_id` en frontmatter/tags; **D4** prohibido generar desde prosa narrativa (paragraph narrativo se descarta).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <path>`; `--profile <path>`; `--out-dir <dir>` |
+| Salida | `<out-dir>/render/flashcards/<note-id>.md` por nota con tarjetas (formato Spaced Repetition plugin); `<out-dir>/render/flashcards/anki.csv` agregando todas las notas; `<out-dir>/reports/render-degradation.{json,md}` |
+| Max clauses | `--max-clauses N` (default 2; descarta si >) — criterio 2 enforcement |
+| Max words | `--max-words N` (default 25; warning si >) |
+| Renderer version | `--renderer-version <semver>` (default `0.1.0`) |
+| Invocación | `python3 scripts/render/flashcards.py --ir evals/flashcards-render-sample/fixtures --profile <yaml> --out-dir <dir>` |
+| Dependencias | Python 3.9+ stdlib puro (csv stdlib para RFC 4180 escape) |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con advertencias (compound-fact descartados) |
+| Escritura | Atómica: `tempfile` + `Path.replace` (compartido vía `util/_io.py`) |
+| Constantes inline | `ATOMIC_NODE_KINDS` (5), `NO_OP_CAPABILITIES` (5 filas), `CLAUSE_SEPARATORS` (regex), `REASON_PROSE`, `REASON_COMPOUND` |
+| Tabla de degradación | `references/08-render/contract.md §6` filas 6/9/10/13/14/18 (Flashcards) |
+| Documentación | `references/08-render/contract.md` (F53) + docstring del script |
+| Schema del reporte | `evals/render-contract-sample/schema/report.schema.json` |
+
