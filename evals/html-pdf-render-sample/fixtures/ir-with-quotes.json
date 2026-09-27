@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "ff0000000002",
+  "title": "Cita que sobrevive",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Cita"
+          }
+        }
+      ]
+    },
+    {
+      "node": "quote",
+      "attrs": {
+        "cite": "Platón, La República"
+      },
+      "capability": "quote",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "La justicia es la suma de las virtudes."
+          }
+        }
+      ]
+    },
+    {
+      "node": "quote",
+      "attrs": {
+        "cite": "Aristóteles, Ética a Nicómaco"
+      },
+      "capability": "quote",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Somos lo que hacemos repetidamente."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "ff0000000003",
+  "title": "Tabla con rowspan/colspan",
+  "children": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1
+      },
+      "capability": "section-h1",
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Tabla"
+          }
+        }
+      ]
+    },
+    {
+      "node": "table",
+      "attrs": {
+        "headers": [
+          "A",
+          "B",
+          "C"
+        ],
+        "rows": [
+          [
+            {
+              "value": "X",
+              "rowspan": 2
+            },
+            "Y",
+            "Z"
+          ],
+          [
+            null,
+            "Y2",
+            "Z2"
+          ]
+        ]
+      },
+      "capability": "table-merged-cells",
+      "source_refs": [],
+      "children": []
+    }
+  ]
+}
