@@ -59,6 +59,29 @@ _spec.loader.exec_module(_io_mod)
 _atomic_write_json = _io_mod.atomic_write_json
 _atomic_write_text = _io_mod.atomic_write_text
 
+# Helper `## Cabecera` (F75): tabla GFM 2-col con los 5 campos canónicos.
+_HEADER_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.render._header",
+    Path(__file__).resolve().parent / "_header.py",
+)
+_header_mod = _importlib_util.module_from_spec(_HEADER_SPEC)
+sys.modules.setdefault("scripts.render._header", _header_mod)
+_HEADER_SPEC.loader.exec_module(_header_mod)
+_emit_cabecera = _header_mod.emit_cabecera
+
+# Tabla canónica severidad → estilo por destino (F73). El renderer consume
+# solo el helper de icono (Notion import no soporta callouts nativos, solo
+# blockquotes con emoji prefijo).
+_STYLE_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.util.style_mapping",
+    Path(__file__).resolve().parent.parent / "util" / "style_mapping.py",
+)
+sys.modules.setdefault("scripts.util.style_mapping",
+                       _importlib_util.module_from_spec(_STYLE_SPEC))
+_style_mod = _importlib_util.module_from_spec(_STYLE_SPEC)
+_STYLE_SPEC.loader.exec_module(_style_mod)
+icon_for = _style_mod.icon_for
+
 
 EXIT_OK = 0
 EXIT_FATAL = 1
@@ -69,29 +92,9 @@ EXIT_WARN = 2
 # Constantes inline
 # ---------------------------------------------------------------------------
 
-# Severidad IR → emoji semántico (para blockquote prefijo).
-# Notion import no soporta callouts nativos; solo blockquotes con emoji.
-SEVERITY_TO_EMOJI: Dict[str, str] = {
-    "note": "📝",
-    "tip": "💡",
-    "info": "ℹ️",
-    "warning": "⚠️",
-    "caution": "⚠️",
-    "danger": "🚫",
-    "example": "📋",
-    "question": "❓",
-    "success": "✅",
-    "failure": "❌",
-    "bug": "🐛",
-    "quote": "💬",
-    "abstract": "📑",
-    "security": "🔒",
-    "performance": "⚡",
-    "version": "🏷️",
-    "deprecated": "⛔",
-    "conflict": "⚠️",
-    "external": "🔗",
-}
+# Severidad IR → emoji semántico (para blockquote prefijo): vive en
+# scripts/util/style_mapping.py (F73). Notion import no soporta callouts
+# nativos; solo blockquotes con emoji.
 
 DEFAULT_SEVERITY = "note"
 DEFAULT_EMOJI = "📝"
@@ -431,16 +434,17 @@ def _emit_admonition(node: Dict[str, Any],
     title = str(attrs.get("title", "") or "")
     body = _emit_inline(node.get("children", []))
 
-    emoji = SEVERITY_TO_EMOJI.get(severity)
-    if emoji is None:
+    try:
+        emoji = icon_for(severity)
+    except KeyError as e:
         degradations.append({
             "id": f"deg-{_sha256_hex((node_path + 'sev').encode())[:12]}",
             "node_path": node_path,
             "node_type": "admonition",
             "capability": "callout",
             "alternative": (
-                f"blockquote con emoji '{DEFAULT_EMOJI}' prefijo (severity='{severity}' "
-                f"no en SEVERITY_TO_EMOJI; default aplicado)"
+                f"blockquote con emoji '{DEFAULT_EMOJI}' prefijo ({e}; "
+                f"default aplicado)"
             ),
             "vs_notion_api": (
                 "notion_api habría emitido callout nativo con icon={emoji} y color={name}"
@@ -789,6 +793,11 @@ def emit_artifact(ir_obj: Dict[str, Any], ir_sha256: str,
     body_parts: List[str] = []
     if title:
         body_parts.append(f"# {title}\n")
+    # Cabecera visual F75: tabla GFM con los 5 campos.
+    cabecera_md = _emit_cabecera(ir_obj.get("frontmatter", {}) or {},
+                                 dest="notion_md")
+    if cabecera_md:
+        body_parts.append(cabecera_md.rstrip())
     for path, node in ir_nodes:
         rendered = _emit_node(node, degradations=degradations, node_path=path)
         if rendered:
