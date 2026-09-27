@@ -1,0 +1,54 @@
+# 10 tipos canónicos del catálogo (§4) con su intención primaria.
+# Cada tipo debe tener al menos un bloque `:::diagram` con `mermaid` no vacío
+# y una sección "Ejemplo" con código Mermaid real.
+tipos:
+  - id: T1
+    titulo_esperado: "T1 — Decisión"
+    tipo_mermaid: "flowchart"
+    intencion_primaria: "I-1"
+    nodos_ejemplo_min: 6
+  - id: T2
+    titulo_esperado: "T2 — Secuencia"
+    tipo_mermaid: "sequenceDiagram"
+    intencion_primaria: "I-2"
+    nodos_ejemplo_min: 4
+  - id: T3
+    titulo_esperado: "T3 — Estados"
+    tipo_mermaid: "stateDiagram-v2"
+    intencion_primaria: "I-3"
+    nodos_ejemplo_min: 3
+  - id: T4
+    titulo_esperado: "T4 — Jerarquía"
+    tipo_mermaid: "flowchart"
+    intencion_primaria: "I-4"
+    nodos_ejemplo_min: 6
+  - id: T5
+    titulo_esperado: "T5 — Modelo de datos"
+    tipo_mermaid: "erDiagram"
+    intencion_primaria: "I-5"
+    nodos_ejemplo_min: 4
+  - id: T6
+    titulo_esperado: "T6 — Capas"
+    tipo_mermaid: "flowchart"
+    intencion_primaria: "I-6"
+    nodos_ejemplo_min: 4
+  - id: T7
+    titulo_esperado: "T7 — Dependencias"
+    tipo_mermaid: "flowchart"
+    intencion_primaria: "I-7"
+    nodos_ejemplo_min: 5
+  - id: T8
+    titulo_esperado: "T8 — Cronología de versiones"
+    tipo_mermaid: "gantt"
+    intencion_primaria: "I-8"
+    nodos_ejemplo_min: 4
+  - id: T9
+    titulo_esperado: "T9 — Estructura de memoria"
+    tipo_mermaid: "flowchart"
+    intencion_primaria: "I-9"
+    nodos_ejemplo_min: 4
+  - id: T10
+    titulo_esperado: "T10 — Gramática"
+    tipo_mermaid: "flowchart"
+    intencion_primaria: "I-10"
+    nodos_ejemplo_min: 4

@@ -1,0 +1,36 @@
+# Casos sintéticos para validar la regla de los 15 nodos (§6).
+# Cada caso declara N (número de nodos del diagrama propuesto) y el veredicto
+# esperado según §6.1 + §6.2 (excepciones por tipo).
+casos:
+  - id: "tiny"
+    nodos: 5
+    tipo: "T1"
+    verdict: "unico"           # 1-7 → un solo diagrama
+  - id: "small"
+    nodos: 10
+    tipo: "T1"
+    verdict: "unico_subgraphs" # 8-14 → un solo diagrama con subgraphs
+  - id: "medium"
+    nodos: 18
+    tipo: "T2"
+    verdict: "partir"          # 15-25 → partir
+  - id: "large"
+    nodos: 30
+    tipo: "T7"
+    verdict: "tabla"           # 26+ → tabla
+  - id: "gantt_excepcion"
+    nodos: 20
+    tipo: "T8"
+    verdict: "unico"           # T8 admite hasta 25 sin partir
+  - id: "jerarquia_excepcion"
+    nodos: 22
+    tipo: "T4"
+    verdict: "unico"           # T4 admite hasta 25 si profundidad ≤4
+  - id: "gramatica_sin_excepcion"
+    nodos: 16
+    tipo: "T10"
+    verdict: "partir"          # T10 no admite excepción
+  - id: "boundary_15"
+    nodos: 15
+    tipo: "T1"
+    verdict: "partir"          # exactamente 15 → partir

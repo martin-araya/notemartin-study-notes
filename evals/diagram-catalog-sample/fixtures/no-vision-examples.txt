@@ -1,0 +1,46 @@
+CNN
+convolution
+convolutional
+RNN
+recurrent neural
+transformer
+YOLO
+segmentation
+object detection
+detection
+SLAM
+calibration
+optical flow
+GAN
+autoencoder
+ResNet
+VGG
+U-Net
+Mask R-CNN
+pose estimation
+depth map
+feature map
+kernel
+stride
+pooling
+fully connected layer
+semantic segmentation
+instance segmentation
+backbone
+encoder-decoder
+deconvolution
+upsampling
+downsampling
+attention head
+self-attention
+multi-head attention
+batch normalization
+dropout
+loss function
+gradient descent
+backpropagation
+inception
+mobilenet
+efficientnet
+token embedding
+positional encoding

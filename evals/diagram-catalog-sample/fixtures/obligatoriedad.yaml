@@ -1,0 +1,29 @@
+# 5 situaciones para validar la regla de obligatoriedad (§7).
+# 3 deben llevar diagrama (arquitectura/índice/procedimiento ramificado),
+# 2 no (casos lineales / puramente tabulares).
+casos:
+  - id: "arq_3_componentes"
+    tipo_nota: "architecture"
+    entidades: 3
+    relaciones: 2
+    esperado: "obligatorio"
+  - id: "arq_2_componentes"
+    tipo_nota: "architecture"
+    entidades: 2
+    relaciones: 1
+    esperado: "opcional"      # bajo el umbral de §7
+  - id: "moc_6_hijos"
+    tipo_nota: "index-moc"
+    entidades: 6
+    relaciones: 5
+    esperado: "obligatorio"
+  - id: "proc_lineal"
+    tipo_nota: "procedure"
+    entidades: 5
+    relaciones: 0  # 0 puntos de decisión
+    esperado: "opcional"
+  - id: "proc_3_caminos"
+    tipo_nota: "procedure"
+    entidades: 8
+    relaciones: 3  # ≥3 caminos alternativos
+    esperado: "obligatorio"

@@ -1,0 +1,46 @@
+# Intenciones no listadas en §3 que el catálogo debe resolver a "sin diagrama"
+# (tabla, lista o nada). Verifica R-D-01: la matriz es cerrada y el fallback
+# a "no diagrama" es explícito.
+intenciones_fuera_de_matriz:
+  - intencion: "receta de cocina"
+    esperado: "sin diagrama"   # no es I-1..I-10 → tabla de ingredientes
+  - intencion: "lista de comandos CLI sin dependencias"
+    esperado: "sin diagrama"   # lista GFM, no diagrama
+  - intencion: "fórmula matemática única"
+    esperado: "sin diagrama"   # :::equation (F12)
+  - intencion: "definición de un solo término"
+    esperado: "sin diagrama"   # :::note con {src:}
+  - intencion: "tabla de comparación de 5 alternativas"
+    esperado: "sin diagrama"   # tabla GFM
+  - intencion: "color picker con 8 hex"
+    esperado: "sin diagrama"   # tabla de tokens (F72)
+  - intencion: "flujo narrativo de un proceso sin decisiones"
+    esperado: "sin diagrama"   # :::step o lista
+  - intencion: "árbol genealógico de un personaje"
+    esperado: "T4"            # excepción legítima: jerarquía personal
+  - intencion: "registro de versiones de un binario"
+    esperado: "T8"            # cronología de versiones
+  - intencion: "historia de un commit en git"
+    esperado: "T8"            # cronología
+  - intencion: "mapa de calles de una ciudad"
+    esperado: "T7"            # dependencias (calles como aristas)
+  - intencion: "tabla periódica de los elementos"
+    esperado: "sin diagrama"   # tabla GFM
+  - intencion: "diagrama de clases UML"
+    esperado: "T5"            # entidades con cardinalidad
+  - intencion: "secuencia de boot de un SO"
+    esperado: "T2"            # secuencia entre actores heterogéneos
+  - intencion: "API REST con un endpoint y 2 parámetros"
+    esperado: "sin diagrama"   # tabla de parámetros
+  - intencion: "organigrama de una empresa pequeña"
+    esperado: "T4"            # jerarquía
+  - intencion: "memoria virtual con paginación"
+    esperado: "T9"            # estructura de memoria
+  - intencion: "compilador: fases léxico→sintáctico→semántico"
+    esperado: "T6"            # capas
+  - intencion: "esquema de colores RGB"
+    esperado: "sin diagrama"   # tabla
+  - intencion: "árbol de decisión de un clasificador"
+    esperado: "T1"            # decisión (excepción: árbol de decisión
+                              # de ML clásico sí es válido — solo se prohíbe
+                              # el dominio de visión por computador)
