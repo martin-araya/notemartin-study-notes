@@ -662,3 +662,22 @@ L4 renderer: genera tarjetas de repaso desde nodos IR atómicos. Implementa el c
 | Documentación | `references/08-render/contract.md` (F53) + docstring del script |
 | Schema del reporte | `evals/render-contract-sample/schema/report.schema.json` |
 
+### `render/linking.py` — F61 · Enlaces por destino
+
+CLI de orquestación de enlaces: invoca los renderers (F54-F60) y produce
+los outputs derivados del grafo de links (`reports/link_debt.json`,
+`reports/linking-report.{json,md}`). Módulo compartido `_linking.py` con
+API centralizada (`LinkTarget`, `LinkReport`, `LinkGraph`, `resolve_links`,
+`build_backlinks_section_md`, `build_backlinks_aside_html`,
+`aggregate_link_debt`). El spec normativo está en
+`references/08-render/linking.md`.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--ir <path>`; `--out-dir <dir>`; `--profile <yaml>`; `--renderers <csv>` (default todos) |
+| Salida | `reports/link_debt.json` (deuda por destino); `reports/linking-report.{json,md}`; invoca renderers y recolecta paths |
+| Pasadas | `--pass1-only` (invoca renderers); `--pass2-only` (análisis); default ambas |
+| Dependencias | Python 3.9+ stdlib puro (subprocess para invocar renderers) |
+| Códigos de salida | 0 OK · 1 error fatal · 2 OK con deuda residual |
+| Documentación | `references/08-render/linking.md` (F61) + docstring |
+
