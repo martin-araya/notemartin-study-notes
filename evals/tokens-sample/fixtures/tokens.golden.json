@@ -1,0 +1,95 @@
+{
+  "$version": "1.0.0",
+  "semantic": {
+    "info": {
+      "light": {
+        "fgOnBg": "#0D47A1",
+        "bg": "#E3F2FD"
+      },
+      "dark": {
+        "fgOnBg": "#E3F2FD",
+        "bg": "#0D2747"
+      }
+    },
+    "success": {
+      "light": {
+        "fgOnBg": "#1B5E20",
+        "bg": "#E8F5E9"
+      },
+      "dark": {
+        "fgOnBg": "#E8F5E9",
+        "bg": "#10331A"
+      }
+    },
+    "warning": {
+      "light": {
+        "fgOnBg": "#5D2E00",
+        "bg": "#FFF8E1"
+      },
+      "dark": {
+        "fgOnBg": "#FFF8E1",
+        "bg": "#3A2A0A"
+      }
+    },
+    "danger": {
+      "light": {
+        "fgOnBg": "#B71C1C",
+        "bg": "#FFEBEE"
+      },
+      "dark": {
+        "fgOnBg": "#FFEBEE",
+        "bg": "#3A0F0F"
+      }
+    },
+    "note": {
+      "light": {
+        "fgOnBg": "#212121",
+        "bg": "#F5F5F5"
+      },
+      "dark": {
+        "fgOnBg": "#E0E0E0",
+        "bg": "#2A2A2A"
+      }
+    },
+    "example": {
+      "light": {
+        "fgOnBg": "#263238",
+        "bg": "#FAFAFA"
+      },
+      "dark": {
+        "fgOnBg": "#ECEFF1",
+        "bg": "#263238"
+      }
+    },
+    "deprecated": {
+      "light": {
+        "fgOnBg": "#4A148C",
+        "bg": "#F3E5F5"
+      },
+      "dark": {
+        "fgOnBg": "#F3E5F5",
+        "bg": "#2A0F38"
+      }
+    },
+    "security": {
+      "light": {
+        "fgOnBg": "#B71C1C",
+        "bg": "#FFEBEE"
+      },
+      "dark": {
+        "fgOnBg": "#FFEBEE",
+        "bg": "#3A0F0F"
+      }
+    },
+    "performance": {
+      "light": {
+        "fgOnBg": "#92400E",
+        "bg": "#FFFBEA"
+      },
+      "dark": {
+        "fgOnBg": "#FFFBEA",
+        "bg": "#3A2A05"
+      }
+    }
+  }
+}
