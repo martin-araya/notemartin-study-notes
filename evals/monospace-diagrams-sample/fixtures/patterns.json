@@ -1,0 +1,139 @@
+{
+  "source": "skill/notemartin-study-notes/references/07-visual/monospace-diagrams.md",
+  "patterns": [
+    {
+      "index": 4,
+      "name": "Layout en disco (ext2/ext3 simplificado)",
+      "code": "+----------------+\n|  superblock    |\n|  (block #0)    |\n+-------+--------+\n|       |        |\n| inode table    |\n|       |        |\n+-------+--------+\n|       |        |\n| data blocks    |\n|       |        |\n+-------+--------+\n",
+      "max_line_width": 18
+    },
+    {
+      "index": 5,
+      "name": "Buffer circular",
+      "code": "   +---+---+---+---+---+---+---+---+\n   |   |   |   |   |   |   |   |   |\n   +---+---+---+---+---+---+---+---+\n     ^                       ^\n    head                    tail\n   (read)                  (write)\n   \n   (vacío cuando head == tail)\n",
+      "max_line_width": 36
+    },
+    {
+      "index": 6,
+      "name": "Árbol B (nodo genérico)",
+      "code": "              +-----+\n              |  K  |\n              +--+--+\n                 |\n       +---------+---------+\n       |                   |\n   +---+---+           +---+---+\n   | K | K |  -->      | K | K |  -->\n   +-|-+-+-           +-|-+-+-\n    V   V             V   V\n  leaf leaf         leaf leaf\n",
+      "max_line_width": 37
+    },
+    {
+      "index": 7,
+      "name": "Jerarquía de memoria",
+      "code": "  Speed          Size          Cost\n    +               +             +\n    |               |             |\n    v               v             v\n+--------+      +---------+     +---------+\n| regs   |      |  L1     |     |  RAM    |\n+--------+      +---------+     +---------+\n   |               |               |\n   v               v               v\n+--------+      +---------+     +---------+\n|  L1    |      |  L2     |     |  Disk   |\n+--------+      +---------+     +---------+\n   |               |               |\n   v               v               v\n+--------+      +---------+     +---------+\n|  L2    |      |  L3     |     |  Tape   |\n+--------+      +---------+     +---------+\n",
+      "max_line_width": 43
+    },
+    {
+      "index": 8,
+      "name": "Concurrencia y bloqueos",
+      "code": "Thread A   Thread B\n   |           |\n   v           v\n+---+       +---+\n|M  |       |M  |\n+-+-+       +-+-+\n  |   lock    |\n  +-----+-----+\n        v\n   +---------+\n   | shared  |\n   | resource|\n   +---------+\n",
+      "max_line_width": 19
+    },
+    {
+      "index": 9,
+      "name": "Paquete de red (Ethernet/IP simplificado)",
+      "code": "+--------+--------+--------+----------------+\n| dest   | src    | type   | payload        |\n| MAC    | MAC    | (Ether)| (var)          |\n+--------+--------+--------+----------------+\n|  6B    |  6B    |  2B    | 46-1500B       |\n+--------+--------+--------+----------------+\n",
+      "max_line_width": 45
+    },
+    {
+      "index": 10,
+      "name": "Particionamiento (sharding)",
+      "code": "+-----------+   +-----------+   +-----------+\n| Shard 0   |   | Shard 1   |   | Shard 2   |\n| key % 3=0 |   | key % 3=1 |   | key % 3=2 |\n+-----------+   +-----------+   +-----------+\n       \\              |              /\n        +-------------+-------------+\n                      |\n                +-----+-----+\n                | router    |\n                | hash(key) |\n                +-----------+\n",
+      "max_line_width": 45
+    },
+    {
+      "index": 11,
+      "name": "Comparación lado a lado",
+      "code": "+----------+       +----------+\n| Before   |       | After    |\n+----------+       +----------+\n| prop A   |  -->  | prop A'  |\n| prop B   |       | prop B'  |\n| prop C   |       | prop D   |\n+----------+       +----------+\n",
+      "max_line_width": 31
+    },
+    {
+      "index": 12,
+      "name": "Pipeline de instrucciones (5-stage RISC)",
+      "code": "  IF    ->    ID    ->    EX    ->    MEM   ->    WB\nfetch     decode    execute    memory    writeback\n  |          |          |          |          |\n  v          v          v          v          v\ninstr     regs      ALU       data       reg\nfrom      read      op        mem        file\nmem                           access\n",
+      "max_line_width": 52
+    },
+    {
+      "index": 13,
+      "name": "Cola de mensajes (producer/consumer)",
+      "code": "producer         broker            consumer\n   |                |                  |\n   v                v                  v\n+------+    +-----+-----+    +------+\n| msg1 |--->| topic A    |--->| sub1 |\n+------+    +-----+-----+    +------+\n   |         |  |  |           |\n   v         v  v  v           v\n+------+    +-----+-----+    +------+\n| msg2 |--->| topic B    |--->| sub2 |\n+------+    +-----+-----+    +------+\n",
+      "max_line_width": 43
+    },
+    {
+      "index": 14,
+      "name": "Tabla hash con chaining",
+      "code": "bucket[0]   bucket[1]   bucket[2]   bucket[3]\n   |           |           |           |\n   v           v           v           v\n+---+       +---+       +---+       +---+\n| K |--->|   |       | K |--->| K |\n+---+   | K |--->|     +---+   | K |\n        +---+   |              +---+\n        | nil  |\n        +-----+\n",
+      "max_line_width": 45
+    },
+    {
+      "index": 15,
+      "name": "Pila de llamadas",
+      "code": "+----------+\n| main()   |\n+----------+\n   |\n   v\n+----------+\n| foo()    |\n+----------+\n   |\n   v\n+----------+\n| bar()    |\n+----------+\n   |\n   v\n+----------+\n| baz()    |\n+----------+\n",
+      "max_line_width": 12
+    }
+  ],
+  "decision_table": [
+    [
+      "Diagrama con ≤15 nodos",
+      "✅",
+      "✅ más simple"
+    ],
+    [
+      "Diagrama con >15 nodos",
+      "✅ con partición",
+      "⚠ aceptable si cabe en ancho"
+    ],
+    [
+      "Anchura requerida > 60 chars",
+      "✅ se adapta",
+      "❌ se sale del viewport"
+    ],
+    [
+      "Ramas complejas (>5 alternativas)",
+      "✅ decisiones con rombo",
+      "⚠ verboso"
+    ],
+    [
+      "Estados con transiciones complejas",
+      "✅ stateDiagram",
+      "⚠ verboso"
+    ],
+    [
+      "Tabla de comparación con datos",
+      "❌ mejor tabla GFM",
+      "✅ side-by-side"
+    ],
+    [
+      "Layout de memoria / buffer",
+      "⚠ verbose",
+      "✅ claro"
+    ],
+    [
+      "ASCII art embebido en código fuente",
+      "❌",
+      "✅ natural"
+    ],
+    [
+      "Jerarquías profundas (>5 niveles)",
+      "✅ con subgraph",
+      "❌ verboso"
+    ],
+    [
+      "Redes de paquetes / protocolos",
+      "✅",
+      "✅ para headers simples"
+    ],
+    [
+      "Diagramas muy pequeños (≤3 nodos)",
+      "⚠ overhead innecesario",
+      "✅ más simple"
+    ],
+    [
+      "Diagramas que se actualizan frecuentemente",
+      "✅ editable en texto",
+      "✅ editable en texto"
+    ]
+  ]
+}
