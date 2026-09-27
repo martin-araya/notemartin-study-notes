@@ -63,6 +63,32 @@ _spec.loader.exec_module(_io_mod)
 _atomic_write_json = _io_mod.atomic_write_json
 _atomic_write_text = _io_mod.atomic_write_text
 
+# Helper `## Cabecera` (F75): tabla HTML integrable con la tabla `## Metadata`
+# de F59 (mismo `<dl>`; la cabecera añade los 5 campos canónicos).
+_HEADER_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.render._header",
+    Path(__file__).resolve().parent / "_header.py",
+)
+_header_mod = _importlib_util.module_from_spec(_HEADER_SPEC)
+sys.modules.setdefault("scripts.render._header", _header_mod)
+_HEADER_SPEC.loader.exec_module(_header_mod)
+_emit_cabecera = _header_mod.emit_cabecera
+
+# Tabla canónica severidad → estilo por destino (F73). El renderer HTML/PDF
+# consume icono + CSS class. Las CSS classes prefijo `callout-<severity>` se
+# estilizan en `references/08-render/html_pdf.template.css` (F59, pendiente
+# migración a `var(--token)` en F74).
+_STYLE_SPEC = _importlib_util.spec_from_file_location(
+    "scripts.util.style_mapping",
+    Path(__file__).resolve().parent.parent / "util" / "style_mapping.py",
+)
+sys.modules.setdefault("scripts.util.style_mapping",
+                       _importlib_util.module_from_spec(_STYLE_SPEC))
+_style_mod = _importlib_util.module_from_spec(_STYLE_SPEC)
+_STYLE_SPEC.loader.exec_module(_style_mod)
+icon_for = _style_mod.icon_for
+html_css_class_for = _style_mod.html_css_class_for
+
 
 EXIT_OK = 0
 EXIT_FATAL = 1
@@ -73,26 +99,10 @@ EXIT_WARN = 2
 # Constantes inline
 # ---------------------------------------------------------------------------
 
-SEVERITY_TO_CSS_CLASS: Dict[str, str] = {
-    "note": "note", "tip": "tip", "info": "info",
-    "warning": "warning", "caution": "warning", "danger": "danger",
-    "example": "example", "question": "question", "success": "success",
-    "failure": "danger", "bug": "danger",
-    "quote": "note", "abstract": "note",
-    "security": "danger", "performance": "warning", "version": "info",
-    "deprecated": "warning", "conflict": "warning", "external": "info",
-}
-DEFAULT_SEVERITY = "note"
+# Severidad IR → CSS class + emoji: vive en scripts/util/style_mapping.py
+# (F73). Esta sección solo conserva el default visible al módulo.
 
-SEVERITY_TO_EMOJI: Dict[str, str] = {
-    "note": "📝", "tip": "💡", "info": "ℹ️",
-    "warning": "⚠️", "caution": "⚠️", "danger": "🚫",
-    "example": "📋", "question": "❓", "success": "✅",
-    "failure": "❌", "bug": "🐛",
-    "quote": "💬", "abstract": "📑",
-    "security": "🔒", "performance": "⚡", "version": "🏷️",
-    "deprecated": "⛔", "conflict": "⚠️", "external": "🔗",
-}
+DEFAULT_SEVERITY = "note"
 DEFAULT_EMOJI = "📝"
 
 LANG_MAP: Dict[str, str] = {
@@ -375,7 +385,7 @@ def _emit_table(node: Dict[str, Any]) -> str:
         return ""
     out = ["<table>", "  <thead>", "    <tr>"]
     for h in headers:
-        out.append(f"      <th>{_html_escape(str(h))}</th>")
+        out.append(f'      <th scope="col">{_html_escape(str(h))}</th>')
     out.append("    </tr>")
     out.append("  </thead>")
     out.append("  <tbody>")
@@ -502,10 +512,10 @@ def _emit_admonition(node: Dict[str, Any],
     title = str(attrs.get("title", "") or "")
     body = _emit_inline(node.get("children", []))
 
-    css_class = SEVERITY_TO_CSS_CLASS.get(severity, DEFAULT_SEVERITY)
-    emoji = SEVERITY_TO_EMOJI.get(severity, DEFAULT_EMOJI)
-
-    if severity not in SEVERITY_TO_CSS_CLASS:
+    try:
+        css_class = html_css_class_for(severity)
+        emoji = icon_for(severity)
+    except KeyError as e:
         degradations.append({
             "id": f"deg-{_sha256_hex((node_path + 'sev').encode())[:12]}",
             "node_path": node_path,
@@ -513,11 +523,13 @@ def _emit_admonition(node: Dict[str, Any],
             "capability": "callout",
             "alternative": (
                 f"<aside class='callout callout-{DEFAULT_SEVERITY}'> con emoji "
-                f"'{DEFAULT_EMOJI}' (severity='{severity}' no en SEVERITY_TO_CSS_CLASS)"
+                f"'{DEFAULT_EMOJI}' ({e}; default aplicado)"
             ),
             "evidence": "rg 'class=\"callout' render/html_pdf/<id>.html exit 0",
             "content_intact": True,
         })
+        css_class = html_css_class_for(DEFAULT_SEVERITY)
+        emoji = icon_for(DEFAULT_SEVERITY)
 
     parts = [f'<aside class="callout callout-{css_class}">',
              f'  <span class="emoji">{emoji}</span>',
@@ -613,7 +625,7 @@ def _emit_parameter_table(node: Dict[str, Any]) -> str:
     rows = attrs.get("rows", []) or []
     out = ['<table class="parameter-table">', "  <thead>", "    <tr>"]
     for c in columns:
-        out.append(f"      <th>{_html_escape(str(c))}</th>")
+        out.append(f'      <th scope="col">{_html_escape(str(c))}</th>')
     out.append("    </tr>")
     out.append("  </thead>")
     out.append("  <tbody>")
@@ -893,6 +905,15 @@ def emit_artifact(ir_obj: Dict[str, Any], ir_sha256: str,
         body_parts.append("</header>")
 
     body_parts.append(f'<h1 data-note-id="{_html_escape(note_id)}">{_html_escape(title)}</h1>')
+
+    # Cabecera visual F75: tabla HTML con los 5 campos canónicos.
+    cabecera_html = _emit_cabecera(ir_obj.get("frontmatter", {}) or {},
+                                  dest="html_pdf")
+    if cabecera_html:
+        body_parts.append('<section class="cabecera-section">')
+        body_parts.append("  <h2>Cabecera</h2>")
+        body_parts.append("  " + cabecera_html)
+        body_parts.append("</section>")
 
     props_html = _collect_properties_for_body(ir_obj)
     if props_html:
