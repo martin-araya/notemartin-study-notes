@@ -55,6 +55,22 @@ _spec.loader.exec_module(_io_mod)
 _atomic_write_json = _io_mod.atomic_write_json
 _atomic_write_text = _io_mod.atomic_write_text
 
+# Design tokens (F72): consume desde assets/tokens.json. INV-14: este archivo
+# no contiene literales de color.
+_TOKENS_PATH = Path(__file__).resolve().parents[2] / "assets" / "tokens.json"
+_tokens_spec = _importlib_util.spec_from_file_location(
+    "_skill_tokens", Path(__file__).resolve().parent.parent / "util" / "tokens.py"
+)
+_tokens_mod = _importlib_util.module_from_spec(_tokens_spec)
+_tokens_spec.loader.exec_module(_tokens_mod)
+load_tokens = _tokens_mod.load_tokens
+resolve_token = _tokens_mod.resolve_token
+resolve_series = _tokens_mod.resolve_series
+warn_if_unsupported_major = _tokens_mod.warn_if_unsupported_major
+
+_TOKENS = load_tokens(_TOKENS_PATH)
+warn_if_unsupported_major(_TOKENS["$version"])
+
 
 EXIT_OK = 0
 EXIT_PARTIAL = 1
@@ -70,52 +86,60 @@ DEFAULT_MARGIN_RIGHT = 30
 
 
 # ---------------------------------------------------------------------------
-# Paleta Okabe-Ito (seed; F72 ratificará)
+# Paleta Okabe-Ito (F70 seed ratificado por F72; vive en tokens.json)
 # ---------------------------------------------------------------------------
 
 
-OKABE_ITO_PALETTE = {
-    "okabe-ito-orange":         "#E69F00",
-    "okabe-ito-sky-blue":       "#56B4E9",
-    "okabe-ito-bluish-green":   "#009E73",
-    "okabe-ito-yellow":         "#F0E442",
-    "okabe-ito-blue":           "#0072B2",
-    "okabe-ito-vermillion":     "#D55E00",
-    "okabe-ito-reddish-purple": "#CC79A7",
-    "okabe-ito-black":          "#000000",
-}
+_OKABE_ITO_NAMES = (
+    "okabe-ito-orange",
+    "okabe-ito-sky-blue",
+    "okabe-ito-bluish-green",
+    "okabe-ito-yellow",
+    "okabe-ito-blue",
+    "okabe-ito-vermillion",
+    "okabe-ito-reddish-purple",
+    "okabe-ito-black",
+)
+
+
+def _okabe_ito_palette(theme: str) -> Dict[str, str]:
+    """Devuelve la paleta Okabe-Ito resuelta desde tokens.json para `theme`.
+
+    La inversión light↔dark de `okabe-ito-black` (negro en light, blanco en
+    dark) está modelada en tokens.json `series.okabe-ito-black.{light,dark}`
+    y la aplica automáticamente `resolve_series`.
+    """
+    return {name: resolve_series(_TOKENS, name, theme) for name in _OKABE_ITO_NAMES}
 
 
 def palette_for_theme(palette: Dict[str, str], theme: str) -> Dict[str, str]:
-    """Devuelve la paleta adaptada al tema (light/dark)."""
-    if theme == "dark":
-        out = palette.copy()
-        out["okabe-ito-black"] = "#FFFFFF"
-        return out
-    return palette.copy()
+    """Devuelve la paleta adaptada al tema (light/dark).
 
-
-NEUTRAL_AXES_LIGHT = {
-    "axis_line": "#666666",
-    "gridline": "#E0E0E0",
-    "text_axis": "#333333",
-    "title": "#000000",
-    "subtitle": "#666666",
-    "background": "#FFFFFF",
-}
-
-NEUTRAL_AXES_DARK = {
-    "axis_line": "#A0A0A0",
-    "gridline": "#404040",
-    "text_axis": "#CCCCCC",
-    "title": "#FFFFFF",
-    "subtitle": "#A0A0A0",
-    "background": "#1E1E1E",
-}
+    Mantiene la firma histórica (recibe `palette`) para no romper consumidores
+    externos, pero ignora el argumento y reconstruye desde tokens. Conservar el
+    parámetro es deliberado: documenta que el adaptador es por-tema, no
+    por-paleta.
+    """
+    return _okabe_ito_palette(theme)
 
 
 def get_neutral(theme: str) -> Dict[str, str]:
-    return NEUTRAL_AXES_DARK if theme == "dark" else NEUTRAL_AXES_LIGHT
+    """Devuelve el dict de ejes neutros (axisLine, gridline, textAxis, etc.) para `theme`.
+
+    Lee desde `tokens.json["series"]["axisLight"|"axisDark"]`. Los nombres
+    históricos (snake_case) se preservan en la salida para no tocar los
+    consumidores (`neutral["axis_line"]`, etc.).
+    """
+    bucket = "axisDark" if theme == "dark" else "axisLight"
+    src = resolve_token(_TOKENS, "series", bucket)
+    return {
+        "axis_line":  src["axisLine"],
+        "gridline":   src["gridline"],
+        "text_axis":  src["textAxis"],
+        "title":      src["title"],
+        "subtitle":   src["subtitle"],
+        "background": src["background"],
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -342,7 +366,7 @@ def parse_figure_spec(data: Dict[str, Any]) -> Tuple[Optional[FigureSpec], List[
                 fix_hint="Añadir source_refs con los IDs de bloque del SDM",
             ))
 
-        color_hex = OKABE_ITO_PALETTE.get(color_token, "#888888")
+        color_hex = _okabe_ito_palette(theme).get(color_token) or resolve_series(_TOKENS, "okabe-ito-blue", theme)
 
         data_points = [
             DataPoint(
@@ -601,7 +625,7 @@ def build_heatmap(spec: FigureSpec, width: int, height: int, palette: Dict[str, 
         max_v = 1.0
 
     color_token = series.color_token or "okabe-ito-blue"
-    base_color = palette.get(color_token, "#0072B2")
+    base_color = palette.get(color_token) or resolve_series(_TOKENS, "okabe-ito-blue", spec.theme)
     neutral = get_neutral(spec.theme)
 
     for ci, cat in enumerate(cats):
@@ -646,7 +670,7 @@ def build_confusion_matrix(spec: FigureSpec, width: int, height: int, palette: D
     if max_v == 0:
         max_v = 1.0
     color_token = series.color_token or "okabe-ito-blue"
-    base_color = palette.get(color_token, "#0072B2")
+    base_color = palette.get(color_token) or resolve_series(_TOKENS, "okabe-ito-blue", spec.theme)
     neutral = get_neutral(spec.theme)
 
     for ri, row_cat in enumerate(cats):
@@ -672,7 +696,7 @@ def build_confusion_matrix(spec: FigureSpec, width: int, height: int, palette: D
             # Etiqueta central
             cx = x + cell_w / 2
             cy = y + cell_h / 2
-            text_color = "#FFFFFF" if intensity > 0.5 else neutral["text_axis"]
+            text_color = resolve_token(_TOKENS, "_neutral", "background", "light") if intensity > 0.5 else neutral["text_axis"]
             out.append(f'  <text x="{cx:.1f}" y="{cy:.1f}" text-anchor="middle" fill="{text_color}" font-size="11" dominant-baseline="middle">{dp.value}</text>\n')
             # Etiquetas de fila/columna
             if ri == 0:
@@ -804,7 +828,7 @@ def render_figure(
     palette_name: str,
 ) -> Tuple[str, Dict[str, Any]]:
     """Renderiza la figura a SVG y devuelve (svg_string, palette_check)."""
-    palette = palette_for_theme(OKABE_ITO_PALETTE, spec.theme)
+    palette = palette_for_theme({}, spec.theme)
     builder = BUILDERS[spec.figure_type]
     svg = builder(spec, width, height, palette)
 
