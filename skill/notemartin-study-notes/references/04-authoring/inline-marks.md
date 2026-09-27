@@ -101,7 +101,7 @@ tipo de bloque. La unidad de citación depende del tipo de bloque.
 **Densidad objetivo global por nota:** ≥ 0.80 `{src:}` por bloque fáctico (de cada
 5 bloques fácticos, ≥ 4 llevan al menos una ancla). El validador (F49) mide esta
 densidad; no la exige para cierre en F46 pero la usa para detectar notas con baja
-cobertura.
+cobertura. (Ver `references/07-visual/density.md` R8; F76 formaliza el número 0.80 en la tabla cerrada R1-R8.)
 
 ## §5 · Regla de primera aparición de términos
 
@@ -183,8 +183,10 @@ degradado documentado en F8 §4 (no se eliminan del NoteMark; el renderer decide
 | `{external}` | `<span class="external">…</span>` via CSS | `callout` con color externo (token) | se pierde | highlight via token | literal `{external}` | `<span class="external">{external}</span>` | descartado |
 
 **Colores:** todos via `assets/tokens.json` (INV-I3 / INV-14). Cero literales. Los
-nombres `highlight-token`, `derived`, `external` referencian tokens concretos definidos
-en F72.
+nombres `highlight-token` → `_neutral.code` (+ `_neutral.codeText` para texto),
+`derived` → `_neutral.quote` (+ `_neutral.quoteBorder` para borde lateral),
+`external` → `_neutral.quote` (+ `_neutral.quoteBorder`). Tokens definidos en
+`assets/tokens.json` (F72).
 
 **Marcas "se pierden":** significa que el destino degrada el bloque a texto plano o
 lo descarta según F8 §4. La marca sigue presente en el NoteMark y en el IR; no se
