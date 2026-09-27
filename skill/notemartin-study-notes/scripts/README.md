@@ -7,10 +7,11 @@ Ejecutables invocables por el agente. **No se leen en contexto**; se invocan por
 | Subcarpeta | Rol | Fases |
 |---|---|---|
 | `ingest/` | L0: triaje, OCR, layout, regiones, tablas, fórmulas, código, post-OCR, formatos no PDF | F17-F29, F33 |
-| `validate/` | Validadores de SDM, IR, NoteMark, Mermaid, completitud, equivalencia cross-target | F30, F43, F49, F63, F67 |
+| `validate/` | Validadores de SDM, IR, NoteMark, Mermaid, completitud, equivalencia cross-target, contraste de tokens, densidad de notas | F30, F43, F49, F63, F67, F72, F76 |
+| `evals/visual/` (no es `scripts/` sino `evals/visual/`) | Verificación visual multi-destino (F77): 12 artefactos reales + checklist + defects.md + visual_inspect.py + run_eval.py | F77 |
 | `authoring/` | Parser NoteMark → IR (F48, `parse_notemark.py`); transformaciones de IR (F50) | F48, F50 |
-| `render/` | Renderers a cada destino + pre-render de diagramas y figuras | F54-F60, F68, F68 |
-| `util/` | Caché, visor, ledger, grafo de conceptos, trazabilidad | F36, F38, F39, F52 |
+| `render/` | Renderers a cada destino + pre-render de diagramas y figuras + generador CSS de tokens + helper de cabecera F75 | F54-F60, F68, F68, F74, F75 |
+| `util/` | Caché, visor, ledger, grafo de conceptos, trazabilidad, tokens, mapeo de estilo | F36, F38, F39, F52, F72, F73 |
 | `README.md` | Catálogo con qué hace cada script, entrada, salida, dependencias, invocación | F117 |
 
 ## Reglas (per `AGENT.md` §6)
@@ -807,8 +808,8 @@ Stdlib puro. Genera alt text automáticamente; exige reading_phrase no vacío.
 | Entrada | `--input <spec.json>` (archivo único) o `--input-dir <dir>` (varios specs) |
 | Salida | `<out-dir>/<slug>.svg` + `<out-dir>/<slug>.manifest.json` + `<out-dir>/render-degradation.{json,md}` |
 | Tipos | `bar`, `line`, `heatmap`, `confusion_matrix`, `distribution`, `before_after` |
-| Paleta | Okabe-Ito (8 colores) invertida para tema dark; verificada con ΔE CIEL76 ≥ 20 |
-| Ejes neutros | `#666666` axis / `#E0E0E0` gridline / `#333333` text en light; `#A0A0A0` / `#404040` / `#CCCCCC` en dark |
+| Paleta | Okabe-Ito (8 colores) desde `assets/tokens.json` → `series.okabe-ito-*` (F72 ratifica el seed F70); inversión `okabe-ito-black` light↔dark modelada en el JSON; verificada con ΔE CIEL76 ≥ 20 |
+| Ejes neutros | Resueltos desde `assets/tokens.json` → `series.axisLight` / `series.axisDark` (F72) |
 | Source refs | Validación obligatoria por serie; `--allow-missing-refs` para modo draft |
 | Alt text | Auto-generado por tipo; sobrescribible vía spec |
 | Reading phrase | Obligatorio no vacío (≤ 280 chars recomendado) |
@@ -816,5 +817,151 @@ Stdlib puro. Genera alt text automáticamente; exige reading_phrase no vacío.
 | Códigos de salida | 0 OK · 1 con violaciones ≥ `--fail-on` · 2 fatal |
 | Escritura | Atómica vía `util/_io.py:atomic_write_json/text` |
 | Tabla de degradación | `references/08-render/contract.md` §6 — figuras como capacidad; obsidian/no, notion_api/svg-inline, notion_md/svg-embed, appflowy/svg-inline, html_pdf/svg-inline, markdown/svg-embed, flashcards/png-raster |
-| Documentación | `references/07-visual/tokens.md` (F72 provee la paleta canónica — F70 incluye seed Okabe-Ito) + docstring del script |
+| Documentación | `references/07-visual/tokens.md` (F72 — tokens.json + loader + verificador WCAG) + docstring del script |
 | Dependencias | Python 3.9+ stdlib puro (Pillow opcional para `--format png\|both`) |
+
+### `util/tokens.py` — F72
+
+Loader de design tokens. Lee `assets/tokens.json` (la fuente única de color, tipografía, espaciado, radios y pesos per `INV-14`), valida `$version` semver y expone helpers de resolución por modo (`light` | `dark`). Consumido por `scripts/render/make_figure.py` (paleta Okabe-Ito + ejes neutros) y por `scripts/validate/contrast_check.py` (verificación WCAG). Migración retroactiva de `references/08-render/html_pdf.template.css` queda para F74 (wiring explícito en `references/07-visual/tokens.md` §3).
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Resolver cualquier token semántico, neutral o de serie a su hex concreto, eliminando literales de color del código (INV-14) |
+| API | `load_tokens(path=None)` → dict · `resolve_token(t, category, name, mode="light", field=None)` → hex · `resolve_series(t, name, mode="light")` → hex (maneja inversión de `okabe-ito-black` light↔dark) · `warn_if_unsupported_major(version, supported_major=1)` |
+| CLI | `python -m scripts.util.tokens --dump` (imprime JSON completo) · `--resolve CATEGORY NAME [MODE] [FIELD]` (imprime hex; p.ej. `semantic info light fgOnBg` → `#0D47A1`) |
+| Source-of-truth | `skill/notemartin-study-notes/assets/tokens.json` (`$version: 1.0.0`) |
+| Búsqueda del archivo | Explícita (`--tokens <path>`) → `<cwd>/skill/notemartin-study-notes/assets/tokens.json` → `<repo>/skill/notemartin-study-notes/assets/tokens.json` (vía `parents[2]`) |
+| Validación | `$version` debe ser semver `X.Y.Z` con `major ≤ 1`; claves top-level obligatorias: `typography`, `spacing`, `radii`, `_neutral`, `semantic`, `series` |
+| Hex regex | `^#(?:[0-9A-Fa-f]{3}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$` (3, 6 u 8 dígitos) |
+| Semver | major bump = rename/remove; minor = add; patch = hex adjustment (re-auditar con `contrast_check.py`) |
+| Errores | `FileNotFoundError` si no hay tokens.json en ninguna ruta · `ValueError` si JSON inválido o `$version` no semver · `KeyError` si ruta no existe |
+| Códigos CLI | 0 OK · 1 ruta no resuelta |
+| Dependencias | Python 3.9+ stdlib puro (json, re, pathlib, argparse) |
+| Wirings | F70 `make_figure.py` (consume Okabe-Ito + ejes), F72 `contrast_check.py` (verifica), F73/F74 (consumidores futuros) |
+
+### `validate/contrast_check.py` — F72
+
+Verificador de contraste WCAG 2.1 sobre `assets/tokens.json`. Calcula el ratio entre `fgOnBg` y `bg` para los 9 tokens semánticos en cada modo (light + dark = 18 pares) usando la fórmula WCAG SC 1.4.3 (linealización sRGB + luminancia relativa). Pensado para ejecutarse en CI y bloquear el commit si algún par cae por debajo del mínimo AA.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Garantizar `INV-14` no solo estructural (sin literales) sino funcional (contraste suficiente en ambos temas) |
+| Fórmula | `L = 0.2126 R + 0.7152 G + 0.0722 B` (canal linealizado con `c/12.92` si `c ≤ 0.03928`, si no `((c+0.055)/1.055)**2.4`); `ratio = (L_lighter+0.05)/(L_darker+0.05)` |
+| Ratios | AA = 4.5:1 (mínimo, default `--min-ratio`); AAA = 7:0 (referencia en la tabla) |
+| CLI | `python scripts/validate/contrast_check.py --tokens <path> --min-ratio 4.5 --mode both` |
+| Salida | Markdown (default) con tabla 18 filas + veredicto PASS/FAIL; o JSON (`--json`) con `tokens_path`, `min_ratio`, `aa_ratio`, `aaa_ratio`, `pairs[]`, `fails[]` |
+| Exit codes | 0 todos ≥ min · 1 algún par falla · 2 archivo no encontrado / JSON inválido / sin `semantic` |
+| Resultado esperado | 18/18 PASS en `assets/tokens.json` actual; tabla de referencia en `references/07-visual/tokens.md` §5 |
+| Dependencias | Python 3.9+ stdlib puro (json, argparse, pathlib) |
+| Wirings | Cierra criterio 3 de F72; documentado en `references/07-visual/tokens.md` §4 y §10 |
+
+### `util/style_mapping.py` — F73
+
+Tabla canónica `severidad → estilo por destino`. Cierra el drift entre los 6 renderers L4 (cada uno tenía su propio `SEVERITY_TO_*` local con 19 keys divergentes); F73 los consolida en una única tupla inmutable de 20 `StyleMapping` (dataclass frozen). El módulo valida al import (20 entradas, Notion color ∈ lista cerrada de 10, sin campos vacíos) y expone 6 helpers (`icon_for`, `obsidian_callout_for`, `notion_callout_for`, `appflowy_callout_for`, `html_css_class_for`, `semantic_token_for`) que devuelven `KeyError` con sugerencia Levenshtein si llega una severidad desconocida.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Single source of truth para los 6 renderers L4; cualquier cambio de mapeo severidad→destino se aplica una vez aquí |
+| Tabla | 20 `StyleMapping`: severities `note, tip, info, warning, caution, danger, example, question, success, failure, bug, quote, abstract, security, performance, version, deprecated, conflict, external, derived` |
+| 7 campos por fila | `semantic_token` (F72) · `icon` (emoji canónico) · `obsidian_callout` (tipo nativo Obsidian 1.5+) · `notion_icon` · `notion_color` (uno de los 10 válidos) · `appflowy_callout` (tipo nativo AppFlowy) · `html_css_class` (prefijo `callout-<severity>`) |
+| Validador | `validate_table()` al import; verifica 20 entradas, severidades únicas ∈ `CANONICAL_SEVERITIES`, Notion color ∈ `NOTION_VALID_COLORS`, sin campos vacíos |
+| Constantes exportadas | `CANONICAL_SEVERITIES` (frozenset de 20) · `NOTION_VALID_COLORS` (frozenset de 10) |
+| Sugerencia | `KeyError` con Levenshtein(limit=2) si la severidad no existe (p.ej. `warnign` → `¿quizás 'warning'?`) |
+| CLI | `python -m scripts.util.style_mapping --dump` (JSON con los 20 mappings) · `--resolve SEVERITY` (1 mapping detallado) |
+| Consumidores | `scripts/render/obsidian.py` (obsidian_callout_for) · `scripts/render/notion_api.py` (notion_callout_for) · `scripts/render/notion_md.py` (icon_for) · `scripts/render/appflowy.py` (appflowy_callout_for) · `scripts/render/markdown.py` (icon_for + html_css_class_for) · `scripts/render/html_pdf.py` (icon_for + html_css_class_for) |
+| Inconsistencias cerradas | 12 divergencias entre los dicts legacy (caution, security, performance, external, failure, bug, etc.); tabla D3 en `references/07-visual/style-mapping.md` §6 justifica cada una |
+| Migración | Los 6 dicts `SEVERITY_TO_*` locales eliminados; verificado por `rg -n 'SEVERITY_TO_' scripts/render/` exit 1 |
+| Códigos | 0 OK · 1 severidad desconocida (con sugerencia) |
+| Dependencias | Python 3.9+ stdlib puro (dataclasses, json, argparse) |
+| Wirings | Cierra los 3 criterios del ROADMAP §1437-1440 para F73; documentado en `references/07-visual/style-mapping.md` §8-§9; eval en `evals/style-mapping-sample/` (5/5 PASS) |
+
+### `render/css_from_tokens.py` — F74
+
+Generador de CSS variables desde `assets/tokens.json` (F72). Produce `assets/css-tokens.generated.css`: un bloque `:root { --token: hex; }` con los 9 tokens semánticos × 5 valores (45 vars) + 9 neutrals + tipografía + spacing + radii en modo light, y los mismos redefinidos en `@media (prefers-color-scheme: dark) { :root { ... } }` para el tema oscuro. Carga tokens vía `scripts/util/tokens.py` (reusa validación semver + estructura); advertencia (no error) si `$version.major > 1`. Naming convention estricto (ver tabla abajo).
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Single source of truth para que el snippet CSS (F74) y, en el futuro, la plantilla HTML/PDF (F74-FUERA) consuman `var(--semantic-*)` y `var(--_neutral-*)` sin literales hex propios (INV-14) |
+| Naming | `semantic.<name>.<field>` → `--semantic-<name>-<field>` (p.ej. `semantic.info.bg` → `--semantic-info-bg`); `_neutral.<name>` → `--_neutral-<name>`; `typography.{families,scale,weights,lineHeights}.*` → `--typography-...`; `spacing.{scale,density}.*` → `--spacing-...`; `radii.<name>` → `--radii-<name>` |
+| Modo | Light por defecto; dark override vía `@media (prefers-color-scheme: dark) :root { ... }` (no usa la clase `.theme-dark` de Obsidian; respeta el modo del sistema) |
+| Estático (mode-agnostic) | Tipografía + spacing + radii: un solo bloque `:root` arriba; no se redefinen en dark |
+| Validación | `load_tokens()` centralizado en `scripts/util/tokens.py` (verifica $version semver + 6 top-level keys + regex `#RRGGBB`) |
+| Atomic write | Vía `scripts/util/_io.py:atomic_write_text` (fallback a `Path.write_text`); chmod 0644 post-write |
+| CLI | `python3 -m scripts.render.css_from_tokens --out <path>` (escribe; default `assets/css-tokens.generated.css`) · `--check` (exit 0 si al día, 1 si drift o falta) · `--print` (stdout; útil para diff) |
+| Consumidores | `assets/notemartin.css` (F74, `@import "css-tokens.generated.css"`) — futuro: `references/08-render/html_pdf.template.css` (F74-FUERA) |
+| Códigos | 0 OK / archivo al día · 1 archivo desactualizado (con `--check`) o ruta no encontrada |
+| Dependencias | Python 3.9+ stdlib puro (importlib, json, hashlib, argparse, pathlib) |
+| Wirings | Cierra los 3 criterios de F74 ROADMAP §1453-1455 (snippet ≤ 400 líneas, tema dual, tablas 10+ cols legibles); eval en `evals/css-snippet-sample/` (6/6 PASS) |
+
+### `render/_header.py` — F75
+
+Helper `## Cabecera` que emite el bloque con los 5 campos canónicos (Resumen, Procedencia, Versión, Estado, Tiempo de lectura) en 7 formatos distintos según `dest`. Cierra la dispersión de los renderers L4 (cada uno construía su propia cabecera; F75 los unifica en una sola tabla cerrada). El módulo valida al import que `SUPPORTED_DESTS` cubra los 7 destinos canónicos. Cero literales de color (INV-14).
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Single source of truth para la cabecera visual de las 7 destinos; cualquier cambio de composición o campos se aplica una vez aquí. |
+| Tabla | 5 campos en orden fijo: `summary`, `source` (compuesto), `product_version` (compuesto), `status`, `reading_time_minutes`. Filas vacías se omiten. |
+| 7 destinos | `obsidian` / `appflowy` → callout nativo con bullets; `notion_api` → callout block con rich_text; `notion_md` / `markdown` → tabla GFM 2-col; `html_pdf` → `<table class="cabecera">` integrable con la tabla `## Metadata` de F59; `flashcards` → tupla `(anverso, reverso)` con `""` en anverso y `summary` como hint en reverso. |
+| Composición | Procedencia = `source (source-type) §source-anchor source-url · recuperado YYYY-MM-DD`. Versión = `product product-version`. Estado = `"Publicado (published)"` con etiqueta humana + valor canónico. Reading time = `"N min"`. |
+| Validación | `validate_dest_coverage()` al import; verifica que `SUPPORTED_DESTS` cubra exactamente los 7 destinos canónicos. |
+| API | `emit_cabecera(frontmatter, *, dest, profile=None)` retorna `str` o `dict` (notion_api) o `tuple` (flashcards); `compute_cabecera_rows(frontmatter)` retorna `[(etiqueta, valor), ...]`; `get_summary_hint(frontmatter)` retorna `str` (summary para flashcards hint). |
+| Consumidores | Los 7 renderers L4 importan este helper en lugar de construir la cabecera localmente. |
+| Códigos | 0 OK / 1 destino no soportado (`ValueError`) / bug en `_header.py` (`AssertionError`). |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | Cierra los 3 criterios de F75 ROADMAP §1467-1470; 2 propiedades universales nuevas (`summary`, `reading-time-minutes` per properties.md §5.19-§5.20) consumidas en cada destino; eval en `evals/note-templates-sample/` (5/5 PASS). |
+
+### `validate/density_check.py` — F76
+
+Verificador de densidad y jerarquía. Lee una nota NoteMark (`.md`), parsea
+bloques por sección H2/H3, y mide las 8 reglas canónicas R1-R8 de
+`references/07-visual/density.md`. Cierra el drift entre las reglas
+dispersas que existían en F51 (longitudes L1/L2), F75 §5.2 (frecuencia
+de anclaje y máximo de callouts consecutivos) y F46 §4 (densidad `{src:}`).
+Sin dependencias externas.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Hacer ejecutable la tabla cerrada de densidad R1-R8; cualquier cambio de umbral se aplica una vez aquí. |
+| Tabla R1-R8 | R1 max L1 ≤ 60 palabras / 8 líneas; R2 max L2 ≤ 200 palabras; R3 ≥ 1 anclaje cada 200 palabras; R4 ≤ 3 callouts consecutivos; R5 ≤ 5 viñetas consecutivas; R6 sección ≥ 1 estructura; R7 L3 > 100 líneas plegable; R8 densidad `{src:}` ≥ 0.80. |
+| Exenciones | `glossary-term` (R3+R6); `cheatsheet` (R3+R5+R6); `index-moc` (R3+R5+R6). 12 tipos restantes aplican todas las reglas. |
+| Algoritmo | Pseudocódigo en `density.md` §5; implementación 1:1. Parser Markdown ligero (regex sobre líneas) reconoce callouts, tablas, directivas `:::type`, code fences, listas con/sin checklist. |
+| Severidad | R2/R4/R5/R6 = error (bloquea cierre); R1/R3/R7/R8 = warning. `--strict` hace que warnings también exit 1. |
+| CLI | `--note <path>` (un archivo), `--notes <dir>` (batch), `--json` (estructurado), `--strict`, `--allow-violations R2,R5` (override). |
+| Códigos | 0 sin violaciones; 1 con violaciones; 2 error de uso. |
+| Dependencias | Python 3.9+ stdlib puro (`re`, `dataclasses`, `pathlib`, `argparse`). |
+| Wirings | Cierra los 3 criterios de F76 ROADMAP §1483-1485; wirings desde F46 (R8), F51 (R1+R2+R7), F75 (R3+R4); eval en `evals/density-sample/` (5/5 PASS). |
+
+### `evals/visual/visual_inspect.py` — F77
+
+Inspector de los 12 artefactos generados por los renderers en F77. Detecta
+defectos visuales: líneas > 200 chars, tablas 10+ cols sin wrapper de
+overflow, links con formato no estándar, marcas `{src:}` no canónicas, bloques
+HTML sin cerrar, `<th>` sin `scope` (a11y WCAG 1.3.1), SVG sin `<title>` o
+`viewBox`, CSV con > 5 clauses por front/back. Sin dependencias externas.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Validar que los 12 artefactos reales (4 destinos × 2 notas) no tienen contenido cortado/ilegible. Cierra criterio 2 del ROADMAP §1499. |
+| Formatos | Markdown (`.md`), HTML (`.html` / `.htm`), SVG (`.svg`), CSV (`.csv`). |
+| Severidades | error (bloquea cierre) vs warning (no bloquea). `--strict` hace que warnings también exit 1. |
+| Códigos | `MD_LINE_TOO_LONG`, `MD_TABLE_WIDE`, `MD_SRC_NONCANONICAL`, `MD_LINK_FORMAT`, `HTML_*_UNBALANCED`, `HTML_TH_NO_SCOPE`, `HTML_INLINE_STYLES`, `HTML_SRC_NONCANONICAL`, `SVG_NO_VIEWBOX`, `SVG_VIEWBOX_MALFORMED`, `SVG_NO_TITLE`, `SVG_NO_ROLE`, `CSV_RFC4180`, `CSV_MISSING_COLUMNS`, `CSV_FRONT_TOO_MANY_CLAUSES`, `CSV_BACK_TOO_MANY_CLAUSES`, `FILE_MISSING`. |
+| CLI | `--artifacts-dir <path>` (default requerido), `--json`, `--strict`. |
+| Códigos | 0 sin issues; 1 con issues; 2 error de uso. |
+| Dependencias | Python 3.9+ stdlib puro (re, csv, json, argparse, pathlib). |
+| Wirings | Cierra criterio 2 de F77 ROADMAP §1499; eval en `evals/visual/run_eval.py` (5/5 PASS); 1 fix trivial aplicado en `_header.py:204` (defect #1 en `evals/visual/defects.md`). |
+
+### `evals/visual/run_eval.py` — F77
+
+Eval visual de la Fase 77. 5 sub-criterios: C1 notas fuente + sha256,
+C2 12 artefactos válidos, C3 45 vars semánticas en light+dark, C4
+visual_inspect.py exit 0 o issues documentados, C5 checklist 12 entradas.
+Cierra los 3 criterios del ROADMAP §1498-1500.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Test ejecutable del cierre de F77. |
+| Criterios | C1 (notas), C2 (artefactos), C3 (theme), C4 (inspect), C5 (checklist). |
+| Salida | `PASS 5/5` o `FAIL n/5 (passed k/5)` con detalle por criterio. |
+| Códigos | 0 todos PASS; 1 alguno FAIL. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | Cierra los 3 criterios de F77 ROADMAP §1498-1500. |
