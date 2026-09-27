@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" role="img" aria-label="Mermaid probe note flow diagram">
+  <title>Probe Note flow diagram</title>
+  <desc>Diagrama de flujo que muestra la estructura canónica de una nota: frontmatter YAML, body NoteMark, render L4 a 7 destinos.</desc>
+  <style>
+    .node { fill: #E3F2FD; stroke: #0D47A1; stroke-width: 1.5; rx: 6; }
+    .label { font-family: sans-serif; font-size: 13px; fill: #1F2328; }
+    .arrow { stroke: #57606A; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+    .dest { fill: #FFF8E1; stroke: #F57C00; stroke-width: 1.5; rx: 4; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#57606A"/>
+    </marker>
+  </defs>
+  <rect x="40" y="30" width="180" height="50" class="node"/>
+  <text x="130" y="55" text-anchor="middle" class="label">NoteMark (.nm)</text>
+  <text x="130" y="72" text-anchor="middle" class="label">frontmatter + body</text>
+  <rect x="40" y="130" width="180" height="50" class="node"/>
+  <text x="130" y="155" text-anchor="middle" class="label">Parser F48</text>
+  <text x="130" y="172" text-anchor="middle" class="label">parse_notemark.py</text>
+  <rect x="40" y="230" width="180" height="40" class="node"/>
+  <text x="130" y="252" text-anchor="middle" class="label">IR (.note-ir.json)</text>
+  <line x1="130" y1="80" x2="130" y2="130" class="arrow"/>
+  <line x1="130" y1="180" x2="130" y2="230" class="arrow"/>
+  <rect x="320" y="30" width="240" height="200" class="dest"/>
+  <text x="440" y="55" text-anchor="middle" class="label">7 destinos (F54-F60)</text>
+  <text x="440" y="80" text-anchor="middle" class="label">· obsidian (nativo)</text>
+  <text x="440" y="100" text-anchor="middle" class="label">· notion_api (nativo)</text>
+  <text x="440" y="120" text-anchor="middle" class="label">· notion_md (GFM)</text>
+  <text x="440" y="140" text-anchor="middle" class="label">· appflowy (nativo)</text>
+  <text x="440" y="160" text-anchor="middle" class="label">· markdown (GFM)</text>
+  <text x="440" y="180" text-anchor="middle" class="label">· html_pdf (HTML+PDF)</text>
+  <text x="440" y="200" text-anchor="middle" class="label">· flashcards (CSV)</text>
+  <line x1="220" y1="250" x2="320" y2="130" class="arrow"/>
+</svg>

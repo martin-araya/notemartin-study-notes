@@ -1,0 +1,22 @@
+# Perfil para evals/visual/ (F77).
+# Activa markdown + html_pdf; obsidian/notion_api/appflowy/flashcards
+# quedan inactivos (los eval samples invocan los renderers directamente).
+schema_version: "1.0.0"
+targets:
+  active:
+    - markdown
+    - html_pdf
+  markdown:
+    enabled: true
+  html_pdf:
+    enabled: true
+  obsidian:
+    enabled: false
+  notion_api:
+    enabled: false
+  appflowy:
+    enabled: false
+  notion_md:
+    enabled: false
+  flashcards:
+    enabled: false

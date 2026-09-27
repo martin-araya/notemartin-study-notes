@@ -1,0 +1,1029 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "probe-note",
+  "title": "Probe Note",
+  "layer": "l2",
+  "frontmatter": {
+    "title": "Probe Note",
+    "note-type": "probe",
+    "tags": [
+      "probe",
+      "f008",
+      "capability-matrix"
+    ],
+    "source": "capability-matrix",
+    "source-type": "synthetic",
+    "vendor": "notemartin-study-notes",
+    "product": "notemartin-study-notes",
+    "product-version": "0.1.0",
+    "source-anchor": "synthetic",
+    "source-url": "https://github.com/notemartin-study-notes",
+    "retrieved": "2026-09-21",
+    "language": "en",
+    "coverage": "full",
+    "status": "draft",
+    "difficulty": "n/a",
+    "review-next": "none",
+    "aliases": [
+      "probe",
+      "nota-sonda"
+    ],
+    "related": [
+      "references/08-render/capability-matrix.md"
+    ]
+  },
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1,
+        "capability": "section",
+        "_title": "Probe Note"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Esta nota ejercita las 14 capacidades de la matriz de capacidades. Se regenera con ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "python3 scripts/util/build_probe_note.py --output evals/probe/probe.nm",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ".",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Section heading"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Texto de prueba con término canónico ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "term-ref",
+          "attrs": {
+            "text": "concepto-demostrado",
+            "term_id": "concepto-demostrado",
+            "capability": "link-term"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " y marca de fuente {src:blk_a91f0}.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Subsection heading"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Subsección con marca de capa ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "layer": "l2"
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ".",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "note",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Callout de tipo nota. Texto del callout.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Callout de tipo consejo.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "warning",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Callout de tipo advertencia.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "danger",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Callout de tipo peligro.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "admonition",
+      "attrs": {
+        "severity": "tip",
+        "capability": "callout"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Callout de tipo ejemplo.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "collapsible",
+      "attrs": {
+        "title": "",
+        "default_open": false,
+        "capability": "collapsible"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Contenido plegable. Este bloque se puede expandir o colapsar.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "columns",
+      "attrs": {
+        "count": 2,
+        "capability": "columns"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Columna izquierda.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        },
+        {
+          "node": "paragraph",
+          "attrs": {
+            "capability": "paragraph"
+          },
+          "source_refs": [],
+          "children": [
+            {
+              "node": "text",
+              "attrs": {
+                "text": "Columna derecha.",
+                "capability": "text"
+              },
+              "source_refs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 4,
+        "capability": "section",
+        "_title": "Tablas"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Tabla simple:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "table",
+      "attrs": {
+        "headers": [
+          "name",
+          "type"
+        ],
+        "capability": "table"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Tabla con directiva param-table:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "parameter-table",
+      "attrs": {
+        "columns": [
+          "name",
+          "type",
+          "default",
+          "range"
+        ],
+        "capability": "parameter-table"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "table",
+          "attrs": {
+            "headers": [
+              "parametro",
+              "tipo",
+              "default",
+              "rango"
+            ],
+            "capability": "table"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 4,
+        "capability": "section",
+        "_title": "Código y consola"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Bloque de código:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "python",
+        "text": "def hello(name: str) -> str:\n    return f\"Hello, {name}\"\n\nprint(hello(\"world\"))",
+        "capability": "code"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Bloque de consola:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "bash",
+        "text": "$ docker run -d --name web nginx:alpine\n$ docker ps --filter name=web",
+        "capability": "code"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 4,
+        "capability": "section",
+        "_title": "Ecuaciones"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Inline: la fórmula de Einstein ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "math-inline",
+          "attrs": {
+            "latex": "E = mc^2",
+            "capability": "math-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " describe la equivalencia masa-energía.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Bloque:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "$",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "math-inline",
+          "attrs": {
+            "latex": " \\sum_{i=1}^{n} w_i x_i = b ",
+            "capability": "math-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "$",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 4,
+        "capability": "section",
+        "_title": "Diagramas y figuras"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Diagrama Mermaid:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "mermaid",
+        "text": "graph TD\n  A[Source] --> B{Ingesta}\n  B -->|nativo| C[SDM]\n  B -->|escaneado| D[OCR]\n  C --> E[Knowledge]\n  D --> E\n  E --> F[NoteMark]",
+        "capability": "code"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Figura con alt text y source_ref:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "figure",
+      "attrs": {
+        "src": "",
+        "alt": "",
+        "capability": "figure"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 4,
+        "capability": "section",
+        "_title": "Enlaces"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Enlace externo: ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "link-external",
+          "attrs": {
+            "text": "sitio oficial",
+            "url": "https://example.com",
+            "capability": "link-external"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ".",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Enlace entre notas: ver ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "link-note",
+          "attrs": {
+            "text": "concepto-demostrado",
+            "target": "concepto-demostrado",
+            "capability": "link-note"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " para más detalles.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 4,
+        "capability": "section",
+        "_title": "Marcadores de procedencia"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Este párrafo es derivado del contenido fuente. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "derived": true
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Este párrafo es conocimiento externo al documento. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "",
+            "capability": "text"
+          },
+          "source_refs": [],
+          "external": true
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 4,
+        "capability": "section",
+        "_title": "Placeholder"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Sustituye ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "placeholder",
+          "attrs": {
+            "text": "nombre",
+            "capability": "placeholder"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " por el valor real antes de publicar.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 4,
+        "capability": "section",
+        "_title": "Listas"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Lista de bullets:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "list",
+      "attrs": {
+        "ordered": false,
+        "capability": "list"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "item 1",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "item 2",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "item 3",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Lista numerada:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "list",
+      "attrs": {
+        "ordered": true,
+        "capability": "list"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "item 1",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "item 2",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "item 3",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Checklist:",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "list",
+      "attrs": {
+        "ordered": false,
+        "capability": "list"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[x] tarea completada",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[ ] tarea pendiente",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 4,
+        "capability": "section",
+        "_title": "Cita"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "quote",
+      "attrs": {
+        "capability": "quote"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "\"La fidelidad al documento original es la promesa principal de la skill.\" — Manifiesto del producto",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    }
+  ],
+  "source_file": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/visual/notes/probe.nm"
+}

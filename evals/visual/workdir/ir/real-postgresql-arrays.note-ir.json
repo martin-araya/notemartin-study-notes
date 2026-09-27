@@ -1,0 +1,863 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "arrays-in-postgresql-16",
+  "title": "Arrays in PostgreSQL 16",
+  "layer": "l2",
+  "frontmatter": {
+    "title": "Arrays in PostgreSQL 16",
+    "note-type": "concept",
+    "status": "published",
+    "summary": "PostgreSQL arrays are 1-dimensional lists of values of the same type, useful for modeling many-to-one relationships without creating a separate child table.",
+    "reading-time-minutes": 6,
+    "tags": [
+      "type/concept",
+      "domain/database",
+      "vendor/postgresql"
+    ],
+    "source": "PostgreSQL 16 Documentation",
+    "source-type": "manual",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL",
+    "product-version": "16",
+    "source-anchor": "8.15",
+    "source-url": "https://www.postgresql.org/docs/16/arrays.html",
+    "retrieved": "2026-09-15",
+    "language": "en",
+    "coverage": "full",
+    "difficulty": 3,
+    "review-next": "2027-09-15",
+    "aliases": [
+      "pg-arrays",
+      "postgres-arrays"
+    ],
+    "related": [
+      "block-directives.md",
+      "depth-layers.md"
+    ]
+  },
+  "blocks": [
+    {
+      "node": "section",
+      "attrs": {
+        "level": 1,
+        "capability": "section",
+        "_title": "Arrays in PostgreSQL 16"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "TL;DR"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "PostgreSQL arrays let you store lists of values of the same type inside a single column. They are useful for many-to-one relationships (tags, categories, simple lists) and avoid the overhead of a child table when you don't need full relational power. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "a1b2c3d4e5f6",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Definición"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "An array is a one-dimensional collection of values sharing the same type. PostgreSQL supports arrays of any built-in or user-defined type. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "b2c3d4e5f6a7",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 3,
+        "capability": "section",
+        "_title": "Sintaxis de declaración"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "sql",
+        "text": "CREATE TABLE articles (\n    id          bigserial PRIMARY KEY,\n    title       text NOT NULL,\n    tags        text[] DEFAULT '{}',\n    scores      integer[]\n);",
+        "capability": "code"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "The square brackets ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "[]",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " after the type mark the column as an array. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "c3d4e5f6a7b8",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Características"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "PostgreSQL arrays are powerful but should be used judiciously. The following table compares when to use arrays vs. junction tables.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "table",
+      "attrs": {
+        "headers": [
+          "Criterio",
+          "Array column",
+          "Junction table"
+        ],
+        "capability": "table"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "quote",
+      "attrs": {
+        "capability": "quote"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[!info] When to prefer arrays Arrays shine when the inner data is ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "strong",
+          "attrs": {
+            "capability": "strong"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ". Example: a list of categories per article.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "quote",
+      "attrs": {
+        "capability": "quote"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[!warning] When to avoid arrays Avoid arrays when you need to JOIN the inner data as a first-class entity, or when the cardinality is unbounded. The 1NF violation makes some queries awkward. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "d4e5f6a7b8c9",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "quote",
+      "attrs": {
+        "capability": "quote"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[!danger] Array size limits PostgreSQL limits arrays to ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "strong",
+          "attrs": {
+            "capability": "strong"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " (1 GB total row size). Practical limits are much smaller; benchmark with 10K+ elements.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "quote",
+      "attrs": {
+        "capability": "quote"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[!example] GIN index for array contains Use a GIN index for fast ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "tags @> ARRAY['postgres']",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " queries.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "quote",
+      "attrs": {
+        "capability": "quote"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[!tip] Array functions ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "array_append",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ", ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "array_remove",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ", ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "unnest",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ", ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "array_agg",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " are your friends.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Indexación con GIN"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "Arrays benefit from a GIN (Generalized Inverted Index) index. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "e5f6a7b8c9d0",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "sql",
+        "text": "CREATE INDEX articles_tags_gin ON articles USING GIN (tags);",
+        "capability": "code"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "This makes ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "@>",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ", ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "&&",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": ", and ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "=",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " operators index-accelerated.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Modelo de datos (ERD)"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "code",
+      "attrs": {
+        "lang": "mermaid",
+        "text": "erDiagram\n    ARTICLES ||--o{ ARTICLE_TAGS : has\n    ARTICLES {\n        bigserial id PK\n        text title\n        text[] tags\n        integer[] scores\n    }\n    ARTICLE_TAGS {\n        bigint article_id FK\n        text tag\n    }",
+        "capability": "code"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "quote",
+      "attrs": {
+        "capability": "quote"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "[!note] See also The ERD above shows a hybrid pattern: keep tags as an array for fast lookup, and join with ARTICLE_TAGS only if you need per-tag analytics.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Anti-patrones"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "list",
+      "attrs": {
+        "ordered": false,
+        "capability": "list"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "strong",
+          "attrs": {
+            "capability": "strong"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " If you find yourself joining array elements in many queries, model them as a junction table.",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "strong",
+          "attrs": {
+            "capability": "strong"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " A user can insert a 10K-element array; add a CHECK constraint. ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "f6a7b8c9d0e1",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "strong",
+          "attrs": {
+            "capability": "strong"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " Use ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "jsonb",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " columns instead of ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "text[]",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " if the inner data has structure.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Comparativa con otros motores"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "table",
+      "attrs": {
+        "headers": [
+          "Database",
+          "Native arrays",
+          "Element type",
+          "Index"
+        ],
+        "capability": "table"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "section",
+      "attrs": {
+        "level": 2,
+        "capability": "section",
+        "_title": "Ver también"
+      },
+      "source_refs": []
+    },
+    {
+      "node": "list",
+      "attrs": {
+        "ordered": false,
+        "capability": "list"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "depth-layers.md",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " — L1/L2/L3 in arrays of references.",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": "block-directives.md",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " — ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "code-inline",
+          "attrs": {
+            "text": ":::param-table",
+            "capability": "code-inline"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " for documenting array parameters.",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    },
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "a1b2c3d4e5f6",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "b2c3d4e5f6a7",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "c3d4e5f6a7b8",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "d4e5f6a7b8c9",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "e5f6a7b8c9d0",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "text",
+          "attrs": {
+            "text": " ",
+            "capability": "text"
+          },
+          "source_refs": []
+        },
+        {
+          "node": "source-ref",
+          "attrs": {
+            "block_id": "f6a7b8c9d0e1",
+            "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "capability": "source-ref"
+          },
+          "source_refs": []
+        }
+      ]
+    }
+  ],
+  "source_file": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/visual/notes/real-postgresql-arrays.md"
+}

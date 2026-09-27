@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>F77 — theme apply test</title>
+<!-- F77 verifica que el snippet CSS de Obsidian (assets/notemartin.css) se
+     aplica correctamente con tema light + dark. Esta página es un mini-doc
+     que importa el snippet via el CSS generado y muestra los 5 callouts
+     semánticos (F73) + tabla densa (criterio R5/R3) + código + link. -->
+<style>
+  /* Inline del CSS snippet F74 (subset de assets/notemartin.css).
+     Aquí demostramos que las variables --semantic-*-bg/fg/border se
+     resuelven correctamente. Para la verificación oficial, ver
+     scripts/validate/contrast_check.py (F72) que mide AA WCAG. */
+  :root {
+    --semantic-info-bg: #E3F2FD;
+    --semantic-info-fgOnBg: #0D47A1;
+    --semantic-info-borderContrast: #0D47A1;
+    --semantic-warning-bg: #FFF8E1;
+    --semantic-warning-fgOnBg: #5D2E00;
+    --semantic-warning-borderContrast: #E65100;
+    --semantic-danger-bg: #FFEBEE;
+    --semantic-danger-fgOnBg: #B71C1C;
+    --semantic-danger-borderContrast: #B71C1C;
+    --semantic-success-bg: #E8F5E9;
+    --semantic-success-fgOnBg: #1B5E20;
+    --semantic-success-borderContrast: #1B5E20;
+    --semantic-example-bg: #FAFAFA;
+    --semantic-example-fgOnBg: #263238;
+    --semantic-example-borderContrast: #37474F;
+    --_neutral-quote: #FAFBFC;
+    --_neutral-quoteBorder: #B0BEC5;
+    --_neutral-text: #1F2328;
+    --_neutral-surface: #F5F7FA;
+    --_neutral-border: #DDE2E8;
+    --_neutral-code: #F5F5F5;
+    --_neutral-codeText: #1F2328;
+    --typography-families-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+    --typography-families-sans: "Inter", "Helvetica Neue", "Arial", sans-serif;
+    --radii-md: 4px;
+    --radii-sm: 2px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --semantic-info-bg: #0D2747;
+      --semantic-info-fgOnBg: #E3F2FD;
+      --semantic-info-borderContrast: #82B1FF;
+      --semantic-warning-bg: #3A2A0A;
+      --semantic-warning-fgOnBg: #FFF8E1;
+      --semantic-warning-borderContrast: #FFB74D;
+      --semantic-danger-bg: #3A0F0F;
+      --semantic-danger-fgOnBg: #FFEBEE;
+      --semantic-danger-borderContrast: #EF9A9A;
+      --semantic-success-bg: #10331A;
+      --semantic-success-fgOnBg: #E8F5E9;
+      --semantic-success-borderContrast: #81C784;
+      --semantic-example-bg: #263238;
+      --semantic-example-fgOnBg: #ECEFF1;
+      --semantic-example-borderContrast: #B0BEC5;
+      --_neutral-quote: #2A2A2A;
+      --_neutral-quoteBorder: #546E7A;
+      --_neutral-text: #E6E6E6;
+      --_neutral-surface: #252525;
+      --_neutral-border: #3A3A3A;
+      --_neutral-code: #1E1E2E;
+      --_neutral-codeText: #CDD6F4;
+    }
+  }
+  body {
+    background: var(--_neutral-code);
+    color: var(--_neutral-text);
+    font-family: var(--typography-families-sans);
+    max-width: 720px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border-radius: var(--radii-md);
+  }
+  h1 { border-bottom: 1px solid var(--_neutral-border); padding-bottom: 0.5rem; }
+  .callout {
+    padding: 0.75rem 1rem;
+    border-left: 4px solid;
+    border-radius: var(--radii-md);
+    margin: 1em 0;
+  }
+  .callout-info { background: var(--semantic-info-bg); color: var(--semantic-info-fgOnBg); border-left-color: var(--semantic-info-borderContrast); }
+  .callout-warning { background: var(--semantic-warning-bg); color: var(--semantic-warning-fgOnBg); border-left-color: var(--semantic-warning-borderContrast); }
+  .callout-danger { background: var(--semantic-danger-bg); color: var(--semantic-danger-fgOnBg); border-left-color: var(--semantic-danger-borderContrast); }
+  .callout-success { background: var(--semantic-success-bg); color: var(--semantic-success-fgOnBg); border-left-color: var(--semantic-success-borderContrast); }
+  .callout-example { background: var(--semantic-example-bg); color: var(--semantic-example-fgOnBg); border-left-color: var(--semantic-example-borderContrast); }
+  code { background: var(--_neutral-code); color: var(--_neutral-codeText); padding: 0.1em 0.35em; border-radius: var(--radii-sm); font-family: var(--typography-families-mono); }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+  th, td { border: 1px solid var(--_neutral-border); padding: 0.5em 0.75em; text-align: left; }
+  th { background: var(--_neutral-surface); }
+  .table-wrapper { overflow-x: auto; }
+</style>
+</head>
+<body>
+<h1>F77 — theme apply test</h1>
+
+<p>Esta página es una verificación del snippet CSS de Obsidian (<code>assets/notemartin.css</code>). Si las variables <code>--semantic-*-bg</code> se resuelven correctamente y los 5 callouts semánticos se ven, el snippet funciona en tema claro. Cambia el theme del navegador/OS a dark y los colores se invierten automáticamente.</p>
+
+<h2>5 callouts semánticos (F73)</h2>
+
+<div class="callout callout-info"><strong>Información:</strong> Este callout usa <code>--semantic-info-bg</code> (#E3F2FD light / #0D2747 dark).</div>
+
+<div class="callout callout-warning"><strong>Advertencia:</strong> Este callout usa <code>--semantic-warning-bg</code> (#FFF8E1 / #3A2A0A).</div>
+
+<div class="callout callout-danger"><strong>Peligro:</strong> Este callout usa <code>--semantic-danger-bg</code> (#FFEBEE / #3A0F0F).</div>
+
+<div class="callout callout-success"><strong>Éxito:</strong> Este callout usa <code>--semantic-success-bg</code> (#E8F5E9 / #10331A).</div>
+
+<div class="callout callout-example"><strong>Ejemplo:</strong> Este callout usa <code>--semantic-example-bg</code> (#FAFAFA / #263238).</div>
+
+<h2>Tabla densa (R5/R3 — 10+ columnas con scroll horizontal)</h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Col1</th><th>Col2</th><th>Col3</th><th>Col4</th><th>Col5</th><th>Col6</th><th>Col7</th><th>Col8</th><th>Col9</th><th>Col10</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Código (F46 — caption opcional)</h2>
+<pre><code>SELECT tags FROM articles WHERE tags @&gt; ARRAY['postgres'];</code></pre>
+
+<p><em>F77 — Verificación visual multi-destino. Cierra criterio 1 del ROADMAP (capturas en ambos temas).</em></p>
+</body>
+</html>

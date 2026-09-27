@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "target": "html_pdf",
+  "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "generated_at": "2026-09-27T19:32:25Z",
+  "totals": {
+    "ir_nodes": 0,
+    "degradations": 1,
+    "content_loss": 0
+  },
+  "degradations": [
+    {
+      "id": "deg-pdf-skipped-weasyprint-missing",
+      "node_path": "renderer/pdf",
+      "node_type": "pdf",
+      "capability": "pdf-export",
+      "alternative": "PDF no generado (weasyprint no instalado). HTML producido como alternativa; usuario puede `pip install weasyprint` y re-renderizar, o usar browser print-to-PDF con la CSS @media print",
+      "evidence": "python3 -c 'import weasyprint' → ImportError",
+      "content_intact": true
+    }
+  ],
+  "published_pages": {
+    "arrays-in-postgresql-16": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/visual/workdir/render/render/html_pdf/arrays-in-postgresql-16.html"
+  },
+  "pdf_status": "skipped: weasyprint not installed",
+  "cross_target_diff": {
+    "vs_markdown": "HTML permite callouts nativos (<aside>), table con rowspan/colspan nativos, backlinks via <aside>; pierde portabilidad de texto plano",
+    "vs_obsidian": "HTML self-contained; Obsidian usa wikilinks [[id]] y callout syntax [!type]",
+    "vs_appflowy": "HTML <aside class='callout-*'>; AppFlowy usa > [!type] en Markdown"
+  }
+}

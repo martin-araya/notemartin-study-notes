@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" role="img" aria-label="Mermaid ERD: articles with tags array and junction table">
+  <title>PostgreSQL Arrays: ERD con articles + junction table</title>
+  <desc>Diagrama entidad-relación que muestra la tabla articles con columna array tags y una junction table article_tags para casos que requieren per-tag analytics.</desc>
+  <style>
+    .entity { fill: #E3F2FD; stroke: #0D47A1; stroke-width: 1.5; }
+    .entity-name { font-family: monospace; font-weight: bold; fill: #0D47A1; }
+    .field { font-family: monospace; font-size: 12px; fill: #1F2328; }
+    .rel { stroke: #57606A; stroke-width: 1.5; fill: none; }
+    .label { font-family: sans-serif; font-size: 11px; fill: #57606A; }
+    .pk { text-decoration: underline; font-weight: bold; }
+  </style>
+  <rect x="20" y="30" width="240" height="180" rx="6" class="entity"/>
+  <text x="40" y="55" class="entity-name">ARTICLES</text>
+  <line x1="20" y1="65" x2="260" y2="65" stroke="#0D47A1" stroke-width="0.5"/>
+  <text x="40" y="85" class="field pk">id bigserial PK</text>
+  <text x="40" y="110" class="field">title text</text>
+  <text x="40" y="135" class="field">tags text[]</text>
+  <text x="40" y="160" class="field">scores integer[]</text>
+  <text x="40" y="190" class="label">"store tags as array"</text>
+  <rect x="380" y="80" width="200" height="100" rx="6" class="entity"/>
+  <text x="400" y="105" class="entity-name">ARTICLE_TAGS</text>
+  <line x1="380" y1="115" x2="580" y2="115" stroke="#0D47A1" stroke-width="0.5"/>
+  <text x="400" y="135" class="field pk">article_id bigint FK</text>
+  <text x="400" y="160" class="field">tag text</text>
+  <text x="400" y="185" class="label">"per-tag analytics"</text>
+  <line x1="260" y1="100" x2="380" y2="115" class="rel"/>
+  <text x="290" y="100" class="label">"has 0..N"</text>
+</svg>

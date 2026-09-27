@@ -1,0 +1,168 @@
+---
+title: "Probe Note"
+note-type: probe
+tags: [probe, f008, capability-matrix]
+source: capability-matrix
+source-type: synthetic
+vendor: notemartin-study-notes
+product: notemartin-study-notes
+product-version: 0.1.0
+source-anchor: synthetic
+source-url: https://github.com/notemartin-study-notes
+retrieved: 2026-09-21
+language: en
+coverage: full
+status: draft
+difficulty: n/a
+review-next: none
+aliases: [probe, nota-sonda]
+related: [references/08-render/capability-matrix.md]
+---
+
+# Probe Note
+
+Esta nota ejercita las 14 capacidades de la matriz de capacidades. Se regenera con `python3 scripts/util/build_probe_note.py --output evals/probe/probe.nm`.
+
+## Section heading
+
+Texto de prueba con término canónico [[term:concepto-demostrado]] y marca de fuente {src:blk_a91f0}.
+
+### Subsection heading
+
+Subsección con marca de capa {layer:l2}.
+
+:::note
+Callout de tipo nota. Texto del callout.
+:::
+
+:::tip
+Callout de tipo consejo.
+:::
+
+:::warning
+Callout de tipo advertencia.
+:::
+
+:::danger
+Callout de tipo peligro.
+:::
+
+:::example
+Callout de tipo ejemplo.
+:::
+
+:::collapsible
+Contenido plegable. Este bloque se puede expandir o colapsar.
+:::
+
+:::columns
+Columna izquierda.
+
+Columna derecha.
+:::
+
+#### Tablas
+
+Tabla simple:
+
+| name | type |
+| --- | --- |
+| foo | string |
+| bar | integer |
+
+Tabla con directiva param-table:
+
+:::param-table
+| parametro | tipo | default | rango |
+| --- | --- | --- | --- |
+| max_connections | integer | 100 | 1-10000 |
+| shared_buffers | bytes | 128MB | 8MB- |
+:::
+
+#### Código y consola
+
+Bloque de código:
+
+```python
+def hello(name: str) -> str:
+    return f"Hello, {name}"
+
+print(hello("world"))
+```
+
+Bloque de consola:
+
+```bash
+$ docker run -d --name web nginx:alpine
+$ docker ps --filter name=web
+```
+
+#### Ecuaciones
+
+Inline: la fórmula de Einstein $E = mc^2$ describe la equivalencia masa-energía.
+
+Bloque:
+
+$$
+\sum_{i=1}^{n} w_i x_i = b
+$$
+
+#### Diagramas y figuras
+
+Diagrama Mermaid:
+
+```mermaid
+graph TD
+  A[Source] --> B{Ingesta}
+  B -->|nativo| C[SDM]
+  B -->|escaneado| D[OCR]
+  C --> E[Knowledge]
+  D --> E
+  E --> F[NoteMark]
+```
+
+Figura con alt text y source_ref:
+
+:::figure
+![Diagrama de la cadena de ingesta](assets/ingesta.png){src:blk_fig01}
+:::
+
+#### Enlaces
+
+Enlace externo: [sitio oficial](https://example.com).
+
+Enlace entre notas: ver [[note:concepto-demostrado]] para más detalles.
+
+#### Marcadores de procedencia
+
+Este párrafo es derivado del contenido fuente. {derived}
+
+Este párrafo es conocimiento externo al documento. {external}
+
+#### Placeholder
+
+Sustituye {{nombre}} por el valor real antes de publicar.
+
+#### Listas
+
+Lista de bullets:
+
+- item 1
+- item 2
+- item 3
+
+Lista numerada:
+
+1. item 1
+2. item 2
+3. item 3
+
+Checklist:
+
+- [x] tarea completada
+- [ ] tarea pendiente
+
+#### Cita
+
+> "La fidelidad al documento original es la promesa principal de la skill." — Manifiesto del producto
+
