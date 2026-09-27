@@ -33,6 +33,7 @@ from __future__ import annotations
 import argparse
 import html
 import hashlib
+import importlib.util as _importlib_util
 import json
 import re
 import sys
@@ -42,6 +43,44 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
+# Design tokens (F72): consume desde assets/tokens.json. INV-14: este
+# archivo no contiene literales de color; los hex del reporte HTML se
+# resuelven desde la paleta canónica en tiempo de generación.
+_TOKENS_SPEC = _importlib_util.spec_from_file_location(
+    "_skill_tokens",
+    Path(__file__).resolve().parent.parent / "util" / "tokens.py",
+)
+_tokens_mod = _importlib_util.module_from_spec(_TOKENS_SPEC)
+_TOKENS_SPEC.loader.exec_module(_tokens_mod)
+_TOKENS = _tokens_mod.load_tokens()
+
+
+def _hex(token_category: str, token_name: str, field_name: Optional[str] = None) -> str:
+    """Devuelve el hex del token para el modo light.
+
+    - Tokens semánticos (`semantic.<name>.<mode>.{fg,bg,border,fgOnBg,borderContrast}`)
+      requieren `field_name`.
+    - Tokens neutros (`_neutral.<name>.<mode>`) y series simples
+      (`series.<name>`) no llevan `field_name`.
+    """
+    return _tokens_mod.resolve_token(
+        _TOKENS, token_category, token_name, "light", field_name
+    )
+
+
+# Atajos para el CSS del reporte (mapeo semántico → token; ver tokens.md §2).
+_REPORT_TOKENS = {
+    "summary_bg":     _hex("_neutral", "surface"),
+    "filter_bg":      _hex("_neutral", "quote"),
+    "table_border":   _hex("_neutral", "border"),
+    "table_th_bg":    _hex("_neutral", "surface"),
+    "low_bg":         _hex("semantic", "danger", "bg"),
+    "ok_bg":          _hex("semantic", "success", "bg"),
+    "blocked_bg":     _hex("semantic", "danger", "bg"),
+    "blocked_fg":     _hex("semantic", "danger", "fg"),
+    "blocked_border": _hex("semantic", "danger", "border"),
+}
 
 SCHEMA_VERSION = "1.0.0"
 
@@ -398,19 +437,19 @@ def render_html(
   <style>
     body {{ font-family: -apple-system, sans-serif; margin: 20px; }}
     h1 {{ margin-bottom: 8px; }}
-    .summary {{ background: #f5f5f5; padding: 12px; border-radius: 4px; margin-bottom: 16px; }}
+    .summary {{ background: {_REPORT_TOKENS["summary_bg"]}; padding: 12px; border-radius: 4px; margin-bottom: 16px; }}
     .summary .stat {{ display: inline-block; margin-right: 24px; font-weight: bold; }}
     .banner {{ padding: 12px; border-radius: 4px; margin-bottom: 16px; }}
-    .blocked-banner {{ background: #fee; color: #c00; border: 2px solid #c00; font-weight: bold; }}
-    .filters {{ background: #fafafa; padding: 12px; border-radius: 4px; margin-bottom: 16px; }}
+    .blocked-banner {{ background: {_REPORT_TOKENS["blocked_bg"]}; color: {_REPORT_TOKENS["blocked_fg"]}; border: 2px solid {_REPORT_TOKENS["blocked_border"]}; font-weight: bold; }}
+    .filters {{ background: {_REPORT_TOKENS["filter_bg"]}; padding: 12px; border-radius: 4px; margin-bottom: 16px; }}
     .filters label {{ margin-right: 16px; }}
     table.regions {{ width: 100%; border-collapse: collapse; }}
-    table.regions th, table.regions td {{ border: 1px solid #ccc; padding: 8px; vertical-align: top; }}
-    table.regions th {{ background: #eee; }}
+    table.regions th, table.regions td {{ border: 1px solid {_REPORT_TOKENS["table_border"]}; padding: 8px; vertical-align: top; }}
+    table.regions th {{ background: {_REPORT_TOKENS["table_th_bg"]}; }}
     table.regions img {{ max-width: 400px; max-height: 300px; }}
     table.regions pre {{ margin: 0; white-space: pre-wrap; font-family: monospace; font-size: 12px; }}
-    .low {{ background: #fee; }}
-    .ok {{ background: #efe; }}
+    .low {{ background: {_REPORT_TOKENS["low_bg"]}; }}
+    .ok {{ background: {_REPORT_TOKENS["ok_bg"]}; }}
     .region-class {{ font-weight: bold; }}
   </style>
 </head>
