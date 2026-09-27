@@ -10,7 +10,7 @@ Cargar al renderizar o re-renderizar. `contract.md` siempre; el resto según el 
 
 - `capability-matrix.md` `[existente]` — F8: matriz 14×7 con cero ⚠.
 - `contract.md` `[existente]` — F53: contrato del renderer + tabla cerrada de degradación (20 filas = 20 celdas ❌ de F8).
-- `linking.md` `[pendiente F61]`
+- `linking.md` `[existente]` — F61: spec de resolución de enlaces por destino + 2 pasadas + link debt registry + tabla de backlinks por destino.
 - `publishing.md` `[pendiente F62]`
 - `migration.md` `[pendiente F64]`
 
