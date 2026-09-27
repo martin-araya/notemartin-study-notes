@@ -6,8 +6,9 @@ Material copiable que el agente y los renderers cargan como dato, no como instru
 
 | Archivo | Rol | Fase |
 |---|---|---|
-| `tokens.json` | Design tokens (color, tipografía, espaciado) con valor claro y oscuro | F72 |
-| `notemartin.css` | Snippet CSS para Obsidian | F74 |
+| `tokens.json` | Design tokens (color, tipografía, espaciado) con valor claro y oscuro (18/18 AA WCAG verificados) | F72 ✅ |
+| `notemartin.css` | Snippet CSS canónico para Obsidian (363 líneas, 9 secciones, 0 literales hex) | F74 ✅ |
+| `css-tokens.generated.css` | Variables CSS auto-generadas desde `tokens.json` (light + dark) | F74 |
 | `profile.template.yaml` | Plantilla del perfil del usuario | F11 |
 | `palettes/` | Paletas daltonismo-seguras para figuras | F70 |
 
@@ -17,4 +18,4 @@ Ningún archivo del proyecto contiene un color literal fuera de `tokens.json` (`
 
 ## Cuándo se crea
 
-Esta carpeta se puebla desde F11 (plantilla de perfil) y F70-F76 (visual). Hoy está vacía.
+Esta carpeta se puebla desde F11 (plantilla de perfil) y F70-F76 (visual). `tokens.json` (F72), `notemartin.css` (F74) y `profile.template.yaml` (F11) ya están publicados; `palettes/` (F70+) está pendiente.
