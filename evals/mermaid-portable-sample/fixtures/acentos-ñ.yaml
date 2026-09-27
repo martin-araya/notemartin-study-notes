@@ -1,0 +1,91 @@
+# Generado por build_fixtures.py.
+etiquetas:
+  - id: cliente_nino
+    id_nodo: "Cliente_Nino"
+    etiqueta: "Cliente (niño)"
+    ascii_id: true
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: true
+    portable_github: true
+  - id: accion_acento
+    id_nodo: "Accion"
+    etiqueta: "Acción con acento"
+    ascii_id: true
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: true
+    portable_github: true
+  - id: anio_2026
+    id_nodo: "Anio_2026"
+    etiqueta: "Año 2026 — España"
+    ascii_id: true
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: true
+    portable_github: true
+  - id: pequeno
+    id_nodo: "Pequeno"
+    etiqueta: "Pequeño en acción"
+    ascii_id: true
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: true
+    portable_github: true
+  - id: categoria_espanol
+    id_nodo: "Categoria"
+    etiqueta: "Categoría en español"
+    ascii_id: true
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: true
+    portable_github: true
+  - id: descripcion
+    id_nodo: "Descripcion"
+    etiqueta: "Descripción técnica"
+    ascii_id: true
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: true
+    portable_github: true
+  - id: libro_magico
+    id_nodo: "Libro_Magico"
+    etiqueta: "Libro mágico"
+    ascii_id: true
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: true
+    portable_github: true
+  - id: cumpleanos
+    id_nodo: "Cumpleanos"
+    etiqueta: "Cumpleaños 2026"
+    ascii_id: true
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: true
+    portable_github: true
+  - id: sin_comillas_fail
+    id_nodo: "A"
+    etiqueta: "Acción"
+    ascii_id: true
+    comillas: false
+    portable_obsidian: true
+    portable_notion_import: false
+    portable_github: true
+  - id: id_con_acento_fail
+    id_nodo: "Acción"
+    etiqueta: "Acción"
+    ascii_id: false
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: false
+    portable_github: true
+  - id: remplazos_ascii
+    id_nodo: "nino"
+    etiqueta: "nino (remplazo ASCII)"
+    ascii_id: true
+    comillas: true
+    portable_obsidian: true
+    portable_notion_import: true
+    portable_github: true
+    nota: "Remplazo ASCII seguro según §6.4"

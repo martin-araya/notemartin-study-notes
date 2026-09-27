@@ -1,0 +1,66 @@
+# Generado por build_fixtures.py.
+blacklist:
+  - id: LN-1
+    construct: "pie con etiquetas >12 chars"
+    alternativa: "Tabla markdown 2 columnas (categoría | valor)"
+    wirings: ""
+  - id: LN-2
+    construct: "journey"
+    alternativa: "flowchart LR con swimlanes por lanes nombradas"
+    wirings: "F65 T7"
+  - id: LN-3
+    construct: "timeline (Mermaid 10+)"
+    alternativa: "gantt con section"
+    wirings: "F65 T8"
+  - id: LN-4
+    construct: "mindmap"
+    alternativa: "flowchart TB jerárquico"
+    wirings: "F65 T4"
+  - id: LN-5
+    construct: "radar"
+    alternativa: "Tabla con valores por dimensión"
+    wirings: ""
+  - id: LN-6
+    construct: "sankey-beta"
+    alternativa: "flowchart LR con aristas etiquetadas"
+    wirings: "F65 T7"
+  - id: LN-7
+    construct: "C4 / architecture-beta"
+    alternativa: "flowchart con subgraph siguiendo convención C4"
+    wirings: "F65 T6"
+  - id: LN-8
+    construct: "style X fill:#hex"
+    alternativa: "classDef con nombre semántico + tokens F72"
+    wirings: "F72"
+  - id: LN-9
+    construct: "click A callback, linkStyle"
+    alternativa: "Documentar enlace en prosa adyacente o nota al pie"
+    wirings: ""
+  - id: LN-10
+    construct: "init con theme/themeVariables"
+    alternativa: "Tema por defecto; tema por destino si F73 aplica"
+    wirings: "F73"
+  - id: LN-11
+    construct: "init con flowchart.htmlLabels: false"
+    alternativa: "Usar etiquetas sin HTML (<br/> solo si los 3 destinos lo soportan)"
+    wirings: ""
+  - id: LN-12
+    construct: "HTML labels complejos (<b>, <i>, <sub>)"
+    alternativa: "Markdown inline en etiquetas (Mermaid 10+: **bold**, *italic*)"
+    wirings: ""
+  - id: LN-13
+    construct: "Subgraphs anidados >2 niveles"
+    alternativa: "Partir en 2 diagramas enlazados o usar classDef"
+    wirings: "F65 §6"
+  - id: LN-14
+    construct: "IDs Unicode (Acción["x"])"
+    alternativa: "ASCII ID + acento en etiqueta (Accion["Acción"])"
+    wirings: ""
+  - id: LN-15
+    construct: "Imágenes embebidas (img://...) en nodos"
+    alternativa: "Usar :::figure separada referenciada desde el caption"
+    wirings: "F65 §3"
+  - id: LN-16
+    construct: "block-beta (experimental)"
+    alternativa: "flowchart TB con subgraph"
+    wirings: "F65 T4/T6"

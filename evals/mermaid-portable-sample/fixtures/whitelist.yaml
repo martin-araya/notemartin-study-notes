@@ -1,0 +1,30 @@
+# 9 tipos portables (WP-1 … WP-9) declarados en §3.
+# Generado por build_fixtures.py.
+tipos:
+  - id: WP-1
+    nombre: "flowchart"
+    equivalente_f65: "T1, T4, T6, T7, T9, T10"
+  - id: WP-2
+    nombre: "sequenceDiagram"
+    equivalente_f65: "T2"
+  - id: WP-3
+    nombre: "stateDiagram-v2"
+    equivalente_f65: "T3"
+  - id: WP-4
+    nombre: "erDiagram"
+    equivalente_f65: "T5"
+  - id: WP-5
+    nombre: "classDiagram"
+    equivalente_f65: "(sin equivalente F65)"
+  - id: WP-6
+    nombre: "gantt"
+    equivalente_f65: "T8"
+  - id: WP-7
+    nombre: "gitGraph"
+    equivalente_f65: "(sin equivalente F65)"
+  - id: WP-8
+    nombre: "pie"
+    equivalente_f65: "(sin equivalente F65)"
+  - id: WP-9
+    nombre: "flowchart con subgraph"
+    equivalente_f65: "T4, T6"

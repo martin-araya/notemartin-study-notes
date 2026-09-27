@@ -1,0 +1,26 @@
+# Generado por build_fixtures.py.
+reglas:
+  - id: R-MP-01
+    regla: "Etiquetas siempre entrecomilladas"
+    pass: "A["texto"]"
+    fail: "A[texto]"
+  - id: R-MP-02
+    regla: "IDs ASCII; acentos en etiqueta"
+    pass: "Cliente_Nino["Cliente (niño)"]"
+    fail: "Cliente_Niño["Cliente"]"
+  - id: R-MP-03
+    regla: "≤40 chars por línea, ≤60 con <br/>"
+    pass: "A["PostgreSQL: motor<br/>MVCC"]"
+    fail: "A["PostgreSQL motor transaccional con control de concurrencia multiversión"]"
+  - id: R-MP-04
+    regla: "classDef con nombre semántico; sin style literal"
+    pass: "classDef warning fill:#ff6b6b; class A warning"
+    fail: "style A fill:#ff0000"
+  - id: R-MP-05
+    regla: "Subgraphs anidados ≤2 niveles"
+    pass: "subgraph X con 1 nivel interno"
+    fail: "subgraph X con subgraph Y con subgraph Z (3 niveles)"
+  - id: R-MP-06
+    regla: "Sin click, linkStyle, init con theme"
+    pass: "A["X"] sin directivas"
+    fail: "click A "https://...""

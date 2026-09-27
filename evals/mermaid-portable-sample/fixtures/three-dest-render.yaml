@@ -1,0 +1,80 @@
+# Generado por build_fixtures.py.
+matriz_destinos:
+  columnas: ["Obsidian", "Notion import", "GitHub"]
+  estados_requeridos_notion_import:
+    ok: 5
+    warning: 2
+    no: 5
+  filas:
+    - construct: "flowchart TB/LR con [], {}, (), [[]], [()]"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "subgraph id con ≤2 niveles"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "sequenceDiagram con participant y Note"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "stateDiagram-v2 con note"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "erDiagram crow's foot"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "classDiagram"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "gantt con section, milestone, active"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "gitGraph básico"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "pie con etiquetas ≤12 chars"
+      obsidian: ok
+      notion_import: warning
+      github: ok
+    - construct: "Etiquetas UTF-8 (acentos, ñ)"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "Etiquetas HTML inline (<br/>, <b>)"
+      obsidian: ok
+      notion_import: warning
+      github: ok
+    - construct: "classDef <name> fill:#hex + class"
+      obsidian: ok
+      notion_import: ok
+      github: ok
+    - construct: "style X fill:#hex literal"
+      obsidian: ok
+      notion_import: no
+      github: ok
+    - construct: "click X url"
+      obsidian: ok
+      notion_import: no
+      github: ok
+    - construct: "%%{init:...}%%"
+      obsidian: ok
+      notion_import: no
+      github: ok
+    - construct: "linkStyle N stroke"
+      obsidian: ok
+      notion_import: no
+      github: ok
+    - construct: "Tema custom (theme: dark)"
+      obsidian: ok
+      notion_import: no
+      github: ok
+    - construct: "Comentarios %% ... %%"
+      obsidian: ok
+      notion_import: ok
+      github: ok
