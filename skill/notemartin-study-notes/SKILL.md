@@ -115,21 +115,22 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | Inserción de marcas inline en redacción | `references/04-authoring/inline-marks.md` | ninguno | F46 |
 | Definición de propiedades YAML de una nota | `references/04-authoring/properties.md` | `references/05-note-types/` | F47 |
 | Definir capas L1, L2, L3 de una nota | `references/04-authoring/depth-layers.md` | `references/05-note-types/` | F51 |
-| Seleccionar el tipo de nota `concept` | `references/05-note-types/concept.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F78] |
-| Seleccionar el tipo de nota `api-reference` | `references/05-note-types/api-reference.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F79] |
-| Seleccionar el tipo de nota `procedure` | `references/05-note-types/procedure.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F80] |
-| Seleccionar el tipo de nota `configuration` | `references/05-note-types/configuration.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F81] |
-| Seleccionar el tipo de nota `error-troubleshooting` | `references/05-note-types/error-troubleshooting.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F82] |
-| Seleccionar el tipo de nota `architecture` | `references/05-note-types/architecture.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F83] |
-| Seleccionar el tipo de nota `syntax` | `references/05-note-types/syntax.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F84] |
-| Seleccionar el tipo de nota `data-model` | `references/05-note-types/data-model.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F85] |
-| Seleccionar el tipo de nota `chapter-digest` | `references/05-note-types/chapter-digest.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F86] |
-| Seleccionar el tipo de nota `comparison` | `references/05-note-types/comparison.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F87] |
-| Seleccionar el tipo de nota `version-delta` | `references/05-note-types/version-delta.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F88] |
-| Seleccionar el tipo de nota `glossary-term` | `references/05-note-types/glossary-term.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F89] |
-| Seleccionar el tipo de nota `cheatsheet` | `references/05-note-types/cheatsheet.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F90] |
-| Seleccionar el tipo de nota `index-moc` | `references/05-note-types/index-moc.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F91] |
-| Seleccionar el tipo de nota `practice` o lab | `references/05-note-types/practice.md` | los otros 14 archivos de `references/05-note-types/` | [pendiente F92] |
+| Seleccionar el tipo de nota `concept` | `references/05-note-types/concept.md` | los otros 14 archivos de `references/05-note-types/` | F78 |
+| Seleccionar el tipo de nota `api-reference` | `references/05-note-types/api-reference.md` | los otros 14 archivos de `references/05-note-types/` | F79 |
+| Seleccionar el tipo de nota `procedure` | `references/05-note-types/procedure.md` | los otros 14 archivos de `references/05-note-types/` | F80 |
+| Seleccionar el tipo de nota `configuration` | `references/05-note-types/configuration.md` | los otros 14 archivos de `references/05-note-types/` | F81 |
+| Seleccionar el tipo de nota `error-troubleshooting` | `references/05-note-types/error-troubleshooting.md` | los otros 14 archivos de `references/05-note-types/` | F82 |
+| Seleccionar el tipo de nota `architecture` | `references/05-note-types/architecture.md` | los otros 14 archivos de `references/05-note-types/` | F83 |
+| Seleccionar el tipo de nota `syntax` | `references/05-note-types/syntax.md` | los otros 14 archivos de `references/05-note-types/` | F84 |
+| Seleccionar el tipo de nota `data-model` | `references/05-note-types/data-model.md` | los otros 14 archivos de `references/05-note-types/` | F85 |
+| Seleccionar el tipo de nota `chapter-digest` | `references/05-note-types/chapter-digest.md` | los otros 14 archivos de `references/05-note-types/` | F86 |
+| Seleccionar el tipo de nota `comparison` | `references/05-note-types/comparison.md` | los otros 14 archivos de `references/05-note-types/` | F87 |
+| Seleccionar el tipo de nota `version-delta` | `references/05-note-types/version-delta.md` | los otros 14 archivos de `references/05-note-types/` | F88 |
+| Seleccionar el tipo de nota `glossary-term` | `references/05-note-types/glossary-term.md` | los otros 14 archivos de `references/05-note-types/` | F89 |
+| Seleccionar el tipo de nota `cheatsheet` | `references/05-note-types/cheatsheet.md` | los otros 14 archivos de `references/05-note-types/` | F90 |
+| Seleccionar el tipo de nota `index-moc` | `references/05-note-types/index-moc.md` | los otros 14 archivos de `references/05-note-types/` | F91 |
+| Seleccionar el tipo de nota `practice` o lab | `references/05-note-types/practice.md` | los otros 14 archivos de `references/05-note-types/` | F92 |
+| Seleccionar el tipo de nota `selector` | `references/05-note-types/selector.md` | los 15 archivos de `references/05-note-types/` | F93 |
 | Elegir el tipo de diagrama para una intención | `references/07-visual/diagram-catalog.md` | `references/04-authoring/` | F65 |
 | Escribir un bloque Mermaid portable | `references/07-visual/mermaid-portable.md` | `references/08-render/` (la portabilidad es decisión de L3, no de L4) | F66 |
 | Decidir entre diagrama monoespaciado, Mermaid o imagen | `references/07-visual/monospace-diagrams.md` | `references/08-render/` | F69 |
