@@ -1,0 +1,14 @@
+# Perfil de prueba F78: `include_practice: true`
+# Activa la sección opcional `## Práctica` en notas `concept`.
+# Este archivo documenta el contrato; el agente consumidor lo lee y aplica
+# `references/05-note-types/concept.md` §5.
+schema_version: "1.0.0"
+
+notes:
+  types:
+    concept:
+      include_practice: true
+      include_limits_alternatives: true
+      include_comparisons: true
+      min_comparisons: 2
+      min_traps: 1

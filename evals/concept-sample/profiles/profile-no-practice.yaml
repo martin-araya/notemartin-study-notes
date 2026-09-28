@@ -1,0 +1,12 @@
+# Perfil de prueba F78: `include_practice: false` (default)
+# Omite la sección `## Práctica` en notas `concept`.
+schema_version: "1.0.0"
+
+notes:
+  types:
+    concept:
+      include_practice: false
+      include_limits_alternatives: true
+      include_comparisons: true
+      min_comparisons: 2
+      min_traps: 1
