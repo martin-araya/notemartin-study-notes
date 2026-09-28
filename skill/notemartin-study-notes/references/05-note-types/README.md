@@ -14,25 +14,26 @@ patrón de apertura/cierre y la jerarquía visual por tipo. La densidad por tipo
 se mide contra la tabla cerrada R1-R8 de `references/07-visual/density.md` (F76),
 con exenciones explícitas para glossary-term, cheatsheet e index-moc.
 
-- `concept.md` `[pendiente F78]`
-- `api-reference.md` `[pendiente F79]`
-- `procedure.md` `[pendiente F80]`
-- `configuration.md` `[pendiente F81]`
-- `error-troubleshooting.md` `[pendiente F82]`
-- `architecture.md` `[pendiente F83]`
-- `syntax.md` `[pendiente F84]`
-- `data-model.md` `[pendiente F85]`
-- `chapter-digest.md` `[pendiente F86]`
-- `comparison.md` `[pendiente F87]`
-- `version-delta.md` `[pendiente F88]`
-- `glossary-term.md` `[pendiente F89]`
-- `cheatsheet.md` `[pendiente F90]`
-- `index-moc.md` `[pendiente F91]`
-- `practice.md` `[pendiente F92]`
+- `concept.md`
+- `api-reference.md`
+- `procedure.md`
+- `configuration.md`
+- `error-troubleshooting.md`
+- `architecture.md`
+- `syntax.md`
+- `data-model.md`
+- `chapter-digest.md`
+- `comparison.md`
+- `version-delta.md`
+- `glossary-term.md`
+- `cheatsheet.md`
+- `index-moc.md`
+- `practice.md`
+- `selector.md`
 
 ## Quién lee / quién produce
 
-El agente lee el archivo del tipo elegido. Cada fase `F78`-`F92` produce su archivo.
+El agente lee el archivo del tipo elegido. Cada fase `F78`-`F93` produce su archivo.
 
 ## Referencia cruzada
 
