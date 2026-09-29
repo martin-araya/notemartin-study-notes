@@ -1,0 +1,7 @@
+Los pods de Kubernetes pueden fallar al iniciar por 4 motivos comunes:
+imagen no encontrada, recursos insuficientes, configuración de probe
+incorrecta, y volumen no montado. La firma del método `WaitForPodRunning`
+es `func (c *Clientset) WaitForPodRunning(ctx context.Context, namespace,
+name string, timeout time.Duration) error`. El warning de seguridad
+del scheduler es `WARNING: pod has unbound immediate PersistentVolumeClaims`.
+Si el pod no arranca, el error es `ImagePullBackOff`. {src:blk_1d3e8a92f7c4}

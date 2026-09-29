@@ -1,0 +1,5 @@
+PostgreSQL soporta 7 tipos de replicación built-in: physical streaming,
+logical streaming, synchronous, asynchronous, cascading, bidirectional
+y slot-based. El default de `wal_level` es `replica`. El comando para
+crear una replica slot es `SELECT pg_create_physical_replication_slot(
+'standby_1');`. {src:blk_8c4d9e6f1a20}

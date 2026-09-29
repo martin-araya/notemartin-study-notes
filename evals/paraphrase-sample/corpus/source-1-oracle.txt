@@ -1,0 +1,8 @@
+Antes de Oracle RAC, las bases de datos monolíticas se caían cuando un
+servidor fallaba, dejando a los clientes sin servicio. La solución
+RAC (Real Application Clusters) introdujo 5 mecanismos de protección:
+failover automático, load balancing, cache fusion, node affinity y
+service registration. El comando para verificar el estado del cluster
+es `srvctl status database -d ORCL`. Cuando un nodo falla, el error
+reportado en el alert log es `ORA-29701: unable to connect to Cluster
+Synchronization Service`. {src:blk_a91f8e02c1d3}
