@@ -136,7 +136,7 @@
           "type": "string",
           "enum": ["intuition-first", "reference-pure", "tutorial", "summary"],
           "default": "intuition-first",
-          "description": "Estilo de redacción (Fase 94). intuition-first = problema → intuición → analogía → formalismo."
+          "description": "Estilo de redacción. Ver `references/06-writing/intuition-first.md` (Fase 94) — intuition-first = problema → intuición → analogía → definición formal → confirmación. reference-pure = solo problema + definición formal, con la excepción acotada por 4 checks binarios."
         },
         "depth": {
           "type": "object",
