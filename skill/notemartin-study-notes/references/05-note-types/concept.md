@@ -144,10 +144,10 @@ se aplican sin exención (concept no está en la lista de tipos exentos).
 |---|---|---|
 | Cabecera (F75 §2) | 5 campos en este orden: Resumen, Procedencia, Versión, Estado, Tiempo de lectura | F75 §2.1 |
 | `## TL;DR` | ≤ 60 palabras / 8 líneas (R1) | F76 §2 R1 |
-| `## Problema` | 1-2 párrafos (≤ 200 palabras cada uno) | esta fase |
-| `## Intuición` | 1 párrafo, ≤ 200 palabras | esta fase |
-| `## Analogía` | 1 analogía (dominio conocido distinto al del concepto) | esta fase |
-| `## Definición formal` | 1 versión precisa (prosa, tabla o fórmula) | esta fase |
+| `## Problema` | 1-2 párrafos (≤ 200 palabras cada uno) | F94 §2/§5.1 |
+| `## Intuición` | 1 párrafo, ≤ 200 palabras, con `[[term:nombre]]` | F94 §2/§5.2 |
+| `## Analogía` | 1 analogía (dominio conocido distinto al del concepto) + declaración explícita de rotura | F94 §2/§5.3 |
+| `## Definición formal` | 1 versión precisa (prosa, tabla o fórmula) | F94 §2/§5.4 |
 | `## Mecanismo` | ≥ 3 frases o 1 diagrama con explicación | esta fase |
 | `## Comparaciones` | ≥ 2 conceptos comparados (filas o columnas) | esta fase |
 | `## Resumen` | 3-5 viñetas, ≥ 0.80 densidad `{src:}` (R8) | F46 §4 + F76 R8 |
@@ -266,6 +266,22 @@ Antes de publicar la nota (`status: published`), verificar:
 - [ ] Ningún color literal; tokens via `assets/tokens.json` (INV-14).
 - [ ] `density_check.py --note <path>` exit 0 (sin violaciones).
 - [ ] `validate_ir.py --ir <path>` exit 0 (parser acepta la nota).
+- [ ] **AP1** No hay transcripción disfrazada: el `## Resumen` no copia ≥ 50% de un párrafo del SDM verbatim sin reescritura (F100 §3 S5).
+- [ ] **AP2** No hay definiciones circulares: las definiciones no usan el término definido ("X es un X que…") (F100 §3 S1).
+- [ ] **AP3** No hay callouts decorativos: cada `:::note` / `:::tip` / `:::warning` informa, advierte o guía con ≥ 30 caracteres de cuerpo y un verbo de acción (F100 §3 S6).
+- [ ] **AP4** No hay tabla de una fila útil: las tablas tienen ≥ 2 filas de datos (F100 §3 S7).
+- [ ] **AP5** Las analogías tienen rotura explícita: cada analogía incluye una frase que matchea D5 (F95 §4 / F100 §3 S5).
+- [ ] **AP6** Los diagramas Mermaid añaden información no presente en el párrafo adyacente (F100 §3 inspección visual).
+- [ ] **AP7** Los enlaces entre notas llevan frase introductoria de ≥ 5 palabras antes del `[[note:id]]` (F100 §3 S4).
+- [ ] **AP8** No hay volcado de viñetas: las secciones con ≥ 5 viñetas consecutivas tienen prosa intermedia (F100 §3 S3 / F76 R5).
+- [ ] **AP9** No hay marketing copiado: ausencia de "solución innovadora", "transforma su negocio", "cambia las reglas", etc. (F100 §3 S2).
+- [ ] **AP10** Los bloques `:::example` tienen caption o salida esperada (F100 §3 S10).
+- [ ] **AP11** `scripts/validate/mermaid.py --fail-on error` retorna exit 0 (F100 §3 S9).
+- [ ] **AP12** No hay secciones vacías: cada `##` tiene ≥ 1 párrafo sustantivo de ≥ 30 caracteres (F100 §3 S8).
+- [ ] **F101-AP1** Ningún nombre técnico aparece traducido: identificadores, parámetros, errores, comandos y código verbatim contra la lista cerrada de 45 no-traducibles de F101 §3.
+- [ ] **F101-AP2** Los términos se introducen bilingües en primera aparición: notas con `language == es-en` o `en-es` tienen ≥ 1 marca `[[en:term]]` o `[[es:term]]` en la primera mención y un bloque `## Glosario` al pie (F101 §4).
+- [ ] **F101-AP3** La lista de no-traducibles tiene ≥ 40 entradas: la lista cerrada F101 §3 cubre 45 entradas en 8 categorías (12 identificadores PG + 8 parámetros CLI + 6 mensajes + 3 códigos HTTP + 6 comandos + 3 sintaxis + 3 versiones + 4 headers).
+- [ ] **F101-AP4** Bloque de procedencia al pie: la nota tiene `## Procedencia` con 4 campos cerrados (Fuente / Versión / Fecha de recuperación ISO YYYY-MM-DD / URL/anchor).
 
 ---
 
