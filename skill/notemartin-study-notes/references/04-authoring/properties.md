@@ -360,6 +360,9 @@ validación → mapeo por destino (7) → notas.
   - Flashcards → descartado; el deck no cambia por idioma.
 - **Notas:** `es-en` significa que la nota tiene secciones en ambos idiomas
   (típicamente cuando el SDM es EN y la salida esperada es bilingüe).
+  El idioma de la prosa, las marcas bilingües `[[en:term]]` / `[[es:term]]`
+  y el bloque `## Procedencia` al pie se normativizan en F101
+  (`references/06-writing/i18n-and-citation.md`).
 
 ### 5.14 `coverage`  {#prop-coverage}
 
