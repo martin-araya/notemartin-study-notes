@@ -126,6 +126,24 @@ se mantiene en el H2; cada sub-complemento va en H3.
 `api-reference` rara vez es "extensa" (≥ 50 líneas por sección típica); si
 supera 100 líneas en `## Parámetros`, se pliega. La L1 siempre va en plano.
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `api-reference` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | ✅ |
+| Diagnóstico | — |
+| Decisión | — |
+| Predicción | — |
+
+Notas: por defecto solo recuerdo + aplicación. Diagnóstico y decisión se
+añaden solo si la nota documenta errores o trade-offs de uso (sub-tipo
+`api-reference-with-errors`); ver `self-evaluation.md` §4. La nota puede
+declarar `self-evaluation-types` como superset del default.
+
 ---
 
 ## §3 · Componentes mínimos
