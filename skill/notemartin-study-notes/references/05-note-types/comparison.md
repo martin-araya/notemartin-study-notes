@@ -114,6 +114,25 @@ related: "[[note:concept-del-dominio]], [[note:api-reference-de-opciones]]"
 | L2 | `{layer:l2}` | Comparativa, Síntesis, Criterios, Matriz, Trade-offs, Veredicto. 70-90% del total. |
 | L3 | `{layer:l3}` | Casos de uso (opcional). Si > 100 líneas, `:::collapsible` con `default_open: false` (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `comparison` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | — |
+| Aplicación | ✅ |
+| Diagnóstico | — |
+| Decisión | ✅ |
+| Predicción | — |
+
+Notas: aplicación + decisión (la comparación invita a elegir). Recuerdo
+se añade solo si la tabla es 100 % factual sin mecanismo (sub-tipo
+`comparison-factual`); en ese caso aplica la regla de referencia pura de
+`self-evaluation.md` §4. La nota puede declarar `self-evaluation-types`
+como superset del default.
+
 ---
 
 ## §3 · Componentes mínimos
