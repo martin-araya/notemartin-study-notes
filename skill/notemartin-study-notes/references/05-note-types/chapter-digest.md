@@ -131,6 +131,24 @@ related: "[[note:chapter-N-1-digest]], [[note:chapter-N+1-digest]]"
 | L2 | `{layer:l2}` | Resumen ejecutivo, Continuidad, Puntos clave, Conceptos nuevos, Citas, Énfasis, Conexiones. 50-70% del total. |
 | L3 | `{layer:l3}` | Detalles, Erratas, Ejercicios. Si > 100 líneas, `:::collapsible` con `default_open: false` (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `chapter-digest` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | — |
+| Diagnóstico | — |
+| Decisión | ✅ |
+| Predicción | — |
+
+Notas: recuerdo (puntos clave del capítulo) + decisión (cuál idea
+justifica más la atención). Aplicación + diagnóstico se añaden solo si
+la nota conserva ejemplos ejecutables del capítulo. La nota puede
+declarar `self-evaluation-types` como superset del default.
+
 ---
 
 ## §3 · Componentes mínimos
