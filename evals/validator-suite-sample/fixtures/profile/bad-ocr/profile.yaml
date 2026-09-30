@@ -1,0 +1,10 @@
+{
+  "language": "es",
+  "ocr_engine": "magic_reader",
+  "targets": [
+    "obsidian"
+  ],
+  "notes": {
+    "tags_prefix": "type/"
+  }
+}

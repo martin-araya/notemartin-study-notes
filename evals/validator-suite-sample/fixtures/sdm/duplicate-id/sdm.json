@@ -1,0 +1,34 @@
+{
+  "source": {
+    "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "sections": [
+    {
+      "id": "abc123456789",
+      "blocks": [
+        {
+          "id": "aabbccddeeff",
+          "anchor": {
+            "page": 1
+          },
+          "content": {
+            "type": "prose",
+            "text": "x"
+          },
+          "source": "native"
+        },
+        {
+          "id": "aabbccddeeff",
+          "anchor": {
+            "page": 2
+          },
+          "content": {
+            "type": "prose",
+            "text": "y"
+          },
+          "source": "native"
+        }
+      ]
+    }
+  ]
+}

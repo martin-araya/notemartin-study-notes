@@ -1,0 +1,23 @@
+{
+  "source": {
+    "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "sections": [
+    {
+      "id": "abc",
+      "blocks": [
+        {
+          "id": "nothex",
+          "anchor": {
+            "page": 1
+          },
+          "content": {
+            "type": "prose",
+            "text": "x"
+          },
+          "source": "native"
+        }
+      ]
+    }
+  ]
+}

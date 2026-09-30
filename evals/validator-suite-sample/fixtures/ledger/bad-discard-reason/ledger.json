@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "unit_id": "u2",
+      "criticity": "redundant",
+      "state": "discarded",
+      "source_block_ids": [
+        "aabbccddeeff"
+      ],
+      "discard_reason": "too-redundant"
+    }
+  ]
+}

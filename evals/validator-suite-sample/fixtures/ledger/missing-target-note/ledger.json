@@ -1,0 +1,14 @@
+{
+  "entries": [
+    {
+      "unit_id": "u3",
+      "criticity": "must-keep",
+      "state": "kept",
+      "source_block_ids": [
+        "aabbccddeeff"
+      ],
+      "discard_reason": null,
+      "target_note": null
+    }
+  ]
+}

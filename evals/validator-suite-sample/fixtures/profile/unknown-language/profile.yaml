@@ -1,0 +1,10 @@
+{
+  "language": "klingon",
+  "ocr_engine": "tesseract",
+  "targets": [
+    "obsidian"
+  ],
+  "notes": {
+    "tags_prefix": "type/"
+  }
+}

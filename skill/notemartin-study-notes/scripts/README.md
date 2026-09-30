@@ -7,7 +7,7 @@ Ejecutables invocables por el agente. **No se leen en contexto**; se invocan por
 | Subcarpeta | Rol | Fases |
 |---|---|---|
 | `ingest/` | L0: triaje, OCR, layout, regiones, tablas, fórmulas, código, post-OCR, formatos no PDF | F17-F29, F33 |
-| `validate/` | Validadores de SDM, IR, NoteMark, Mermaid, completitud, equivalencia cross-target, contraste de tokens, densidad de notas | F30, F43, F49, F63, F67, F72, F76 |
+| `validate/` | Validadores de SDM, IR, NoteMark, Mermaid, completitud, equivalencia cross-target, contraste de tokens, densidad de notas, perfil, ledger, propiedades, longitudes, tablas, imágenes, enlaces, diagramas monoespaciados, destinos, orquestador unificado | F11, F12, F13, F15, F30, F43, F47, F49, F63, F67, F69, F72, F76, F113 |
 | `evals/visual/` (no es `scripts/` sino `evals/visual/`) | Verificación visual multi-destino (F77): 12 artefactos reales + checklist + defects.md + visual_inspect.py + run_eval.py | F77 |
 | `authoring/` | Parser NoteMark → IR (F48, `parse_notemark.py`); transformaciones de IR (F50) | F48, F50 |
 | `render/` | Renderers a cada destino + pre-render de diagramas y figuras + generador CSS de tokens + helper de cabecera F75 | F54-F60, F68, F68, F74, F75 |
@@ -936,6 +936,219 @@ Sin dependencias externas.
 | Dependencias | Python 3.9+ stdlib puro (`re`, `dataclasses`, `pathlib`, `argparse`). |
 | Wirings | Cierra los 3 criterios de F76 ROADMAP §1483-1485; wirings desde F46 (R8), F51 (R1+R2+R7), F75 (R3+R4); eval en `evals/density-sample/` (5/5 PASS). |
 
+### `validate/validate_profile.py` — F11/F113
+
+Validador del perfil de usuario. Carga `profile.yaml` y verifica targets,
+defaults, idioma, ocr_engine y overrides contra la lista cerrada de
+valores aceptados. Schema de severidades y exit codes conforme a
+`references/10-quality/validators.md` §3.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-PROF-01 target desconocido / V-PROF-02 default ausente / V-PROF-03 override mal formado / V-PROF-04 product_version vacío / V-PROF-05 idioma no soportado / V-PROF-06 ocr_engine desconocido. |
+| Severidad | V-PROF-02, V-PROF-04 = warning; resto = error. |
+| CLI | `--note <profile.yaml>` / `--notes-dir <dir>` / `--workdir <dir>` + `--json` / `--out <path>`. |
+| Códigos | 0 / 2 (warnings) / 1 (errors) / 3 (uso). |
+| Dependencias | Python 3.9+ stdlib + PyYAML (recomendado; fallback mini-parser). |
+| Wirings | F11 `schemas/profile.schema.json`; F113 `validators.md` §4. |
+
+### `validate/validate_sdm.py` — F13/F113
+
+Validador del Source Document Model. Carga `sdm.json` y verifica ids
+deterministas (12 hex), anclas con page, ausencia de duplicados, source
+presente y ocr con confidence. Schema conforme a `validators.md` §3.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-SDM-01 id malformado / V-SDM-02 anchor sin page / V-SDM-03 duplicate id / V-SDM-04 source ausente / V-SDM-05 ocr sin confidence / V-SDM-06 content.type no soportado / V-SDM-07 hash no sha256 / V-SDM-08 source ausente / V-SDM-09/10 structure errors. |
+| Severidad | V-SDM-04, V-SDM-05 = warning; resto = error. |
+| CLI | `--note <sdm.json>` / `--notes-dir` / `--workdir` + `--json` / `--out`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | F13 `schemas/sdm.schema.json`; F31 build_sdm.py; F113. |
+
+### `validate/validate_ledger.py` — F15/F113
+
+Validador del Coverage Ledger. Verifica estados terminales para must-keep,
+lista cerrada de discard_reason, target_note en kept, unit_ids únicos y
+redundantes apuntando a units existentes. Schema conforme a
+`validators.md` §3.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-LED-01 must-keep pending / V-LED-02 discard_reason fuera de lista / V-LED-03 target_note ausente / V-LED-04 unit_id duplicado / V-LED-05 redundant-with apunta a inexistente / V-LED-06 source_block_ids vacío. |
+| Severidad | V-LED-01/02/03 = error; V-LED-05/06 = warning. |
+| CLI | `--note <ledger.json>` / `--notes-dir` / `--workdir` + `--json`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | F15 `schemas/ledger.schema.json`; F113. |
+
+### `validate/validate_notemark.py` — F12/F113
+
+Validador de sintaxis NoteMark. Parsea frontmatter, directivas de bloque
+`:::tipo`, marcas inline (`{src:blk_xxxx}`, `[[term:nombre]]`, `[[note:id]]`,
+`{layer:l1|l2|l3}`, `{{placeholder}}`) y verifica balance de callouts.
+Schema conforme a `validators.md` §3.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-NM-01..09 (frontmatter, directivas, marcas, callouts, layer markers, placeholders). |
+| Severidad | V-NM-01..05 errores; V-NM-06/09 warnings. |
+| CLI | `--note <file.nm>` / `--notes-dir`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib + PyYAML recomendado. |
+| Wirings | F12 `references/04-authoring/notemark.ebnf`; F113. |
+
+### `validate/validate_links.py` — F61/F100/F113
+
+Validador de enlaces entre notas. Resuelve `[[note:id]]`, exige frase
+introductoria ≥ 5 palabras (F100 AP7), verifica backlinks bidireccionales
+y detecta ciclos de 2 nodos.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-LK-01 target no existe / V-LK-02 sin intro ≥ 5 palabras / V-LK-03 backlink ausente / V-LK-04 ciclo de 2 nodos. |
+| Severidad | V-LK-01 = error; V-LK-02/04 = warning; V-LK-03 = info (no bloqueante). |
+| CLI | `--note` / `--notes-dir` / `--workdir`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | F61 linking; F100 AP7; F113. |
+
+### `validate/validate_images.py` — F12/F45/F65/F113
+
+Validador de imágenes y figuras. Verifica alt-text, paths resolubles,
+tamaño máximo (10 MB) y formatos soportados por los destinos.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-IMG-01 sin alt / V-IMG-02 path no resoluble / V-IMG-03 > 10 MB / V-IMG-04 formato no soportado / V-IMG-05 :::figure sin cuerpo. |
+| Severidad | V-IMG-01/02 = error; V-IMG-03/04 = warning; V-IMG-05 = warning/info. |
+| CLI | `--note`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | F12; F45 block-directives; F65 diagram-catalog; F113. |
+
+### `validate/validate_properties.py` — F47/F113
+
+Validador de propiedades YAML (frontmatter). Verifica whitelist de 20
+claves F47, enums cerrados, campos obligatorios en published y tipos de
+`reading-time-minutes` / `tags` / `summary`.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-PR-01 frontmatter ausente / V-PR-02 key desconocida / V-PR-03 enum / V-PR-04 required on published / V-PR-05 tags list / V-PR-06 reading-time / V-PR-07 summary ≤ 200 chars. |
+| Severidad | V-PR-01/02/03/04/06 = error; V-PR-05/07 = warning. |
+| CLI | `--note`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib + PyYAML recomendado. |
+| Wirings | F47 `schemas/properties.schema.json`; F113. |
+
+### `validate/validate_tables.py` — F23/F76/F113
+
+Validador de tablas Markdown. Detecta separador ausente, 1 fila de datos,
+celdas vacías y número de columnas inconsistente.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-TBL-01..04 (separador, ≥ 2 filas, celdas vacías, columnas inconsistentes). |
+| Severidad | V-TBL-04 = error; resto = warning. |
+| CLI | `--note`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | F23; F76 R8; F100 AP4. |
+
+### `validate/validate_lengths.py` — F75/F76/F113
+
+Validador de longitudes por tipo de nota. TL;DR ≤ 60/30/120 según tipo,
+cheatsheet ≤ 80 líneas, glossary ≤ 30, index-moc ≤ 200, secciones ≥ 30
+chars de cuerpo.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-LEN-01 TL;DR > 60 / V-LEN-02 cheatsheet > 80 / V-LEN-03 glossary > 30 / V-LEN-04 index-moc > 200 / V-LEN-05 chapter-digest TL;DR > 120 / V-LEN-06 sección vacía. |
+| Severidad | V-LEN-02/03 = error; resto = warning. |
+| CLI | `--note <path> --type <note-type>`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | F75 §6.X patrones por tipo; F76 R1; F113. |
+
+### `validate/monospace_diagrams.py` — F69/F113
+
+Detector de bloques monoespaciados usados como diagramas ASCII (F69).
+Ancho > 100 cols sin flag, bloques > 10 líneas no declarados como
+`:::figure`.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-MD-01 ancho > 100 / V-MD-02 mezcla mono+proporcional / V-MD-03 sin declarar :::figure. |
+| Severidad | V-MD-01 = warning; V-MD-03 = info. |
+| CLI | `--note`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | F69; F113. |
+
+### `validate/validate_destinations.py` — F63/F77/F113
+
+Wrapper cross-target que invoca la lógica de `cross_target.py` (F63) por
+cada destino activo. Detecta destinos no renderizados, pérdidas de
+unidad y degradaciones no documentadas.
+
+| Aspecto | Detalle |
+|---|---|
+| Reglas | V-DST-00 destino no renderizado (info) / V-DST-01 pérdida / V-DST-02 degradación no documentada / V-DST-04 sin IRs / V-DST-05 sin renders con IRs. |
+| Severidad | V-DST-01 = error; V-DST-02/04/05 = warning; V-DST-00 = info. |
+| CLI | `--workdir <dir> [--note <note-id>]`. |
+| Códigos | 0/2/1/3. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | F63 cross_target.py; F77 visual; F113. |
+
+### `validate/run_all.py` — F113
+
+Orquestador unificado. Ejecuta la batería de validadores aplicables a
+una nota, carpeta o workdir, agrega issues en un único JSON con la shape
+común de `validators.md` §3 y aplica la exit code policy.
+
+| Aspecto | Detalle |
+|---|---|
+| Modos | `--note <path>` / `--notes-dir <dir>` / `--workdir <dir>`. |
+| Filtro | `--validators <csv>` (default: todos los aplicables al modo). |
+| Severidad | Heredada de cada validador. Issues del orquestador: V-RUN-01..02. |
+| CLI | + `--strict` (warnings = error), `--json`, `--out <path>`. |
+| Códigos | 0 (sin issues / solo info) / 2 (warnings) / 1 (errors) / 3 (uso). |
+| Dependencias | Python 3.9+ stdlib puro; invoca los 14 validadores como subprocesos. |
+| Wirings | F113 `validators.md`; F114 quality gate consume su JSON. |
+| Batería | `evals/validator-suite-sample/run_eval.py` 3/3 PASS. |
+
+### `audit/fidelity_audit.py` — F114
+
+Auditoría semántica de fidelidad. Tres pasadas automatizadas:
+
+1. **Forward source-check** (R-FAUDIT-01): todo nodo IR fáctico
+   (`paragraph`, `list`, `code`, `table`, `equation`, `figure`,
+   `definition_list`) con `external/derived = false` debe tener
+   `source_refs` no vacío → **V-FAUDIT-01: error** si falta.
+2. **Content-fidelity check** (R-FAUDIT-02): valores numéricos sin
+   unidad (V-FAUDIT-02), parameter names inventados (V-FAUDIT-03),
+   error codes inventados (V-FAUDIT-04), version-notes sin
+   `version_introduced/removed` (V-FAUDIT-05). Búsqueda literal contra
+   el texto concatenado del SDM (lowercase + whitespace collapsed).
+3. **Inverse sample** (R-FAUDIT-03): muestreo estratificado con seed
+   reproducible (default `0`); 100 % must-keep (parameter/default/error-
+   code/version-note/syntax-rule), 100 % editorial crítico
+   (deprecated/removed/novelty), 10 % aleatorio del resto. Bloques no
+   cubiertos → **V-FAUDIT-06**.
+
+| Aspecto | Detalle |
+|---|---|
+| Modos | `--note <ir>` / `--notes-dir <dir>` / `--workdir <dir>` + `--sdm` opcional. |
+| CLI | 4 subcomandos: `audit` (default; 3 pasadas + threshold gate), `report` (texto), `check --strict` (aborta al primer error), `fix` (lista accionable). |
+| Severidad | V-FAUDIT-01/03/04 = error; V-FAUDIT-02/05 = warning; V-FAUDIT-06 must-keep = error, context = warning. |
+| Salida | JSON shape F113 §3 con `sample_metadata` adicional. |
+| Códigos | 0 PASS / 2 warnings / 1 errors / 2 uso. |
+| Dependencias | Python 3.9+ stdlib puro. |
+| Wirings | F42 `fidelity-rules.md` (lista cerrada de prohibiciones); F43 `completeness.py` (patrón arquitectónico forward + inverse + threshold gate); F49 `validate_ir.py` (existencia de source_refs); F113 `validators.md` (shape JSON + exit codes); F118 evals. |
+| Batería | `evals/fidelity-audit-sample/run_eval.py` **4/4 PASS**. |
+
 ### `evals/visual/visual_inspect.py` — F77
 
 Inspector de los 12 artefactos generados por los renderers en F77. Detecta
@@ -1130,4 +1343,163 @@ version-delta** (`ir/vd0001.note-ir.json` con `changes[]` poblado).
 | Default | `mark_obsolete_status: "archived"`; sin auto-invoke (cumple INV-12) |
 | Dependencias | Python 3.9+ stdlib puro (sin subprocess, sin jsonschema) |
 | Documentación | `references/04-authoring/incremental-update.md` (normativa, 277 líneas ≤ 500) + `schemas/version-delta.schema.json` |
-| Eval | `evals/incremental-sample/run_eval.py` 3/3 PASS (C1 obsoleted selectivo, C2 delta auto, C3 source_refs preservados) | |
+| Eval | `evals/incremental-sample/run_eval.py` 3/3 PASS (C1 obsoleted selectivo, C2 delta auto, C3 source_refs preservados) |
+
+### `quality_gate.py` — F115
+
+Puerta de calidad y reporte. Agrega 4 fuentes (F43, F113, F114, F7 auto
++ F108 opcional), produce un reporte JSON + Markdown por trabajo, y
+bloquea la promoción a `status: verified` cuando hay errors
+bloqueantes o cobertura incompleta. Registra la deuda aceptada en
+`reports/debt.json`.
+
+| Aspecto | Detalle |
+|---|---|
+| Fuentes obligatorias | F43 `completeness.py`, F113 `validate/run_all.py`, F114 `audit/fidelity_audit.py`, F7 `evals/rubric.md` (auto-aplicada). |
+| Fuente opcional | F108 `dedup/detect.py` (sólo si `len(irs) ≥ 5`). |
+| Salida | `reports/quality-gate.json` + `reports/quality-gate.md`; reporte agrega `summary` (errors/warnings/info), `blocking` (bool), `coverage` (0..1), `rubric` (4 auto-aplicadas + 4 humanas null), `not_covered`, `debt_registry`, `sources`. |
+| Sub-comandos | `report` (default; produce reporte), `promote --yes` (modifica frontmatter `published`→`verified` si blocking=false), `check` (sólo exit code para CI), `debt list/add/accept`. |
+| Blocking | `summary.errors > 0` OR `coverage < coverage_min` OR deuda blocker non-accepted. |
+| Severidad | `blocking=true` ⇒ exit 1; warnings ⇒ exit 2; clean ⇒ exit 0. |
+| Códigos | 0 PASS / 1 FAIL / 2 warnings / 3 IO/uso. |
+| Dependencias | Python 3.9+ stdlib puro; invoca F43/F113/F114/F108 por subprocess. |
+| Wirings | F43/F113/F114 como fuentes; F7 rúbrica; F108 dedup opcional; F47 propiedades (extiende `status` con `verified`); F118 evals. |
+| Batería | `evals/quality-gate-sample/run_eval.py` **5/5 PASS**. |
+
+### `validate/error_log_check.py` — F103
+
+Verificador de registros de errores propios (`study/errors/<dominio>.md`).
+Detecta formato canónico, exige bloque de causa-raíz, valida que las
+soluciones referencien notas canónicas por `[[note:id]]`. Sin dependencias
+externas.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Asegurar que los errores propios del estudiante tienen formato F103 y back-referencian notas canónicas. |
+| Entrada | `--errors-dir <dir>` (default: `study/errors/`) |
+| Salida | JSON a stdout (`--json`) o texto humano |
+| Códigos | 0 / 1 / 2 (warnings) / 3 (uso) |
+| Dependencias | Python 3.9+ stdlib puro |
+| Wirings | F103 `references/09-study/error-log.md`; F102 self-evaluation; F115 quality gate consume su JSON |
+
+### `validate/goal_profile_check.py` — F105
+
+Verificador del perfil de objetivo (`study-path-goals`). Detecta que el
+perfil declare al menos uno de los 3 valores del enum cerrado
+(`operate-hoy` / `entender-a-fondo` / `repasar`), y que las rutas de
+estudio (F104) filtren correctamente.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Asegurar coherencia entre perfil de objetivo y rutas de estudio (F104). |
+| Entrada | `--profile <profile.yaml>` |
+| Salida | JSON o texto |
+| Códigos | 0 / 1 / 2 / 3 |
+| Dependencias | Python 3.9+ stdlib puro + PyYAML |
+| Wirings | F104 `references/09-study/study-paths.md`; F105 `references/09-study/goal-profiles.md` |
+
+### `validate/self_eval_check.py` — F102
+
+Verificador de bloques `## Autoevaluación` con H3 `### Recuerdo` /
+`### Aplicación` / `### Decisión` y plegables `:::collapsible`. Detecta
+folders plegables con respuesta sin línea `> Fundamento:`. Valida que las
+respuestas no son plagio (> 90 % Jaccard con la fuente). Sin dependencias.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Asegurar que el bloque opcional `## Autoevaluación` cumple el formato F102. |
+| Entrada | `--note <path>` / `--notes-dir <dir>` |
+| Salida | JSON o texto |
+| Códigos | 0 / 1 / 2 / 3 |
+| Dependencias | Python 3.9+ stdlib puro |
+| Wirings | F102 `references/09-study/self-evaluation.md`; F105 `goal-profiles.md` |
+
+### `validate/study_paths_check.py` — F104
+
+Verificador de las 3 rutas de estudio canónicas (`operate-hoy`,
+`entender-a-fondo`, `repasar`). Detecta que cada ruta filtre correctamente
+las notas por `study-path-goals` y que el living-doc de errores
+(`study/errors/<dominio>.md`) sólo aparezca en `repasar`. Sin dependencias.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Validar que las rutas de estudio F104 aplican el filtro correcto. |
+| Entrada | `--workdir <path>` / `--profile <profile.yaml>` |
+| Salida | JSON o texto |
+| Códigos | 0 / 1 / 2 / 3 |
+| Dependencias | Python 3.9+ stdlib puro + PyYAML |
+| Wirings | F104 `references/09-study/study-paths.md`; F105 `goal-profiles.md` |
+
+### `study/error_cards.py` — F103
+
+Generador de flashcards de Anki a partir del living-doc de errores
+(`study/errors/<dominio>.md`). Cada error se convierte en 1 tarjeta con
+campo `Error:` (trigger) y `Causa raíz:`. Sin dependencias.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Convertir errores propios del estudiante en flashcards. |
+| Entrada | `--errors-dir <dir>` |
+| Salida | `<out-dir>/cards.tsv` (formato Anki) |
+| Códigos | 0 / 1 / 3 |
+| Dependencias | Python 3.9+ stdlib puro |
+| Wirings | F103 `error-log.md`; F65 `references/07-visual/diagram-catalog.md` (render Anki) |
+
+### `study/error_log_query.py` — F103
+
+Query runner sobre `study/errors/<dominio>.md`. Soporta filtros por
+`status` / `kind` / `domain` y exporta a Markdown formateado. Sin dependencias.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Interrogar el living-doc de errores propios. |
+| Entrada | `--errors-dir <dir>` + `--query <yaml/json>` o flags (`--status open`). |
+| Salida | Texto o JSON |
+| Códigos | 0 / 1 / 3 |
+| Dependencias | Python 3.9+ stdlib puro |
+| Wirings | F103 `error-log.md` |
+
+### `study/goal_profiles.py` — F105
+
+Generador y validador de perfiles de objetivo (`study-path-goals`). Crea
+un perfil nuevo a partir de un cuestionario y lo normaliza al enum cerrado.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Generar perfiles de objetivo (F105) consistentes. |
+| Entrada | `--init` (interactivo) / `--validate <profile.yaml>` |
+| Salida | `<out>/profile.yaml` o JSON de validación |
+| Códigos | 0 / 1 / 3 |
+| Dependencias | Python 3.9+ stdlib puro + PyYAML |
+| Wirings | F105 `goal-profiles.md`; F104 `study-paths.md` |
+
+### `study/study_paths.py` — F104
+
+Generador de las 3 rutas de estudio canónicas. Lee `study-path-goals` del
+perfil y produce listas de notas filtradas por ruta. Sin dependencias.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Generar rutas de estudio operativas. |
+| Entrada | `--workdir <path>` / `--profile <profile.yaml>` |
+| Salida | `<out>/paths/{operate-hoy,entender-a-fondo,repasar}.md` |
+| Códigos | 0 / 1 / 3 |
+| Dependencias | Python 3.9+ stdlib puro + PyYAML |
+| Wirings | F104 `study-paths.md`; F105 `goal-profiles.md` |
+
+### `check_deps.py` — F117
+
+Verificador de dependencias declaradas en `scripts/README.md`. Recorre
+el catálogo, parsea cada fila `| Dependencias |`, y cruza contra
+módulos disponibles + `shutil.which` para binarios externos. Emite
+reporte con 4 niveles (req/rec/opt/bin) y exit codes alineados con F113.
+
+| Aspecto | Detalle |
+|---|---|
+| Propósito | Detectar dependencias faltantes antes de ejecutar la skill. |
+| Entrada | `--catalog <path>` (default `scripts/README.md`); `--manifest <path>` (default `scripts/pkg/deps.yaml`); `--scripts-root <path>` |
+| Salida | Texto humano (default) o JSON (`--json`) |
+| Severidad | req missing → exit 1; rec missing → exit 2; opt missing → exit 0 + info. |
+| Códigos | 0 PASS / 2 warnings / 1 errors / 3 IO/uso. |
+| Dependencias | Python 3.9+ stdlib puro + PyYAML (recomendado). |
+| Wirings | `scripts/CHECKLIST.md` (spec); `scripts/pkg/deps.yaml` (manifest). | |

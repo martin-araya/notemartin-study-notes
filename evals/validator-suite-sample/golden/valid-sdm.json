@@ -1,0 +1,322 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "01-postgresql-chapter",
+    "hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+    "algorithm": "sha256",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL 16",
+    "version": "16",
+    "authors": [
+      "The PostgreSQL Global Development Group"
+    ],
+    "url": "https://www.postgresql.org/docs/16/sql.html",
+    "language": "en",
+    "date": "2026-09-21",
+    "format": "html"
+  },
+  "sections": [
+    {
+      "section_path": "/ch02/intro",
+      "title": "The SQL Language",
+      "blocks": [
+        {
+          "id": "bbea33d7135a",
+          "type": "heading",
+          "content": {
+            "level": 1,
+            "text": "Chapter 2: The SQL Language"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              0,
+              50
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "1d4636683c29",
+          "type": "prose",
+          "content": "SQL is a declarative language for querying and modifying relational data.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              50,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "71207ed4002b",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "2.1 Lexical Structure"
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              100,
+              150
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "378c4ef3842a",
+          "type": "list",
+          "content": {
+            "ordered": true,
+            "items": [
+              "identifier",
+              "keyword",
+              "literal",
+              "operator"
+            ]
+          },
+          "anchor": {
+            "page": 4,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              150,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "c3971cec7abd",
+          "type": "code",
+          "content": {
+            "lang": "sql",
+            "text": "SELECT * FROM pg_class;"
+          },
+          "anchor": {
+            "page": 5,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              200,
+              250
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "c042d176ddb8",
+          "type": "console",
+          "content": {
+            "lines": [
+              "$ psql -U postgres",
+              "postgres=# SELECT version();",
+              "PostgreSQL 16.1"
+            ]
+          },
+          "anchor": {
+            "page": 6,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              250,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "982755aac10b",
+          "type": "formula",
+          "content": {
+            "latex": "\\sum_{i=1}^{n} w_i x_i = b",
+            "display": true
+          },
+          "anchor": {
+            "page": 7,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              300,
+              350
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "18468f902165",
+          "type": "figure",
+          "content": {
+            "src": "assets/architecture.png",
+            "alt": "Architecture",
+            "caption": "System overview"
+          },
+          "anchor": {
+            "page": 8,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              350,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "99398c4e3c09",
+          "type": "caption",
+          "content": "Figure 2.1: System architecture overview.",
+          "anchor": {
+            "page": 9,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              400,
+              450
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "007569f0912e",
+          "type": "note",
+          "content": {
+            "text": "This is an editorial note.",
+            "severity": "tip"
+          },
+          "anchor": {
+            "page": 10,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              450,
+              500
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "475d8106bb66",
+          "type": "warning",
+          "content": {
+            "text": "Backups must be verified before relying on them."
+          },
+          "anchor": {
+            "page": 11,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              500,
+              550
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "27428737b683",
+          "type": "example",
+          "content": {
+            "text": "Example: SELECT count(*) FROM pg_class WHERE relkind='r';"
+          },
+          "anchor": {
+            "page": 12,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              550,
+              600
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "d99f69a1ee85",
+          "type": "syntax-diagram",
+          "content": {
+            "notation": "ebnf",
+            "text": "select := 'SELECT' select_list"
+          },
+          "anchor": {
+            "page": 13,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              600,
+              650
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "5626ac06f17e",
+          "type": "footnote",
+          "content": {
+            "text": "See the SQL standard ISO/IEC 9075.",
+            "ref": "1"
+          },
+          "anchor": {
+            "page": 14,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              650,
+              700
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "e6536e2f4e85",
+          "type": "toc",
+          "content": {
+            "entries": [
+              {
+                "label": "Chapter 2",
+                "page": 47,
+                "anchor": "/ch02"
+              },
+              {
+                "label": "Chapter 3",
+                "page": 89,
+                "anchor": "/ch03"
+              }
+            ]
+          },
+          "anchor": {
+            "page": 15,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              700,
+              750
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "b2cf7dffdb49",
+          "type": "boilerplate",
+          "content": "Copyright © The PostgreSQL Global Development Group.",
+          "anchor": {
+            "page": 16,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              750,
+              800
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

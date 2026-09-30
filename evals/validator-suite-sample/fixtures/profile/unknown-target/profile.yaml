@@ -1,0 +1,11 @@
+{
+  "language": "es",
+  "ocr_engine": "tesseract",
+  "targets": [
+    "obsidian",
+    "magic_place"
+  ],
+  "notes": {
+    "tags_prefix": "type/"
+  }
+}
