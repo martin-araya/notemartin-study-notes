@@ -14,6 +14,10 @@
     "book_mode": {
       "description": "Modo obra completa (F106, opt-in). Activar solo si la fuente es un libro con ≥ 2 capítulos detectables. Ver references/00-pipeline/book-mode.md §3.",
       "$ref": "#/$defs/book_mode"
+    },
+    "chunk_loop": {
+      "description": "Bucle por chunks y presupuesto de contexto (F107, opt-in). Activar cuando el SDM supera el presupuesto de contexto (≥ 30 bloques). Ver references/00-pipeline/chunk-loop.md §3-4.",
+      "$ref": "#/$defs/chunk_loop"
     }
   },
   "$defs": {
@@ -37,6 +41,40 @@
           "type": "boolean",
           "default": false,
           "description": "Si true, el script consolida automáticamente al cerrar el N-ésimo capítulo; si false, sugiere pero no fuerza (cumple INV-12)."
+        }
+      }
+    },
+    "chunk_loop": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Configuración del bucle por chunks (F107). Ver references/00-pipeline/chunk-loop.md §3-4.",
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "enum": [
+            "by_blocks",
+            "by_chapter",
+            "by_section_path"
+          ],
+          "default": "by_blocks",
+          "description": "Estrategia de fragmentación del SDM en chunks."
+        },
+        "chunk_size": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 30,
+          "description": "Bloques por chunk (by_blocks) o capítulos por chunk (by_chapter). Default 30."
+        },
+        "neighbor_window": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 1,
+          "description": "Cuántos chunks previos/siguientes cargar junto al actual para resolver referencias cruzadas. Default 1 = 3 chunks en memoria."
+        },
+        "strict_no_full_load": {
+          "type": "boolean",
+          "default": true,
+          "description": "Si true, AP-CHK2 se dispara ante cualquier carga del texto crudo fuera de L0 (F107 §3 CHK-R2)."
         }
       }
     }

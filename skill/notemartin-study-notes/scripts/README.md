@@ -994,3 +994,29 @@ escritura atómica + `.bak`.
 | Documentación | `references/00-pipeline/book-mode.md` (normativa, 387 líneas) + `schemas/book-state.schema.json` + `schemas/book-map.schema.json` |
 | Eval | `evals/book-mode-sample/run_eval.py` 6/6 PASS (C1 BM-R1, C2 AP-BM1, C3 stop/resume, C4 consolidación N=5 idempotente, C5 .bak atómico, C6 AP-BM2..AP-BM4) |
 
+### `pipeline/chunk_loop.py` — F107 · Bucle por chunks y presupuesto de contexto
+
+Meta-orquestador sobre L1-L4 para fuentes cuyo SDM supera el presupuesto
+de contexto (≥ 30 bloques / ≥ 50 páginas). Fragmenta el SDM en chunks
+(by_blocks / by_chapter / by_section_path) y procesa cada chunk siguiendo
+el ciclo de 6 etapas (leer → inventariar → ledger → NoteMark → validar →
+manifiesto) con un **presupuesto acotado** de archivos cargados por etapa.
+Las unidades que cruzan la frontera entre dos chunks se documentan **una
+vez** (first-seen wins; AP-CHK1 detecta duplicación). El texto crudo de la
+fuente NUNCA se abre fuera de L0 (verificable con `--audit-loads`; AP-CHK2).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--sdm <sdm.json> --workdir <DIR>` (init); `--workdir <DIR> --chunk chkNN` (walk); etc. |
+| Salida | `<workdir>/chunk-state.json` (init + walk); `<audit-loads>.jsonl` (walk con flag) |
+| Subcomandos | `init`, `walk`, `status`, `resume`, `check` (5 en total) |
+| Invocación | `python3 scripts/pipeline/chunk_loop.py init --sdm <sdm.json> --workdir <DIR> --strategy by_blocks --chunk-size 30 --strict` |
+| API Python | `from chunk_loop import ChunkState, register_cross_chunk_unit` |
+| Códigos | 0 OK · 1 validación (AP-CHK1..AP-CHK4) · 2 uso (paths faltantes, CHUNK_NO_SDM, CHUNK_INVALID_ID) |
+| Presupuesto | `BUDGET_PER_STAGE = {leer:4, inventariar:3, ledger:4, notemark:4, validar:3, manifiesto:3}` (tabla §3) |
+| Escritura | Atómica: tempfile + `Path.replace` + backup `.bak` antes de cada save (CHK-R2) |
+| Signals | SIGTERM → flush atómico + exit 0 |
+| Dependencias | Python 3.9+ stdlib puro (sin `jsonschema`) |
+| Documentación | `references/00-pipeline/chunk-loop.md` (normativa, 314 líneas) + `schemas/chunk-state.schema.json` |
+| Eval | `evals/chunk-loop-sample/run_eval.py` 6/6 PASS (C1 chunk_size=30, C2 by_chapter, C3 cross-chunk unit, C4 AP-CHK2 audit-loads, C5 idempotente + previous_processed_at, C6 resume + .bak + timestamps inmutables) |
+

@@ -143,3 +143,14 @@ book_mode:
   consolidation_every: 5          # cada cuántos capítulos consolidar (N, default 5)
   auto_consolidate: false         # true = consolidar automáticamente al cerrar N-ésimo capítulo
 
+# === Bucle por chunks y presupuesto de contexto (F107, opt-in) ===
+# Activar cuando el SDM es demasiado grande para caber en contexto (≥ 30 bloques
+# o ≥ 50 páginas). Ver `references/00-pipeline/chunk-loop.md` §3-4.
+# Por defecto desactivado; el agente decide cuándo invocar `chunk_loop.py init`.
+# Se compone con `book_mode` (F106): F106 orquesta por capítulo, F107 por chunk.
+chunk_loop:
+  strategy: by_blocks             # by_blocks | by_chapter | by_section_path
+  chunk_size: 30                  # bloques por chunk (by_blocks) o capítulos (by_chapter)
+  neighbor_window: 1              # chunks previos/siguientes cargados junto al actual
+  strict_no_full_load: true       # true = AP-CHK2 dispara ante carga del texto crudo fuera de L0
+

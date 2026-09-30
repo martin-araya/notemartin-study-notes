@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/chunk-state.schema.json",
+  "title": "ChunkState",
+  "description": "Estado del bucle por chunks (F107). Persiste el progreso de procesamiento por chunks (no por capítulos como F106), las unidades que cruzan frontera y la configuración de presupuesto de contexto. Producido y consumido por scripts/pipeline/chunk_loop.py. Especificación normativa: references/00-pipeline/chunk-loop.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_hash",
+    "chunk_strategy",
+    "chunks",
+    "cross_chunk_units",
+    "config",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del esquema. Mayor en cambios incompatibles."
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 hex de la fuente cruda (PDF/EPUB/...)."
+    },
+    "chunk_strategy": {
+      "type": "string",
+      "enum": ["by_blocks", "by_chapter", "by_section_path"],
+      "description": "Estrategia usada para fragmentar el SDM en chunks (mirror de config.chunk_strategy; se conserva en root para inspección rápida)."
+    },
+    "chunks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/chunk" }
+    },
+    "cross_chunk_units": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/crossChunkUnit" },
+      "description": "Unidades con source_block_ids[] que abarcan ≥ 2 chunks (CHK-R3)."
+    },
+    "current_chunk_id": {
+      "type": ["string", "null"],
+      "pattern": "^chk[0-9]{2,}$"
+    },
+    "config": { "$ref": "#/$defs/config" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "chunk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "start_anchor", "end_anchor", "status", "started_at", "processed_at"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^chk[0-9]{2,}$",
+          "description": "Identificador de chunk (chk01, chk02, ...)."
+        },
+        "start_anchor": { "$ref": "#/$defs/anchor" },
+        "end_anchor": { "$ref": "#/$defs/anchor" },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "processing", "done", "failed"]
+        },
+        "started_at": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "ISO 8601 UTC; se sella al transicionar a processing (CHK-R1)."
+        },
+        "processed_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "previous_processed_at": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "Conservado al re-procesar con --force (AP-CHK4)."
+        },
+        "units_discovered": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IDs de unidades detectadas en este chunk (pueden ser primarias o secundarias)."
+        },
+        "notes_written": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IDs de notas producidas por este chunk."
+        },
+        "error": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["code", "message", "recoverable"],
+          "properties": {
+            "code": { "type": "string" },
+            "message": { "type": "string" },
+            "recoverable": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["section_path", "page"],
+      "properties": {
+        "section_path": { "type": "string", "minLength": 1 },
+        "page": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "crossChunkUnit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit_id", "primary_chunk", "secondary_chunks"],
+      "properties": {
+        "unit_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$"
+        },
+        "primary_chunk": {
+          "type": "string",
+          "pattern": "^chk[0-9]{2,}$",
+          "description": "Chunk donde la unidad aparece primero (first-seen wins)."
+        },
+        "secondary_chunks": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^chk[0-9]{2,}$" },
+          "description": "Chunks donde la unidad también aparece; NO se crea segunda nota (CHK-R4 + AP-CHK1)."
+        },
+        "note_id": {
+          "type": ["string", "null"],
+          "description": "ID de la nota escrita para esta unidad; UN solo note_id por unidad."
+        }
+      }
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chunk_strategy", "chunk_size"],
+      "properties": {
+        "chunk_strategy": {
+          "type": "string",
+          "enum": ["by_blocks", "by_chapter", "by_section_path"],
+          "default": "by_blocks"
+        },
+        "chunk_size": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 30,
+          "description": "Bloques por chunk (by_blocks) o capítulos por chunk (by_chapter)."
+        },
+        "neighbor_window": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 1,
+          "description": "Cuántos chunks previos/siguientes cargar además del actual."
+        },
+        "strict_no_full_load": {
+          "type": "boolean",
+          "default": true,
+          "description": "Si true, AP-CHK2 se dispara ante cualquier apertura del texto crudo fuera de L0."
+        }
+      }
+    }
+  }
+}

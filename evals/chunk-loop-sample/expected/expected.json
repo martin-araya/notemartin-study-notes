@@ -1,0 +1,12 @@
+{
+  "n_chunks_by_blocks_default": 9,
+  "n_chunks_by_blocks_size_15": 17,
+  "n_chunks_by_section_path_default": 25,
+  "n_chunks_by_chapter_size_3": 9,
+  "cross_chunk_unit_count": 1,
+  "cross_chunk_unit_primary": "chk01",
+  "cross_chunk_unit_secondary": [
+    "chk02"
+  ],
+  "ap_chk2_dirty_loads_detected": 1
+}
