@@ -163,8 +163,12 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | Re-render o migración entre destinos | `references/08-render/migration.md` | `references/03-knowledge/`, `references/04-authoring/` (migrar no es re-redactar) | [pendiente F64] |
 | Cualquier redacción de contenido fáctico | `references/10-quality/fidelity-rules.md` | `references/07-visual/` hasta cerrar el contenido | [pendiente F42] |
 | Auditoría de no-pérdida antes de cerrar | `references/10-quality/completeness-audit.md` | `references/04-authoring/` (la auditoría no reescribe) | [pendiente F43] |
+| Antes de cerrar una nota que requiere autoevaluación (cualquier `note-type` excepto `index-moc`) | [self-evaluation.md](references/09-study/self-evaluation.md) | ninguno (la fase lo define todo) | F102 |
+| Al registrar un error propio o consultar el repaso vencido del registro | [error-log.md](references/09-study/error-log.md) | `references/04-authoring/` (no se reescribe el IR del error) | F103 |
+| Al planificar una ruta de estudio (operar hoy / entender a fondo / repasar) | [study-paths.md](references/09-study/study-paths.md) | `references/03-knowledge/` (consultar grafo + note-plan) | F104 |
+| Al configurar el perfil de objetivo (interview / certification / work) o consultar cobertura por objetivo | [goal-profiles.md](references/09-study/goal-profiles.md) | `references/04-authoring/` (sobrescribe el perfil global) | F105 |
 
-> Las carpetas `references/09-study/` y `references/11-i18n/` se poblarán desde F60 y F101 respectivamente; cada archivo que se cree en ellas se enruta desde §5 en el mismo commit. El catálogo exhaustivo de scripts se publica en `scripts/README.md` cuando F117 cierre; mientras tanto, §6 de este router lista los únicos scripts físicos del paquete.
+> Las carpetas `references/09-study/` y `references/11-i18n/` se poblarán desde F102, F103, F104, F105 y F101 respectivamente; cada archivo que se cree en ellas se enruta desde §5 en el mismo commit. F102, F103, F104 y F105 publican los cuatro archivos de `09-study/` (`self-evaluation.md`, `error-log.md`, `study-paths.md` y `goal-profiles.md`). El catálogo exhaustivo de scripts se publica en `scripts/README.md` cuando F117 cierre; mientras tanto, §6 de este router lista los únicos scripts físicos del paquete.
 
 ## §6 · Catálogo de scripts invocables hoy
 
