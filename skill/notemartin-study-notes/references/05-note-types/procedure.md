@@ -128,6 +128,24 @@ en `## Procedimiento: <sub>` (anti-patrón §6.3 — no más de 10 pasos por blo
 
 Si la nota tiene `len(body_lines) < 50`, las 3 capas son **optativas** y basta L2.
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `procedure` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | — |
+| Aplicación | ✅ |
+| Diagnóstico | — |
+| Decisión | — |
+| Predicción | ✅ |
+
+Notas: por defecto aplicación + predicción (el lector transfiere a un caso
+y anticipa el efecto del comando). Recuerdo se añade solo si la nota
+enumera comandos (sub-tipo recordatorio). La nota puede declarar
+`self-evaluation-types` como superset del default.
+
 ---
 
 ## §3 · Componentes mínimos
