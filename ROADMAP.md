@@ -1783,3 +1783,116 @@ Ficha, mapa de capítulos, grafo de dependencias, rutas, cobertura por capítulo
 - [x] Enlaza glosario, cheatsheets y prácticas.
 
 **Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/05-note-types/index-moc-generator.md` (234 líneas ≤ 500, 11 secciones canónicas: §1 propósito + §2 cuándo aplica + §3 las 10 secciones del archivo generado (Ficha, Mapa de capítulos, Grafo de dependencias, Rutas de lectura, Cobertura por capítulo, Glosario, Cheatsheets, Prácticas, Erratas, Progreso) + §4 algoritmo del generador de 5 pasos + §5 reglas duras IDX-R1..IDX-R5 (idempotente, no muta inputs, orden canónico, links existentes, Mermaid embebido) + §6 CLI + §7 wirings cerrados a F16/F39/F40/F90/F91/F104/F106/F107/F109/F117 + §8 anti-patrones AP-IDX-1..3 + §9 verificación + §10 cambios permitidos + §11 tabla de auto-verificación). Script generador en `skill/notemartin-study-notes/scripts/pipeline/book_index.py` (~410 líneas, Python 3.9+ stdlib puro, 2 sub-comandos `generate`/`check`; clase `BookIndexGenerator` con 10 métodos de sección que leen manifest.json + book-state.json + concept-graph.json + glossary.json + 3 F109 reports + IRs; renderiza Markdown con 10 secciones en orden canónico estricto (IDX-R3); bloque Mermaid embebido con ` ```mermaid ` fences (IDX-R5); valida que los `[[note:id]]` apuntan a IRs existentes (IDX-R4); strip de fenced-block delimiters en `book_map.mmd` para aceptar ambos formatos (con y sin fences); escritura atómica con tempfile + `Path.replace` + backup `.bak`; exit codes 0/1/2 con códigos de error cerrados `IDX_NO_WORKDIR`/`IDX_NO_MANIFEST`/`IDX_CHECK_FAILED`). Batería en `evals/book-index-sample/` con `build_fixtures.py` (stdlib puro; 5 IRs: 1 concept + 1 cheatsheet + 1 practice + 1 glossary-term + 1 procedure; glossary con 3 términos; concept-graph con 4 nodos + 3 aristas; book-state con 3 capítulos 2 done + 1 pending; book_map.mmd; 3 F109 reports) + `run_eval.py` con **3 sub-criterios PASS**: C1 cobertura refleja estado real (3 capítulos en tabla con % done; IDX-R3 verificado), C2 grafo renderizado (bloque Mermaid con 4 nodos + 3 aristas; IDX-R5 verificado), C3 enlaces glosario/cheatsheets/prácticas (3 secciones con `[[note:id]]`; 3 IDs totales; todos existen en IRs; IDX-R4 verificado). Wirings cerrados: `SKILL.md` §5.2 entrada añadida (sigue ≤ 500 líneas), `references/05-note-types/README.md` marca `index-moc-generator.md` como publicado, `references/00-pipeline/book-mode.md` §9 wiring F106→F110 (auto_on_consolidate), `references/00-pipeline/chunk-loop.md` §9 wiring declarado para F107→F110, `references/10-quality/consolidation-passes.md` §7 wiring F109→F110, `references/06-writing/anti-patterns.md` §2 añade **AP29** "Índice desactualizado" + **AP30** "Grafo no renderizado en índice" + **AP31** "Índice sin enlaces a glosario/cheatsheets" (31 APs totales; §4 lista ampliada con AP29-31; §6 checklist con 3 items adicionales), `assets/profile.template.yaml` añade bloque `book_index` opcional con 2 propiedades (`auto_on_consolidate` default `false`; `include_errata` default `true`), `schemas/profile.schema.json` define `$defs/book_index`, `scripts/README.md` catálogo añade entrada `pipeline/book_index.py` con 2 sub-comandos + dependencias + eval. Cierra los 3 criterios del ROADMAP §1779-1783.
+
+## Fase 111 — Actualización incremental **[mixta]**
+Comparación de SDM antiguo y nuevo, reproceso solo de lo afectado, `version-delta` generado desde las diferencias, obsoleto marcado sin borrar, actualización selectiva en destinos remotos.
+- [x] Un cambio en una sección reprocesa solo lo afectado.
+- [x] Se genera el delta automáticamente.
+- [x] Ninguna nota pierde contenido válido.
+
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/04-authoring/incremental-update.md` (277 líneas ≤ 500, 11 secciones canónicas: §1 propósito + §2 cuándo aplica + §3 algoritmo de 5 pasos (diff SDM → agrupar por sección → identificar IRs afectados → marcar obsoletos sin borrar → generar version-delta + republish selectiva) + §4 reglas duras INC-R1..INC-R5 (block-level diff, no borra, delta auto, republish selectiva, preserva previous_processed_at) + §5 CLI + §6 wirings cerrados a F13/F16/F31/F32/F88/F15/F62/F117 + §7 anti-patrones AP-INC-1..3 (AP32/AP33/AP34) + §8 verificación + §9 cambios permitidos + §10 ejemplo end-to-end + §11 tabla de auto-verificación). Schema `schemas/version-delta.schema.json` (Draft 2020-12, `additionalProperties: false`, enum cerrado de 4 change_types `added`/`removed`/`modified`/`moved`, regex semver `^\d+\.\d+(\.\d+)?$`, regex `^vd\d{4,}$` para `delta_id`). Script orquestador en `skill/notemartin-study-notes/scripts/diff/update.py` (~510 líneas, Python 3.9+ stdlib puro, 4 sub-comandos `diff`/`dry-run`/`run-all`/`status`; clase `SDMDiffer` con `_block_differs` que compara `text` + `attrs` excluyendo timestamps; `_find_affected_irs` itera `ir/*.json` y compara `source_refs[*].section_path` con secciones afectadas; `_mark_obsolete` añade `status: archived` + `superseded_by` poblado con inferencia en cascada (same section → same title → único added block); `_emit_version_delta` genera `ir/vdNNNN.note-ir.json` con `note_type: "version-delta"` y `changes[]` agrupado por sección; `--yes` requerido para mutación (cumple INV-12); exit codes 0/1/2 con códigos de error cerrados `INC_NO_SDM`/`INC_SOURCE_MISMATCH`/`INC_INVALID_PAIR`/`INC_PARTIAL_RUN_FAILED`/`INC_BLOCK_ID_INVALID`). Batería en `evals/incremental-sample/` con `build_fixtures.py` (stdlib puro; 2 SDMs old/new con 4 bloques old → 4 bloques new: b1 unchanged + b2 modified + b3 removed + b5 added; 4 IRs: a refs b1 unchanged, b refs b2 modified, c refs b3 removed → obsoleted con superseded_by=d, d refs b5 added; manifest.json con published_notes en obsidian) + `run_eval.py` con **3 sub-criterios PASS**: C1 solo-afectado (c obsoleted con superseded_by poblado; a/b source_refs byte-a-byte preservados), C2 delta-auto (3 cambios cubriendo 3 secciones `/ch02/main` modified + `/ch03/deprecated` removed + `/ch05/new` added; version-delta auto-generado; INC-R3 verificado), C3 no-pérdida (a/b source_refs preservados; c NO borrado con superseded_by poblado + source_refs originales; INC-R2 + AP34 verificados). Wirings cerrados: `SKILL.md` §5.2 entrada añadida (sigue ≤ 500 líneas), `references/04-authoring/README.md` marca `incremental-update.md` como publicado con tabla de wirings, `references/00-pipeline/book-mode.md` §9 wiring F106→F111 (F106 detecta hash_mismatch → F111 invoca), `references/00-pipeline/manifest.md` §6 actualizado para mencionar F111 implementa MIGRATE, `references/06-writing/anti-patterns.md` §2 añade **AP32** "Reproceso completo por cambio pequeño (incremental)" + **AP33** "Delta no generado (incremental)" + **AP34** "Nota válida eliminada por obsoleto (incremental)" (34 APs totales; §4 lista ampliada con AP32-34; §6 checklist con 3 items adicionales), `assets/profile.template.yaml` añade bloque `incremental_update` opcional con 2 propiedades (`auto_on_hash_mismatch` default `false`; `mark_obsolete_status` default `archived`), `schemas/profile.schema.json` define `$defs/incremental_update` con enum cerrado de 2 statuses, `scripts/README.md` catálogo añade entrada `diff/update.py` con 4 sub-comandos + dependencias + eval. Cierra los 3 criterios del ROADMAP §1787-1791.
+
+---
+
+# BLOQUE 13 — Calidad
+
+## Fase 112 — Checklists por tipo **[ref] [núcleo]**
+Checklist común más bloque por tipo; nota mínima viable por tipo; criterios bloqueantes separados de recomendados; orden de verificación de lo barato a lo caro.
+- [ ] Cada tipo tiene su bloque y su nota mínima viable.
+- [ ] Los bloqueantes están marcados y son objetivos.
+- [ ] Ningún criterio exige elementos académicos en perfil `reference`.
+
+## Fase 113 — Validadores **[script] [núcleo]**
+Perfil, SDM, ledger, NoteMark, IR, diagramas, salidas por destino, enlaces, imágenes, propiedades, tablas, longitudes. Severidades error / advertencia / info. Ejecución sobre una nota, carpeta o trabajo completo.
+- [ ] Detecta el 100 % de una batería de defectos inyectados.
+- [ ] Cero falsos positivos sobre los ejemplos del repo.
+- [ ] Reporta archivo, nodo y regla violada.
+
+## Fase 114 — Auditoría automatizada de fidelidad **[script] [núcleo]**
+Todo nodo fáctico con `source_refs` resolubles; detección de afirmaciones sin respaldo; ningún valor, nombre de parámetro o código de error sin unidad asociada; muestreo inverso automatizado.
+- [ ] Detecta un dato inventado inyectado a propósito.
+- [ ] Reporta todo nodo fáctico sin respaldo.
+- [ ] El muestreo inverso corre automáticamente.
+
+## Fase 115 — Puerta de calidad y reporte **[mixta] [núcleo]**
+Reporte con cobertura, validadores, degradaciones por destino, rúbrica auto-aplicada, pendientes y decisiones; no se cierra con errores bloqueantes ni cobertura incompleta; deuda aceptada registrada.
+- [ ] Cada trabajo produce reporte con cobertura y validación.
+- [ ] El reporte declara explícitamente lo no cubierto.
+- [ ] No es posible marcar `status: verified` con errores bloqueantes.
+
+## Fase 116 — Modos de fallo **[ref]**
+Catálogo (OCR fallido, fuente ilegible, contexto agotado, API caída, validador en rojo repetido, conflicto irresoluble, interrupción) con detección, acción, estado y reanudación; nada a medias sin marcar `draft`; casos que exigen preguntar al usuario.
+- [ ] Cada fallo tiene acción definida y estado resultante.
+- [ ] Una interrupción no deja notas sin marcar `draft`.
+- [ ] Reprocesar tras un fallo no duplica contenido.
+
+## Fase 117 — Catálogo de scripts **[ref] [núcleo]**
+`@/scripts/README.md`: por script, qué hace, entrada, salida, dependencias, invocación, qué pasa si falta la dependencia.
+- [ ] Todo script del repo está catalogado.
+- [ ] Cada entrada declara sus dependencias del sistema.
+- [ ] El agente puede invocar cualquier script leyendo solo el catálogo.
+- [ ] Existe un comando que verifica qué dependencias faltan y qué se degrada sin ellas.
+
+---
+
+# BLOQUE 14 — Evaluación y entrega
+
+## Fase 118 — Suite de evals de la skill **[núcleo]**
+Casos con prompt realista sobre fuentes del corpus, ejecutados **como los ejecutaría un usuario**: el agente carga la skill y trabaja. Aserciones automáticas (validadores) más evaluación humana con rúbrica.
+- [ ] Cada caso declara aserciones automáticas y criterios humanos.
+- [ ] El caso de Oracle incluye aserción de cobertura de tabla de parámetros.
+- [ ] El caso escaneado incluye aserción de fidelidad de código OCR.
+- [ ] Los resultados son comparables entre iteraciones de la skill.
+
+## Fase 119 — Regresión y varianza
+Ejecución repetida midiendo varianza de cobertura, tipos de nota elegidos y estructura del IR; set de regresión con casos problemáticos; criterio de aceptación de un cambio.
+- [ ] La varianza de cobertura está bajo el umbral definido.
+- [ ] La suite corre antes de cada release.
+- [ ] Todo cambio aceptado tiene evidencia de no-regresión.
+
+## Fase 120 — Ejemplos end-to-end **[núcleo]**
+Cuatro casos: documentación de producto, libro técnico, **PDF escaneado**, API reference extensa. Cada uno con SDM, ledger, NoteMark, IR, salidas en los tres destinos ricos, capturas y reporte.
+- [ ] Los cuatro pasan la puerta de calidad y los validadores.
+- [ ] Cada ejemplo muestra los artefactos intermedios.
+- [ ] Cada ejemplo incluye capturas de los tres destinos.
+
+## Fase 121 — README, instalación y personalización
+Posicionamiento, galería multi-dominio, flujo de 5 capas, garantías, instalación con dependencias de OCR por sistema operativo, configuración inicial, prompts de ejemplo reales, cómo añadir un tipo de nota.
+- [ ] El README menciona OCR y los tres destinos en las primeras líneas.
+- [ ] La instalación cubre las dependencias por sistema operativo.
+- [ ] Los prompts de ejemplo disparan efectivamente la skill.
+
+## Fase 122 — Empaquetado e instalación **[núcleo]**
+Generación del `.skill`, verificación de que el paquete instalado funciona con un caso de humo, tamaño del paquete, qué queda fuera, instrucciones de instalación.
+- [ ] El paquete instala y pasa el caso de humo.
+- [ ] El contenido del paquete es exactamente el delimitado en la Fase 5.
+- [ ] El proceso de empaquetado es reproducible.
+
+## Fase 123 — Versionado y CHANGELOG
+Versión semántica con criterio explícito (cambio de contrato de SDM, IR o NoteMark = mayor); CHANGELOG con referencia a fases; compatibilidad de artefactos entre versiones declarada.
+- [ ] Cada release tiene entrada de CHANGELOG con sus fases.
+- [ ] La convención de versionado está documentada con ejemplos.
+- [ ] La compatibilidad de artefactos está declarada por versión.
+
+## Fase 124 — Contribución y mantenimiento
+Estilo de referencias, proceso para proponer una regla (caso de fallo que la motiva + caso de prueba), política de ejemplos multi-dominio, checklist de PR, contrato de ingesta externa para enchufar conversores propios.
+- [ ] Ninguna regla nueva entra sin caso de prueba.
+- [ ] El checklist de PR incluye validadores y regresión.
+- [ ] El contrato de ingesta externa está definido y es independiente de la herramienta.
+
+## Fase 125 — Verificación final **[núcleo]**
+Ejecución completa sobre las 15 fuentes, puntuación con la rúbrica, veredicto por cada defecto del diagnóstico inicial.
+- [ ] El capítulo de Oracle pasa la puerta de calidad en los tres destinos ricos.
+- [ ] El PDF escaneado produce notas con código fiel verificado manualmente.
+- [ ] La tasa de pérdida es cero en unidades `must-keep`.
+- [ ] `SKILL.md` sigue bajo 500 líneas tras las 125 fases.
+
+---
+
+## Camino mínimo
+
+Las fases **[núcleo]** forman una skill funcional completa: 51 fases. Cubren ingesta con OCR, SDM, ledger, NoteMark, IR, tres renderers, las tres puertas y el empaquetado.
+
+**Orden de ataque:** 1-2-3-4-6-7-8 → 9-10-11-12-13-14-15-16 → 17-18-19-20-21-22-23-25-30 → 31 → 37-38-42-43-44 → 45-46-47-48-49-51 → 53-54-55-57-61-62-63 → 65-66-67-68 → 72-73 → 78-79-80-86-91-93 → 94-98-101 → 112-113-114-115-117 → 118-120-122-125.
+
+La fase 12 (NoteMark) es la bisagra: hasta que exista, el agente no tiene con qué escribir, y todo el bloque 9 depende de poder expresar las plantillas en ese formato.

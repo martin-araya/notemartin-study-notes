@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "postgres-doc",
+    "vendor": "postgres",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "version": "15.0"
+  },
+  "blocks": [
+    {
+      "block_id": "b1",
+      "type": "text",
+      "text": "MVCC intro unchanged",
+      "anchor": {
+        "section_path": "/ch01/intro",
+        "page": 1
+      }
+    },
+    {
+      "block_id": "b2",
+      "type": "text",
+      "text": "WAL old text",
+      "anchor": {
+        "section_path": "/ch02/main",
+        "page": 5
+      }
+    },
+    {
+      "block_id": "b3",
+      "type": "text",
+      "text": "Deprecated section",
+      "anchor": {
+        "section_path": "/ch03/deprecated",
+        "page": 10
+      }
+    },
+    {
+      "block_id": "b4",
+      "type": "text",
+      "text": "Misc",
+      "anchor": {
+        "section_path": "/ch04/misc",
+        "page": 15
+      }
+    }
+  ]
+}

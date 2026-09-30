@@ -184,3 +184,34 @@ book_index:
   auto_on_consolidate: false      # true = generar book-index.md automáticamente tras consolidar (F109)
   include_errata: true            # true = incluir sección Erratas en el índice (default true; opt-out --no-include-errata)
 
+# === Actualización incremental (F111, opt-in) ===
+# Activar cuando el agente quiera comparar 2 SDMs y reprocesar solo lo
+# afectado. Ver `references/04-authoring/incremental-update.md`.
+# Por defecto desactivado; el agente decide cuándo invocar `update.py`.
+# Cumple INV-12 (no sorpresa al usuario): ambas default `false`/`true`.
+incremental_update:
+  auto_on_hash_mismatch: false    # true = invocar update.py automáticamente cuando F16 detecta hash_mismatch (cumple política MIGRATE)
+  mark_obsolete_status: archived  # status que reciben los IRs obsoletos (default archived; INC-R2)
+
+# === Overrides comunes por dominio (INV-15: al menos 2 dominios) ===
+#
+# Documentación técnica de producto → Notion:
+#   targets.active: [notion]
+#   targets.notion.database_id: "<uuid>"
+#   use_case_profile: reference
+#
+# Libro técnico escaneado en español:
+#   ocr.languages: [es]
+#   ocr.confidence_threshold: 0.6
+#   writing.language: es
+#
+# Repaso espaciado para certificación:
+#   targets.active: [anki]
+#   targets.anki.deck: "Cert-Kubernetes"
+#   use_case_profile: study
+#
+# Capítulo de libro técnico + Notion como wiki:
+#   writing.language: en
+#   writing.style: intuition-first
+#   targets.active: [notion]
+#   use_case_profile: hybrid

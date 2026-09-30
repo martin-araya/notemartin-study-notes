@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "c",
+  "title": "C",
+  "layer": "l2",
+  "note_type": "concept",
+  "frontmatter": {
+    "title": "C",
+    "note-type": "concept",
+    "status": "done"
+  },
+  "blocks": [
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [
+        {
+          "block_id": "b3",
+          "source_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "section_path": "/ch03/deprecated"
+        }
+      ],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "C body",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "postgres-doc",
+    "path": ".",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "algorithm": "sha256"
+  },
+  "current_stage": "l3",
+  "stage_progress": {
+    "l0": "done",
+    "l1": "done",
+    "l2": "done",
+    "l3": "done"
+  },
+  "published_notes": [
+    {
+      "note_id": "a",
+      "destination": "obsidian",
+      "remote_id": "obs-a-uuid",
+      "published_at": "2026-01-01T00:00:00Z",
+      "last_updated": "2026-01-01T00:00:00Z"
+    },
+    {
+      "note_id": "b",
+      "destination": "obsidian",
+      "remote_id": "obs-b-uuid",
+      "published_at": "2026-01-01T00:00:00Z",
+      "last_updated": "2026-01-01T00:00:00Z"
+    }
+  ],
+  "link_debt": [],
+  "consolidation_runs": [],
+  "last_modified": "2026-01-01T00:00:00Z"
+}

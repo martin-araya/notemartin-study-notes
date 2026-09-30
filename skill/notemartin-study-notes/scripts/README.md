@@ -1104,3 +1104,30 @@ Erratas, Progreso). Sigue el patrón de F91 + extiende con Progreso.
 | Documentación | `references/05-note-types/index-moc-generator.md` (normativa, 234 líneas ≤ 500) |
 | Eval | `evals/book-index-sample/run_eval.py` 3/3 PASS (C1 cobertura 3 capítulos, C2 Mermaid 4 nodos + 3 aristas, C3 glosario/cheatsheets/prácticas con `[[note:id]]`) |
 
+### `diff/update.py` — F111 · Orquestador de actualización incremental
+
+Compara un SDM antiguo con uno nuevo, identifica bloques afectados, marca
+obsoletos sin borrar (cumple INC-R2), genera notas `version-delta`
+automáticamente (F88) con tabla `## Cambios`, y emite reporte de
+republicación selectiva (afecta solo `affected_ir_ids ∩
+published_destinations`).
+
+Algoritmo de 5 pasos: **diff SDM** (block-level por `block_id`) →
+**agrupar por `section_path`** → **identificar IRs afectados** (matching
+`source_refs`) → **marcar obsoletos sin borrar** (`status: archived` +
+`superseded_by` poblado con inferencia en cascada) → **generar
+version-delta** (`ir/vd0001.note-ir.json` con `changes[]` poblado).
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--old-sdm OLD.json --new-sdm NEW.json --workdir DIR [--yes] [--force]` |
+| Salida | `<workdir>/ir/vdNNNN.note-ir.json` (auto-numerado) + IRs obsoletos marcados |
+| Subcomandos | `diff`, `dry-run`, `run-all`, `status` (4 en total) |
+| Invocación | `python3 scripts/diff/update.py run-all --old-sdm old.json --new-sdm new.json --workdir .notes-work/abc --yes` |
+| API Python | `from update import SDMDiffer; SDMDiffer(old, new).diff()` |
+| Códigos | 0 OK · 1 validación (INC-R* violado, partial run failed) · 2 uso (paths faltantes, INC_NO_SDM/INC_SOURCE_MISMATCH) |
+| Garantías | INC-R1 (block-level diff), INC-R2 (no borra), INC-R3 (delta auto), INC-R4 (republish selectiva), INC-R5 (preserva previous_processed_at) |
+| Default | `mark_obsolete_status: "archived"`; sin auto-invoke (cumple INV-12) |
+| Dependencias | Python 3.9+ stdlib puro (sin subprocess, sin jsonschema) |
+| Documentación | `references/04-authoring/incremental-update.md` (normativa, 277 líneas ≤ 500) + `schemas/version-delta.schema.json` |
+| Eval | `evals/incremental-sample/run_eval.py` 3/3 PASS (C1 obsoleted selectivo, C2 delta auto, C3 source_refs preservados) | |

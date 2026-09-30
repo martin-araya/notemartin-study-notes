@@ -1,0 +1,12 @@
+{
+  "obsoleted_ir_ids": [
+    "c"
+  ],
+  "affected_ir_ids_count_min": 2,
+  "delta_id_pattern": "^vd\\d{4,}$",
+  "obsoleted_count": 1,
+  "added_count": 1,
+  "modified_count": 1,
+  "removed_count": 1,
+  "unchanged_count_min": 1
+}

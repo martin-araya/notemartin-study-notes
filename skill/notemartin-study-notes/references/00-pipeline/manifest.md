@@ -90,7 +90,7 @@ Transiciones permitidas:
 **Default: REJECT.** Razones:
 
 - RESET puede destruir trabajo en curso; el usuario lo decide.
-- MIGRATE requiere lógica de diff que es trabajo de F31 (build_sdm), no de F16.
+- MIGRATE requiere lógica de diff; F111 (`scripts/diff/update.py`) implementa esa lógica. Cuando el agente o el usuario confirma `RESET`/`MIGRATE` y `incremental_update.auto_on_hash_mismatch == true`, F111 se invoca.
 - REJECT es la única política conservadora por defecto que no corrompe el estado sin intervención explícita.
 
 Activación:

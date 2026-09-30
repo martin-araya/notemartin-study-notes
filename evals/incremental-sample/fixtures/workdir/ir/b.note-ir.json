@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "b",
+  "title": "B",
+  "layer": "l2",
+  "note_type": "concept",
+  "frontmatter": {
+    "title": "B",
+    "note-type": "concept",
+    "status": "done"
+  },
+  "blocks": [
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [
+        {
+          "block_id": "b2",
+          "source_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "section_path": "/ch02/main"
+        }
+      ],
+      "children": [
+        {
+          "node": "text",
+          "attrs": {
+            "text": "B body",
+            "capability": "text"
+          },
+          "source_refs": []
+        }
+      ]
+    }
+  ]
+}
