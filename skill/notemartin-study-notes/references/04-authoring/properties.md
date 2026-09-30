@@ -65,7 +65,7 @@ soporte nativo (criterio #3).
 
 | ID | Invariante | Si se omite… |
 |---|---|---|
-| **INV-P1** *(F47)* | El conjunto de propiedades canónicas es exactamente las 18 documentadas en §5. Añadir una nueva requiere reabrir F47. | El parser rechaza claves no listadas o el renderer las descarta silenciosamente. |
+| **INV-P1** *(F47, +F102, +F104, +F105)* | El conjunto de propiedades canónicas es exactamente las 24 documentadas en §5. Añadir una nueva requiere reabrir F47. | El parser rechaza claves no listadas o el renderer las descarta silenciosamente. |
 | **INV-P2** *(F47)* | Las claves se escriben en **kebab-case** sin espacios, sin underscores, sin CamelCase. Las claves de namespace `x-*` o `user-*` también en kebab-case. | El parser (F48) rechaza claves que no coincidan con `^[a-z][a-z0-9-]*$`. |
 | **INV-P3** *(F47)* | Cero colores literales en valores de propiedades. Tokens via `assets/tokens.json` (F72). | INV-14 violación. |
 | **INV-P4** *(F47)* | Ninguna clave duplicada dentro del mismo frontmatter. | El parser rechaza el YAML. |
@@ -78,7 +78,7 @@ soporte nativo (criterio #3).
 
 ## §4 · Conjunto canónico (resumen)
 
-Las 20 propiedades cerradas. Las 5 primeras (universales) son obligatorias en notas con `status: published`; el resto tiene obligatoriedad variable según §6. Las universales son obligatorias en `status: draft` solo las 3 primeras (title, note-type, status) — `summary` y `reading-time-minutes` se difieren hasta el cierre (F75).
+Las 24 propiedades cerradas. Las 5 primeras (universales) son obligatorias en notas con `status: published`; el resto tiene obligatoriedad variable según §6. Las universales son obligatorias en `status: draft` solo las 3 primeras (title, note-type, status) — `summary` y `reading-time-minutes` se difieren hasta el cierre (F75).
 
 | # | Propiedad | Tipo | Universal |
 |---|---|---|---|
@@ -98,10 +98,14 @@ Las 20 propiedades cerradas. Las 5 primeras (universales) son obligatorias en no
 | 14 | `retrieved` | date ISO 8601 | |
 | 15 | `language` | enum (4) | |
 | 16 | `coverage` | enum (3) | |
-| 17 | `difficulty` | enum (1-5) |
+| 17 | `difficulty` | enum (1-5) | |
 | 18 | `review-next` | date ISO 8601 | |
 | 19 | `aliases` | array of string | |
 | 20 | `related` | array of string (note_id o term_id) | |
+| 21 | `self-evaluation-types` | array of enum (5) | |
+| 22 | `study-path-goals` | array of enum (3) | |
+| 23 | `goal-profile-override` | enum (4) | |
+| 24 | `certification-objective` | array of string | |
 
 Detalle de cada una en **§5**. Para propiedades personalizadas fuera de esta lista,
 ver **§8**.
@@ -430,7 +434,10 @@ validación → mapeo por destino (7) → notas.
   - Flashcards → campo de scheduling de la card (controla cuándo aparece
     en el deck).
 - **Notas:** si la nota cambia de versión del producto, actualizar
-  `review-next` para forzar un repaso.
+  `review-next` para forzar un repaso. F103 (`references/09-study/error-log.md`)
+  reutiliza `review-next` también por entrada del living-doc de errores
+  propios (`study/errors/<dominio>.md`), controlando el scheduling de
+  las tarjetas prioritarias (tag `priority-error`).
 
 ### 5.17 `aliases`  {#prop-aliases}
 
@@ -526,6 +533,132 @@ validación → mapeo por destino (7) → notas.
   implementa; hasta entonces, el validador acepta cualquier int ≥ 1
   escrito por el agente. El override manual se usa cuando la nota tiene
   tablas densas que el ojo lee más lento que la prosa (factor 1.5x típico).
+
+### 5.21 `self-evaluation-types`  {#prop-self-evaluation-types}
+
+- **Tipo:** array of enum (5 valores).
+- **Obligatoriedad:** opcional. Recomendada en notas con `note-type` distinto
+  de `index-moc` que tengan sección `## Autoevaluación`.
+- **Descripción:** tipos de pregunta que la nota declara en su sección
+  `## Autoevaluación`. El validador `scripts/validate/self_eval_check.py`
+  lo cruza con la tabla cerrada de `references/09-study/self-evaluation.md`
+  §3 (mapeo `note-type` × tipos-de-pregunta).
+- **Valores:** `recuerdo`, `aplicación`, `diagnóstico`, `decisión`, `predicción`
+  (5 valores cerrados, en kebab-case con tildes — literal como aparecen en
+  la H3 canónica `### Recuerdo` / `### Aplicación` / etc.; el validador
+  normaliza a minúsculas y sin tildes para comparar).
+- **Default:** si está ausente, se usa la fila de §3 de `self-evaluation.md`
+  correspondiente al `note-type` de la nota.
+- **Validación:**
+  - Cada valor debe pertenecer a los 5 cerrados.
+  - El array debe ser un **superset** del default §3 (nunca subset).
+  - `index-moc` debe tener `self-evaluation-types: []` o ausente.
+- **Mapeo por destino:**
+  - Obsidian → `Properties.self-evaluation-types` (array CSV).
+  - Notion API → `page.properties.self-evaluation-types` (`multi_select`).
+  - Notion import → literal YAML.
+  - AppFlowy → `Properties.self-evaluation-types`.
+  - MD → literal YAML.
+  - HTML/PDF → celda en `## Metadata` como array CSV.
+  - Flashcards → descartado.
+- **Notas:** F102 (`references/09-study/self-evaluation.md`) define los
+  5 tipos, la tabla cerrada de mapeo y las reglas V1-V7 del validador.
+  Esta propiedad existe para que el validador V2 pueda detectar
+  notas que añaden tipos no permitidos por su `note-type` o que
+  omiten tipos esperados.
+
+### 5.22 `study-path-goals`  {#prop-study-path-goals}
+
+- **Tipo:** array of enum (3 valores).
+- **Obligatoriedad:** opcional. Default: `["operate-hoy", "entender-a-fondo"]`
+  (la ruta `repasar` solo se incluye si la nota tiene errores propios
+  en `study/errors/<domain>.md`).
+- **Descripción:** objetivos para los que la nota canónica es relevante.
+  F104 (`references/09-study/study-paths.md`) usa esto para filtrar qué
+  notas aparecen en cada ruta (`operate-hoy` / `entender-a-fondo` /
+  `repasar`).
+- **Valores:** `operate-hoy`, `entender-a-fondo`, `repasar` (3 valores
+  cerrados, en kebab-case inglés).
+- **Default:** si está ausente, F104 incluye la nota en todas las rutas
+  aplicables (decidido por la estrategia `shortest`/`broadest` del
+  grafo).
+- **Validación:**
+  - Cada valor debe pertenecer a los 3 cerrados.
+  - El array debe ser un **sub-set** del default + `repasar`
+    (nunca inventar valores).
+- **Mapeo por destino:**
+  - Obsidian → `Properties.study-path-goals` (array CSV).
+  - Notion API → `page.properties.study-path-goals` (`multi_select`).
+  - Notion import → literal YAML.
+  - AppFlowy → `Properties.study-path-goals`.
+  - MD → literal YAML.
+  - HTML/PDF → celda en `## Metadata` como array CSV.
+  - Flashcards → descartado.
+- **Notas:** F104 (`references/09-study/study-paths.md`) define los
+  3 objetivos cerrados, las 7 reglas R-P1 a R-P7, y los scripts
+  `study_paths.py` (Q1-Q6) + `study_paths_check.py` (V1-V4).
+  Esta propiedad permite al autor sobrescribir la inferencia
+  automática del grafo (ej. una nota `practice` que NO es relevante
+  para `operate-hoy` puede declararse solo en `entender-a-fondo`).
+
+### 5.23 `goal-profile-override`  {#prop-goal-profile-override}
+
+- **Tipo:** enum (4 valores).
+- **Obligatoriedad:** opcional. Default: ausente (usa el `goal_profile`
+  global del `profile.yaml`).
+- **Descripción:** sobrescribe el `goal_profile` activo del
+  `profile.yaml` para esta nota específica. Útil cuando una nota
+  pertenece a un perfil por defecto (ej. `work`) pero el estudiante
+  la necesita bajo otro perfil (ej. `interview`).
+- **Valores:** `hybrid`, `interview`, `certification`, `work` (4
+  valores cerrados).
+- **Default:** si está ausente, la nota hereda `goal_profile` del
+  `profile.yaml`.
+- **Validación:**
+  - El valor debe pertenecer a los 4 cerrados.
+- **Mapeo por destino:**
+  - Obsidian → `Properties.goal-profile-override` (enum).
+  - Notion API → `page.properties.goal-profile-override` (`select`).
+  - Notion import → literal YAML.
+  - AppFlowy → `Properties.goal-profile-override`.
+  - MD → literal YAML.
+  - HTML/PDF → celda en `## Metadata`.
+  - Flashcards → descartado.
+- **Notas:** F105 (`references/09-study/goal-profiles.md`) define los
+  4 perfiles canónicos, las 7 reglas R-G1 a R-G7, y los scripts
+  `goal_profiles.py` (P1-P4) + `goal_profile_check.py` (V1-V5).
+  Esta propiedad permite al autor sobrescribir el perfil activo nota
+  por nota, sin modificar el `profile.yaml` global.
+
+### 5.24 `certification-objective`  {#prop-certification-objective}
+
+- **Tipo:** array of string.
+- **Obligatoriedad:** opcional. Default: ausente (la nota no cubre
+  ningún `objetivo_id` externo).
+- **Descripción:** lista de `objetivo_id` externos que esta nota cubre.
+  El validador V2 de `goal_profile_check.py --by-objective <id>`
+  consulta esta propiedad para emitir el reporte de cobertura por
+  objetivo (F105 §4).
+- **Valores:** array de strings (slugs kebab-case). Cada `objetivo_id`
+  debe estar declarado en `profile.yaml::certification.objectives[]`.
+- **Default:** si está ausente, la nota no contribuye al reporte de
+  cobertura por objetivo.
+- **Validación:**
+  - Cada valor debe ser un slug kebab-case válido (regex `^[a-z0-9][a-z0-9-]{0,63}$`).
+  - Si `goal_profile == certification`, se recomienda (no obligatorio)
+    declarar ≥ 1 `objetivo_id` para que la nota aporte al reporte.
+- **Mapeo por destino:**
+  - Obsidian → `Properties.certification-objective` (array CSV).
+  - Notion API → `page.properties.certification-objective` (`multi_select`).
+  - Notion import → literal YAML.
+  - AppFlowy → `Properties.certification-objective`.
+  - MD → literal YAML.
+  - HTML/PDF → celda en `## Metadata` como array CSV.
+  - Flashcards → descartado.
+- **Notas:** F105 (`references/09-study/goal-profiles.md`) §4 define el
+  reporte JSON canónico por objetivo. Esta propiedad es la fuente
+  primaria del reporte (`goal_profile_check.py --profile certification
+  --by-objective <id>`).
 
 ---
 
