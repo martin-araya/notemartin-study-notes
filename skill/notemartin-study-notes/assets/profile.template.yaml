@@ -71,6 +71,26 @@ terms:
 # Ver evals/rubric.md §2.
 use_case_profile: hybrid       # study | reference | hybrid
 
+# === Perfil de objetivo (F105) ===
+# Declara para qué usas las notas del corpus. Ortogonal a use_case_profile:
+# use_case_profile controla el estilo de prosa; goal_profile controla
+# qué secciones adicionales aparecen y qué reglas R-* se relajan.
+# Ver references/09-study/goal-profiles.md §2.
+# Valores cerrados: hybrid | interview | certification | work
+goal_profile: hybrid
+
+# === Objetivos oficiales (F105, solo si goal_profile == certification) ===
+# Lista de `objetivo_id` externos que las notas pueden cubrir. El validador
+# `scripts/validate/goal_profile_check.py --by-objective <id>` emite un
+# reporte de cobertura por objetivo cruzando `objetivo_id` con la propiedad
+# `certification-objective` del frontmatter de las notas.
+certification:
+  objectives:
+    # - id: "ckad-core-1"
+    #   description: "Core Concepts (13 %)"
+    # - id: "ckad-core-2"
+    #   description: "Configuration (18 %)"
+
 # === OCR ===
 # Solo se usa si la fuente es PDF escaneado o imagen.
 ocr:
