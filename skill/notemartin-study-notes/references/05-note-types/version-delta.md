@@ -114,6 +114,24 @@ related: "[[note:product-configuration]], [[note:concept-X]]"
 | L2 | `{layer:l2}` | Cambios, Breaking changes, Migración. 50-70% del total. |
 | L3 | `{layer:l3}` | Cambios de default, Trampas, Compatibilidad, Notas afectadas. Si > 100 líneas, `:::collapsible` con `default_open: false` (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `version-delta` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | — |
+| Diagnóstico | — |
+| Decisión | — |
+| Predicción | ✅ |
+
+Notas: recuerdo (cambios concretos) + predicción (qué pasa al migrar).
+Diagnóstico se añade si la nota lista incompatibilidades (sub-tipo
+`version-delta-with-incompatibilities`). La nota puede declarar
+`self-evaluation-types` como superset del default.
+
 ---
 
 ## §3 · Componentes mínimos
