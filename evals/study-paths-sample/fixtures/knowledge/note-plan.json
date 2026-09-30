@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0.0",
+  "notes": [
+    {
+      "note_id": "pg-basics",
+      "concept_ids": [
+        "pg-basics"
+      ],
+      "depends_on": [],
+      "note-type": "concept",
+      "domain": "postgresql",
+      "study-path-goals": [
+        "operate-hoy",
+        "entender-a-fondo"
+      ]
+    },
+    {
+      "note_id": "pg-mvcc",
+      "concept_ids": [
+        "pg-mvcc"
+      ],
+      "depends_on": [
+        "pg-basics"
+      ],
+      "note-type": "concept",
+      "domain": "postgresql",
+      "study-path-goals": [
+        "operate-hoy",
+        "entender-a-fondo"
+      ]
+    },
+    {
+      "note_id": "pg-restore",
+      "concept_ids": [
+        "pg-restore"
+      ],
+      "depends_on": [
+        "pg-mvcc"
+      ],
+      "note-type": "procedure",
+      "domain": "postgresql",
+      "study-path-goals": [
+        "operate-hoy",
+        "entender-a-fondo"
+      ]
+    },
+    {
+      "note_id": "pg-listening",
+      "concept_ids": [
+        "pg-listen"
+      ],
+      "depends_on": [
+        "pg-basics"
+      ],
+      "note-type": "configuration",
+      "domain": "postgresql",
+      "study-path-goals": [
+        "operate-hoy",
+        "entender-a-fondo"
+      ]
+    },
+    {
+      "note_id": "pg-lab-backup",
+      "concept_ids": [
+        "pg-restore"
+      ],
+      "depends_on": [
+        "pg-restore"
+      ],
+      "note-type": "practice",
+      "domain": "postgresql",
+      "study-path-goals": [
+        "entender-a-fondo"
+      ]
+    },
+    {
+      "note_id": "docker-basics",
+      "concept_ids": [
+        "docker-basics"
+      ],
+      "depends_on": [],
+      "note-type": "concept",
+      "domain": "docker",
+      "study-path-goals": [
+        "operate-hoy",
+        "entender-a-fondo"
+      ]
+    },
+    {
+      "note_id": "docker-images",
+      "concept_ids": [
+        "docker-images"
+      ],
+      "depends_on": [
+        "docker-basics"
+      ],
+      "note-type": "concept",
+      "domain": "docker",
+      "study-path-goals": [
+        "entender-a-fondo"
+      ]
+    },
+    {
+      "note_id": "docker-compose",
+      "concept_ids": [
+        "docker-compose"
+      ],
+      "depends_on": [
+        "docker-images"
+      ],
+      "note-type": "procedure",
+      "domain": "docker",
+      "study-path-goals": [
+        "operate-hoy",
+        "entender-a-fondo"
+      ]
+    },
+    {
+      "note_id": "docker-networking",
+      "concept_ids": [
+        "docker-networking"
+      ],
+      "depends_on": [
+        "docker-compose"
+      ],
+      "note-type": "concept",
+      "domain": "docker",
+      "study-path-goals": [
+        "entender-a-fondo"
+      ]
+    },
+    {
+      "note_id": "docker-lab-compose",
+      "concept_ids": [
+        "docker-compose"
+      ],
+      "depends_on": [
+        "docker-compose"
+      ],
+      "note-type": "practice",
+      "domain": "docker",
+      "study-path-goals": [
+        "entender-a-fondo"
+      ]
+    }
+  ],
+  "metadata": {
+    "generated_at": "2026-09-30T00:00:00Z",
+    "source": "study-paths-sample"
+  }
+}

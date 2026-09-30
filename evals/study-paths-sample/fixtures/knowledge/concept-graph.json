@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "study-paths-sample-corpus",
+    "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "vendor": "sample",
+    "product": "study-paths-eval"
+  },
+  "domain": "all",
+  "nodes": [
+    {
+      "concept_id": "pg-basics",
+      "domain": "postgresql",
+      "definition_unit_id": "u-pg-basics",
+      "section_path": "/pg/basics",
+      "label": "PostgreSQL basics"
+    },
+    {
+      "concept_id": "pg-mvcc",
+      "domain": "postgresql",
+      "definition_unit_id": "u-pg-mvcc",
+      "section_path": "/pg/mvcc",
+      "label": "MVCC y snapshot isolation"
+    },
+    {
+      "concept_id": "pg-restore",
+      "domain": "postgresql",
+      "definition_unit_id": "u-pg-restore",
+      "section_path": "/pg/restore",
+      "label": "pg_dump y pg_restore"
+    },
+    {
+      "concept_id": "pg-listen",
+      "domain": "postgresql",
+      "definition_unit_id": "u-pg-listen",
+      "section_path": "/pg/listen",
+      "label": "Configuraci\u00f3n de listen_addresses"
+    },
+    {
+      "concept_id": "docker-basics",
+      "domain": "docker",
+      "definition_unit_id": "u-docker-basics",
+      "section_path": "/docker/basics",
+      "label": "Docker basics"
+    },
+    {
+      "concept_id": "docker-images",
+      "domain": "docker",
+      "definition_unit_id": "u-docker-images",
+      "section_path": "/docker/images",
+      "label": "Im\u00e1genes y capas"
+    },
+    {
+      "concept_id": "docker-compose",
+      "domain": "docker",
+      "definition_unit_id": "u-docker-compose",
+      "section_path": "/docker/compose",
+      "label": "Docker Compose"
+    },
+    {
+      "concept_id": "docker-networking",
+      "domain": "docker",
+      "definition_unit_id": "u-docker-networking",
+      "section_path": "/docker/net",
+      "label": "Networking entre contenedores"
+    }
+  ],
+  "edges": [
+    {
+      "from_concept_id": "pg-basics",
+      "to_concept_id": "pg-mvcc",
+      "relation": "prerequisite",
+      "source_unit_id": "u-pg-mvcc"
+    },
+    {
+      "from_concept_id": "pg-mvcc",
+      "to_concept_id": "pg-restore",
+      "relation": "prerequisite",
+      "source_unit_id": "u-pg-restore"
+    },
+    {
+      "from_concept_id": "pg-basics",
+      "to_concept_id": "pg-listen",
+      "relation": "prerequisite",
+      "source_unit_id": "u-pg-listen"
+    },
+    {
+      "from_concept_id": "docker-basics",
+      "to_concept_id": "docker-images",
+      "relation": "prerequisite",
+      "source_unit_id": "u-docker-images"
+    },
+    {
+      "from_concept_id": "docker-images",
+      "to_concept_id": "docker-compose",
+      "relation": "prerequisite",
+      "source_unit_id": "u-docker-compose"
+    },
+    {
+      "from_concept_id": "docker-compose",
+      "to_concept_id": "docker-networking",
+      "relation": "prerequisite",
+      "source_unit_id": "u-docker-networking"
+    }
+  ],
+  "cycles": [],
+  "routes": [
+    {
+      "domain": "postgresql",
+      "goal_concept_id": "pg-mvcc",
+      "strategy": "shortest",
+      "path": [
+        "pg-mvcc",
+        "pg-basics"
+      ],
+      "length": 2
+    },
+    {
+      "domain": "postgresql",
+      "goal_concept_id": "pg-mvcc",
+      "strategy": "broadest",
+      "path": [
+        "pg-mvcc",
+        "pg-restore",
+        "pg-listen",
+        "pg-basics"
+      ],
+      "length": 4
+    },
+    {
+      "domain": "postgresql",
+      "goal_concept_id": "pg-restore",
+      "strategy": "shortest",
+      "path": [
+        "pg-restore",
+        "pg-mvcc",
+        "pg-basics"
+      ],
+      "length": 3
+    },
+    {
+      "domain": "postgresql",
+      "goal_concept_id": "pg-restore",
+      "strategy": "broadest",
+      "path": [
+        "pg-restore",
+        "pg-mvcc",
+        "pg-listen",
+        "pg-basics"
+      ],
+      "length": 4
+    },
+    {
+      "domain": "docker",
+      "goal_concept_id": "docker-compose",
+      "strategy": "shortest",
+      "path": [
+        "docker-compose",
+        "docker-images",
+        "docker-basics"
+      ],
+      "length": 3
+    },
+    {
+      "domain": "docker",
+      "goal_concept_id": "docker-compose",
+      "strategy": "broadest",
+      "path": [
+        "docker-compose",
+        "docker-networking",
+        "docker-images",
+        "docker-basics"
+      ],
+      "length": 4
+    }
+  ],
+  "dangling_edges": [],
+  "build_metadata": {
+    "built_at": "2026-09-30T00:00:00Z",
+    "cycle_policy": "block",
+    "node_count": 8,
+    "edge_count": 6
+  }
+}

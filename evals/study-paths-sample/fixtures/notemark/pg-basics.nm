@@ -1,0 +1,34 @@
+---
+title: "PostgreSQL basics"
+note-type: concept
+status: published
+summary: "Nota fixture pg-basics."
+reading-time-minutes: 10
+language: es
+tags: [type/concept, domain/postgresql, f104/study-paths]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: postgresql
+---
+
+# PostgreSQL basics
+
+## TL;DR
+
+TL;DR de pg-basics.
+
+## Mecanismo
+
+Mecanismo de pg-basics.
+
+## Autoevaluación
+
+### Recuerdo
+
+:::collapsible{{default_open=false}}
+Pregunta de recuerdo.
+Respuesta reformulada.
+> Fundamento: {{{{src:blk_test}}}}
+:::

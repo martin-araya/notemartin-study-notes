@@ -1,0 +1,24 @@
+---
+title: "Configurar listen_addresses"
+note-type: configuration
+status: published
+summary: "Config fixture pg-listening."
+reading-time-minutes: 8
+language: es
+tags: [type/configuration, domain/postgresql, f104/study-paths]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: postgresql
+---
+
+# Configurar listen_addresses
+
+## TL;DR
+
+Config de pg-listening.
+
+## Configuración
+
+Tabla de configuración.

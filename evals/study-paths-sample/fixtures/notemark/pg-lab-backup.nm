@@ -1,0 +1,32 @@
+---
+title: "Lab: pg_dump + pg_restore"
+note-type: practice
+status: published
+summary: "Lab fixture pg-lab-backup."
+reading-time-minutes: 25
+language: es
+tags: [type/practice, domain/postgresql, f104/study-paths]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: postgresql
+---
+
+# Lab: pg_dump + pg_restore
+
+## TL;DR
+
+Lab de pg-lab-backup.
+
+## Enunciado
+
+Hacer el lab.
+
+## Entorno
+
+Entorno del lab.
+
+## Limpieza
+
+Limpieza.

@@ -1,0 +1,167 @@
+[
+  {
+    "domain": "docker",
+    "goal": "operate-hoy",
+    "note_path": [
+      {
+        "note_id": "docker-basics",
+        "step": 1,
+        "depends_on": []
+      },
+      {
+        "note_id": "docker-images",
+        "step": 2,
+        "depends_on": [
+          "docker-basics"
+        ]
+      },
+      {
+        "note_id": "docker-lab-compose",
+        "step": 3,
+        "depends_on": []
+      }
+    ],
+    "estimated_minutes": 49,
+    "checkpoints": [
+      {
+        "after_step": 3,
+        "type": "practice",
+        "note_id": "docker-lab-compose",
+        "description": "Ejecutar el lab en `notemark/docker-lab-compose.nm` antes de continuar."
+      }
+    ],
+    "coincides_with_shortest": false
+  },
+  {
+    "domain": "docker",
+    "goal": "entender-a-fondo",
+    "note_path": [
+      {
+        "note_id": "docker-basics",
+        "step": 1,
+        "depends_on": []
+      },
+      {
+        "note_id": "docker-images",
+        "step": 2,
+        "depends_on": [
+          "docker-basics"
+        ]
+      },
+      {
+        "note_id": "docker-lab-compose",
+        "step": 3,
+        "depends_on": []
+      },
+      {
+        "note_id": "docker-networking",
+        "step": 4,
+        "depends_on": []
+      }
+    ],
+    "estimated_minutes": 63,
+    "checkpoints": [
+      {
+        "after_step": 3,
+        "type": "practice",
+        "note_id": "docker-lab-compose",
+        "description": "Ejecutar el lab en `notemark/docker-lab-compose.nm` antes de continuar."
+      }
+    ],
+    "coincides_with_shortest": false
+  },
+  {
+    "domain": "postgresql",
+    "goal": "operate-hoy",
+    "note_path": [
+      {
+        "note_id": "pg-basics",
+        "step": 1,
+        "depends_on": []
+      },
+      {
+        "note_id": "pg-mvcc",
+        "step": 2,
+        "depends_on": [
+          "pg-basics"
+        ]
+      }
+    ],
+    "estimated_minutes": 24,
+    "checkpoints": [
+      {
+        "after_step": 1,
+        "type": "auto-eval",
+        "note_id": "pg-basics",
+        "description": "Responder `## Autoevaluación` en `notemark/pg-basics.nm` antes de continuar."
+      }
+    ],
+    "coincides_with_shortest": false
+  },
+  {
+    "domain": "postgresql",
+    "goal": "entender-a-fondo",
+    "note_path": [
+      {
+        "note_id": "pg-basics",
+        "step": 1,
+        "depends_on": []
+      },
+      {
+        "note_id": "pg-lab-backup",
+        "step": 2,
+        "depends_on": []
+      },
+      {
+        "note_id": "pg-listening",
+        "step": 3,
+        "depends_on": [
+          "pg-basics"
+        ]
+      },
+      {
+        "note_id": "pg-mvcc",
+        "step": 4,
+        "depends_on": [
+          "pg-basics"
+        ]
+      }
+    ],
+    "estimated_minutes": 57,
+    "checkpoints": [
+      {
+        "after_step": 2,
+        "type": "practice",
+        "note_id": "pg-lab-backup",
+        "description": "Ejecutar el lab en `notemark/pg-lab-backup.nm` antes de continuar."
+      }
+    ],
+    "coincides_with_shortest": false
+  },
+  {
+    "domain": "postgresql",
+    "goal": "repasar",
+    "note_path": [
+      {
+        "note_id": "[error] PG-001 → pg-mvcc",
+        "step": 3,
+        "depends_on": []
+      },
+      {
+        "note_id": "[error] PG-002 → pg-restore",
+        "step": 4,
+        "depends_on": []
+      }
+    ],
+    "estimated_minutes": 26,
+    "checkpoints": [
+      {
+        "after_step": 1,
+        "type": "auto-eval",
+        "note_id": "pg-basics",
+        "description": "Responder `## Autoevaluación` en `notemark/pg-basics.nm` antes de continuar."
+      }
+    ],
+    "coincides_with_shortest": false
+  }
+]

@@ -1,0 +1,34 @@
+---
+title: "Imágenes y capas"
+note-type: concept
+status: published
+summary: "Nota fixture docker-images."
+reading-time-minutes: 14
+language: es
+tags: [type/concept, domain/docker, f104/study-paths]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: docker
+---
+
+# Imágenes y capas
+
+## TL;DR
+
+TL;DR de docker-images.
+
+## Mecanismo
+
+Mecanismo de docker-images.
+
+## Autoevaluación
+
+### Recuerdo
+
+:::collapsible{{default_open=false}}
+Pregunta.
+Respuesta.
+> Fundamento: {{{{src:blk_test}}}}
+:::

@@ -1,0 +1,32 @@
+---
+title: "Lab: docker compose"
+note-type: practice
+status: published
+summary: "Lab fixture docker-lab-compose."
+reading-time-minutes: 25
+language: es
+tags: [type/practice, domain/docker, f104/study-paths]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: docker
+---
+
+# Lab: docker compose
+
+## TL;DR
+
+Lab de docker-lab-compose.
+
+## Enunciado
+
+Hacer el lab.
+
+## Entorno
+
+Entorno del lab.
+
+## Limpieza
+
+Limpieza.

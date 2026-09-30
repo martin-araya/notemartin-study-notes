@@ -1,0 +1,24 @@
+---
+title: "Restaurar con pg_restore"
+note-type: procedure
+status: published
+summary: "Procedure fixture pg-restore."
+reading-time-minutes: 12
+language: es
+tags: [type/procedure, domain/postgresql, f104/study-paths]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: postgresql
+---
+
+# Restaurar con pg_restore
+
+## TL;DR
+
+Procedure de pg-restore.
+
+## Procedimiento
+
+Pasos.

@@ -1,0 +1,34 @@
+---
+title: "MVCC y snapshot isolation"
+note-type: concept
+status: published
+summary: "Nota fixture pg-mvcc."
+reading-time-minutes: 14
+language: es
+tags: [type/concept, domain/postgresql, f104/study-paths]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: postgresql
+---
+
+# MVCC y snapshot isolation
+
+## TL;DR
+
+TL;DR de pg-mvcc.
+
+## Mecanismo
+
+Mecanismo de pg-mvcc.
+
+## Autoevaluación
+
+### Recuerdo
+
+:::collapsible{{default_open=false}}
+Pregunta de recuerdo.
+Respuesta reformulada.
+> Fundamento: {{{{src:blk_test}}}}
+:::
