@@ -109,6 +109,24 @@ related: "[[note:concept-base]], [[note:procedure-relacionada]]"
 | L2 | `{layer:l2}` | Enunciado + Entorno + Objetivo + Solución. 50-70% del total. |
 | L3 | `{layer:l3}` | Qué observar + Verificación + Limpieza + Lo que NO debe correrse + Cuándo omitir + Pistas + Variantes. Si > 100 líneas, `:::collapsible` con `default_open: false` (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `practice` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | — |
+| Aplicación | ✅ |
+| Diagnóstico | ✅ |
+| Decisión | — |
+| Predicción | ✅ |
+
+Notas: aplicación (uso correcto en el lab) + diagnóstico (qué falla si…)
++ predicción (qué log/efecto esperas). El lector verifica con el lab.
+La nota puede declarar `self-evaluation-types` como superset del default
+(nunca subset).
+
 ---
 
 ## §3 · Componentes mínimos
