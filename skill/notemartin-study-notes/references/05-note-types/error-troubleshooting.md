@@ -113,6 +113,24 @@ related: "[[note:procedure-de-recuperacion]], [[note:api-reference-afectada]]"
 | L2 | `{layer:l2}` | Síntomas, Causa raíz, Diagnóstico, Solución, Prevención, Confundibles. 70-90% del total. |
 | L3 | `{layer:l3}` | Árbol de diagnóstico + Tabla índice. Si la tabla tiene > 50 filas, `:::collapsible` con `default_open: false` (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `error-troubleshooting` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | — |
+| Aplicación | — |
+| Diagnóstico | ✅ |
+| Decisión | ✅ |
+| Predicción | — |
+
+Notas: solo diagnóstico + decisión aplican. El mensaje literal del error
+se preserva verbatim en las preguntas de diagnóstico (INV-09 + F98 L1).
+La nota puede declarar `self-evaluation-types` como superset del default
+(nunca subset).
+
 ---
 
 ## §3 · Componentes mínimos
@@ -245,6 +263,8 @@ Antes de publicar:
 - [ ] Cierre: `## Backlinks` + `## Queries`.
 - [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
 - [ ] `density_check.py --note <path>` exit 0.
+- [ ] **F103-1** Si el estudiante mantiene un living-doc de errores propios en `study/errors/<dominio>.md`, esta nota canónica lo enlaza desde `## Síntomas` o `## Causa raíz` con `[[study-error:<dominio>:<id>]]` (opcional, solo si el registro existe).
+- [ ] **F103-2** Esta nota canónica NO contiene el registro subjetivo del estudiante: solo el error objetivo + corrección + enlaces canónicos. El registro subjetivo vive en el living-doc separado (F103 §1).
 
 ---
 
