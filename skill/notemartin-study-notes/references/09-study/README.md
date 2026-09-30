@@ -8,18 +8,18 @@ Cargar tras cerrar un capítulo, al preparar repaso o al configurar el perfil de
 
 ## Estado actual
 
-Todos los archivos pendientes:
-
-- `self-evaluation.md` `[pendiente F102]`
-- `error-log.md` `[pendiente F103]`
-- `study-paths.md` `[pendiente F104]`
-- `goal-profiles.md` `[pendiente F105]`
+| Archivo | Fase | Estado |
+|---|---|---|
+| `self-evaluation.md` | F102 | **publicado** |
+| `error-log.md` | F103 | **publicado** |
+| `study-paths.md` | F104 | **publicado** |
+| `goal-profiles.md` | F105 | **publicado** |
 
 ## Quién lee / quién produce
 
 | Archivo | Lee | Produce |
 |---|---|---|
-| `self-evaluation.md` | Agente y estudiante | F102 |
-| `error-log.md` | Estudiante al registrar error | F103 |
+| `self-evaluation.md` | Agente al redactar y revisor al cerrar | F102 |
+| `error-log.md` | Estudiante al registrar error y al preparar repaso | F103 |
 | `study-paths.md` | Estudiante al planificar repaso | F104 |
 | `goal-profiles.md` | Estudiante al configurar objetivo | F105 |
