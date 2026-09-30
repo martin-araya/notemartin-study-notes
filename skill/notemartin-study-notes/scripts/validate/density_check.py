@@ -573,9 +573,26 @@ def _measure(parsed: ParsedNote, rules: Rules) -> List[Issue]:
                 ))
 
     # R8: ≥ 0.80 {src:} por bloque fáctico.
+    # Las secciones `## Autoevaluación` (F102) y `## Errores registrados` /
+    # `## Resumen de errores` (F103, en living-docs `note-type: error-log`)
+    # y sus H3 hijas quedan exentas: son ejercicios del lector o
+    # meta-documentales, no bloques fácticos con anclaje al SDM.
+    exempt_h2_starts = ("## Autoevaluaci", "## Errores registrados", "## Resumen de errores")
+    in_exempt = False
     factual_count = 0
     anchored_count = 0
     for section in parsed.sections:
+        if section.heading.startswith("## ") and any(
+            ex in section.heading for ex in exempt_h2_starts
+        ):
+            in_exempt = True
+            continue
+        if section.heading.startswith("## ") and not any(
+            ex in section.heading for ex in exempt_h2_starts
+        ):
+            in_exempt = False
+        if in_exempt:
+            continue
         for block in section.blocks:
             if block.is_factual:
                 factual_count += 1
