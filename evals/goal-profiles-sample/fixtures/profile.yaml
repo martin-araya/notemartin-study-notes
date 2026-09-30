@@ -1,0 +1,14 @@
+# Profile fixture para F105 — eval goal-profiles-sample.
+# Ver references/09-study/goal-profiles.md §2.
+
+use_case_profile: hybrid
+goal_profile: hybrid
+
+certification:
+  objectives:
+    - id: "ckad-core-1"
+      description: "Core Concepts (13 %)"
+    - id: "ckad-core-2"
+      description: "Configuration (18 %)"
+    - id: "psql-admin-1"
+      description: "Architecture and Design (15 %)"

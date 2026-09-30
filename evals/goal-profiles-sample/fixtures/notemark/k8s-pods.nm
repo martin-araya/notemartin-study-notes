@@ -1,0 +1,37 @@
+---
+title: "Kubernetes Pods"
+note-type: concept
+status: published
+summary: "Pods son la unidad mínima de scheduling en Kubernetes."
+reading-time-minutes: 10
+language: es
+tags: [type/concept, domain/kubernetes, f105/goal-profiles]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: kubernetes
+certification-objective: [ckad-core-1, ckad-core-2]
+---
+
+# Kubernetes Pods
+
+## TL;DR
+
+Pods son la unidad mínima de scheduling.
+
+## Mecanismo
+
+Un Pod encapsula uno o más contenedores con networking y storage compartido.
+{src:blk_k8s_pods_1}
+
+## Objetivos oficiales
+
+| objetivo_id | descripción | cobertura |
+|---|---|---|
+| ckad-core-1 | Core Concepts (13 %) | covered |
+| ckad-core-2 | Configuration (18 %) | covered |
+
+## Cobertura por objetivo
+
+Esta nota cubre los objetivos `ckad-core-1` y `ckad-core-2`.

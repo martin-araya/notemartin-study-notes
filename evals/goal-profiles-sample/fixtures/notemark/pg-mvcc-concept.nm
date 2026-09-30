@@ -1,0 +1,34 @@
+---
+title: "MVCC y snapshot isolation"
+note-type: concept
+status: published
+summary: "MVCC da a cada transacción un snapshot al inicio."
+reading-time-minutes: 12
+language: es
+tags: [type/concept, domain/postgresql, f105/goal-profiles]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: postgresql
+---
+
+# MVCC y snapshot isolation
+
+## TL;DR
+
+MVCC da a cada transacción un snapshot al inicio.
+
+## Mecanismo
+
+Cada fila lleva marcas `xmin` y `xmax`.
+{src:blk_pg_mvcc_1}
+
+## Decisiones de diseño
+
+1. **Snapshot por transacción.** Trade-off: simplicidad vs memoria por snapshot.
+2. **Marcas por fila.** Trade-off: espacio en heap vs index lookup.
+
+## Explicación oral
+
+Explicar MVCC a un entrevistador: 'cada transacción ve una foto fija del database al momento de empezar, sin esperar a que otras transacciones terminen. Esto evita lecturas sucias a costa de mantener múltiples versiones por fila.'

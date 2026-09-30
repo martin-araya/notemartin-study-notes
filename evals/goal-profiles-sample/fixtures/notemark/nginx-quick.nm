@@ -1,0 +1,24 @@
+---
+title: "Nginx quick start"
+note-type: configuration
+status: published
+summary: "Configuración mínima de nginx para producción."
+reading-time-minutes: 8
+language: es
+tags: [type/configuration, domain/nginx, f105/goal-profiles]
+source: "evals/corpus/sample/sdm.json"
+source-type: docs
+source-anchor: "section_path=/sample"
+retrieved: 2026-09-30
+domain: nginx
+---
+
+# Nginx quick start
+
+## TL;DR
+
+Esta guía cubre la configuración operativa mínima de nginx para producción. {src:blk_nginx_1}
+
+## Configuración
+
+Tabla de configuración. {src:blk_nginx_2}

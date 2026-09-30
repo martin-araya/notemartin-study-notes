@@ -1,0 +1,42 @@
+[
+  {
+    "domain": "postgresql",
+    "goal": "operate-hoy",
+    "note_path": [
+      {
+        "note_id": "pg-mvcc-concept",
+        "step": 1,
+        "depends_on": []
+      }
+    ],
+    "estimated_minutes": 12,
+    "checkpoints": [
+      {
+        "after_step": 1,
+        "type": "auto-eval",
+        "note_id": "pg-mvcc-concept",
+        "description": "Responder ## Autoevaluaci\u00f3n."
+      }
+    ]
+  },
+  {
+    "domain": "postgresql",
+    "goal": "entender-a-fondo",
+    "note_path": [
+      {
+        "note_id": "pg-mvcc-concept",
+        "step": 1,
+        "depends_on": []
+      }
+    ],
+    "estimated_minutes": 12,
+    "checkpoints": [
+      {
+        "after_step": 1,
+        "type": "auto-eval",
+        "note_id": "pg-mvcc-concept",
+        "description": "Responder ## Autoevaluaci\u00f3n."
+      }
+    ]
+  }
+]
