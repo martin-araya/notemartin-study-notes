@@ -1,0 +1,39 @@
+schema_version: "1.0.0"
+
+# Globales (4 paquetes del entorno base).
+globals:
+  python3.9+: req
+  git: rec
+  curl: req
+  unzip: rec
+
+# Extras por tier (paquetes Python de la skill).
+extras:
+  by_tier:
+    req:
+      - PyYAML
+      - jsonschema
+    rec:
+      - pypdf
+      - Pillow
+      - pypdfium2
+      - opencv-python-headless
+      - numpy
+    opt:
+      - easyocr
+      - paddleocr
+
+# Binarios externos del sistema.
+binaries:
+  req:
+    - tesseract
+  rec:
+    - pdfium
+  opt: []
+
+# Mapeo módulo_import → paquete_pip (caso de nombres distintos).
+alias:
+  cv2: opencv-python-headless
+  yaml: PyYAML
+  jsonschema: jsonschema
+  PIL: Pillow

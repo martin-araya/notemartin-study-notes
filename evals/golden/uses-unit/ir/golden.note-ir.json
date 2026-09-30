@@ -1,0 +1,19 @@
+{
+  "note_id": "golden-unit",
+  "nodes": [
+    {
+      "id": "gu1",
+      "node": "default",
+      "attrs": {
+        "value": 128,
+        "unit": "MB"
+      },
+      "source_refs": [
+        {
+          "block_id": "bbbccc222333",
+          "source_hash": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ]
+    }
+  ]
+}
