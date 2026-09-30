@@ -149,6 +149,16 @@
         "length": {
           "type": "integer",
           "minimum": 1
+        },
+        "goal": {
+          "type": "string",
+          "enum": ["operate-hoy", "entender-a-fondo", "repasar"],
+          "description": "F104 (Fase 104) añade el campo `goal` para mapear la ruta del grafo a uno de los 3 objetivos cerrados del estudiante. Opcional: si está ausente, se asume `operate-hoy` (camino más corto). `additionalProperties: false` mantiene el schema cerrado."
+        },
+        "estimated_minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "F104 (Fase 104) añade `estimated_minutes`: suma de `reading-time-minutes` (F47 §5.20) de las notas en `note_path`. Opcional; calculado por `study_paths.py` (Q3)."
         }
       }
     },
