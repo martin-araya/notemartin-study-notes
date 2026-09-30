@@ -30,7 +30,7 @@ El umbral es **100 % de `must-keep` con estado terminal** (`written`/`merged`/`d
 |---|---|
 | L2 (agente al cerrar workdir) | Ejecuta `completeness.py audit` antes de marcar L2 como `done` en el manifest. |
 | F44 (note-plan) | Lo consulta para diseñar notas que cubran todos los must-keep antes de cerrar. |
-| F114 (quality gate) | Lo corre continuamente para detectar drift entre ledger y SDM. |
+| F114 (quality gate) | Lo corre continuamente para detectar drift entre ledger y SDM; `scripts/audit/fidelity_audit.py` complementa con auditoría semántica del IR (F114). |
 | F43 (este doc, recurrente) | Cada vez que se cierra un workdir o se actualiza el SDM. |
 | F118 (suite automatizada) | Corre `evals/completeness-sample/run_eval.py` para verificar los 3 criterios. |
 

@@ -1,0 +1,16 @@
+{
+  "note_id": "test-coverage",
+  "nodes": [
+    {
+      "id": "n1",
+      "node": "paragraph",
+      "text": "shared_buffers is the cache.",
+      "source_refs": [
+        {
+          "block_id": "111222333444",
+          "source_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "note_id": "test-note",
+  "nodes": [
+    {
+      "id": "n1",
+      "node": "paragraph",
+      "text": "Some factual claim that should reference the SDM block.",
+      "external": false,
+      "derived": false,
+      "source_refs": []
+    },
+    {
+      "id": "n2",
+      "node": "paragraph",
+      "text": "Another claim with proper backing.",
+      "external": false,
+      "derived": false,
+      "source_refs": [
+        {
+          "block_id": "abc123456789",
+          "source_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "source": {
+    "hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "sections": [
+    {
+      "id": "b1b1b1b1abcd",
+      "title": "Intro",
+      "blocks": [
+        {
+          "id": "def123456789",
+          "anchor": {
+            "page": 1
+          },
+          "content": {
+            "type": "prose",
+            "text": "PostgreSQL is an ORDBMS. The default shared_buffers is 128MB. The parameter work_mem defaults to 4MB. Error code FATAL 534 occurs when configuration is invalid. Version 16 introduced scram-sha-256 as default password_encryption."
+          },
+          "source": "native"
+        }
+      ]
+    }
+  ]
+}

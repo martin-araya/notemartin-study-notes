@@ -1,0 +1,18 @@
+{
+  "note_id": "test-err",
+  "nodes": [
+    {
+      "id": "e1",
+      "node": "error-code",
+      "attrs": {
+        "code": "E_FAKE_999"
+      },
+      "source_refs": [
+        {
+          "block_id": "fab123456789",
+          "source_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      ]
+    }
+  ]
+}

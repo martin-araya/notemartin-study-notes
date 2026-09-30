@@ -1,0 +1,32 @@
+{
+  "note_id": "test-no-unit",
+  "nodes": [
+    {
+      "id": "u1",
+      "node": "default",
+      "attrs": {
+        "value": 128,
+        "unit": "MB"
+      },
+      "source_refs": [
+        {
+          "block_id": "999aaa111bbb",
+          "source_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "node": "default",
+      "attrs": {
+        "value": 4
+      },
+      "source_refs": [
+        {
+          "block_id": "999aaa111bbb",
+          "source_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      ]
+    }
+  ]
+}

@@ -32,7 +32,7 @@ La fidelidad al original es la promesa central del proyecto (architecture.md §3
 | L3 (agente al redactar) | Antes de declarar un valor técnico (default, parámetro, etc.), busca en el ledger. Si no existe, escribe la ausencia. |
 | F43 (auditoría de no-pérdida) | Verifica cobertura: todo bloque externo está en `:::external`, todo valor técnico está en el ledger. |
 | F44 (note-plan) | Consulta la lista cerrada de prohibiciones al diseñar la división del trabajo. |
-| F114 (quality gate) | Mide la proporción de bloques con tag por nota y por destino. |
+| F114 (quality gate) | Mide la proporción de bloques con tag por nota y por destino; ejecuta `scripts/audit/fidelity_audit.py` (3 pasadas: forward + content + sampling). |
 | F118 (suite automatizada) | Corre `evals/fidelity-sample/run_eval.py` para verificar los 3 criterios. |
 
 **No se aplica a**: ingesta (L0–L1), render puro sin nota (no aplica), destinos vacíos.

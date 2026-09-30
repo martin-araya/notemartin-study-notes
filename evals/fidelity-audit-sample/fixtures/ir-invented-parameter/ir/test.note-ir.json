@@ -1,0 +1,33 @@
+{
+  "note_id": "test-param",
+  "nodes": [
+    {
+      "id": "p1",
+      "node": "parameter",
+      "attrs": {
+        "name": "custom_param_X42",
+        "type": "string"
+      },
+      "source_refs": [
+        {
+          "block_id": "def123456789",
+          "source_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "node": "parameter",
+      "attrs": {
+        "name": "shared_buffers",
+        "type": "size"
+      },
+      "source_refs": [
+        {
+          "block_id": "def123456789",
+          "source_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ]
+    }
+  ]
+}

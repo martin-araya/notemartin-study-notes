@@ -1,0 +1,37 @@
+{
+  "source": {
+    "hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "sections": [
+    {
+      "id": "d1d1d1d1abcd",
+      "title": "Parameters",
+      "blocks": [
+        {
+          "id": "111222333444",
+          "anchor": {
+            "page": 1
+          },
+          "content": {
+            "type": "parameter",
+            "name": "shared_buffers",
+            "text": "shared_buffers default 128MB"
+          },
+          "source": "native"
+        },
+        {
+          "id": "555666777888",
+          "anchor": {
+            "page": 1
+          },
+          "content": {
+            "type": "parameter",
+            "name": "work_mem",
+            "text": "work_mem default 4MB for sort operations"
+          },
+          "source": "native"
+        }
+      ]
+    }
+  ]
+}
