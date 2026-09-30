@@ -61,9 +61,9 @@ DOC_LINE_LIMIT = 600
 
 EXPECTED_SECTIONS = (
     "## §1 · Propósito y alcance",
-    "## §2 · Los 12 anti-patrones transversales",
+    "## §2 · Los 19 anti-patrones transversales",
     "## §3 · Señales de diagnóstico",
-    "## §4 · Lista cerrada de los 12 AP",
+    "## §4 · Lista cerrada de los 19 AP",
     "## §5 · Anti-patrones específicos cubiertos por F94-F99",
     "## §6 · Checklist de cierre",
     "## §7 · Wirings y referencias cruzadas",
