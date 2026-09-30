@@ -114,6 +114,24 @@ related: "[[note:procedure-de-migracion]], [[note:concept-del-dominio]]"
 | L2 | `{layer:l2}` | Modelo, Entidades, Campos, Relaciones, Claves. 60-80% del total. |
 | L3 | `{layer:l3}` | Integridad, Consultas típicas, Evolución. Si > 100 líneas, `:::collapsible` con `default_open: false` (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `data-model` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | ✅ |
+| Diagnóstico | — |
+| Decisión | — |
+| Predicción | — |
+
+Notas: recuerdo (entidades, campos) + aplicación (consultas típicas).
+Decisión se añade si la nota discute normalización o desnormalización
+(sub-tipo `data-model-with-normalization`). La nota puede declarar
+`self-evaluation-types` como superset del default.
+
 ---
 
 ## §3 · Componentes mínimos
