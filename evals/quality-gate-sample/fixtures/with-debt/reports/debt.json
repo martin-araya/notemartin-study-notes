@@ -1,0 +1,24 @@
+[
+  {
+    "id": "QG-DEBT-0001",
+    "kind": "warning",
+    "scope": "global",
+    "reason": "renombrar capítulo en próximo ciclo",
+    "raised_by": "human",
+    "rule_id": "V-MISC-001",
+    "created_at": "2026-09-01T00:00:00+00:00",
+    "expires_at": "2026-12-01",
+    "accepted_by": "maría"
+  },
+  {
+    "id": "QG-DEBT-0002",
+    "kind": "warning",
+    "scope": "global",
+    "reason": "warning pendiente de resolver",
+    "raised_by": "validators",
+    "rule_id": "V-MISC-002",
+    "created_at": "2026-09-15T00:00:00+00:00",
+    "expires_at": "2026-10-15",
+    "accepted_by": null
+  }
+]

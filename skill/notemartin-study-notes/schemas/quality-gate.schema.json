@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://notemartin.study/schemas/quality-gate.schema.json",
+  "title": "notemartin-study-notes quality-gate report",
+  "description": "Reporte de la puerta de calidad (F115). Agrega F43, F113, F114, F7 (auto) y F108 (opcional). Decide si el workdir puede promover notas a status: verified.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "workdir",
+    "source_hash",
+    "generated_at",
+    "summary",
+    "blocking",
+    "coverage",
+    "rubric",
+    "not_covered",
+    "debt_registry",
+    "sources"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del esquema. Const 1.0.0 (F115)."
+    },
+    "workdir": {
+      "type": "string",
+      "description": "Ruta absoluta al workdir auditado."
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256 hex 64 chars del SDM canónico."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp ISO 8601 de generación del reporte."
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["errors", "warnings", "info"],
+      "properties": {
+        "errors": {"type": "integer", "minimum": 0},
+        "warnings": {"type": "integer", "minimum": 0},
+        "info": {"type": "integer", "minimum": 0}
+      },
+      "description": "Agregado de issues de F43+F113+F114 (F43 critical se mapea a error)."
+    },
+    "blocking": {
+      "type": "boolean",
+      "description": "true si summary.errors>0 OR coverage<min OR debt blocker non-accepted. Bloquea promotion a verified."
+    },
+    "coverage": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Fracción 0..1 de secciones del SDM con unidad asignada en el ledger."
+    },
+    "rubric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fidelity", "coverage", "traceability", "render",
+        "pedagogy", "structure", "components", "operational"
+      ],
+      "properties": {
+        "fidelity":     {"$ref": "#/$defs/rubricDim"},
+        "coverage":     {"$ref": "#/$defs/rubricDim"},
+        "traceability": {"$ref": "#/$defs/rubricDim"},
+        "render":       {"$ref": "#/$defs/rubricDim"},
+        "pedagogy":     {"$ref": "#/$defs/rubricDimHuman"},
+        "structure":    {"$ref": "#/$defs/rubricDimHuman"},
+        "components":   {"$ref": "#/$defs/rubricDimHuman"},
+        "operational":  {"$ref": "#/$defs/rubricDimHuman"}
+      },
+      "description": "8 dimensiones del rubric.md (F7). Las 4 detectables tienen level 0-4; las 4 humanas quedan con level null."
+    },
+    "not_covered": {
+      "type": "array",
+      "description": "Secciones del SDM sin unidad en el ledger. Lista explícita (puede ser []).",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["section_path", "reason"],
+        "properties": {
+          "section_path": {"type": "string", "minLength": 1},
+          "reason": {
+            "type": "string",
+            "enum": [
+              "out-of-scope-by-user",
+              "navigation",
+              "boilerplate",
+              "redundante",
+              "futuro"
+            ]
+          }
+        }
+      }
+    },
+    "debt_registry": {
+      "type": "array",
+      "description": "Deuda aceptada o activa.",
+      "items": {"$ref": "#/$defs/debtEntry"}
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["completeness", "validators", "fidelity"],
+      "properties": {
+        "completeness": {"type": ["object", "null"]},
+        "validators":   {"type": ["object", "null"]},
+        "fidelity":     {"type": ["object", "null"]},
+        "dedup":        {"type": ["object", "null"]}
+      },
+      "description": "JSON completos de las 4 fuentes. null si la fuente no se pudo ejecutar."
+    }
+  },
+  "$defs": {
+    "rubricDim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "justification"],
+      "properties": {
+        "level": {"type": "integer", "minimum": 0, "maximum": 4},
+        "justification": {"type": "string", "minLength": 1}
+      },
+      "description": "Dimensión auto-aplicada (4 detectables)."
+    },
+    "rubricDimHuman": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "justification"],
+      "properties": {
+        "level": {"type": "null"},
+        "justification": {"type": "string", "minLength": 1}
+      },
+      "description": "Dimensión que requiere evaluación humana (rubric §3.4-3.7)."
+    },
+    "debtEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "kind", "scope", "reason", "raised_by", "rule_id",
+        "created_at", "expires_at", "accepted_by"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^QG-DEBT-\\d{4}$",
+          "description": "Identificador único cerrado."
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["blocker", "warning", "info"]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "description": "note-id, section_path, o 'global'."
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "raised_by": {
+          "type": "string",
+          "enum": ["completeness", "validators", "fidelity", "human"]
+        },
+        "rule_id": {
+          "type": "string",
+          "pattern": "^V-[A-Z]+-\\d+$",
+          "description": "V-XXX-NNN del validador que levantó la deuda."
+        },
+        "created_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": ["string", "null"], "format": "date-time"},
+        "accepted_by": {"type": ["string", "null"]}
+      }
+    }
+  }
+}

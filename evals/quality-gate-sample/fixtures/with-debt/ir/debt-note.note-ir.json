@@ -1,0 +1,16 @@
+{
+  "note_id": "debt-note",
+  "nodes": [
+    {
+      "id": "n1",
+      "node": "paragraph",
+      "text": "Body.",
+      "source_refs": [
+        {
+          "block_id": "333333333333",
+          "source_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      ]
+    }
+  ]
+}

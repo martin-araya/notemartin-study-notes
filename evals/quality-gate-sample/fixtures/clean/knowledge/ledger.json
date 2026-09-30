@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "clean",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "entries": [
+    {
+      "unit_id": "u1",
+      "source_section_path": "/ch01/intro",
+      "source_block_ids": [
+        "aaaaaaaaaaaa"
+      ],
+      "type": "definition",
+      "criticality": "must-keep",
+      "state": "kept",
+      "target_note": "clean-intro"
+    },
+    {
+      "unit_id": "u2",
+      "source_section_path": "/ch02/params",
+      "source_block_ids": [
+        "cccccccccccc"
+      ],
+      "type": "parameter",
+      "criticality": "must-keep",
+      "state": "kept",
+      "target_note": "clean-params"
+    }
+  ]
+}

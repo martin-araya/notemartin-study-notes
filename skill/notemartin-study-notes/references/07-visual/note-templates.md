@@ -56,7 +56,7 @@ vacíos:
 | 1 | **Resumen** | `summary` | string (≤ 200 chars) |
 | 2 | **Procedencia** | `source` + `source-type` + `source-anchor` + `source-url` + `retrieved` | compuesto |
 | 3 | **Versión** | `product` + `product-version` | compuesto |
-| 4 | **Estado** | `status` | enum (3: `draft` / `published` / `archived`) |
+| 4 | **Estado** | `status` | enum (4: `draft` / `published` / `archived` / `verified`; F115) |
 | 5 | **Tiempo de lectura** | `reading-time-minutes` | int ≥ 1 |
 
 La composición de los campos compuestos (Procedencia, Versión) sigue las reglas

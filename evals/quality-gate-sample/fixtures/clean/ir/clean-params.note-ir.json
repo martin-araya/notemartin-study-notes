@@ -1,0 +1,21 @@
+{
+  "note_id": "clean-params",
+  "nodes": [
+    {
+      "id": "p1",
+      "node": "parameter",
+      "attrs": {
+        "name": "shared_buffers",
+        "type": "size",
+        "value": 128,
+        "unit": "MB"
+      },
+      "source_refs": [
+        {
+          "block_id": "cccccccccccc",
+          "source_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    }
+  ]
+}

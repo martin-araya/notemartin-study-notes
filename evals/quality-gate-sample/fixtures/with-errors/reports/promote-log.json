@@ -1,0 +1,14 @@
+{
+  "run_id": "9eebcbc9-0a5f-4152-85af-71d1ee19ee8a",
+  "promoted_at": "2026-09-30T20:04:56.858112+00:00",
+  "promoted_count": 1,
+  "log": [
+    {
+      "note_path": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/quality-gate-sample/fixtures/with-errors/notemark/err-note.nm",
+      "before": "published",
+      "after": "verified",
+      "verified_at": "2026-09-30T20:04:56.858112+00:00",
+      "quality_gate_run_id": "9eebcbc9-0a5f-4152-85af-71d1ee19ee8a"
+    }
+  ]
+}

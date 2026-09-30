@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0.0",
+  "workdir": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/quality-gate-sample/fixtures/with-incomplete-coverage",
+  "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "generated_at": "2026-09-30T20:05:13.888252+00:00",
+  "summary": {
+    "errors": 0,
+    "warnings": 1,
+    "info": 0
+  },
+  "blocking": true,
+  "coverage": 0.5,
+  "rubric": {
+    "fidelity": {
+      "level": 4,
+      "justification": "0 errores/warnings en F114"
+    },
+    "coverage": {
+      "level": 0,
+      "justification": "50% cobertura"
+    },
+    "traceability": {
+      "level": 4,
+      "justification": "0 nodos sin trazabilidad"
+    },
+    "render": {
+      "level": 4,
+      "justification": "0 unidades perdidas en cross-target"
+    },
+    "pedagogy": {
+      "level": null,
+      "justification": "human evaluation required (rubric §3.4)"
+    },
+    "structure": {
+      "level": null,
+      "justification": "human evaluation required (rubric §3.5)"
+    },
+    "components": {
+      "level": null,
+      "justification": "human evaluation required (rubric §3.6)"
+    },
+    "operational": {
+      "level": null,
+      "justification": "human evaluation required (rubric §3.7)"
+    }
+  },
+  "not_covered": [
+    {
+      "section_path": "/ch02/uncovered",
+      "reason": "futuro"
+    },
+    {
+      "section_path": "222222222222",
+      "reason": "futuro"
+    }
+  ],
+  "debt_registry": [],
+  "sources": {
+    "completeness": null,
+    "validators": null,
+    "fidelity": {
+      "schema_version": "1.0.0",
+      "validator": "fidelity_audit",
+      "target": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/quality-gate-sample/fixtures/with-incomplete-coverage",
+      "started_at": "2026-09-30T20:05:13.885578+00:00",
+      "duration_ms": 0,
+      "summary": {
+        "errors": 0,
+        "warnings": 1,
+        "info": 0
+      },
+      "sample_metadata": {
+        "seed": 0,
+        "sample_rate": 0.1,
+        "must_keep_sampled": 0,
+        "editorial_sampled": 0,
+        "context_sampled": 2,
+        "total_sampled": 2
+      },
+      "issues": [
+        {
+          "rule_id": "V-FAUDIT-06",
+          "severity": "warning",
+          "message": "bloque SDM prose no cubierto en IR: 222222222222",
+          "file": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/quality-gate-sample/fixtures/with-incomplete-coverage/sdm.json",
+          "node": "sdm.222222222222",
+          "fix_hint": "añade source_refs en algún IR con block_id=222222222222"
+        }
+      ]
+    },
+    "dedup": null
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "source": {
+    "hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+  },
+  "sections": [
+    {
+      "id": "ffffffffffff",
+      "title": "Covered",
+      "path": "/ch01/covered",
+      "blocks": [
+        {
+          "id": "111111111111",
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/covered"
+          },
+          "content": {
+            "type": "prose",
+            "text": "Covered text."
+          },
+          "source": "native"
+        }
+      ]
+    },
+    {
+      "id": "aaaaaaaaaaaa",
+      "title": "Uncovered",
+      "path": "/ch02/uncovered",
+      "blocks": [
+        {
+          "id": "222222222222",
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/uncovered"
+          },
+          "content": {
+            "type": "prose",
+            "text": "Uncovered text."
+          },
+          "source": "native"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0.0",
+  "workdir": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/quality-gate-sample/fixtures/with-debt",
+  "source_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "generated_at": "2026-09-30T20:05:14.212270+00:00",
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "info": 0
+  },
+  "blocking": false,
+  "coverage": 1.0,
+  "rubric": {
+    "fidelity": {
+      "level": 4,
+      "justification": "0 errores/warnings en F114"
+    },
+    "coverage": {
+      "level": 4,
+      "justification": "100% cobertura"
+    },
+    "traceability": {
+      "level": 4,
+      "justification": "0 nodos sin trazabilidad"
+    },
+    "render": {
+      "level": 4,
+      "justification": "0 unidades perdidas en cross-target"
+    },
+    "pedagogy": {
+      "level": null,
+      "justification": "human evaluation required (rubric §3.4)"
+    },
+    "structure": {
+      "level": null,
+      "justification": "human evaluation required (rubric §3.5)"
+    },
+    "components": {
+      "level": null,
+      "justification": "human evaluation required (rubric §3.6)"
+    },
+    "operational": {
+      "level": null,
+      "justification": "human evaluation required (rubric §3.7)"
+    }
+  },
+  "not_covered": [],
+  "debt_registry": [
+    {
+      "id": "QG-DEBT-0001",
+      "kind": "warning",
+      "scope": "global",
+      "reason": "renombrar capítulo en próximo ciclo",
+      "raised_by": "human",
+      "rule_id": "V-MISC-001",
+      "created_at": "2026-09-01T00:00:00+00:00",
+      "expires_at": "2026-12-01",
+      "accepted_by": "maría"
+    },
+    {
+      "id": "QG-DEBT-0002",
+      "kind": "warning",
+      "scope": "global",
+      "reason": "warning pendiente de resolver",
+      "raised_by": "validators",
+      "rule_id": "V-MISC-002",
+      "created_at": "2026-09-15T00:00:00+00:00",
+      "expires_at": "2026-10-15",
+      "accepted_by": null
+    }
+  ],
+  "sources": {
+    "completeness": {
+      "audit_metadata": {
+        "version": "1.0.0",
+        "built_at": "2026-09-30T20:05:13.986841+00:00",
+        "spec": "references/10-quality/completeness-audit.md",
+        "schema_warnings": []
+      },
+      "forward_pass": {
+        "findings": []
+      },
+      "inverse_sample": {
+        "sample_metadata": {
+          "total_blocks": 1,
+          "must_keep_count": 0,
+          "editorial_severity_count": 0,
+          "context_pool_count": 1,
+          "sampled_must_keep": 0,
+          "sampled_context": 1,
+          "sampled_context_pct": 100.0,
+          "sample_rate": 0.1,
+          "seed": 0,
+          "must_keep_coverage_pct": 100.0
+        },
+        "findings": []
+      },
+      "threshold_gate": {
+        "findings": []
+      },
+      "findings": [],
+      "summary": {
+        "total_findings": 0,
+        "critical": 0,
+        "warnings_count": 0,
+        "must_keep_total": 1,
+        "must_keep_terminal": 0
+      }
+    },
+    "validators": null,
+    "fidelity": {
+      "schema_version": "1.0.0",
+      "validator": "fidelity_audit",
+      "target": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/quality-gate-sample/fixtures/with-debt",
+      "started_at": "2026-09-30T20:05:14.209117+00:00",
+      "duration_ms": 0,
+      "summary": {
+        "errors": 0,
+        "warnings": 0,
+        "info": 0
+      },
+      "sample_metadata": {
+        "seed": 0,
+        "sample_rate": 0.1,
+        "must_keep_sampled": 0,
+        "editorial_sampled": 0,
+        "context_sampled": 1,
+        "total_sampled": 1
+      },
+      "issues": []
+    },
+    "dedup": null
+  }
+}

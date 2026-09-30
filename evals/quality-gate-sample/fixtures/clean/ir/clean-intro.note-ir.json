@@ -1,0 +1,16 @@
+{
+  "note_id": "clean-intro",
+  "nodes": [
+    {
+      "id": "n1",
+      "node": "paragraph",
+      "text": "PostgreSQL is an ORDBMS.",
+      "source_refs": [
+        {
+          "block_id": "aaaaaaaaaaaa",
+          "source_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    }
+  ]
+}

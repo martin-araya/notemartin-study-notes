@@ -1,0 +1,24 @@
+{
+  "note_id": "err-note",
+  "nodes": [
+    {
+      "id": "n1",
+      "node": "paragraph",
+      "text": "A factual claim with NO source_refs.",
+      "external": false,
+      "derived": false,
+      "source_refs": []
+    },
+    {
+      "id": "n2",
+      "node": "paragraph",
+      "text": "A claim with proper backing.",
+      "source_refs": [
+        {
+          "block_id": "eeeeeeeeeeee",
+          "source_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ]
+    }
+  ]
+}

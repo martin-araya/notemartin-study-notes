@@ -74,6 +74,7 @@ soporte nativo (criterio #3).
 | **INV-P6** *(F47)* | `retrieved` y `review-next` usan exclusivamente formato `YYYY-MM-DD` (ISO 8601 sin hora). | El parser rechaza formatos con hora, zona, o separadores distintos. |
 | **INV-P7** *(F47)* | `source-url` debe ser URL válida (`http://` o `https://`). | El validador (F49) lo reporta como warning; el parser no rechaza (algunos corpus sintéticos no la tienen). |
 | **INV-P8** *(F47)* | Los valores de los enums cerrados (`note-type`, `status`, `source-type`, `language`, `coverage`, `difficulty`) deben pertenecer exactamente a la lista de §5. | El parser rechaza valores fuera del enum. |
+| **INV-P12** *(F115)* | `status: verified` requiere haber pasado la puerta de calidad completa (`scripts/quality_gate.py promote` exit 0). El campo `verified_at` (ISO 8601) y `quality_gate_run_id` (UUID) se añaden en la promoción. | `quality_gate.py promote` modifica el frontmatter. |
 | **INV-P9** *(F47)* | El orden en el archivo es: frontmatter (`---` … `---`), luego cuerpo. Ningún bloque antes del frontmatter. | El parser (F48) espera frontmatter al inicio; si hay otro bloque, falla. |
 
 ## §4 · Conjunto canónico (resumen)
@@ -84,7 +85,7 @@ Las 24 propiedades cerradas. Las 5 primeras (universales) son obligatorias en no
 |---|---|---|---|
 | 1 | `title` | string | ✅ |
 | 2 | `note-type` | enum (15) | ✅ |
-| 3 | `status` | enum (3) | ✅ |
+| 3 | `status` | enum (4) | ✅ |
 | 4 | `summary` | string (≤ 200 chars) | ✅ (en published) |
 | 5 | `reading-time-minutes` | int ≥ 1 | ✅ (en published) |
 | 6 | `tags` | array of string | |
@@ -158,12 +159,13 @@ validación → mapeo por destino (7) → notas.
 
 ### 5.3 `status`  {#prop-status}
 
-- **Tipo:** enum (3 valores).
+- **Tipo:** enum (4 valores; F115 añadió `verified`).
 - **Obligatoriedad:** siempre obligatoria (INV-P5). Universal.
 - **Descripción:** estado de publicación de la nota; controla visibilidad en
   destinos con indexación.
 - **Valores:** `draft` (en redacción), `published` (lista para consumir),
-  `archived` (obsoleta, conservada por trazabilidad).
+  `archived` (obsoleta, conservada por trazabilidad),
+  `verified` (promovida por `scripts/quality_gate.py promote` exit 0; INV-P12).
 - **Mapeo por destino:**
   - Obsidian → `Properties.status`; filtro Dataview por `status != archived`.
   - Notion API → `page.properties.status` (columna `select`).

@@ -1,0 +1,26 @@
+{
+  "source": {
+    "hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "sections": [
+    {
+      "id": "cccccccccccc",
+      "title": "Body",
+      "path": "/ch01/body",
+      "blocks": [
+        {
+          "id": "333333333333",
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/body"
+          },
+          "content": {
+            "type": "prose",
+            "text": "Body text."
+          },
+          "source": "native"
+        }
+      ]
+    }
+  ]
+}

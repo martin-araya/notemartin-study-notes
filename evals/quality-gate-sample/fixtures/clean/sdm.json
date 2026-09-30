@@ -1,0 +1,46 @@
+{
+  "source": {
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "sections": [
+    {
+      "id": "aaaaaaaaaaaa",
+      "title": "Intro",
+      "path": "/ch01/intro",
+      "blocks": [
+        {
+          "id": "aaaaaaaaaaaa",
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/intro"
+          },
+          "content": {
+            "type": "prose",
+            "text": "PostgreSQL is an ORDBMS."
+          },
+          "source": "native"
+        }
+      ]
+    },
+    {
+      "id": "bbbbbbbbbbbb",
+      "title": "Parameters",
+      "path": "/ch02/params",
+      "blocks": [
+        {
+          "id": "cccccccccccc",
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/params"
+          },
+          "content": {
+            "type": "parameter",
+            "name": "shared_buffers",
+            "text": "shared_buffers default 128MB"
+          },
+          "source": "native"
+        }
+      ]
+    }
+  ]
+}

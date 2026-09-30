@@ -1,0 +1,21 @@
+{
+  "run_id": "f3f273c6-16a8-49ab-a5f9-02630ee5b9a6",
+  "promoted_at": "2026-09-30T20:05:13.226740+00:00",
+  "promoted_count": 2,
+  "log": [
+    {
+      "note_path": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/quality-gate-sample/fixtures/clean/notemark/clean-intro.nm",
+      "before": "published",
+      "after": "verified",
+      "verified_at": "2026-09-30T20:05:13.226740+00:00",
+      "quality_gate_run_id": "f3f273c6-16a8-49ab-a5f9-02630ee5b9a6"
+    },
+    {
+      "note_path": "/Users/martin/Desktop/projects/notemartin-study-notes/evals/quality-gate-sample/fixtures/clean/notemark/clean-params.nm",
+      "before": "published",
+      "after": "verified",
+      "verified_at": "2026-09-30T20:05:13.226740+00:00",
+      "quality_gate_run_id": "f3f273c6-16a8-49ab-a5f9-02630ee5b9a6"
+    }
+  ]
+}

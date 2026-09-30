@@ -1,0 +1,16 @@
+{
+  "note_id": "inc-note",
+  "nodes": [
+    {
+      "id": "n1",
+      "node": "paragraph",
+      "text": "Covered.",
+      "source_refs": [
+        {
+          "block_id": "111111111111",
+          "source_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ]
+    }
+  ]
+}

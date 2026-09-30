@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "with-incomplete-coverage",
+    "hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+  },
+  "entries": [
+    {
+      "unit_id": "u1",
+      "source_section_path": "/ch01/covered",
+      "source_block_ids": [
+        "111111111111"
+      ],
+      "type": "definition",
+      "criticality": "must-keep",
+      "state": "kept",
+      "target_note": "inc-note"
+    }
+  ]
+}
