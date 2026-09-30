@@ -118,6 +118,25 @@ Reglas:
 - Si excede, partir en `concept` (F78) o `procedure` (F80).
 - La brevedad es parte del contrato.
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `glossary-term` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | — |
+| Diagnóstico | — |
+| Decisión | — |
+| Predicción | — |
+
+Notas: **único tipo donde solo recuerdo aplica** — terminología pura.
+La `glossary-term` se considera referencia pura (ver
+`self-evaluation.md` §4); el término + la definición breve son la
+unidad de recuerdo. La nota puede declarar `self-evaluation-types` como
+superset del default (nunca subset).
+
 ---
 
 ## §3 · Componentes mínimos
