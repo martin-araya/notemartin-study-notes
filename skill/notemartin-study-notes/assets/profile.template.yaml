@@ -134,25 +134,12 @@ citation:
   mark_derived: visible            # visible | muted | footnote
   mark_external: visible
 
-# === Overrides comunes por dominio (INV-15: al menos 2 dominios) ===
-#
-# Documentación técnica de producto → Notion:
-#   targets.active: [notion]
-#   targets.notion.database_id: "<uuid>"
-#   use_case_profile: reference
-#
-# Libro técnico escaneado en español:
-#   ocr.languages: [es]
-#   ocr.confidence_threshold: 0.6
-#   writing.language: es
-#
-# Repaso espaciado para certificación:
-#   targets.active: [anki]
-#   targets.anki.deck: "Cert-Kubernetes"
-#   use_case_profile: study
-#
-# Capítulo de libro técnico + Notion como wiki:
-#   writing.language: en
-#   writing.style: intuition-first
-#   targets.active: [notion]
-#   use_case_profile: hybrid
+# === Modo obra completa (F106, opt-in) ===
+# Activar SOLO si la fuente es un libro (≥ 2 capítulos con índice detectable).
+# Ver `references/00-pipeline/book-mode.md` §3 para cuándo aplica.
+# Por defecto desactivado; el agente decide cuándo invocar `book_mode.py init`.
+book_mode:
+  enabled: false                  # true para activar el orquestador F106
+  consolidation_every: 5          # cada cuántos capítulos consolidar (N, default 5)
+  auto_consolidate: false         # true = consolidar automáticamente al cerrar N-ésimo capítulo
+

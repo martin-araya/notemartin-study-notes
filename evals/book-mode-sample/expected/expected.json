@@ -1,0 +1,13 @@
+{
+  "after_init_chapters": 11,
+  "after_init_has_preface": true,
+  "after_init_total_chapters": 10,
+  "after_init_edges_min": 2,
+  "after_ch2_registered_concepts": [
+    "mvcc"
+  ],
+  "after_consolidation_at_ch5": "ch05",
+  "ap_bm1_violation_count": 1,
+  "ap_bm2_violation_present": true,
+  "ap_bm4_force_preserves_previous": true
+}

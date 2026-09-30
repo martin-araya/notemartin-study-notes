@@ -15,6 +15,7 @@ Cargar al construir el `knowledge/` del workdir (L2). Cada archivo se cita por s
 - `terminology.md`
 - `conflicts.md` `[pendiente F41]`
 - `conflicts.md`
+- `dedup.md` `[existente]` — F108: deduplicación y fusión (detector canónico/alias/similarity + orquestador de apply sobre F50).
 - `note-plan.md`
 
 ## Quién lee / quién produce
@@ -29,4 +30,5 @@ Cargar al construir el `knowledge/` del workdir (L2). Cada archivo se cita por s
 | `conflicts.md` | Agente al detectar contradicciones | F41 |
 | `conflicts.md` | Agente en L2/L3 al detectar y documentar contradicciones; F43 auditoría; F118 evals | F41 |
 | `conflicts.md` | Agente en L2/L3 al detectar y documentar contradicciones; F43 auditoría; F118 evals | F41 |
+| `dedup.md` | F106 book-mode (consolidación paso 1); F118 evals | F108 |
 | `note-plan.md` | Agente en L2 al dividir el trabajo; L3 (F45-F51) para redactar; F43 auditoría de cobertura; F118 evals | F44 |

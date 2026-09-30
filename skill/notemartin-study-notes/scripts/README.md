@@ -12,6 +12,11 @@ Ejecutables invocables por el agente. **No se leen en contexto**; se invocan por
 | `authoring/` | Parser NoteMark → IR (F48, `parse_notemark.py`); transformaciones de IR (F50) | F48, F50 |
 | `render/` | Renderers a cada destino + pre-render de diagramas y figuras + generador CSS de tokens + helper de cabecera F75 | F54-F60, F68, F68, F74, F75 |
 | `util/` | Caché, visor, ledger, grafo de conceptos, trazabilidad, tokens, mapeo de estilo | F36, F38, F39, F52, F72, F73 |
+| `pipeline/` | Meta-orquestadores sobre las 5 capas (modo obra completa, bucle por chunks, consolidación, índice de obra) | F106, F107, F109, F110 |
+| `dedup/` | Detector de duplicados (canónico/alias/similarity) + orquestador de apply sobre F50 | F108 |
+| (consolidation in `pipeline/`) | Orquestador de 5 pases de consolidación idempotentes | F109 |
+| (book_index in `pipeline/`) | Generador del índice de obra (10 secciones canónicas) | F110 |
+| `diff/` | Orquestador de actualización incremental (diff SDM + obsoletos + version-delta + republish selectiva) | F111 |
 | `README.md` | Catálogo con qué hace cada script, entrada, salida, dependencias, invocación | F117 |
 
 ## Reglas (per `AGENT.md` §6)
@@ -964,4 +969,28 @@ Cierra los 3 criterios del ROADMAP §1498-1500.
 | Salida | `PASS 5/5` o `FAIL n/5 (passed k/5)` con detalle por criterio. |
 | Códigos | 0 todos PASS; 1 alguno FAIL. |
 | Dependencias | Python 3.9+ stdlib puro. |
-| Wirings | Cierra los 3 criterios de F77 ROADMAP §1498-1500. |
+| Wirings | Cierra los 3 criterios de F77 ROADMAP §1498-1500.
+
+### `pipeline/book_mode.py` — F106 · Orquestador del modo obra completa
+
+Meta-orquestador sobre las 5 capas L0-L4 para fuentes multi-capítulo
+(libros). Reconoce la obra entera antes del primer capítulo (índice,
+prefacio, mapa de dependencias Mermaid), procesa por capítulos con estado
+compartido (`book-state.json`), consolida parcialmente cada N capítulos
+(default 5), y permite detenerse / reanudar en cualquier capítulo con
+escritura atómica + `.bak`.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--sdm <sdm.json> --workdir <DIR>` (init); `--workdir <DIR> --chapter chNN` (process); etc. |
+| Salida | `<workdir>/book-state.json`, `<workdir>/book_map.json`, `<workdir>/book_map.mmd` (init) + mutaciones in-place (process/resume/consolidate) |
+| Subcomandos | `init`, `process`, `consolidate`, `status`, `resume`, `map`, `check`, `detect-ap-bm1`, `register-concept` (9 en total) |
+| Invocación | `python3 scripts/pipeline/book_mode.py init --sdm <sdm.json> --workdir <DIR> --book-id my-book --consolidation-every 5` |
+| API Python | `from book_mode import BookState, register_concept, mark_done` |
+| Códigos | 0 OK · 1 validación (BM-R1, BM-R4, AP-BM1..AP-BM4) · 2 uso (paths faltantes, BOOK_MODE_NO_INDEX) |
+| Escritura | Atómica: tempfile + `Path.replace` + backup `.bak` antes de cada save (BM-R2) |
+| Signals | SIGTERM → flush atómico + exit 0 (BM-R5b) |
+| Dependencias | Python 3.9+ stdlib puro (sin `jsonschema`); usa `difflib.SequenceMatcher` para AP-BM1 |
+| Documentación | `references/00-pipeline/book-mode.md` (normativa, 387 líneas) + `schemas/book-state.schema.json` + `schemas/book-map.schema.json` |
+| Eval | `evals/book-mode-sample/run_eval.py` 6/6 PASS (C1 BM-R1, C2 AP-BM1, C3 stop/resume, C4 consolidación N=5 idempotente, C5 .bak atómico, C6 AP-BM2..AP-BM4) |
+

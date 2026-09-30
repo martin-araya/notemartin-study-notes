@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "synthetic-book",
+    "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Preface",
+      "anchor": {
+        "section_path": "/Preface"
+      }
+    },
+    {
+      "type": "text",
+      "text": "Welcome. See Chapter 1 for an overview.",
+      "anchor": {
+        "section_path": "/Preface/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Introduction",
+      "anchor": {
+        "section_path": "/Introduction"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter references Chapter 2 for setup.",
+      "anchor": {
+        "section_path": "/Introduction/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Getting Started",
+      "anchor": {
+        "section_path": "/Getting Started"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter references Chapter 3 for details.",
+      "anchor": {
+        "section_path": "/Getting Started/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "MVCC Fundamentals",
+      "anchor": {
+        "section_path": "/MVCC Fundamentals"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter covers material in depth.",
+      "anchor": {
+        "section_path": "/MVCC Fundamentals/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Query Execution",
+      "anchor": {
+        "section_path": "/Query Execution"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter covers material in depth.",
+      "anchor": {
+        "section_path": "/Query Execution/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Storage Internals",
+      "anchor": {
+        "section_path": "/Storage Internals"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter covers material in depth.",
+      "anchor": {
+        "section_path": "/Storage Internals/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Replication",
+      "anchor": {
+        "section_path": "/Replication"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter covers material in depth.",
+      "anchor": {
+        "section_path": "/Replication/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Transactions",
+      "anchor": {
+        "section_path": "/Transactions"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter covers material in depth.",
+      "anchor": {
+        "section_path": "/Transactions/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Performance",
+      "anchor": {
+        "section_path": "/Performance"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter covers material in depth.",
+      "anchor": {
+        "section_path": "/Performance/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Case Studies",
+      "anchor": {
+        "section_path": "/Case Studies"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter revisits Chapter 1 concepts.",
+      "anchor": {
+        "section_path": "/Case Studies/intro"
+      }
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "title": "Advanced Topics",
+      "anchor": {
+        "section_path": "/Advanced Topics"
+      }
+    },
+    {
+      "type": "text",
+      "text": "This chapter covers material in depth.",
+      "anchor": {
+        "section_path": "/Advanced Topics/intro"
+      }
+    }
+  ]
+}
