@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "g",
+  "title": "G",
+  "layer": "l1",
+  "note_type": "glossary-term",
+  "frontmatter": {
+    "title": "G",
+    "note-type": "glossary-term"
+  },
+  "blocks": [
+    {
+      "node": "text",
+      "attrs": {
+        "text": "Glossary G",
+        "capability": "text"
+      },
+      "source_refs": []
+    }
+  ]
+}

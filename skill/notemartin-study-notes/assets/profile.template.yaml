@@ -163,3 +163,13 @@ dedup:
   similarity_threshold: 0.6       # umbral mínimo de combined_score (default 0.6)
   actions: [merge, specialize, split]  # acciones disponibles; subset permitido
 
+# === Pases de consolidación (F109, opt-in) ===
+# Activar cuando el agente quiera ejecutar los 5 pases
+# (link-debt, glossary, indices, cheatsheets, consistency) sobre el workdir.
+# Ver `references/10-quality/consolidation-passes.md` para cuándo aplica.
+# Por defecto desactivado; el agente decide cuándo invocar `consolidate.py run-all`.
+# Cumple INV-12 (no sorpresa al usuario): ambas default `false`.
+consolidation:
+  auto_on_consolidate: false      # true = consolidar automáticamente al consolidar F106/F107
+  link_debt_auto_resolve: false   # true = borrar/editar refs rotas detectadas por pass-link-debt (NO recomendado)
+

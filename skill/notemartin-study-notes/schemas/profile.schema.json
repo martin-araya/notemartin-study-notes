@@ -22,6 +22,10 @@
     "dedup": {
       "description": "Deduplicación y fusión (F108, opt-in). Activar cuando el corpus tiene ≥ 5 notas con note-type soportado. Ver references/03-knowledge/dedup.md.",
       "$ref": "#/$defs/dedup"
+    },
+    "consolidation": {
+      "description": "Pases de consolidación (F109, opt-in). Activar cuando se quiera ejecutar el orquestador `consolidate.py run-all`. Ver references/10-quality/consolidation-passes.md.",
+      "$ref": "#/$defs/consolidation"
     }
   },
   "$defs": {
@@ -114,6 +118,23 @@
             "split"
           ],
           "description": "Acciones permitidas por el orquestador `apply.py`; subset de la lista cerrada."
+        }
+      }
+    },
+    "consolidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Configuración de pases de consolidación (F109). Ver references/10-quality/consolidation-passes.md.",
+      "properties": {
+        "auto_on_consolidate": {
+          "type": "boolean",
+          "default": false,
+          "description": "Si true, el agente ejecuta `consolidate.py run-all` automáticamente al consolidar (e.g., F106 book-mode). Default false (cumple INV-12)."
+        },
+        "link_debt_auto_resolve": {
+          "type": "boolean",
+          "default": false,
+          "description": "Si true, pass-link-debt reescribe IRs/NoteMark para borrar refs rotas o redirigirlas automáticamente. Default false (cumple INV-12; el agente revisa)."
         }
       }
     }

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "a",
+  "title": "A",
+  "layer": "l2",
+  "note_type": "concept",
+  "frontmatter": {
+    "title": "A",
+    "note-type": "concept"
+  },
+  "blocks": [
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "link-note",
+          "attrs": {
+            "target": "nonexistent",
+            "capability": "link-note",
+            "text": "x"
+          },
+          "source_refs": []
+        }
+      ]
+    }
+  ]
+}

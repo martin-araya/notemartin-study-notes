@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "s",
+    "vendor": "postgres"
+  },
+  "terms": [
+    {
+      "canonical": "mvcc",
+      "definition": "Multi-Version Concurrency Control.",
+      "domain": "postgres",
+      "aliases": [
+        {
+          "alias": "mv",
+          "kind": "acronym"
+        }
+      ],
+      "definitions": []
+    },
+    {
+      "canonical": "wal",
+      "definition": "Write-Ahead Logging.",
+      "domain": "postgres",
+      "aliases": [
+        {
+          "alias": "mv",
+          "kind": "acronym"
+        }
+      ],
+      "definitions": []
+    }
+  ],
+  "build_metadata": {
+    "built_at": "2026-01-01T00:00:00Z",
+    "term_count": 2
+  }
+}

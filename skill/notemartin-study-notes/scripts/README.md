@@ -1060,3 +1060,26 @@ aporta `_rewrite_links_glob` propio (workaround al bug de F50 v1 con
 | Dependencias | Python 3.9+ stdlib puro (invoca `scripts/authoring/transform.py` por subproceso) |
 
 ### `pipeline/consolidate.py` — F109 · Orquestador de pases de consolidación
+
+Meta-orquestador sobre F16/F40/F104/F108/F110 que ejecuta 5 pases
+secuenciales (link-debt, glossary, indices, cheatsheets, consistency) sobre
+el workdir de una fuente. Cada pase es **idempotente** (CON-R1):
+re-ejecución produce el mismo `after_sha256` (excluyendo `generated_at` y
+`.bak`). Cada pase es **conmutativo** (CON-R2) y **no muta inputs** (CON-R3).
+
+Pase 5 invoca `scripts/dedup/detect.py` por subproceso (F108). Pase 1 NO
+edita IRs/NoteMark; solo emite entradas en `manifest.json::link_debt[]`.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--workdir DIR [--strategy {default,consolidate,single-chunk}] [--irs-glob 'ir/*.json'] [--notemark-glob 'notemark/*.nm']` |
+| Salida | `<workdir>/reports/{report-link-debt,report-glossary,index-moc-summary,cheatsheets-index,study-paths,consistency-report}.json` + `manifest.json::consolidation_runs[]` |
+| Subcomandos | `run-all`, `pass-link-debt`, `pass-glossary`, `pass-indices`, `pass-cheatsheets`, `pass-consistency` (6 en total) |
+| Invocación | `python3 scripts/pipeline/consolidate.py run-all --workdir .notes-work/abc --strategy consolidate` |
+| Códigos | 0 OK · 1 validación (pase falla / AP26) · 2 uso (paths faltantes) |
+| Garantías | CON-R1 (idempotente), CON-R2 (conmutativo), CON-R3 (no muta inputs), CON-R4 (link-debt no edita IRs), CON-R5 (pase 5 delega en F108) |
+| Hash | `after_sha256` calculado sobre contenido semántico de `reports/` (excluye `.bak` y `generated_at`) |
+| Dependencias | Python 3.9+ stdlib puro (invoca `scripts/dedup/detect.py` por subproceso para pase 5) |
+| Documentación | `references/10-quality/consolidation-passes.md` (normativa, 298 líneas) + `schemas/manifest.schema.json::$defs::consolidationRun` |
+| Eval | `evals/consolidation-sample/run_eval.py` 3/3 PASS (C1 link-debt, C2 glossary R3, C3 idempotente) |
+

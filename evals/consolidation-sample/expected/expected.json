@@ -1,0 +1,14 @@
+{
+  "broken_wikilink_count": 1,
+  "orphan_note_count": 2,
+  "missing_target_count": 0,
+  "r3_violation_count": 1,
+  "r3_violation_alias": "mv",
+  "r3_violation_terms": [
+    "mvcc",
+    "wal"
+  ],
+  "cheatsheet_count": 1,
+  "consistency_candidate_count": 0,
+  "total_notes": 7
+}

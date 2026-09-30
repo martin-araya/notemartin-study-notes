@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "f",
+  "title": "F",
+  "layer": "l1",
+  "note_type": "cheatsheet",
+  "frontmatter": {
+    "title": "F",
+    "note-type": "cheatsheet",
+    "source-anchor": "12.1"
+  },
+  "blocks": [
+    {
+      "node": "text",
+      "attrs": {
+        "text": "Cheatsheet F",
+        "capability": "text"
+      },
+      "source_refs": []
+    }
+  ]
+}

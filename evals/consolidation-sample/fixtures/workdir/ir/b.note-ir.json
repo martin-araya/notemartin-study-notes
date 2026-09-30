@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "b",
+  "title": "B",
+  "layer": "l2",
+  "note_type": "concept",
+  "frontmatter": {
+    "title": "B",
+    "note-type": "concept"
+  },
+  "blocks": [
+    {
+      "node": "text",
+      "attrs": {
+        "text": "Body B",
+        "capability": "text"
+      },
+      "source_refs": []
+    }
+  ]
+}

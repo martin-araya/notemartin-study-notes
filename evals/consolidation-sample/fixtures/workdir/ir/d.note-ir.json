@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "d",
+  "title": "D",
+  "layer": "l2",
+  "note_type": "procedure",
+  "frontmatter": {
+    "title": "D",
+    "note-type": "procedure"
+  },
+  "blocks": [
+    {
+      "node": "paragraph",
+      "attrs": {
+        "capability": "paragraph"
+      },
+      "source_refs": [],
+      "children": [
+        {
+          "node": "link-note",
+          "attrs": {
+            "target": "b",
+            "capability": "link-note",
+            "text": "b"
+          },
+          "source_refs": []
+        }
+      ]
+    }
+  ]
+}
