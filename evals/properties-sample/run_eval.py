@@ -238,8 +238,8 @@ def check_notemark_shrunk() -> Result:
 def check_minimum_size(doc: str) -> Result:
     n = doc.count("\n")
     return Result(
-        "Tamaño entre 600 y 900 líneas",
-        600 <= n <= 900,
+        "Tamaño entre 600 y 1000 líneas (F47 + F102)",
+        600 <= n <= 1000,
         f"lineas={n}",
     )
 
