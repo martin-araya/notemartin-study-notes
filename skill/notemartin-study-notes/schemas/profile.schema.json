@@ -18,6 +18,10 @@
     "chunk_loop": {
       "description": "Bucle por chunks y presupuesto de contexto (F107, opt-in). Activar cuando el SDM supera el presupuesto de contexto (≥ 30 bloques). Ver references/00-pipeline/chunk-loop.md §3-4.",
       "$ref": "#/$defs/chunk_loop"
+    },
+    "dedup": {
+      "description": "Deduplicación y fusión (F108, opt-in). Activar cuando el corpus tiene ≥ 5 notas con note-type soportado. Ver references/03-knowledge/dedup.md.",
+      "$ref": "#/$defs/dedup"
     }
   },
   "$defs": {
@@ -75,6 +79,41 @@
           "type": "boolean",
           "default": true,
           "description": "Si true, AP-CHK2 se dispara ante cualquier carga del texto crudo fuera de L0 (F107 §3 CHK-R2)."
+        }
+      }
+    },
+    "dedup": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Configuración de deduplicación y fusión (F108). Ver references/03-knowledge/dedup.md.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Si true, el agente puede invocar `dedup/detect.py` sobre el corpus."
+        },
+        "similarity_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.6,
+          "description": "Umbral mínimo de combined_score (canonical ∪ alias ∪ similarity) para emitir un candidato (F108 §4)."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "merge",
+              "specialize",
+              "split"
+            ]
+          },
+          "default": [
+            "merge",
+            "specialize",
+            "split"
+          ],
+          "description": "Acciones permitidas por el orquestador `apply.py`; subset de la lista cerrada."
         }
       }
     }

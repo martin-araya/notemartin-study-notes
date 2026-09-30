@@ -1020,3 +1020,43 @@ fuente NUNCA se abre fuera de L0 (verificable con `--audit-loads`; AP-CHK2).
 | Documentación | `references/00-pipeline/chunk-loop.md` (normativa, 314 líneas) + `schemas/chunk-state.schema.json` |
 | Eval | `evals/chunk-loop-sample/run_eval.py` 6/6 PASS (C1 chunk_size=30, C2 by_chapter, C3 cross-chunk unit, C4 AP-CHK2 audit-loads, C5 idempotente + previous_processed_at, C6 resume + .bak + timestamps inmutables) |
 
+### `dedup/detect.py` — F108 · Detector de duplicados entre notas
+
+Escanea todos los NoteMark (`.md`/`.nm`) del workdir y produce una lista
+de pares candidatos a `merge` / `specialize` / `split` por matching de
+término canónico (F40), alias (F47 §5.17 + F40), y similitud textual
+(`difflib.SequenceMatcher`). Algoritmo de 4 pasos (canonical → alias →
+similarity → combined). Invocable standalone o desde F106 consolidate /
+F107 consolidate.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--workdir DIR [--strategy {default,consolidate,single-chunk}] [--threshold 0.6] [--glossary PATH] [--json-out PATH]` |
+| Salida | JSON `candidates.json` con `[{pair, scores, suggested_action, confidence, rationale}]` |
+| Subcomandos | `scan`, `inspect --pair A B`, `explain --candidate-id N`, `verify` (recall contra fixtures) |
+| Invocación | `python3 scripts/dedup/detect.py scan --workdir .notes-work/abc --glossary knowledge/glossary.json --json-out candidates.json` |
+| API Python | `from detect import Detector, Candidate; det = Detector(workdir=Path('.'), glossary=Path('g.json')); cands = det.scan()` |
+| Códigos | 0 OK · 1 validación (recall < 80%) · 2 uso |
+| Default | `DEFAULT_SIMILARITY_THRESHOLD = 0.6`, `MIN_NOTES_TO_RUN = 5` |
+| Dependencias | Python 3.9+ stdlib puro |
+| Documentación | `references/03-knowledge/dedup.md` (normativa) + `schemas/profile.schema.json::def::dedup` |
+| Eval | `evals/dedup-sample/run_eval.py` 3/3 PASS (C1 DEDUP-R1+R3, C2 DEDUP-R2+R4, C3 recall=4/4) |
+
+### `dedup/apply.py` — F108 · Orquestador de apply sobre F50
+
+Envuelve `scripts/authoring/transform.py merge|split` por subproceso;
+aporta `_rewrite_links_glob` propio (workaround al bug de F50 v1 con
+`*.json` globs) y actualiza `manifest.json::link_debt[]` con entradas
+`redirected` por cada ID viejo redirigido.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `merge --a A.json --b B.json --output C.json --workdir DIR --irs-glob 'ir/*.json' [--note-id ID] [--dry-run] [--yes]` |
+| Salida | IR merged en `<output>`; `manifest.json::link_debt[]` con entradas `redirected` |
+| Subcomandos | `merge`, `split`, `specialize` (wrapper parcial) |
+| Invocación | `python3 scripts/dedup/apply.py merge --a A.json --b B.json --output C.json --workdir . --irs-glob 'ir/*.json' --yes` |
+| Códigos | 0 OK · 1 validación (DEDUP-R1..R5) · 2 uso (falta --yes, --irs-glob, ≥2 --at-heading) |
+| Garantías | DEDUP-R1 (source_refs union), DEDUP-R2 (link redirection), DEDUP-R3 (aliases), DEDUP-R4 (manifest link_debt), DEDUP-R5 (≥2 headings) |
+| Dependencias | Python 3.9+ stdlib puro (invoca `scripts/authoring/transform.py` por subproceso) |
+
+### `pipeline/consolidate.py` — F109 · Orquestador de pases de consolidación

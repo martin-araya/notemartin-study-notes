@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "min_recall_pairs": 4,
+  "candidates": [
+    {
+      "pair": [
+        "mvcc-v1",
+        "mvcc-v2"
+      ]
+    },
+    {
+      "pair": [
+        "mvcc-a",
+        "mvcc-b"
+      ]
+    },
+    {
+      "pair": [
+        "mvcc-titulo",
+        "multi-version-concurrency-control"
+      ]
+    },
+    {
+      "pair": [
+        "concurrency",
+        "mvcc-only"
+      ]
+    }
+  ]
+}

@@ -154,3 +154,12 @@ chunk_loop:
   neighbor_window: 1              # chunks previos/siguientes cargados junto al actual
   strict_no_full_load: true       # true = AP-CHK2 dispara ante carga del texto crudo fuera de L0
 
+# === Deduplicación y fusión (F108, opt-in) ===
+# Activar cuando el corpus tiene ≥ 5 notas con note-type soportado.
+# Ver `references/03-knowledge/dedup.md` para cuándo aplica.
+# Por defecto desactivado; el agente decide cuándo invocar `dedup/detect.py`.
+dedup:
+  enabled: false                  # true para activar el detector F108
+  similarity_threshold: 0.6       # umbral mínimo de combined_score (default 0.6)
+  actions: [merge, specialize, split]  # acciones disponibles; subset permitido
+
