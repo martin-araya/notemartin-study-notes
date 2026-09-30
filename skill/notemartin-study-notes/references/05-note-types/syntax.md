@@ -110,6 +110,24 @@ related: "[[note:api-reference-relacionada]], [[note:error-troubleshooting-de-er
 | L2 | `{layer:l2}` | Convención, Sintaxis, Cláusula por cláusula, Diagramas, Ejemplos. 70-90% del total. |
 | L3 | `{layer:l3}` | Contraejemplos, Errores. Si > 100 líneas, `:::collapsible` con `default_open: false` (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `syntax` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | ✅ |
+| Diagnóstico | — |
+| Decisión | — |
+| Predicción | — |
+
+Notas: recuerdo (reglas sintácticas) + aplicación (uso correcto en un
+caso). Diagnóstico se añade si la nota documenta errores de parseo
+(sub-tipo `syntax-with-errors`). La nota puede declarar
+`self-evaluation-types` como superset del default.
+
 ---
 
 ## §3 · Componentes mínimos
