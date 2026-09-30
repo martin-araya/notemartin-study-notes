@@ -116,6 +116,25 @@ obligatorias en `status: published` (INV-P5).
 | L2 | `{layer:l2}` | Secciones 2-9 (configuración → troubleshooting). 70-90% del total. |
 | L3 | `{layer:l3}` | Tablas auxiliares (`## Valores comunes`). `:::collapsible` con `default_open: false` si > 100 filas (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `configuration` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | — |
+| Diagnóstico | — |
+| Decisión | ✅ |
+| Predicción | — |
+
+Notas: por defecto recuerdo + decisión (la nota es tabla de parámetros con
+trade-offs). Aplicación se añade si la nota incluye casos de tuning
+documentados (sub-tipo `configuration-with-tuning`). Si la nota es solo
+tabla de parámetros sin trade-offs, aplica la regla de referencia pura
+(`self-evaluation.md` §4) y solo recuerdo aplica.
+
 ---
 
 ## §3 · Componentes mínimos
