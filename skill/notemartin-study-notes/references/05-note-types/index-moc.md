@@ -119,6 +119,26 @@ una nota source-bearing.
 | L2 | `{layer:l2}` | Introducción + Mapa + Índice + Rutas + Cobertura de la fuente. 60-80% del total. |
 | L3 | `{layer:l3}` | Pendientes + Próximas incorporaciones + Consulta rápida. Si > 100 líneas, `:::collapsible` con `default_open: false` (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `index-moc` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | — |
+| Aplicación | — |
+| Diagnóstico | — |
+| Decisión | — |
+| Predicción | — |
+
+Notas: la MOC no contiene conocimiento propio — solo enlaza a otras
+notas. Por tanto **la sección `## Autoevaluación` se omite por
+completo**. El validador `self_eval_check.py` aplica V6: si la nota
+tiene `note-type: index-moc` y contiene `## Autoevaluación`, falla con
+`unexpected-section-for-moc`. Si se declara `self-evaluation-types`,
+debe ser `[]` o ausente.
+
 ---
 
 ## §3 · Componentes mínimos
