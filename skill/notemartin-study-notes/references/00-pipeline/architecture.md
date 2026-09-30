@@ -4,7 +4,7 @@
 >
 > Documentos complementarios: `skills/AGENT.md` §5 (resumen en una frase de las 5 capas + esqueleto del workdir — versión corta), `ROADMAP.md` §4 (diagrama Mermaid del flujo). Este doc los **referencia y completa**, no los repite.
 >
-> Enrutado desde N2: `docs/skill-anatomy.md` §6 fila `F4`. Doc hermano: `references/00-pipeline/responsibilities.md` (Fase 3, división agente/script y anti-patrones).
+> Enrutado desde N2: `docs/skill-anatomy.md` §6 fila `F4`. Doc hermano: `references/00-pipeline/responsibilities.md` (Fase 3, división agente/script y anti-patrones). Doc operativo: `references/14-operation/failure-modes.md` (Fase 116, catálogo de modos de fallo).
 
 ## Índice
 
@@ -104,4 +104,16 @@ Cada subsección sigue la misma tabla. "Persistente" significa que el archivo vi
 | Perfil — campos leídos | `book_mode: {enabled, consolidation_every, auto_consolidate}` (opcional) |
 | Puertas aplicadas | **Coherencia (estricto)** — BM-R1 (mapa antes de ch1) + BM-R2 (escritura atómica) + BM-R4 (timestamps sellados) + AP-BM1 (no redefinir conceptos) |
 | Fase del contrato | F106 book-mode (spec en `references/00-pipeline/book-mode.md`; script en `scripts/pipeline/book_mode.py`) |
+
+## 12. Bloque 14 — Operación (F116)
+
+| Aspecto | Detalle |
+|---|---|
+| Definición operativa | Catálogo cerrado de modos de fallo (F116) que el pipeline puede encontrar. Norma los contratos "interrupción no deja notas sin marcar `draft`" (R-INT-1..3) y "reprocesar no duplica contenido" (R-REP-1..3). NO es un orquestador ni una capa nueva; es un contrato cross-fase que los orquestadores existentes (F106/F107/F108/F109/F111) ya implementan y que el spec normativiza. |
+| Artefacto de entrada | Cualquier evento de fallo: signal handler, exception, condición booleana |
+| Artefacto de salida | Estado persistente (`status: draft`, `state: failed`, `debt_registry[]`) |
+| Productos intermedios | `reports/debt.json`; `.bak` snapshots |
+| Productos efímeros | Memoria del orquestador en sesión actual |
+| Puertas aplicadas | **Coherencia (estricto)** — R-INT-1 (schema), R-INT-2 (orquestador conforme), R-INT-3 (orquestador general); R-REP-1 (hash-stable), R-REP-2 (idempotencia estructural), R-REP-3 (source-refs como set) |
+| Fase del contrato | F116 failure-modes (spec en `references/14-operation/failure-modes.md`) |
 

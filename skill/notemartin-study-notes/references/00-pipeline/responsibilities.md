@@ -4,7 +4,7 @@
 >
 > Documentos complementarios: `skills/AGENT.md` §3 (test de tres preguntas y anti-patrones — versión corta), `ROADMAP.md` §2 (tabla semilla — versión resumida). Este doc los **referencia y completa**, no los repite.
 >
-> Enrutado desde N2: `docs/skill-anatomy.md` §6 fila `F3`.
+> Enrutado desde N2: `docs/skill-anatomy.md` §6 fila `F3`. Doc operativo: `references/14-operation/failure-modes.md` (Fase 116, catálogo de modos de fallo).
 
 ## Índice
 
@@ -268,3 +268,19 @@ Las 54 instrucciones corresponden a las 54 filas de `docs/skill-anatomy.md` §6.
 - Mover una fila de zona gris a script o instrucción (o viceversa) sin evidencia.
 - Descubrir un cruce en A/B y no asignarle fase correctora.
 - Cambiar la cláusula genérica de §3.4.
+
+## 9. Apéndice C — Referencia operativa
+
+Toda decisión sobre **qué hacer cuando un orquestador falla** está
+normativizada en `references/14-operation/failure-modes.md` (F116):
+
+- 7 modos cerrados: OCR fallido / fuente ilegible / contexto agotado /
+  API caída / validador en rojo repetido / conflicto irresoluble /
+  interrupción.
+- Contratos cross-fase: R-INT-1..3 (interrupción no deja `draft`), R-REP-1..3
+  (reprocesar no duplica).
+- Regla de extensión: cualquier modo nuevo se documenta con los 4
+  campos canónicos antes de aparecer en código.
+
+Fase 3 + F116 forman el contrato completo: **F3 decide quién hace qué;
+F116 decide qué hacer cuando eso falla.**
