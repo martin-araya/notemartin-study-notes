@@ -288,19 +288,27 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.13. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `source-bearing` recomendado (F75 §6.13).
-- [ ] `## TL;DR` con 1 frase ≤ 30 palabras (criterio #3).
-- [ ] `## Comandos` con tabla 3-col; ≥ 10 filas; ≤ 30 filas (F75 §6.13).
-- [ ] Cada fila de `## Comandos` tiene `[[note:id]]` o `[[term:X]]` (criterio #2).
-- [ ] `## Atajos` con tabla 2-col ≥ 5 filas si aplica al dominio (F75 §6.13).
-- [ ] `## Errores comunes` con `:::warning` por código (opcional).
-- [ ] **Sin párrafos de prosa > 50 palabras** (criterio #3).
-- [ ] **≤ 80 líneas totales** (≤ 2 pantallas).
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `source-bearing` recomendado (F75 §6.13).
+- [ ] [B] `## TL;DR` con 1 frase ≤ 30 palabras (criterio #3).
+- [ ] [B] `## Comandos` con tabla 3-col; ≥ 10 filas; ≤ 30 filas (F75 §6.13).
+- [ ] [B] Cada fila de `## Comandos` tiene `[[note:id]]` o `[[term:X]]` (criterio #2).
+- [ ] [B] `## Atajos` con tabla 2-col ≥ 5 filas si aplica al dominio (F75 §6.13).
+- [ ] [B] **Sin párrafos de prosa > 50 palabras** (criterio #3).
+- [ ] [B] **≤ 80 líneas totales** (≤ 2 pantallas).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] `## Errores comunes` con `:::warning` por código (opcional).
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

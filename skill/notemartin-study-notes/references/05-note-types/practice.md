@@ -334,24 +334,33 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.15. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden + `difficulty` (1-5) (F75 §6.15).
-- [ ] `source-bearing` recomendado (F75 §6.15).
-- [ ] `## TL;DR` ≤ 60 palabras.
-- [ ] `## Enunciado` con 1 párrafo (F75 §6.15).
-- [ ] `## Entorno` con tabla y ≥ 3 componentes (criterio #1).
-- [ ] `## Objetivo` con 1-2 frases.
-- [ ] `## Solución` con pasos numerados (F75 §6.15).
-- [ ] Cada paso destructivo con `:::warning` antes del code block (criterio #2).
-- [ ] `## Qué observar` con `:::note` o lista.
-- [ ] `## Verificación` con 1 frase (F75 §6.15).
-- [ ] `## Limpieza` con ≥ 1 paso (criterio #1).
-- [ ] `## Lo que NO debe correrse en producción` con `:::danger` (criterio #2).
-- [ ] `## Cuándo omitir este lab` con ≥ 1 criterio (criterio #3).
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden + `difficulty` (1-5) (F75 §6.15).
+- [ ] [B] `source-bearing` recomendado (F75 §6.15).
+- [ ] [B] `## TL;DR` ≤ 60 palabras.
+- [ ] [B] `## Enunciado` con 1 párrafo (F75 §6.15).
+- [ ] [B] `## Entorno` con tabla y ≥ 3 componentes (criterio #1).
+- [ ] [B] `## Objetivo` con 1-2 frases.
+- [ ] [B] `## Solución` con pasos numerados (F75 §6.15).
+- [ ] [B] Cada paso destructivo con `:::warning` antes del code block (criterio #2).
+- [ ] [B] `## Qué observar` con `:::note` o lista.
+- [ ] [B] `## Verificación` con 1 frase (F75 §6.15).
+- [ ] [B] `## Limpieza` con ≥ 1 paso (criterio #1).
+- [ ] [B] `## Lo que NO debe correrse en producción` con `:::danger` (criterio #2). **OMIT en `reference`** (F112 §5.1).
+- [ ] [B] `## Cuándo omitir este lab` con ≥ 1 criterio (criterio #3). **OMIT en `reference`** (F112 §5.1).
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] `## Pistas` con `:::tip` cuando el lab es no trivial. **OMIT en `reference`** (F112 §5.1).
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

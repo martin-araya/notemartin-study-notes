@@ -362,24 +362,32 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.14. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `source-bearing` opcional (F75 §6.14).
-- [ ] `## TL;DR` ≤ 60 palabras.
-- [ ] `## Introducción` con 1-2 párrafos (ROADMAP).
-- [ ] `## Mapa conceptual` con `:::diagram` Mermaid (ROADMAP + criterio #2).
-- [ ] `## Índice` con links agrupadas por H3; cada `[[note:id]]` con descripción de 1 frase (criterio #1).
-- [ ] `## Prerrequisitos` con lista de notas.
-- [ ] `## Rutas de lectura` con ≥ 3 rutas (ROADMAP).
-- [ ] `## Estado de cobertura` con tabla (criterio #2).
-- [ ] `## Cobertura de la fuente` con keywords "cubre" + "no cubre" (criterio #3).
-- [ ] `## Pendientes` con notas en `status: draft` (F75 §6.14).
-- [ ] `## Consulta rápida` con tabla (ROADMAP).
-- [ ] **≤ 200 líneas totales**.
-- [ ] **Sin contenido fáctico** (F75 §6.14 anti-patrón).
-- [ ] Sin `## Backlinks` (F75 §6.14 convención).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `source-bearing` opcional (F75 §6.14).
+- [ ] [B] `## TL;DR` ≤ 60 palabras.
+- [ ] [B] `## Introducción` con 1-2 párrafos (ROADMAP).
+- [ ] [B] `## Mapa conceptual` con `:::diagram` Mermaid (ROADMAP + criterio #2).
+- [ ] [B] `## Índice` con links agrupadas por H3; cada `[[note:id]]` con descripción de 1 frase (criterio #1).
+- [ ] [B] `## Prerrequisitos` con lista de notas.
+- [ ] [B] `## Rutas de lectura` con ≥ 3 rutas (ROADMAP).
+- [ ] [B] `## Estado de cobertura` con tabla (criterio #2).
+- [ ] [B] `## Cobertura de la fuente` con keywords "cubre" + "no cubre" (criterio #3).
+- [ ] [B] `## Pendientes` con notas en `status: draft` (F75 §6.14).
+- [ ] [B] `## Consulta rápida` con tabla (ROADMAP).
+- [ ] [B] **≤ 200 líneas totales**.
+- [ ] [B] **Sin contenido fáctico** (F75 §6.14 anti-patrón).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] Sin `## Backlinks` (F75 §6.14 convención).
 
 ---
 

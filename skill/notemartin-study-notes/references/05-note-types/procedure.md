@@ -294,23 +294,31 @@ Precedencia F11 §7.4: **prompt > perfil > defaults**.
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.3. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] Las 8 secciones obligatorias (Objetivo → Errores frecuentes) presentes y en orden.
-- [ ] `## Procedimiento` con pasos numerados (≥ 2 pasos por `min_steps`).
-- [ ] Cada paso tiene `**Verificación:**` explícita (criterio #1).
-- [ ] Pasos destructivos envueltos en `:::danger` con resumen del riesgo (criterio #3).
-- [ ] `## Impacto y reversibilidad` con tabla que incluye columna Rollback **o** declaración explícita de irreversibilidad (criterio #2).
-- [ ] `## Verificación final` con ≥ 1 criterio global post-procedimiento.
-- [ ] `## Errores frecuentes` con ≥ 1 `:::danger` o `:::warning`.
-- [ ] ≤ 10 pasos por bloque en `## Procedimiento` (anti-patrón §6.3).
-- [ ] Cada paso con bloque `code` con lenguaje explícito.
-- [ ] Cierre: `## Backlinks` + `## Queries` si queries activas.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre bloques fácticos (R8).
-- [ ] `density_check.py --note <path>` exit 0.
-- [ ] `validate_ir.py --ir <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] Las 8 secciones obligatorias (Objetivo → Errores frecuentes) presentes y en orden.
+- [ ] [B] `## Procedimiento` con pasos numerados (≥ 2 pasos por `min_steps`).
+- [ ] [B] Cada paso tiene `**Verificación:**` explícita (criterio #1).
+- [ ] [B] Pasos destructivos envueltos en `:::danger` con resumen del riesgo (criterio #3).
+- [ ] [B] `## Impacto y reversibilidad` con tabla que incluye columna Rollback **o** declaración explícita de irreversibilidad (criterio #2).
+- [ ] [B] `## Verificación final` con ≥ 1 criterio global post-procedimiento.
+- [ ] [B] `## Errores frecuentes` con ≥ 1 `:::danger` o `:::warning`.
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre bloques fácticos (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+- [ ] [B] `validate_ir.py --ir <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] ≤ 10 pasos por bloque en `## Procedimiento` (anti-patrón §6.3).
+- [ ] [R] Cada paso con bloque `code` con lenguaje explícito.
+- [ ] [R] Cierre: `## Backlinks` + `## Queries` si queries activas.
 
 ---
 

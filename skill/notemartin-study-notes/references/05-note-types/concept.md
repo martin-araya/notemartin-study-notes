@@ -265,45 +265,52 @@ correspondiente (referencia `[[practice:<concepto>]]` cuando exista, o la nota
 
 ---
 
-## §6 · Checklist de cierre (auto-verificación)
+## §6 · Checklist de cierre
 
-Antes de publicar la nota (`status: published`), verificar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.1. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con los 5 campos en el orden correcto (F75 §2.1).
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] Las 10 secciones obligatorias (Problema → Relacionados) están presentes y en el orden correcto.
-- [ ] `## Límites y alternativas` presente con ≥ 1 fila (criterio ROADMAP F78).
-- [ ] `## Comparaciones` con ≥ `min_comparisons` conceptos comparados (default 2).
-- [ ] `## Trampas` con ≥ `min_traps` (default 1) bloque `:::warning`.
-- [ ] `## Cuándo NO usarlo` con ≥ 1 bullet + enlace `[[note:id]]`.
-- [ ] `## Resumen` con 3-5 viñetas, densidad `{src:}` ≥ 0.80 (R8).
-- [ ] `## Práctica` presente solo si `profile.notes.types.concept.include_practice: true`.
-- [ ] Si `## Práctica` está presente, lleva `{layer:l3}` y `:::collapsible` si > 100 líneas (R7).
-- [ ] Cierre: `## Backlinks` (si hay aristas) + `## Queries` (si hay queries).
-- [ ] Todas las menciones a términos canónicos en `[[term:nombre]]` en su primera aparición (INV-I2).
-- [ ] Ningún color literal; tokens via `assets/tokens.json` (INV-14).
-- [ ] `density_check.py --note <path>` exit 0 (sin violaciones).
-- [ ] `validate_ir.py --ir <path>` exit 0 (parser acepta la nota).
-- [ ] **AP1** No hay transcripción disfrazada: el `## Resumen` no copia ≥ 50% de un párrafo del SDM verbatim sin reescritura (F100 §3 S5).
-- [ ] **AP2** No hay definiciones circulares: las definiciones no usan el término definido ("X es un X que…") (F100 §3 S1).
-- [ ] **AP3** No hay callouts decorativos: cada `:::note` / `:::tip` / `:::warning` informa, advierte o guía con ≥ 30 caracteres de cuerpo y un verbo de acción (F100 §3 S6).
-- [ ] **AP4** No hay tabla de una fila útil: las tablas tienen ≥ 2 filas de datos (F100 §3 S7).
-- [ ] **AP5** Las analogías tienen rotura explícita: cada analogía incluye una frase que matchea D5 (F95 §4 / F100 §3 S5).
-- [ ] **AP6** Los diagramas Mermaid añaden información no presente en el párrafo adyacente (F100 §3 inspección visual).
-- [ ] **AP7** Los enlaces entre notas llevan frase introductoria de ≥ 5 palabras antes del `[[note:id]]` (F100 §3 S4).
-- [ ] **AP8** No hay volcado de viñetas: las secciones con ≥ 5 viñetas consecutivas tienen prosa intermedia (F100 §3 S3 / F76 R5).
-- [ ] **AP9** No hay marketing copiado: ausencia de "solución innovadora", "transforma su negocio", "cambia las reglas", etc. (F100 §3 S2).
-- [ ] **AP10** Los bloques `:::example` tienen caption o salida esperada (F100 §3 S10).
-- [ ] **AP11** `scripts/validate/mermaid.py --fail-on error` retorna exit 0 (F100 §3 S9).
-- [ ] **AP12** No hay secciones vacías: cada `##` tiene ≥ 1 párrafo sustantivo de ≥ 30 caracteres (F100 §3 S8).
-- [ ] **F101-AP1** Ningún nombre técnico aparece traducido: identificadores, parámetros, errores, comandos y código verbatim contra la lista cerrada de 45 no-traducibles de F101 §3.
-- [ ] **F101-AP2** Los términos se introducen bilingües en primera aparición: notas con `language == es-en` o `en-es` tienen ≥ 1 marca `[[en:term]]` o `[[es:term]]` en la primera mención y un bloque `## Glosario` al pie (F101 §4).
-- [ ] **F101-AP3** La lista de no-traducibles tiene ≥ 40 entradas: la lista cerrada F101 §3 cubre 45 entradas en 8 categorías (12 identificadores PG + 8 parámetros CLI + 6 mensajes + 3 códigos HTTP + 6 comandos + 3 sintaxis + 3 versiones + 4 headers).
-- [ ] **F101-AP4** Bloque de procedencia al pie: la nota tiene `## Procedencia` con 4 campos cerrados (Fuente / Versión / Fecha de recuperación ISO YYYY-MM-DD / URL/anchor).
-- [ ] **F102-1** Sección `## Autoevaluación` presente con las H3 `### Recuerdo`, `### Aplicación` y `### Decisión` (tipos asignados al note-type `concept` en `references/09-study/self-evaluation.md` §3), cada una con 3-7 bloques `:::collapsible{default_open=false}` (V5).
-- [ ] **F102-2** Cada bloque plegable de `## Autoevaluación` cierra con la línea `> Fundamento: {src:blk_xxxx}` o `> Fundamento: [[note:id#§N]]` (V3), y la respuesta no es copia literal del bloque referenciado — Jaccard ≤ 0.8 sobre palabras no técnicas (V4).
-- [ ] **F105-1** Si `goal_profile == interview` (en `profile.yaml` o vía `goal-profile-override` en el frontmatter): la nota incluye `## Decisiones de diseño` (lista numerada con trade-off aceptado por decisión) + `## Explicación oral` (1 párrafo). F105 R-G4.
-- [ ] **F105-2** Si `goal_profile == certification`: la nota incluye `## Objetivos oficiales` (tabla con `objetivo_id` + `cobertura`) + declara `certification-objective` en el frontmatter. F105 R-G5.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con los 5 campos en el orden correcto (F75 §2.1).
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] Las 10 secciones obligatorias (Problema → Relacionados) están presentes y en el orden correcto.
+- [ ] [B] `## Límites y alternativas` presente con ≥ 1 fila (criterio ROADMAP F78).
+- [ ] [B] `## Trampas` con ≥ `min_traps` (default 1) bloque `:::warning`.
+- [ ] [B] `## Cuándo NO usarlo` con ≥ 1 bullet + enlace `[[note:id]]`.
+- [ ] [B] `## Resumen` con 3-5 viñetas, densidad `{src:}` ≥ 0.80 (R8).
+- [ ] [B] `## Práctica` presente solo si `profile.notes.types.concept.include_practice: true`.
+- [ ] [B] `density_check.py --note <path>` exit 0 (sin violaciones).
+- [ ] [B] `validate_ir.py --ir <path>` exit 0 (parser acepta la nota).
+- [ ] [B] `scripts/validate/mermaid.py --fail-on error` retorna exit 0 (F100 §3 S9).
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] `## Comparaciones` con ≥ `min_comparisons` conceptos comparados (default 2). **OMIT en `reference`** (F112 §5.1).
+- [ ] [R] Si `## Práctica` está presente, lleva `{layer:l3}` y `:::collapsible` si > 100 líneas (R7).
+- [ ] [R] Cierre: `## Backlinks` (si hay aristas) + `## Queries` (si hay queries).
+- [ ] [R] Todas las menciones a términos canónicos en `[[term:nombre]]` en su primera aparición (INV-I2).
+- [ ] [R] Ningún color literal; tokens via `assets/tokens.json` (INV-14).
+- [ ] [R] **AP1** No hay transcripción disfrazada: el `## Resumen` no copia ≥ 50% de un párrafo del SDM verbatim sin reescritura (F100 §3 S5).
+- [ ] [R] **AP2** No hay definiciones circulares: las definiciones no usan el término definido ("X es un X que…") (F100 §3 S1).
+- [ ] [R] **AP3** No hay callouts decorativos: cada `:::note` / `:::tip` / `:::warning` informa, advierte o guía con ≥ 30 caracteres de cuerpo y un verbo de acción (F100 §3 S6).
+- [ ] [R] **AP4** No hay tabla de una fila útil: las tablas tienen ≥ 2 filas de datos (F100 §3 S7).
+- [ ] [R] **AP5** Las analogías tienen rotura explícita: cada analogía incluye una frase que matchea D5 (F95 §4 / F100 §3 S5).
+- [ ] [R] **AP6** Los diagramas Mermaid añaden información no presente en el párrafo adyacente (F100 §3 inspección visual).
+- [ ] [R] **AP7** Los enlaces entre notas llevan frase introductoria de ≥ 5 palabras antes del `[[note:id]]` (F100 §3 S4).
+- [ ] [R] **AP8** No hay volcado de viñetas: las secciones con ≥ 5 viñetas consecutivas tienen prosa intermedia (F100 §3 S3 / F76 R5).
+- [ ] [R] **AP9** No hay marketing copiado: ausencia de "solución innovadora", "transforma su negocio", "cambia las reglas", etc. (F100 §3 S2).
+- [ ] [R] **AP10** Los bloques `:::example` tienen caption o salida esperada (F100 §3 S10).
+- [ ] [R] **AP12** No hay secciones vacías: cada `##` tiene ≥ 1 párrafo sustantivo de ≥ 30 caracteres (F100 §3 S8).
+- [ ] [R] **F101-AP1** Ningún nombre técnico aparece traducido: identificadores, parámetros, errores, comandos y código verbatim contra la lista cerrada de 45 no-traducibles de F101 §3.
+- [ ] [R] **F101-AP2** Los términos se introducen bilingües en primera aparición: notas con `language == es-en` o `en-es` tienen ≥ 1 marca `[[en:term]]` o `[[es:term]]` en la primera mención y un bloque `## Glosario` al pie (F101 §4).
+- [ ] [R] **F101-AP4** Bloque de procedencia al pie: la nota tiene `## Procedencia` con 4 campos cerrados (Fuente / Versión / Fecha de recuperación ISO YYYY-MM-DD / URL/anchor).
+- [ ] [R] **F102-1** Sección `## Autoevaluación` presente con las H3 `### Recuerdo`, `### Aplicación` y `### Decisión` (F102 §3), cada una con 3-7 bloques `:::collapsible{default_open=false}` (V5). **OMIT en `reference`**.
+- [ ] [R] **F102-2** Cada bloque plegable de `## Autoevaluación` cierra con la línea `> Fundamento: {src:blk_xxxx}` o `> Fundamento: [[note:id#§N]]` (V3), y la respuesta no es copia literal del bloque referenciado — Jaccard ≤ 0.8 sobre palabras no técnicas (V4).
+- [ ] [R] **F105-1** Si `goal_profile == interview`: la nota incluye `## Decisiones de diseño` + `## Explicación oral` (F105 R-G4). **OMIT en `reference`**.
+- [ ] [R] **F105-2** Si `goal_profile == certification`: la nota incluye `## Objetivos oficiales` + declara `certification-objective` en el frontmatter (F105 R-G5). **OMIT en `reference`**.
 
 ---
 

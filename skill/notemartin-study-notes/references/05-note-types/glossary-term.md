@@ -272,20 +272,29 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.12. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `## TL;DR` = 1-2 frases = definición del término (criterio #1).
-- [ ] `## Definición` con 1 frase ≤ 30 palabras (criterio #1).
-- [ ] `## Formas` con ≥ 2 formas (inglés + español o forma + sigla) (criterio #3).
-- [ ] `## Aliases` con ≥ 1 alias (criterio #1).
-- [ ] `## Contexto` con `:::tip` por dominio (ROADMAP).
-- [ ] `## Ejemplos` con ≥ 1 `:::example` (F75 §6.12).
-- [ ] `## Confundibles` con ≥ 1 confundible con `[[note:]]` o `[[term:]]` (criterio #2).
-- [ ] `## Notas donde aparece` con ≥ 1 `[[note:id]]` (criterio #3).
-- [ ] `## Backlinks` obligatorio (F75 §6.12).
-- [ ] **≤ 30 líneas totales** (F75 §6.12 anti-patrón duro).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `## TL;DR` = 1-2 frases = definición del término (criterio #1).
+- [ ] [B] `## Definición` con 1 frase ≤ 30 palabras (criterio #1).
+- [ ] [B] `## Formas` con ≥ 2 formas (inglés + español o forma + sigla) (criterio #3).
+- [ ] [B] `## Aliases` con ≥ 1 alias (criterio #1).
+- [ ] [B] `## Contexto` con `:::tip` por dominio (ROADMAP).
+- [ ] [B] `## Ejemplos` con ≥ 1 `:::example` (F75 §6.12).
+- [ ] [B] `## Confundibles` con ≥ 1 confundible con `[[note:]]` o `[[term:]]` (criterio #2).
+- [ ] [B] `## Notas donde aparece` con ≥ 1 `[[note:id]]` (criterio #3).
+- [ ] [B] `## Backlinks` obligatorio (F75 §6.12).
+- [ ] [B] **≤ 30 líneas totales** (F75 §6.12 anti-patrón duro).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- (sin recomendaciones separadas: los 12 ítems del tipo son todos bloqueantes por su carácter definicional breve).
 
 ---
 

@@ -158,8 +158,14 @@ Lista de archivos `references/` planificados en el roadmap, con la futura fila d
 | `references/08-render/migration.md` | Re-render o migración entre destinos | F64 |
 | `references/10-quality/fidelity-rules.md` | Cualquier redacción de contenido fáctico | F42 |
 | `references/10-quality/completeness-audit.md` | Auditoría de no-pérdida antes de cerrar | F43 |
+| `references/10-quality/checklists-by-type.md` | Verificar el cierre de una nota contra el checklist consolidado por tipo (común + 15 bloques + reglas por perfil, orden cheap→expensive) | F112 |
+| `references/10-quality/validators.md` | Ejecutar la suite de validadores (perfil/SDM/ledger/NoteMark/IR/diagramas/destinos/enlaces/imágenes/propiedades/tablas/longitudes) con shape JSON común y severidades error/warning/info | F113 |
+| `references/10-quality/fidelity-audit.md` | Auditoría semántica automatizada de fidelidad del IR contra el SDM (3 pasadas: forward source-check + content-fidelity + inverse sample) | F114 |
+| `references/10-quality/quality-gate.md` | Puerta de calidad y reporte; agrega F43+F113+F114+F7+F108 (opcional); bloquea promoción a `status: verified` con errores bloqueantes; registra deuda aceptada | F115 |
+| `references/14-operation/failure-modes.md` | Catálogo cerrado de 7 modos de fallo (detección + acción + estado + reanudación); contratos cross-fase R-INT-1..3 (interrupción no deja `draft`) y R-REP-1..3 (reprocesar no duplica) | F116 |
+| `scripts/CHECKLIST.md` | Spec compacta del catálogo de scripts; forma canónica de `| Dependencias \|` con 4 niveles req/rec/opt/bin + columna `\| Si falta \|`; CLI del verificador `check_deps.py` | F117 |
 
-Total declarado: 54 archivos `references/` (38 rutas únicas más 15 tipos de nota de la Fase 78–92). Cada uno aparece exactamente una vez. Cobertura del roadmap: 100 % de las rutas `@/references/` listadas en las fases del bloque 0–11.
+Total declarado: 59 archivos `references/` (43 rutas únicas más 15 tipos de nota de la Fase 78–92, más F112 `checklists-by-type.md`, F113 `validators.md`, F114 `fidelity-audit.md`, F115 `quality-gate.md` y F116 `failure-modes.md`). Cada uno aparece exactamente una vez. Cobertura del roadmap: 100 % de las rutas `@/references/` listadas en las fases del bloque 0–14. Catálogo `scripts/README.md` cubre 80 entradas H3 + `scripts/CHECKLIST.md` (F117).
 
 ---
 

@@ -281,22 +281,30 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.8. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `source-bearing` recomendado (F75 §6.8).
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] `## Modelo` con `:::diagram` Mermaid `erDiagram` (criterio #2).
-- [ ] `## Entidades` con ≥ 3 sub-secciones H3.
-- [ ] `## Campos` con tabla 4-col; cada fila tiene Tipo y Restricciones no vacíos (criterio #1).
-- [ ] `## Relaciones` con tabla y cardinalidad explícita; las relaciones coinciden con el ER (criterio #2).
-- [ ] `## Claves e índices` con tabla.
-- [ ] `## Integridad` con `:::warning`/`:::danger` por tipo (PK, FK, UNIQUE, NOT NULL, CHECK) con `{src:}` (criterio #3).
-- [ ] `## Consultas típicas` con ≥ 3 queries SQL en `:::example`.
-- [ ] `## Evolución` con ≥ 1 cambio documentado.
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `source-bearing` recomendado (F75 §6.8).
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] `## Modelo` con `:::diagram` Mermaid `erDiagram` (criterio #2).
+- [ ] [B] `## Entidades` con ≥ 3 sub-secciones H3.
+- [ ] [B] `## Campos` con tabla 4-col; cada fila tiene Tipo y Restricciones no vacíos (criterio #1).
+- [ ] [B] `## Relaciones` con tabla y cardinalidad explícita; las relaciones coinciden con el ER (criterio #2).
+- [ ] [B] `## Claves e índices` con tabla.
+- [ ] [B] `## Integridad` con `:::warning`/`:::danger` por tipo (PK, FK, UNIQUE, NOT NULL, CHECK) con `{src:}` (criterio #3).
+- [ ] [B] `## Consultas típicas` con ≥ 3 queries SQL en `:::example`.
+- [ ] [B] `## Evolución` con ≥ 1 cambio documentado.
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

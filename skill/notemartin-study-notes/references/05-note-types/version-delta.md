@@ -306,22 +306,30 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.11. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden + `product-version` (NUEVA) (F75 §6.11).
-- [ ] `source-bearing` obligatorio (F75 §6.11).
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] `## Cambios` con tabla 4-col: Versión exacta + Tipo + Área + Descripción.
-- [ ] Cada fila tiene Versión exacta con formato semver (criterio #1).
-- [ ] Cada fila tiene Tipo ∈ {nuevo, cambiado, deprecado, eliminado, default alterado}.
-- [ ] `## Breaking changes` con `:::danger` (F75 §6.11).
-- [ ] `## Cambios de default` con sección propia (criterio #2).
-- [ ] `## Migración` con pasos numerados y bloques `code` (F75 §6.11).
-- [ ] `## Trampas de migración` con ≥ 1 `:::warning` (ROADMAP).
-- [ ] `## Notas afectadas` con ≥ 2 `[[note:id]]` (criterio #3).
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden + `product-version` (NUEVA) (F75 §6.11).
+- [ ] [B] `source-bearing` obligatorio (F75 §6.11).
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] `## Cambios` con tabla 4-col: Versión exacta + Tipo + Área + Descripción.
+- [ ] [B] Cada fila tiene Versión exacta con formato semver (criterio #1).
+- [ ] [B] Cada fila tiene Tipo ∈ {nuevo, cambiado, deprecado, eliminado, default alterado}.
+- [ ] [B] `## Breaking changes` con `:::danger` (F75 §6.11).
+- [ ] [B] `## Cambios de default` con sección propia (criterio #2).
+- [ ] [B] `## Migración` con pasos numerados y bloques `code` (F75 §6.11).
+- [ ] [B] `## Trampas de migración` con ≥ 1 `:::warning` (ROADMAP).
+- [ ] [B] `## Notas afectadas` con ≥ 2 `[[note:id]]` (criterio #3).
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

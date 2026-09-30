@@ -271,23 +271,31 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.4. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `source-bearing` obligatorio: `source`, `source-type`, `source-anchor`, `retrieved`, `vendor`, `product`, `product-version`.
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] `## Configuración` con bloque `code` comentado.
-- [ ] `## Parámetros` con tabla 8-col en orden: Parámetro, Ámbito, Tipo, Default, Rango, Hot reload, Reinicio, Versión, Impacto.
-- [ ] Cero celdas vacías en Parámetro / Ámbito / Tipo / Default / Impacto (criterio #1).
-- [ ] `## Ejemplo completo` con `:::example` + bloque `code`.
-- [ ] `## Combinaciones peligrosas` con ≥ 1 `:::danger` (no `:::warning`).
-- [ ] `## Interacciones` con tabla o lista que documente toda interacción del SDM (criterio #2).
-- [ ] `## Diagrama de dependencias` con `:::diagram` Mermaid (≥ 3 nodos).
-- [ ] Ninguna recomendación sin respaldo: cada `recomendamos|sugerido|usar` lleva `{src:}` o `:::external` (criterio #3).
-- [ ] Si tabla > 30 filas, `:::collapsible` con `default_open: false` (R7).
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `source-bearing` obligatorio: `source`, `source-type`, `source-anchor`, `retrieved`, `vendor`, `product`, `product-version`.
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] `## Configuración` con bloque `code` comentado.
+- [ ] [B] `## Parámetros` con tabla 8-col en orden: Parámetro, Ámbito, Tipo, Default, Rango, Hot reload, Reinicio, Versión, Impacto.
+- [ ] [B] Cero celdas vacías en Parámetro / Ámbito / Tipo / Default / Impacto (criterio #1).
+- [ ] [B] `## Ejemplo completo` con `:::example` + bloque `code`.
+- [ ] [B] `## Combinaciones peligrosas` con ≥ 1 `:::danger` (no `:::warning`).
+- [ ] [B] `## Interacciones` con tabla o lista que documente toda interacción del SDM (criterio #2).
+- [ ] [B] `## Diagrama de dependencias` con `:::diagram` Mermaid (≥ 3 nodos).
+- [ ] [B] Ninguna recomendación sin respaldo: cada `recomendamos|sugerido|usar` lleva `{src:}` o `:::external` (criterio #3).
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] Si tabla > 30 filas, `:::collapsible` con `default_open: false` (R7).
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

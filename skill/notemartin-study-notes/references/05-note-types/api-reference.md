@@ -278,27 +278,35 @@ Precedencia F11 §7.4: **prompt > perfil > defaults**.
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.2. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `source-bearing`: `source`, `source-type`, `source-anchor`, `retrieved` presentes.
-- [ ] `vendor`, `product`, `product-version` cuando aplica.
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] Las 9 secciones obligatorias (Sintaxis → Gotchas) presentes y en orden.
-- [ ] `## Parámetros` con tabla 5-col: `Parámetro`, `Tipo`, `Obligatorio`, `Default`, `Descripción`.
-- [ ] Cero celdas vacías en Tipo/Obligatorio/Default/Descripción (criterio #2).
-- [ ] SDM lista N parámetros → tabla tiene N filas (criterio #1).
-- [ ] Si ≥ 15 subprogramas, cada uno tiene `### Subprograma: <nombre>` con firma + tabla.
-- [ ] `## Ejemplos` con ≥ `min_examples` bloques `:::example` o `code` con caption (criterio #3).
-- [ ] `## Excepciones` con tabla o `:::danger` (nunca prosa).
-- [ ] `## Privilegios` ≠ `## Precondiciones` (sin duplicar).
-- [ ] `## Gotchas` con ≥ 1 `:::warning` (recomendado 3-5).
-- [ ] `## Notas` solo si hay material del SDM y `include_notes: true`.
-- [ ] Si `## Parámetros` > 100 líneas, `:::collapsible` con `default_open: true` (R7).
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre bloques fácticos (R8).
-- [ ] `density_check.py --note <path>` exit 0.
-- [ ] `validate_ir.py --ir <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `source-bearing`: `source`, `source-type`, `source-anchor`, `retrieved` presentes.
+- [ ] [B] `vendor`, `product`, `product-version` cuando aplica.
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] Las 9 secciones obligatorias (Sintaxis → Gotchas) presentes y en orden.
+- [ ] [B] `## Parámetros` con tabla 5-col: `Parámetro`, `Tipo`, `Obligatorio`, `Default`, `Descripción`.
+- [ ] [B] Cero celdas vacías en Tipo/Obligatorio/Default/Descripción (criterio #2).
+- [ ] [B] SDM lista N parámetros → tabla tiene N filas (criterio #1).
+- [ ] [B] Si ≥ 15 subprogramas, cada uno tiene `### Subprograma: <nombre>` con firma + tabla.
+- [ ] [B] `## Ejemplos` con ≥ `min_examples` bloques `:::example` o `code` con caption (criterio #3).
+- [ ] [B] `## Excepciones` con tabla o `:::danger` (nunca prosa).
+- [ ] [B] `## Privilegios` ≠ `## Precondiciones` (sin duplicar).
+- [ ] [B] `## Gotchas` con ≥ 1 `:::warning` (recomendado 3-5).
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre bloques fácticos (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+- [ ] [B] `validate_ir.py --ir <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] `## Notas` solo si hay material del SDM y `include_notes: true`.
+- [ ] [R] Si `## Parámetros` > 100 líneas, `:::collapsible` con `default_open: true` (R7).
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

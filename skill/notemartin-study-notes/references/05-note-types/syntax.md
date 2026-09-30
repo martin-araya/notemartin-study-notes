@@ -259,21 +259,29 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.7. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `source-bearing` obligatorio (F75 §6.7).
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] `## Convención de metasímbolos` con tabla de cada metasímbolo + significado.
-- [ ] `## Sintaxis` con bloque `code` con BNF/EBNF/JSON Schema completa.
-- [ ] `## Cláusula por cláusula` con tabla `Token / Descripción / Ejemplo`.
-- [ ] Cada cláusula `[]` en BNF tiene `###` sub-sección (criterio #1).
-- [ ] `## Diagramas de sintaxis` con `:::diagram` Mermaid ≥ 3 nodos (criterio #3).
-- [ ] `## Ejemplos graduales` con ≥ 3 ejemplos en `:::example`.
-- [ ] `## Contraejemplos` con ≥ 1 `:::warning` con input + error literal (criterio #2).
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `source-bearing` obligatorio (F75 §6.7).
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] `## Convención de metasímbolos` con tabla de cada metasímbolo + significado.
+- [ ] [B] `## Sintaxis` con bloque `code` con BNF/EBNF/JSON Schema completa.
+- [ ] [B] `## Cláusula por cláusula` con tabla `Token / Descripción / Ejemplo`.
+- [ ] [B] Cada cláusula `[]` en BNF tiene `###` sub-sección (criterio #1).
+- [ ] [B] `## Diagramas de sintaxis` con `:::diagram` Mermaid ≥ 3 nodos (criterio #3).
+- [ ] [B] `## Ejemplos graduales` con ≥ 3 ejemplos en `:::example`.
+- [ ] [B] `## Contraejemplos` con ≥ 1 `:::warning` con input + error literal (criterio #2).
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

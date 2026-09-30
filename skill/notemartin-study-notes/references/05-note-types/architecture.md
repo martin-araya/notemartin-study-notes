@@ -265,22 +265,30 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.6. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `source-bearing` recomendado (F75 §6.6).
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] `## Vista general` con `:::diagram` Mermaid (criterio #1).
-- [ ] `## Componentes y responsabilidades` con tabla 3-col; cada responsabilidad ≤ 30 palabras en su primera frase (criterio #2).
-- [ ] `## Flujo paso a paso` con ≥ 3 pasos numerados Y diagrama Mermaid `sequenceDiagram` (criterio #3).
-- [ ] `## Interacciones` con tabla o diagrama detallado.
-- [ ] `## Estructuras en memoria y disco` con 2 sub-secciones y tamaño típico por entrada.
-- [ ] `## Puntos de fallo` con `:::warning`/`:::danger` con `{src:blk_xxxx}` (criterio #4).
-- [ ] `## Cuellos de botella` con `:::warning` y métrica concreta.
-- [ ] `## Decisiones de diseño` con lista numerada y trade-off aceptado.
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `source-bearing` recomendado (F75 §6.6).
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] `## Vista general` con `:::diagram` Mermaid (criterio #1).
+- [ ] [B] `## Componentes y responsabilidades` con tabla 3-col; cada responsabilidad ≤ 30 palabras en su primera frase (criterio #2).
+- [ ] [B] `## Flujo paso a paso` con ≥ 3 pasos numerados Y diagrama Mermaid `sequenceDiagram` (criterio #3).
+- [ ] [B] `## Interacciones` con tabla o diagrama detallado.
+- [ ] [B] `## Estructuras en memoria y disco` con 2 sub-secciones y tamaño típico por entrada.
+- [ ] [B] `## Puntos de fallo` con `:::warning`/`:::danger` con `{src:blk_xxxx}` (criterio #4).
+- [ ] [B] `## Cuellos de botella` con `:::warning` y métrica concreta.
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] `## Decisiones de diseño` con lista numerada y trade-off aceptado. **OMIT en `reference`** (F112 §5.1; F105 R-G4).
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

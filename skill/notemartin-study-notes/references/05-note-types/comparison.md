@@ -285,22 +285,30 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.10. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `source-bearing` recomendado.
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] `## Comparativa` con tabla; ≥ 4 criterios; última fila con `:::tip` (fila decisiva).
-- [ ] `## Síntesis` con ≥ 2 similitudes + 1 diferencia clave (criterio #1).
-- [ ] Criterios paralelos: cada opción tiene valor en cada criterio (criterio #3).
-- [ ] `## Criterios` con bullets explicando cada criterio (F75 §6.10).
-- [ ] `## Matriz de decisión por escenario` con ≥ 3 escenarios (ROADMAP).
-- [ ] `## Trade-offs` con ≥ 3 filas (ROADMAP).
-- [ ] `## Veredicto` con 1-2 párrafos (F75 §6.10).
-- [ ] Afirmaciones derivadas marcadas con `:::derived` o `:::external` (criterio #2).
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `source-bearing` recomendado.
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] `## Comparativa` con tabla; ≥ 4 criterios; última fila con `:::tip` (fila decisiva).
+- [ ] [B] `## Síntesis` con ≥ 2 similitudes + 1 diferencia clave (criterio #1).
+- [ ] [B] Criterios paralelos: cada opción tiene valor en cada criterio (criterio #3).
+- [ ] [B] `## Criterios` con bullets explicando cada criterio (F75 §6.10).
+- [ ] [B] `## Matriz de decisión por escenario` con ≥ 3 escenarios (ROADMAP).
+- [ ] [B] `## Trade-offs` con ≥ 3 filas (ROADMAP).
+- [ ] [B] `## Veredicto` con 1-2 párrafos (F75 §6.10).
+- [ ] [B] Afirmaciones derivadas marcadas con `:::derived` o `:::external` (criterio #2).
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

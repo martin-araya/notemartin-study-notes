@@ -245,26 +245,34 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.5. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden (F75 §2.1).
-- [ ] `source-bearing` obligatorio (F75 §6.5).
-- [ ] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
-- [ ] `## Síntomas` con ≥ 1 bloque `code` con mensaje literal **idéntico carácter por carácter** al SDM (criterio #1).
-- [ ] `## Causa raíz` con párrafo por cada error cubierto.
-- [ ] `## Diagnóstico ordenado` con pasos numerados para confirmar la causa.
-- [ ] `## Solución` con pasos numerados por error (criterio #2).
-- [ ] `## Prevención` con `:::tip` por error.
-- [ ] `## Confundibles` con `[[note:id]]` (criterio #3).
-- [ ] Confundibles **bidireccionales** (la nota target tiene backlink).
-- [ ] `## Árbol de diagnóstico` con `:::diagram` Mermaid.
-- [ ] `## Tabla índice` con ≥ 1 fila por mensaje literal (criterio #1).
-- [ ] Pasos destructivos envueltos en `:::danger` (criterio heredado de F80).
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
-- [ ] `density_check.py --note <path>` exit 0.
-- [ ] **F103-1** Si el estudiante mantiene un living-doc de errores propios en `study/errors/<dominio>.md`, esta nota canónica lo enlaza desde `## Síntomas` o `## Causa raíz` con `[[study-error:<dominio>:<id>]]` (opcional, solo si el registro existe).
-- [ ] **F103-2** Esta nota canónica NO contiene el registro subjetivo del estudiante: solo el error objetivo + corrección + enlaces canónicos. El registro subjetivo vive en el living-doc separado (F103 §1).
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden (F75 §2.1).
+- [ ] [B] `source-bearing` obligatorio (F75 §6.5).
+- [ ] [B] `## TL;DR` ≤ 60 palabras / 8 líneas (R1).
+- [ ] [B] `## Síntomas` con ≥ 1 bloque `code` con mensaje literal **idéntico carácter por carácter** al SDM (criterio #1).
+- [ ] [B] `## Causa raíz` con párrafo por cada error cubierto.
+- [ ] [B] `## Diagnóstico ordenado` con pasos numerados para confirmar la causa.
+- [ ] [B] `## Solución` con pasos numerados por error (criterio #2).
+- [ ] [B] `## Prevención` con `:::tip` por error.
+- [ ] [B] `## Confundibles` con `[[note:id]]` (criterio #3).
+- [ ] [B] Confundibles **bidireccionales** (la nota target tiene backlink).
+- [ ] [B] `## Árbol de diagnóstico` con `:::diagram` Mermaid.
+- [ ] [B] `## Tabla índice` con ≥ 1 fila por mensaje literal (criterio #1).
+- [ ] [B] Pasos destructivos envueltos en `:::danger` (criterio heredado de F80).
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] **F103-1** Si el estudiante mantiene un living-doc de errores propios en `study/errors/<dominio>.md`, esta nota canónica lo enlaza desde `## Síntomas` o `## Causa raíz` con `[[study-error:<dominio>:<id>]]` (opcional, solo si el registro existe).
+- [ ] [R] **F103-2** Esta nota canónica NO contiene el registro subjetivo del estudiante: solo el error objetivo + corrección + enlaces canónicos. El registro subjetivo vive en el living-doc separado (F103 §1).
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 

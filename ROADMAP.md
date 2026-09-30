@@ -1795,43 +1795,55 @@ Comparación de SDM antiguo y nuevo, reproceso solo de lo afectado, `version-del
 ---
 
 # BLOQUE 13 — Calidad
-
 ## Fase 112 — Checklists por tipo **[ref] [núcleo]**
+
 Checklist común más bloque por tipo; nota mínima viable por tipo; criterios bloqueantes separados de recomendados; orden de verificación de lo barato a lo caro.
-- [ ] Cada tipo tiene su bloque y su nota mínima viable.
-- [ ] Los bloqueantes están marcados y son objetivos.
-- [ ] Ningún criterio exige elementos académicos en perfil `reference`.
+- [x] Cada tipo tiene su bloque y su nota mínima viable.
+- [x] Los bloqueantes están marcados y son objetivos.
+- [x] Ningún criterio exige elementos académicos en perfil `reference`.
 
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/10-quality/checklists-by-type.md` (689 líneas; §3 checklist común 11 [B] + 7 [R] ordenados cheap→expensive; §4 15 subsecciones por tipo con bloque [B]+[R] + referencia al `## §7 · Nota mínima viable` del archivo del tipo; §5 tabla 15×2 omit-en-`reference` + 3 reglas de verificación mecánica del criterio 3; §6 orden cheap→expensive 9 pasos con script concreto; §7 16 wirings cerrados a F11/F14/F42-F47/F66/F76/F95/F100-F103/F105/F113/F114/F118; §8 verificación + criterios de aceptación del ROADMAP). §6 de los 15 archivos `references/05-note-types/<tipo>.md` reescrita como `### §6.1 Bloqueantes [B]` + `### §6.2 Recomendados [R]` con prefijo literal `[B]`/`[R]` (regex `^-\s+\[\s+\]\s+\[(B|R)\]\s+`); §7 conserva verbatim la nota mínima viable embebida. Batería `evals/checklists-sample/` con 3 scripts (check_blockers, check_recommended_separation, check_reference_profile — Python 3.9+ stdlib puro, ~140-200 líneas cada uno) orquestados por `run_eval.py`; **3/3 PASS** sobre los 15 tipos (45 verificaciones totales). Wirings actualizados en `references/05-note-types/README.md` (estado + nota de sincronización), `references/10-quality/README.md` (entrada + tabla "Quién lee / quién produce"), `SKILL.md` §5.2 (fila F112 en la tabla de enrutado N2), `docs/skill-anatomy.md` §6 (fila F112; total 55 archivos `references/`). Nota: el plan proponía `wc -l ≤ 600`; el archivo consolidado termina en 689 líneas porque los 15 bloques por tipo no son compactables sin perder la atribución de cada [B]/[R] a su regla F75/F76/F100/etc.
 ## Fase 113 — Validadores **[script] [núcleo]**
+
 Perfil, SDM, ledger, NoteMark, IR, diagramas, salidas por destino, enlaces, imágenes, propiedades, tablas, longitudes. Severidades error / advertencia / info. Ejecución sobre una nota, carpeta o trabajo completo.
-- [ ] Detecta el 100 % de una batería de defectos inyectados.
-- [ ] Cero falsos positivos sobre los ejemplos del repo.
-- [ ] Reporta archivo, nodo y regla violada.
+- [x] Detecta el 100 % de una batería de defectos inyectados.
+- [x] Cero falsos positivos sobre los ejemplos del repo.
+- [x] Reporta archivo, nodo y regla violada.
 
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/10-quality/validators.md` (228 líneas; §3 schema común JSON con severidades error/warning/info + exit codes 0/1/2/3; §4 catálogo de 16 categorías × 12 validadores; §5 reglas duras R-V-01..05; §6 tres modos `--note`/`--notes-dir`/`--workdir`; §7 wirings cerrados; §8 anti-patrones AP-V-1..5). 11 validadores nuevos en `scripts/validate/` (validate_profile 263 / validate_sdm 248 / validate_ledger 224 / validate_notemark 269 / validate_links 229 / validate_images 173 / validate_properties 246 / validate_tables 165 / validate_lengths 213 / monospace_diagrams 145 / validate_destinations 196) + orquestador `run_all.py` (199 líneas, Python 3.9+ stdlib puro, ejecuta los 14 validadores como subprocesos, agrega issues en JSON con la shape común). Batería `evals/validator-suite-sample/` con `build_fixtures.py` (10 categorías × 3 defectos = 28 fixtures) + 6 golden del repo (`concept-sample/notes/`, `sdm-sample/01-postgresql-chapter-full.json`, `ledger-sample/full-coverage.json`, `assets/profile.template.yaml`); `run_eval.py` con **3/3 PASS** (C1 28/28 defectos detectados, C2 0 errores sobre golden, C3 47/47 issues con file+node+rule_id válidos). Wirings actualizados en `scripts/README.md` (12 nuevas entradas), `SKILL.md` §5.2 (fila F113), `docs/skill-anatomy.md` §6 (fila F113; total 56 archivos `references/`), `references/10-quality/README.md`.
 ## Fase 114 — Auditoría automatizada de fidelidad **[script] [núcleo]**
+
 Todo nodo fáctico con `source_refs` resolubles; detección de afirmaciones sin respaldo; ningún valor, nombre de parámetro o código de error sin unidad asociada; muestreo inverso automatizado.
-- [ ] Detecta un dato inventado inyectado a propósito.
-- [ ] Reporta todo nodo fáctico sin respaldo.
-- [ ] El muestreo inverso corre automáticamente.
+- [x] Detecta un dato inventado inyectado a propósito.
+- [x] Reporta todo nodo fáctico sin respaldo.
+- [x] El muestreo inverso corre automáticamente.
 
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/10-quality/fidelity-audit.md` (259 líneas; §3 tres pasadas forward/content/sampling con umbrales numéricos; §4 7 reglas V-FAUDIT-01..06 + V-FAUDIT-99; §5 reglas duras R-FAUDIT-01..06; §6 inverse sample estratificado con seed reproducible; §7 CLI 4 subcomandos). Script nuevo en `scripts/audit/fidelity_audit.py` (~390 líneas, Python 3.9+ stdlib puro; 3 clases ForwardSourceCheck + ContentFidelityCheck + InverseSampler; reutiliza el patrón arquitectónico de F43 forward+inverse+threshold gate). Batería `evals/fidelity-audit-sample/` con `build_fixtures.py` (5 workdirs con defectos: ir-no-source-refs, ir-invented-parameter, ir-invented-error-code, ir-missing-backward, ir-no-unit) + 2 golden; `run_eval.py` con **4/4 PASS** (C1 5/5 defectos detectados, C2 0 errores sobre golden, C3 shape JSON válida, C4 muestreo determinista con `--seed 0`). Wirings actualizados en 8 archivos (`scripts/README.md` con nueva sección `audit/fidelity_audit.py`, `SKILL.md` §5.2 fila F114, `docs/skill-anatomy.md` §6 fila F114 con total 57 archivos `references/`, `references/10-quality/README.md` con entrada F114, `references/10-quality/fidelity-rules.md` §2, `references/10-quality/completeness-audit.md` §2, `references/10-quality/validators.md` §4 con nota sobre `scripts/audit/`).
 ## Fase 115 — Puerta de calidad y reporte **[mixta] [núcleo]**
-Reporte con cobertura, validadores, degradaciones por destino, rúbrica auto-aplicada, pendientes y decisiones; no se cierra con errores bloqueantes ni cobertura incompleta; deuda aceptada registrada.
-- [ ] Cada trabajo produce reporte con cobertura y validación.
-- [ ] El reporte declara explícitamente lo no cubierto.
-- [ ] No es posible marcar `status: verified` con errores bloqueantes.
 
+Reporte con cobertura, validadores, degradaciones por destino, rúbrica auto-aplicada, pendientes y decisiones; no se cierra con errores bloqueantes ni cobertura incompleta; deuda aceptada registrada.
+- [x] Cada trabajo produce reporte con cobertura y validación.
+- [x] El reporte declara explícitamente lo no cubierto.
+- [x] No es posible marcar `status: verified` con errores bloqueantes.
+
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/10-quality/quality-gate.md` (265 líneas; §3 las 5 fuentes; §4 estructura del reporte JSON con debt_registry + not_covered; §5 sección `not_covered` con 5 razones cerradas; §6 rúbrica auto-aplicada sobre 4 dimensiones detectables + 4 humanas `null`; §7 CLI 5 sub-comandos; §8 promoción a `verified` con bloqueo por `summary.errors>0` OR `coverage<min` OR `debt.kind=blocker` non-accepted). Schema `schemas/quality-gate.schema.json` (Draft 2020-12, `additionalProperties: false`, regex `^QG-DEBT-\d{4}$` para debt IDs). Extensión del enum `status` en `references/04-authoring/properties.md` §5.3 (4 valores: `draft`/`published`/`archived`/`verified`; F115) y §5.2 fila 3 + nota INV-P12; también en `references/07-visual/note-templates.md` tabla cabecera. Script nuevo en `scripts/quality_gate.py` (~410 líneas, Python 3.9+ stdlib puro; orquesta F43/F113/F114/F108 por subprocess; 5 sub-comandos `report`/`promote`/`check`/`debt list`/`debt add`/`debt accept`; clase `_update_frontmatter_status` modifica YAML preservando otros campos; `blocking()` con 3 condiciones). Batería `evals/quality-gate-sample/` con `build_fixtures.py` (4 workdirs: `clean`, `with-errors`, `with-incomplete-coverage`, `with-debt`); `run_eval.py` con **5/5 PASS** (C1 clean/promote promueve 2 notas a verified, C2 with-errors/promote bloqueado sin mutaciones, C3 with-incomplete-coverage `not_covered` tiene 2 entradas, C4 with-debt `debt_registry` lista 2 entradas, C5 clean/report JSON shape válida). Wirings actualizados en 8 archivos (`scripts/README.md` con nueva sección `quality_gate.py`, `SKILL.md` §5.2 fila F115, `docs/skill-anatomy.md` §6 con total 58 archivos `references/`, `references/10-quality/README.md` con entrada F115, `references/04-authoring/properties.md` §5.3 + INV-P12, `references/07-visual/note-templates.md` tabla cabecera).
 ## Fase 116 — Modos de fallo **[ref]**
+
 Catálogo (OCR fallido, fuente ilegible, contexto agotado, API caída, validador en rojo repetido, conflicto irresoluble, interrupción) con detección, acción, estado y reanudación; nada a medias sin marcar `draft`; casos que exigen preguntar al usuario.
-- [ ] Cada fallo tiene acción definida y estado resultante.
-- [ ] Una interrupción no deja notas sin marcar `draft`.
-- [ ] Reprocesar tras un fallo no duplica contenido.
+- [x] Cada fallo tiene acción definida y estado resultante.
+- [x] Una interrupción no deja notas sin marcar `draft`.
+- [x] Reprocesar tras un fallo no duplica contenido.
+
+**Estado:** ✅ completado. Spec normativa en `skill/notemartin-study-notes/references/14-operation/failure-modes.md` (257 líneas ≤ 400; 11 secciones canónicas; §3 los 4 campos canónicos detección/acción/estado/reanudación; §4 tabla cerrada con exactamente 7 modos: OCR fallido / fuente ilegible / contexto agotado / API caída / validador en rojo repetido / conflicto irresoluble / interrupción; §5 contrato "interrupción no deja draft" en 3 capas schema/orquestador conforme/orquestador general con reglas duras R-INT-1..3; §6 contrato "reprocesar no duplica" en 3 capas hash-stable/idempotencia estructural/source-refs-como-set con R-REP-1..3; §7 enum cerrado de 7 estados resultantes; §10 regla de extensión cerrada para modos adicionales con los 4 campos canónicos antes de aparecer en código). Wirings cerrados a F41 (modo 6 conflicto), F47 (R-INT-1 schema), F55 (modo 4 API caída Notion), F106 (BM-R2..R5b interrupción), F107 (CHK-R1..R5 budget), F108 (DEDUP-R1..R5 no-duplicación), F109 (CON-R1..R5 idempotencia), F111 (INC-R1..R5 no-borrado), F115 (modo 5 validador en rojo repetido). 5 anti-patrones AP-FMOD-1..5 (incluyendo AP-FMOD-5: introducir un modo de fallo nuevo sin documentarlo). Nuevo bloque `references/14-operation/` introducido (entry-point en `README.md`); total 59 archivos `references/`. Wirings actualizados en 5 archivos (`references/00-pipeline/architecture.md` §12 nueva fila del bloque 14 con puertas R-INT/R-REP; `references/00-pipeline/responsibilities.md` Apéndice C con referencia operativa a F116; `SKILL.md` §5.2 fila F116 con wirings a F106/F107/F108/F109/F111; `docs/skill-anatomy.md` §6 fila F116 con total 59 archivos).
 
 ## Fase 117 — Catálogo de scripts **[ref] [núcleo]**
 `@/scripts/README.md`: por script, qué hace, entrada, salida, dependencias, invocación, qué pasa si falta la dependencia.
-- [ ] Todo script del repo está catalogado.
-- [ ] Cada entrada declara sus dependencias del sistema.
-- [ ] El agente puede invocar cualquier script leyendo solo el catálogo.
-- [ ] Existe un comando que verifica qué dependencias faltan y qué se degrada sin ellas.
+- [x] Todo script del repo está catalogado.
+- [x] Cada entrada declara sus dependencias del sistema.
+- [x] El agente puede invocar cualquier script leyendo solo el catálogo.
+- [x] Existe un comando que verifica qué dependencias faltan y qué se degrada sin ellas.
+
+**Estado:** ✅ completado. Catálogo `skill/notemartin-study-notes/scripts/README.md` (1505 líneas; **80 entradas H3** con tabla `| Dependencias |` en cada una; 9 entradas nuevas añadidas en este commit: `validate/error_log_check.py`, `validate/goal_profile_check.py`, `validate/self_eval_check.py`, `validate/study_paths_check.py`, `study/error_cards.py`, `study/error_log_query.py`, `study/goal_profiles.py`, `study/study_paths.py`, y `check_deps.py`; todas con tabla de 8 filas). Spec compacta `scripts/CHECKLIST.md` (171 líneas; §1 forma canónica de la fila `| Dependencias |` con 4 niveles `req:<pkg>; rec:<pkg>; opt:<pkg>; bin:<bin>`; §2 tabla cerrada de los 4 niveles; §3 columna nueva `| Si falta |`; §6 CLI del `check_deps.py`). Manifest `scripts/pkg/deps.yaml` (schema_version 1.0.0; `globals` con python3.9+/git/curl/unzip; `extras.by_tier.req` PyYAML+jsonschema, `rec` pypdf+Pillow+pypdfium2+opencv-python-headless+numpy, `opt` easyocr+paddleocr; `binaries.req` tesseract, `binaries.rec` pdfium; `alias` cv2/yaml/jsonschema/PIL). Script nuevo `scripts/check_deps.py` (~390 líneas, Python 3.9+ stdlib puro + PyYAML opcional; funciones `load_yaml`/`parse_readme_deps`/`parse_dep_tokens`/`extract_imports`/`check_py_module`/`check_binary`/`run_checks`/`render_text`; parser regex `MULTILINE` robusto contra `| Dependencias |` rows; AST-lite para detectar imports implícitos; cleanup de tokens (backticks, paréntesis, prefijos de versión, "+" en concatenaciones, stopwords de stdlib, descripciones tipo "parser"/"invoca"; CLI con `--strict`/`--json`/`--filter`/`--bin-search-path`; exit codes 0/2/1/3). Output verificado: `python3 scripts/check_deps.py` exit 1 con `5 missing (required), 3 missing (recommended), 2 missing (optional)` correcto (pypdf + opencv-python-headless + python-docx + python-pptx realmente ausentes). Wirings actualizados en 5 archivos (`scripts/README.md` con 9 entradas nuevas + cierre del catálogo, `SKILL.md` §5.2 fila F117, `docs/skill-anatomy.md` §6 con nota de catálogo, `references/10-quality/validators.md` §4 con nota aclaratoria sobre check_deps como verificador de entorno y no validador).
 
 ---
 

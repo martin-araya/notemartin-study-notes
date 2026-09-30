@@ -308,25 +308,33 @@ notes:
 
 ## §6 · Checklist de cierre
 
-Antes de publicar:
+Esta sección resume el bloque del tipo. La fuente normativa es
+`references/10-quality/checklists-by-type.md` §4.9. Esta copia se conserva
+para que el agente que carga solo este archivo tenga la lista delante;
+cualquier cambio debe aplicarse primero allí y después sincronizarse aquí.
 
-- [ ] Cabecera con 5 campos en orden + `coverage: summary` (F75 §6.9).
-- [ ] `source-bearing` obligatorio (F75 §6.9).
-- [ ] `## TL;DR` ≤ 120 palabras (F75 §6.9: L1 extendida).
-- [ ] `## Resumen ejecutivo` con 1-2 párrafos (criterio #3).
-- [ ] `## Continuidad` con `### Hacia atrás` Y `### Hacia adelante` (criterio #1).
-- [ ] `## Puntos clave` con 3-7 bullets.
-- [ ] `## Conceptos nuevos` con ≥ 3 conceptos con `[[note:id]]` o `[[term:nombre]]` (criterio #2).
-- [ ] `## Citas textuales` con ≥ 1 `:::external` con cita literal.
-- [ ] `## Énfasis del autor` con ≥ 1 `:::note`.
-- [ ] `## Detalles` con sub-secciones H3 (mecanismos / código / diagramas).
-- [ ] `## Conexiones` con ≥ 1 `:::derived`.
-- [ ] `## Erratas` con ≥ 1 `:::warning`.
-- [ ] `## Ejercicios` con ≥ 1 ejercicio en `:::example`.
-- [ ] `## Ver también` siempre presente (F75 §6.9).
-- [ ] Cierre: `## Backlinks` + `## Queries`.
-- [ ] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
-- [ ] `density_check.py --note <path>` exit 0.
+### §6.1 · Bloqueantes [B]
+
+- [ ] [B] Cabecera con 5 campos en orden + `coverage: summary` (F75 §6.9).
+- [ ] [B] `source-bearing` obligatorio (F75 §6.9).
+- [ ] [B] `## TL;DR` ≤ 120 palabras (F75 §6.9: L1 extendida).
+- [ ] [B] `## Resumen ejecutivo` con 1-2 párrafos (criterio #3).
+- [ ] [B] `## Continuidad` con `### Hacia atrás` Y `### Hacia adelante` (criterio #1).
+- [ ] [B] `## Puntos clave` con 3-7 bullets.
+- [ ] [B] `## Conceptos nuevos` con ≥ 3 conceptos con `[[note:id]]` o `[[term:nombre]]` (criterio #2).
+- [ ] [B] `## Citas textuales` con ≥ 1 `:::external` con cita literal.
+- [ ] [B] `## Detalles` con sub-secciones H3 (mecanismos / código / diagramas).
+- [ ] [B] `## Ver también` siempre presente (F75 §6.9).
+- [ ] [B] Densidad `{src:}` ≥ 0.80 sobre filas fácticas (R8).
+- [ ] [B] `density_check.py --note <path>` exit 0.
+
+### §6.2 · Recomendados [R]
+
+- [ ] [R] `## Énfasis del autor` con ≥ 1 `:::note`. **OMIT en `reference`** (F112 §5.1).
+- [ ] [R] `## Conexiones` con ≥ 1 `:::derived`. **OMIT en `reference`** (F112 §5.1).
+- [ ] [R] `## Erratas` con ≥ 1 `:::warning`. **OMIT en `reference`** (F112 §5.1).
+- [ ] [R] `## Ejercicios` con ≥ 1 ejercicio en `:::example`. **OMIT en `reference`** (F112 §5.1).
+- [ ] [R] Cierre: `## Backlinks` + `## Queries`.
 
 ---
 
