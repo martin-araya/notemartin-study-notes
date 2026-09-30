@@ -133,6 +133,24 @@ Las secciones 13a-13c son el cierre común de F75 §4. La sección 14
 
 Si la nota tiene < 50 líneas de cuerpo, las 3 capas son **optativas** y basta L2.
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `concept` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | ✅ |
+| Diagnóstico | — |
+| Decisión | ✅ |
+| Predicción | — |
+
+Notas: la nota puede declarar `self-evaluation-types` como superset del
+default (nunca subset) — ver V2 en `self-evaluation.md` §6. La H3
+`### Predicción` solo se incluye si la nota documenta comportamiento
+dinámico explícito (no se añade por defecto).
+
 ---
 
 ## §3 · Componentes mínimos
@@ -282,6 +300,10 @@ Antes de publicar la nota (`status: published`), verificar:
 - [ ] **F101-AP2** Los términos se introducen bilingües en primera aparición: notas con `language == es-en` o `en-es` tienen ≥ 1 marca `[[en:term]]` o `[[es:term]]` en la primera mención y un bloque `## Glosario` al pie (F101 §4).
 - [ ] **F101-AP3** La lista de no-traducibles tiene ≥ 40 entradas: la lista cerrada F101 §3 cubre 45 entradas en 8 categorías (12 identificadores PG + 8 parámetros CLI + 6 mensajes + 3 códigos HTTP + 6 comandos + 3 sintaxis + 3 versiones + 4 headers).
 - [ ] **F101-AP4** Bloque de procedencia al pie: la nota tiene `## Procedencia` con 4 campos cerrados (Fuente / Versión / Fecha de recuperación ISO YYYY-MM-DD / URL/anchor).
+- [ ] **F102-1** Sección `## Autoevaluación` presente con las H3 `### Recuerdo`, `### Aplicación` y `### Decisión` (tipos asignados al note-type `concept` en `references/09-study/self-evaluation.md` §3), cada una con 3-7 bloques `:::collapsible{default_open=false}` (V5).
+- [ ] **F102-2** Cada bloque plegable de `## Autoevaluación` cierra con la línea `> Fundamento: {src:blk_xxxx}` o `> Fundamento: [[note:id#§N]]` (V3), y la respuesta no es copia literal del bloque referenciado — Jaccard ≤ 0.8 sobre palabras no técnicas (V4).
+- [ ] **F105-1** Si `goal_profile == interview` (en `profile.yaml` o vía `goal-profile-override` en el frontmatter): la nota incluye `## Decisiones de diseño` (lista numerada con trade-off aceptado por decisión) + `## Explicación oral` (1 párrafo). F105 R-G4.
+- [ ] **F105-2** Si `goal_profile == certification`: la nota incluye `## Objetivos oficiales` (tabla con `objetivo_id` + `cobertura`) + declara `certification-objective` en el frontmatter. F105 R-G5.
 
 ---
 
