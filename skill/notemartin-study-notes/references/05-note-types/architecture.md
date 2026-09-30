@@ -115,6 +115,24 @@ related: "[[note:procedure-de-instalacion]], [[note:concept-del-sistema]]"
 | L2 | `{layer:l2}` | Vista general, Componentes, Interacciones, Decisiones. 50-70% del total. |
 | L3 | `{layer:l3}` | Estructuras, Puntos de fallo, Cuellos de botella. Si > 100 líneas, `:::collapsible` con `default_open: false` (R7). |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `architecture` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | — |
+| Diagnóstico | — |
+| Decisión | ✅ |
+| Predicción | — |
+
+Notas: recuerdo (componentes, interacciones) + decisión (trade-offs
+arquitectónicos). Aplicación se añade si la nota documenta trade-offs
+operativos documentados. La nota puede declarar `self-evaluation-types`
+como superset del default.
+
 ---
 
 ## §3 · Componentes mínimos
