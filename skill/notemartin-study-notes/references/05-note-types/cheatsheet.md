@@ -109,6 +109,25 @@ related: "[[note:procedure-de-instalacion]], [[note:concept-del-dominio]]"
 |---|---|---|
 | L1 | `{layer:l1}` | Toda la nota. El cheatsheet es denso y no requiere separación L1/L2/L3. |
 
+### §2.5 · Autoevaluación (F102)
+
+Tipos de pregunta asignados a `cheatsheet` (ver
+`references/09-study/self-evaluation.md` §3):
+
+| Tipo de pregunta | Asignado |
+|---|---|
+| Recuerdo | ✅ |
+| Aplicación | ✅ |
+| Diagnóstico | — |
+| Decisión | — |
+| Predicción | — |
+
+Notas: recuerdo (forma del comando) + aplicación (qué flag usar para un
+caso). Se considera referencia pura (ver `self-evaluation.md` §4): tabla
+de comandos; el diagnóstico y la decisión no tienen sentido sin
+contexto. La nota puede declarar `self-evaluation-types` como superset
+del default (nunca subset).
+
 ---
 
 ## §3 · Componentes mínimos
