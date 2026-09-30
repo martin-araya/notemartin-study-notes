@@ -1,0 +1,22 @@
+{
+  "section_count": 10,
+  "sections_order": [
+    "Ficha",
+    "Mapa de cap\u00edtulos",
+    "Grafo de dependencias",
+    "Rutas de lectura",
+    "Cobertura por cap\u00edtulo",
+    "Glosario",
+    "Cheatsheets",
+    "Pr\u00e1cticas",
+    "Erratas",
+    "Progreso"
+  ],
+  "coverage_chapters_total": 3,
+  "coverage_done_count": 2,
+  "glossary_terms_total": 3,
+  "concept_graph_nodes": 4,
+  "concept_graph_edges": 3,
+  "cheatsheet_count": 1,
+  "practice_count": 1
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-30T00:00:00Z",
+  "cheatsheets": [
+    {
+      "note_id": "wal-cheatsheet",
+      "title": "WAL Cheatsheet",
+      "source_anchor": "Chapter 9.1"
+    }
+  ],
+  "count": 1
+}

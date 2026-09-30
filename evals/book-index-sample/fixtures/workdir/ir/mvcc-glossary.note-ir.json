@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "mvcc-glossary",
+  "title": "MVCC Glossary",
+  "layer": "l1",
+  "note_type": "glossary-term",
+  "frontmatter": {
+    "title": "MVCC Glossary",
+    "note-type": "glossary-term"
+  },
+  "blocks": [
+    {
+      "node": "text",
+      "attrs": {
+        "text": "Glossary entry for MVCC.",
+        "capability": "text"
+      },
+      "source_refs": []
+    }
+  ]
+}

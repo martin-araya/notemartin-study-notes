@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "wal-cheatsheet",
+  "title": "WAL Cheatsheet",
+  "layer": "l1",
+  "note_type": "cheatsheet",
+  "frontmatter": {
+    "title": "WAL Cheatsheet",
+    "note-type": "cheatsheet",
+    "source-anchor": "Chapter 9.1"
+  },
+  "blocks": [
+    {
+      "node": "text",
+      "attrs": {
+        "text": "Quick reference for WAL.",
+        "capability": "text"
+      },
+      "source_refs": []
+    }
+  ]
+}

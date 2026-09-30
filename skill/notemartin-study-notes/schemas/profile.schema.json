@@ -26,6 +26,10 @@
     "consolidation": {
       "description": "Pases de consolidación (F109, opt-in). Activar cuando se quiera ejecutar el orquestador `consolidate.py run-all`. Ver references/10-quality/consolidation-passes.md.",
       "$ref": "#/$defs/consolidation"
+    },
+    "book_index": {
+      "description": "Índice de obra (F110, opt-in). Activar cuando se quiera generar el archivo `reports/book-index.md` con 10 secciones canónicas. Ver references/05-note-types/index-moc-generator.md.",
+      "$ref": "#/$defs/book_index"
     }
   },
   "$defs": {
@@ -135,6 +139,23 @@
           "type": "boolean",
           "default": false,
           "description": "Si true, pass-link-debt reescribe IRs/NoteMark para borrar refs rotas o redirigirlas automáticamente. Default false (cumple INV-12; el agente revisa)."
+        }
+      }
+    },
+    "book_index": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Configuración del índice de obra (F110). Ver references/05-note-types/index-moc-generator.md.",
+      "properties": {
+        "auto_on_consolidate": {
+          "type": "boolean",
+          "default": false,
+          "description": "Si true, el agente genera `book-index.md` automáticamente tras `consolidate.py run-all`. Default false (cumple INV-12)."
+        },
+        "include_errata": {
+          "type": "boolean",
+          "default": true,
+          "description": "Si true, el índice incluye la sección Erratas con link-debt del F109. Default true (opt-out vía --no-include-errata)."
         }
       }
     }

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "postgres-config",
+  "title": "Postgres Config",
+  "layer": "l2",
+  "note_type": "procedure",
+  "frontmatter": {
+    "title": "Postgres Config",
+    "note-type": "procedure"
+  },
+  "blocks": [
+    {
+      "node": "text",
+      "attrs": {
+        "text": "Procedure for config.",
+        "capability": "text"
+      },
+      "source_refs": []
+    }
+  ]
+}

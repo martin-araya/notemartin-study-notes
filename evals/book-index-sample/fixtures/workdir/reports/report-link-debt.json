@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-30T00:00:00Z",
+  "total_link_debt": 2,
+  "count_by_kind": {
+    "broken-wikilink": 1,
+    "missing-target": 0,
+    "orphan-note": 1,
+    "redirected": 0,
+    "external-dead": 0
+  }
+}

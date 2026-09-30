@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "postgres",
+    "vendor": "pg"
+  },
+  "terms": [
+    {
+      "canonical": "mvcc",
+      "definition": "Multi-Version Concurrency Control.",
+      "domain": "postgres",
+      "aliases": [
+        {
+          "alias": "mv",
+          "kind": "acronym"
+        }
+      ],
+      "definitions": []
+    },
+    {
+      "canonical": "wal",
+      "definition": "Write-Ahead Logging.",
+      "domain": "postgres",
+      "aliases": [],
+      "definitions": []
+    },
+    {
+      "canonical": "vacuum",
+      "definition": "Process that reclaims space.",
+      "domain": "postgres",
+      "aliases": [],
+      "definitions": []
+    }
+  ],
+  "build_metadata": {
+    "built_at": "2026-01-01T00:00:00Z",
+    "term_count": 3
+  }
+}

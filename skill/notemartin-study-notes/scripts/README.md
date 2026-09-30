@@ -1083,3 +1083,24 @@ edita IRs/NoteMark; solo emite entradas en `manifest.json::link_debt[]`.
 | Documentación | `references/10-quality/consolidation-passes.md` (normativa, 298 líneas) + `schemas/manifest.schema.json::$defs::consolidationRun` |
 | Eval | `evals/consolidation-sample/run_eval.py` 3/3 PASS (C1 link-debt, C2 glossary R3, C3 idempotente) |
 
+### `pipeline/book_index.py` — F110 · Generador del índice de obra
+
+Lee el estado del corpus (manifest, book-state, concept-graph, glossary,
+4 F109 reports, IRs) y produce un único Markdown `<workdir>/reports/book-index.md`
+con 10 secciones canónicas (Ficha, Mapa de capítulos, Grafo de dependencias,
+Rutas de lectura, Cobertura por capítulo, Glosario, Cheatsheets, Prácticas,
+Erratas, Progreso). Sigue el patrón de F91 + extiende con Progreso.
+
+| Aspecto | Valor |
+|---|---|
+| Entrada | `--workdir DIR [--strategy {default,consolidate}] [--output reports/book-index.md] [--include-errata] [--yes]` |
+| Salida | `<workdir>/reports/book-index.md` |
+| Subcomandos | `generate`, `check` (2 en total) |
+| Invocación | `python3 scripts/pipeline/book_index.py generate --workdir .notes-work/abc --strategy consolidate` |
+| Códigos | 0 OK · 1 validación (IDX-R1..R5 violado) · 2 uso (paths faltantes) |
+| Garantías | IDX-R1 (idempotente), IDX-R2 (no muta inputs), IDX-R3 (10 secciones en orden), IDX-R4 (links existentes), IDX-R5 (bloques Mermaid) |
+| Default | `--include-errata true`; orden canónico fijo |
+| Dependencias | Python 3.9+ stdlib puro (sin `jsonschema`); no invoca subprocess |
+| Documentación | `references/05-note-types/index-moc-generator.md` (normativa, 234 líneas ≤ 500) |
+| Eval | `evals/book-index-sample/run_eval.py` 3/3 PASS (C1 cobertura 3 capítulos, C2 Mermaid 4 nodos + 3 aristas, C3 glosario/cheatsheets/prácticas con `[[note:id]]`) |
+

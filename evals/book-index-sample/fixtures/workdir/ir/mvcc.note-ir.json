@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "mvcc",
+  "title": "MVCC",
+  "layer": "l2",
+  "note_type": "concept",
+  "frontmatter": {
+    "title": "MVCC",
+    "note-type": "concept"
+  },
+  "blocks": [
+    {
+      "node": "text",
+      "attrs": {
+        "text": "Multi-Version Concurrency Control.",
+        "capability": "text"
+      },
+      "source_refs": []
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "nodes": [
+    {
+      "id": "mvcc",
+      "label": "MVCC"
+    },
+    {
+      "id": "wal",
+      "label": "Write-Ahead Logging"
+    },
+    {
+      "id": "vacuum",
+      "label": "VACUUM"
+    },
+    {
+      "id": "tx",
+      "label": "Transaction"
+    }
+  ],
+  "edges": [
+    {
+      "from": "mvcc",
+      "to": "wal",
+      "label": "uses"
+    },
+    {
+      "from": "vacuum",
+      "to": "mvcc",
+      "label": "depends on"
+    },
+    {
+      "from": "tx",
+      "to": "mvcc",
+      "label": "controlled by"
+    }
+  ]
+}

@@ -173,3 +173,14 @@ consolidation:
   auto_on_consolidate: false      # true = consolidar automáticamente al consolidar F106/F107
   link_debt_auto_resolve: false   # true = borrar/editar refs rotas detectadas por pass-link-debt (NO recomendado)
 
+# === Índice de obra (F110, opt-in) ===
+# Activar cuando el agente quiera generar el archivo book-index.md con
+# 10 secciones canónicas (ficha, mapa capítulos, grafo dependencias,
+# rutas, cobertura, glosario, cheatsheets, prácticas, erratas, progreso).
+# Ver `references/05-note-types/index-moc-generator.md` para detalles.
+# Por defecto desactivado; el agente decide cuándo invocar `book_index.py`.
+# Cumple INV-12 (no sorpresa al usuario): ambas default `false`/`true`.
+book_index:
+  auto_on_consolidate: false      # true = generar book-index.md automáticamente tras consolidar (F109)
+  include_errata: true            # true = incluir sección Erratas en el índice (default true; opt-out --no-include-errata)
+

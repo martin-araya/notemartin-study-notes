@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "note_id": "backup-practice",
+  "title": "Backup Practice",
+  "layer": "l1",
+  "note_type": "practice",
+  "frontmatter": {
+    "title": "Backup Practice",
+    "note-type": "practice"
+  },
+  "blocks": [
+    {
+      "node": "text",
+      "attrs": {
+        "text": "Practice exercises.",
+        "capability": "text"
+      },
+      "source_refs": []
+    }
+  ]
+}
