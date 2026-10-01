@@ -18,19 +18,28 @@ Declarar la geometría del repositorio y del paquete `skill/notemartin-study-not
 
 | Ruta | Rol | Estado |
 |---|---|---|
-| `README.md` (raíz) | Para contribuidores del proyecto | `[existente, vacío]` |
+| `README.md` (raíz) | Para contribuidores del proyecto | `[existente]` (F121) |
+| `INSTALL.md` (raíz) | Instalación per OS (macOS, Ubuntu, Fedora, Windows) | `[existente]` (F121) |
+| `PROMPTS.md` (raíz) | 12 prompts copy-paste para invocar la skill | `[existente]` (F121) |
+| `EXTEND.md` (raíz) | Tutorial para añadir un tipo de nota | `[existente]` (F121) |
 | `ROADMAP.md` | Roadmap de 125 fases; fuente de verdad de qué construir | `[existente]` |
-| `CHANGELOG.md` | Bitácora de releases | `[pendiente F123]` |
-| `CONTRIBUTING.md` | Guía de contribución | `[pendiente F124]` |
-| `agent.md` | Contrato del agente desarrollador (humano) | `[pendiente]` |
+| `VERSION` | Source of truth del versionado (1 línea semver) | `[existente]` (F123) |
+| `VERSIONING.md` | Convención SemVer 2.0.0 + criterios MAJOR/MINOR/PATCH | `[existente]` (F123) |
+| `CHANGELOG.md` | Bitácora de releases (formato Keep-a-Changelog 1.1) | `[existente]` (F123) |
+| `COMPATIBILITY.md` | Matriz de compat de artefactos entre versiones | `[existente]` (F123) |
+| `CONTRIBUTING.md` | Guía de contribución (estilo + triada + checklist + contrato ingesta externa) | `[existente]` (F124) |
+| `agent.md` | Contrato del agente desarrollador (humano) | `[existente]` (F124) |
+| `docs/external-ingest-contract.md` | Contrato de ingesta externa tool-independent para conversores | `[existente]` (F124) |
 | `PROGRESS.md` | Estado entre sesiones | `[pendiente]` |
 | `docs/product-manifesto.md` | Manifiesto del producto | `[existente]` (F1) |
 | `docs/skill-anatomy.md` | Anatomía y divulgación progresiva | `[existente]` (F2) |
 | `docs/repo-layout.md` | Este doc | `[existente]` (F5) |
+| `docs/galaxy.md` | Galería de las 14 fuentes del corpus | `[existente]` (F121) |
+| `docs/release.md` | Proceso de release con 6 pasos | `[existente]` (F119) |
 | `docs/adr/` | ADRs del proyecto | `[existente, vacío]` (F5) |
 | `skill/notemartin-study-notes/` | Paquete instalable (`.skill`) | `[existente]` (F5) |
-| `examples/` | Casos end-to-end con artefactos intermedios | `[pendiente F120]` |
-| `evals/` | Corpus, rúbrica, suites, resultados | `[pendiente F6-F8, F118]` |
+| `examples/` | Casos end-to-end con artefactos intermedios | `[existente]` (F120) |
+| `evals/` | Corpus, rúbrica, suites, resultados | `[existente]` (F6-F8, F118-F119) |
 | `tests/` | Fixtures y golden files de los scripts | `[pendiente F48+]` |
 | `.kilo/` | Configuración local de Kilo | `[existente, fuera del paquete]` |
 | `.git/` | Metadatos de Git | `[existente, fuera del paquete]` |
