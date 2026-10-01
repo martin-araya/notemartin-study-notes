@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "2026-09-30-r118-001",
+  "timestamp": "2026-09-30T22:49:41.857003+00:00",
+  "skill_version": "aa033a4",
+  "model_id": "unknown",
+  "agent_command": "(dry-run)",
+  "dry_run": true,
+  "cases": [
+    {
+      "case_id": "case-01-postgresql-select",
+      "automatic_pass": 0,
+      "automatic_total": 3,
+      "automatic_pending": 3,
+      "human_pending": true,
+      "approved": null,
+      "notes": "(human evaluation pending; run apply_rubric.py and complete human.json)"
+    },
+    {
+      "case_id": "case-02-database-internals-concept",
+      "automatic_pass": 0,
+      "automatic_total": 3,
+      "automatic_pending": 3,
+      "human_pending": true,
+      "approved": null,
+      "notes": "(human evaluation pending; run apply_rubric.py and complete human.json)"
+    },
+    {
+      "case_id": "case-03-rfc-7231-concurrency",
+      "automatic_pass": 0,
+      "automatic_total": 3,
+      "automatic_pending": 3,
+      "human_pending": true,
+      "approved": null,
+      "notes": "(human evaluation pending; run apply_rubric.py and complete human.json)"
+    },
+    {
+      "case_id": "case-04-arxiv-two-column-arch",
+      "automatic_pass": 0,
+      "automatic_total": 3,
+      "automatic_pending": 3,
+      "human_pending": true,
+      "approved": null,
+      "notes": "(human evaluation pending; run apply_rubric.py and complete human.json)"
+    },
+    {
+      "case_id": "case-05-iso-sql-tables-config",
+      "automatic_pass": 0,
+      "automatic_total": 3,
+      "automatic_pending": 3,
+      "human_pending": true,
+      "approved": null,
+      "notes": "(human evaluation pending; run apply_rubric.py and complete human.json)"
+    },
+    {
+      "case_id": "case-13-internet-archive-scan",
+      "automatic_pass": 0,
+      "automatic_total": 3,
+      "automatic_pending": 3,
+      "human_pending": true,
+      "approved": null,
+      "notes": "(human evaluation pending; run apply_rubric.py and complete human.json)"
+    }
+  ],
+  "summary": {
+    "cases_total": 6,
+    "cases_approved": 0,
+    "cases_human_pending": 6,
+    "automatic_pass_rate": 0.0,
+    "automatic_pending": 18
+  }
+}

@@ -1,0 +1,6 @@
+Necesito una nota reference sobre la sección "Request Concurrent Requests"
+del RFC 7231 (HTTP/1.1 Semantics). Quiero terminología uniforme ("client",
+"origin server", "request target"), prosa precisa sin adjetivos, secciones
+enlazadas internamente, tabla de métodos aplicables, y una sección de
+"Security Considerations" como bloque colapsable. Cero analogías ni
+elementos pedagógicos. Salida a Obsidian y Notion.

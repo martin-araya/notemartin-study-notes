@@ -1,0 +1,9 @@
+{
+  "run_id": "2026-09-30-r118-001",
+  "case_id": "case-13-internet-archive-scan",
+  "timestamp": "2026-09-30T22:49:41.798766+00:00",
+  "skill_version": "aa033a4",
+  "model_id": "unknown",
+  "agent_command": "(dry-run)",
+  "dry_run": true
+}

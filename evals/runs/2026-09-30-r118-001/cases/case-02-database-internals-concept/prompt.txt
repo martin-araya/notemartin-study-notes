@@ -1,0 +1,7 @@
+Tengo el capítulo de muestra de "Database Internals" sobre árboles B y
+almacenamiento. Quiero una nota concept con intuición inicial, analogía
+(libro mayor, sistema de archivos, o similar), ejemplo de búsqueda por
+rango en un árbol B+, comparación con LSM-trees, resumen al final y
+trampas explícitas. Salida a Obsidian como nota de estudio, con preguntas
+de repaso al final. Perfil study: priman analogía, ejemplo y trampa sobre
+exhaustividad de parámetros.
