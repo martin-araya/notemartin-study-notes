@@ -1,0 +1,29 @@
+# SKILL.md stats — F125
+
+> Documento normativo de F125. Verifica el cumplimiento del criterio **C4** del ROADMAP (`SKILL.md sigue bajo 500 líneas tras las 125 fases`).
+
+**Fecha:** 2026-10-01T01:54:48.155843+00:00
+**Archivo:** `skill/notemartin-study-notes/SKILL.md`
+
+| Métrica | Valor | Límite |
+|---|---|---|
+| Líneas totales | 311 | ≤ 500 (INV-02) |
+| Secciones §N | 9 | ≥ 5 |
+| Referencias `@/references/...` resueltas | 89 | ≥ 50 |
+| Referencias rotas | 0 | 0 |
+
+## Veredicto
+
+**PASS**
+
+Sin caveats.
+
+## Referencias rotas (si hay)
+
+(ninguna)
+
+## Cambios que reabren F125
+
+- Cambiar el límite de líneas (INV-02).
+- Eliminar la sección §N que lleva el conteo.
+- Cambiar la regla INV-02 sin ADR.

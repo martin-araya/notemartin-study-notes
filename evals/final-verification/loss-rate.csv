@@ -1,0 +1,15 @@
+source_id,category,has_sample,must_keep_total,must_keep_terminal,loss_rate,status
+01-postgresql-chapter,documentation,True,5,5,0.0,synthetic_full_coverage
+02-database-internals-chapter,book-chapter,True,5,5,0.0,synthetic_full_coverage
+03-rfc-7231,rfc,True,5,5,0.0,synthetic_full_coverage
+04-arxiv-two-column,arxiv-2col,True,5,5,0.0,synthetic_full_coverage
+05-iso-sql-tables,config-table,True,5,5,0.0,synthetic_full_coverage
+06-kubernetes-api-ref,api-ref,True,5,5,0.0,synthetic_full_coverage
+07-docker-cli-ref,cli-ref,True,5,5,0.0,synthetic_full_coverage
+08-conference-transcript,transcript,True,5,5,0.0,synthetic_full_coverage
+09-conference-slides,slides,True,5,5,0.0,synthetic_full_coverage
+10-postgres-readme-repo,readme,True,5,5,0.0,synthetic_full_coverage
+11-iso-cpp-syntax,syntax-diagram,True,5,5,0.0,synthetic_full_coverage
+12-arxiv-formulas,formulas,True,5,5,0.0,synthetic_full_coverage
+13-internet-archive-scan-hostil,hostile-scan,False,0,0,,pending_sample
+14-book-bad-numbering-hostil,hostile-book,False,0,0,,pending_sample

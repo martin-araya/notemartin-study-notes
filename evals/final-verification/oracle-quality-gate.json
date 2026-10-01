@@ -1,0 +1,40 @@
+{
+  "case_id": "01-postgresql-chapter",
+  "validators": {
+    "sdm_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/01-postgresql-chapter/artifacts/sdm.json"
+      ]
+    },
+    "ledger_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/01-postgresql-chapter/artifacts/knowledge/ledger.json"
+      ]
+    },
+    "ir_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/01-postgresql-chapter/artifacts/ir/01-postgresql-chapter-main.json"
+      ]
+    }
+  },
+  "destinations": {
+    "obsidian": {
+      "path": "examples/01-postgresql-chapter/render/obsidian",
+      "files": 1
+    },
+    "notion_api": {
+      "path": "examples/01-postgresql-chapter/render/notion_api",
+      "files": 1
+    },
+    "appflowy": {
+      "path": "examples/01-postgresql-chapter/render/appflowy",
+      "files": 2
+    }
+  },
+  "verdict": "PASS",
+  "caveats": [],
+  "timestamp": "2026-10-01T01:54:47.653920+00:00"
+}
