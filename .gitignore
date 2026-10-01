@@ -1,1 +1,34 @@
+# Kilo local config
 .kilo/
+
+# Git metadata
+.git/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# OS junk
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Build artifacts (F122)
+dist/*.skill
+dist/*.skill.manifest.json
+!dist/.gitkeep
+
+# Local secrets / config
+.env
+.env.local
+*.local
