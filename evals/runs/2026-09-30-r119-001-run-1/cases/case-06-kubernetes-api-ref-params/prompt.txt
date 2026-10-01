@@ -1,0 +1,8 @@
+Necesito una nota api-reference para el recurso Pod v1 de Kubernetes
+(50+ parámetros documentados). Quiero la tabla canónica completa de
+parámetros (nombre, tipo, descripción, default, requerido, version
+introducida), ejemplo mínimo ejecutable, gotchas al final. Terminología
+uniforme ("Pod", "container", "spec", "status"). Sin analogías ni
+elementos pedagógicos; es referencia pura. La tabla NO debe partirse en
+múltiples notas aunque tenga 50+ filas (división semántica, no por
+conteo). Salida a Obsidian y Notion.

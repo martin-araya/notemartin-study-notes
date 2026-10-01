@@ -1,0 +1,9 @@
+{
+  "run_id": "2026-09-30-r119-001-run-1",
+  "case_id": "case-04-arxiv-two-column-arch",
+  "timestamp": "2026-09-30T23:04:44.999017+00:00",
+  "skill_version": "aa033a4",
+  "model_id": "regression-eval",
+  "agent_command": "(dry-run)",
+  "dry_run": true
+}

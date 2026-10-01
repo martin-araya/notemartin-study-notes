@@ -1,0 +1,43 @@
+{
+  "case_id": "case-13-internet-archive-scan",
+  "automatic": [
+    {
+      "id": "ocr-code-fidelity",
+      "type": "ocr_code_fidelity",
+      "validator": "evals/suite/runner/check_assertions.py",
+      "passed": false,
+      "observed": null,
+      "threshold": 0.85,
+      "evidence": "pending_due_to_missing_sample; F6 sin muestra para corpus hostil",
+      "errors": [],
+      "status": "pending"
+    },
+    {
+      "id": "ledger-coverage",
+      "type": "ledger_coverage",
+      "validator": "scripts/util/validate_ledger.py",
+      "passed": false,
+      "observed": 0.0,
+      "threshold": 0.0,
+      "evidence": "ledger no encontrado: /Users/martin/Desktop/projects/notemartin-study-notes/evals/runs/2026-09-30-r119-001-run-1/cases/case-13-internet-archive-scan/workdir/knowledge/ledger.json",
+      "errors": [
+        "ledger no encontrado: /Users/martin/Desktop/projects/notemartin-study-notes/evals/runs/2026-09-30-r119-001-run-1/cases/case-13-internet-archive-scan/workdir/knowledge/ledger.json"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "no-fabricated-ocr",
+      "type": "fidelity_audit",
+      "validator": "evals/suite/runner/check_assertions.py",
+      "passed": false,
+      "observed": 0.0,
+      "threshold": 0.0,
+      "evidence": "notemark/ no existe en /Users/martin/Desktop/projects/notemartin-study-notes/evals/runs/2026-09-30-r119-001-run-1/cases/case-13-internet-archive-scan/workdir",
+      "errors": [
+        "notemark/ no existe en /Users/martin/Desktop/projects/notemartin-study-notes/evals/runs/2026-09-30-r119-001-run-1/cases/case-13-internet-archive-scan/workdir"
+      ],
+      "status": "pending"
+    }
+  ],
+  "human": null
+}

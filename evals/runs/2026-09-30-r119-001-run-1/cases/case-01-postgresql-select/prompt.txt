@@ -1,0 +1,8 @@
+Necesito una nota api-reference sobre el comando SELECT de PostgreSQL 16 a partir
+de esta página de la documentación oficial. La nota debe ir a Obsidian y Notion.
+Estructura: parámetros documentados con su sintaxis, descripción y notas de
+compatibilidad; ejemplos canónicos; cláusulas FROM/WHERE/GROUP BY/ORDER BY
+referenciadas como enlaces a sus notas propias; terminología uniforme; cero
+invenciones. Las cláusulas FROM pueden referenciar tablas, alias, sub-SELECTs,
+joins, TABLESAMPLE y funciones. No quiero prosa pedagógica ni analogías: es
+referencia pura.

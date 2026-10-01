@@ -1,0 +1,2 @@
+Workdir no producido: --dry-run o sin --agent-command.
+Para evaluar este caso, coloque manualmente el workdir del agente en este directorio siguiendo la estructura .notes-work/<hash>/.
