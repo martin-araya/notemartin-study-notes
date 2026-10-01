@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "01-postgresql-chapter",
+    "hash": "a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657",
+    "algorithm": "sha256",
+    "vendor": "PostgreSQL Global Development Group",
+    "product": "PostgreSQL 16",
+    "url": "https://www.postgresql.org/docs/16/sql.html",
+    "language": "en",
+    "format": "html",
+    "version": "16",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/ch02/intro",
+      "blocks": [
+        {
+          "id": "bbea33d7135a",
+          "type": "heading",
+          "content": {
+            "level": 2,
+            "text": "The SQL Language"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "1d4636683c29",
+          "type": "prose",
+          "content": "This chapter describes the SQL language as implemented in PostgreSQL 16.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "71207ed4002b",
+          "type": "table",
+          "content": {
+            "headers": [
+              "name",
+              "type"
+            ],
+            "rows": [
+              [
+                "foo",
+                "string"
+              ],
+              [
+                "bar",
+                "integer"
+              ]
+            ]
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "378c4ef3842a",
+          "type": "code",
+          "content": {
+            "lang": "sql",
+            "text": "SELECT * FROM pg_class WHERE relkind = 'r';"
+          },
+          "anchor": {
+            "page": 4,
+            "section_path": "/ch02/intro",
+            "char_range": [
+              300,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

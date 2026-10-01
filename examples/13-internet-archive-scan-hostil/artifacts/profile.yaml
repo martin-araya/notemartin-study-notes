@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "targets": {
+    "use_case_profile": "hybrid",
+    "obsidian": {
+      "folder": "obsidian",
+      "enable_dataview": false
+    },
+    "notion_api": {
+      "database_id": "synthetic",
+      "dry_run": true
+    },
+    "notion_md": {
+      "include_import_instructions": true
+    },
+    "appflowy": {
+      "pre_render_diagrams": false,
+      "include_import_instructions": true
+    },
+    "html_pdf": {
+      "no_pdf": true
+    }
+  },
+  "language": "en",
+  "ocr_engine": "tesseract"
+}

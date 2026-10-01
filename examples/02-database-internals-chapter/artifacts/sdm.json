@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "id": "02-database-internals-chapter",
+    "hash": "ed1b8006c06d83242eec8c1dd77546d25ee6540ef5eb25950eb139ef50566af6",
+    "algorithm": "sha256",
+    "vendor": "O'Reilly Media",
+    "product": "Database Internals",
+    "url": "https://www.databass.dev/",
+    "language": "en",
+    "format": "pdf",
+    "version": "1st Edition",
+    "isbn": "978-1492040347",
+    "authors": [],
+    "date": "2026-09-21"
+  },
+  "sections": [
+    {
+      "section_path": "/ch01/introduction",
+      "blocks": [
+        {
+          "id": "6d2e74952971",
+          "type": "heading",
+          "content": {
+            "level": 1,
+            "text": "Introduction"
+          },
+          "anchor": {
+            "page": 1,
+            "section_path": "/ch01/introduction",
+            "char_range": [
+              0,
+              100
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "95f9c99836ee",
+          "type": "prose",
+          "content": "Distributed databases are a core building block of modern infrastructure.",
+          "anchor": {
+            "page": 2,
+            "section_path": "/ch01/introduction",
+            "char_range": [
+              100,
+              200
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "faae4b483b0d",
+          "type": "figure",
+          "content": {
+            "src": "assets/architecture.png",
+            "alt": "Database architecture"
+          },
+          "anchor": {
+            "page": 3,
+            "section_path": "/ch01/introduction",
+            "char_range": [
+              200,
+              300
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        },
+        {
+          "id": "19dfbc1d5012",
+          "type": "caption",
+          "content": "Figure 1.1: High-level architecture of a distributed database.",
+          "anchor": {
+            "page": 4,
+            "section_path": "/ch01/introduction",
+            "char_range": [
+              300,
+              400
+            ]
+          },
+          "confidence": 1.0,
+          "origin": "native"
+        }
+      ]
+    }
+  ]
+}

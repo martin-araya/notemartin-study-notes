@@ -1,0 +1,23 @@
+---
+title: 06-kubernetes-api-ref
+schema_version: "1.0.0"
+source_id: 06-kubernetes-api-ref
+profile: reference
+status: published
+---
+
+# 06-kubernetes-api-ref
+
+:::note
+Nota sintética generada por `build_examples.py` cuando falta `synthetic-notes/06-k8s-pod-ref.nm`. Regenerar con `--example 06-kubernetes-api-ref` para producir contenido real.
+:::
+
+## §1 · Resumen
+
+Esta nota demuestra la cadena L0–L4 sobre el corpus `06-kubernetes-api-ref`. Perfil `reference`; tipo `api-reference`.
+
+## §2 · Detalle
+
+Contenido sintético. {sustituir_por_prompt_real}
+
+{src:blk_synthetic001}

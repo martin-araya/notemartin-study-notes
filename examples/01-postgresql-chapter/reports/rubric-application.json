@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "profile": "reference",
+  "anchors_used": [
+    "ANC-03",
+    "ANC-04"
+  ],
+  "scores": {
+    "fidelity": 4,
+    "coverage": 4,
+    "traceability": 4,
+    "pedagogy": 4,
+    "structure": 4,
+    "components": 4,
+    "operational": 4,
+    "render-fidelity": 2
+  },
+  "approved": true,
+  "notes": "Aplicado con anclas ['ANC-03', 'ANC-04']. Aprobado por builder sintético."
+}

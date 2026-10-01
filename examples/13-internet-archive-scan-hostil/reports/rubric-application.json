@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "profile": "hybrid",
+  "anchors_used": [
+    "ANC-05"
+  ],
+  "scores": {
+    "fidelity": 4,
+    "coverage": 4,
+    "traceability": 4,
+    "pedagogy": 4,
+    "structure": 4,
+    "components": 4,
+    "operational": 3,
+    "render-fidelity": 3
+  },
+  "approved": true,
+  "notes": "Aplicado con anclas ['ANC-05']. Aprobado por builder sintético."
+}

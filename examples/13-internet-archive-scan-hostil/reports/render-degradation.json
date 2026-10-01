@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "target": "html_pdf",
+  "source_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "generated_at": "2026-10-01T01:54:47Z",
+  "totals": {
+    "ir_nodes": 0,
+    "degradations": 0,
+    "content_loss": 0
+  },
+  "degradations": [],
+  "published_pages": {
+    "13-internet-archive-scan-hostil-main": "/Users/martin/Desktop/projects/notemartin-study-notes/examples/13-internet-archive-scan-hostil/render/html_pdf/13-internet-archive-scan-hostil-main.html"
+  },
+  "pdf_status": "skipped: --no-pdf flag",
+  "cross_target_diff": {
+    "vs_markdown": "HTML permite callouts nativos (<aside>), table con rowspan/colspan nativos, backlinks via <aside>; pierde portabilidad de texto plano",
+    "vs_obsidian": "HTML self-contained; Obsidian usa wikilinks [[id]] y callout syntax [!type]",
+    "vs_appflowy": "HTML <aside class='callout-*'>; AppFlowy usa > [!type] en Markdown"
+  }
+}

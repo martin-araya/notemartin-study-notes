@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-09-30T23:21:28.877423+00:00",
+  "validators": {
+    "ir_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/02-database-internals-chapter/artifacts/ir/02-database-internals-chapter-main.json"
+      ]
+    },
+    "ledger_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/02-database-internals-chapter/artifacts/knowledge/ledger.json"
+      ]
+    },
+    "sdm_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/02-database-internals-chapter/artifacts/sdm.json"
+      ]
+    }
+  },
+  "passes": true
+}

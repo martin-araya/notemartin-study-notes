@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-09-30T23:21:29.950563+00:00",
+  "validators": {
+    "ir_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/06-kubernetes-api-ref/artifacts/ir/06-kubernetes-api-ref-main.json"
+      ]
+    },
+    "ledger_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/06-kubernetes-api-ref/artifacts/knowledge/ledger.json"
+      ]
+    },
+    "sdm_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/06-kubernetes-api-ref/artifacts/sdm.json"
+      ]
+    }
+  },
+  "passes": true
+}

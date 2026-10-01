@@ -1,0 +1,8 @@
+# 06-kubernetes-api-ref-main
+
+> Render placeholder generado por build_examples.py para el destino `notion_md`.
+> En modo real este destino produce payloads JSON (notion_api) o requiere token.
+
+## §1 · Contenido
+
+Texto del placeholder. {sustituir_por_prompt}

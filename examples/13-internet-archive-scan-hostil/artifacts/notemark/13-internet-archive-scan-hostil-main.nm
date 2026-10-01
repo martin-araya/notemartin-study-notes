@@ -1,0 +1,23 @@
+---
+title: 13-internet-archive-scan-hostil
+schema_version: "1.0.0"
+source_id: 13-internet-archive-scan-hostil
+profile: hybrid
+status: published
+---
+
+# 13-internet-archive-scan-hostil
+
+:::note
+Nota sintética generada por `build_examples.py` cuando falta `synthetic-notes/13-hostile-concept.nm`. Regenerar con `--example 13-internet-archive-scan-hostil` para producir contenido real.
+:::
+
+## §1 · Resumen
+
+Esta nota demuestra la cadena L0–L4 sobre el corpus `13-internet-archive-scan-hostil`. Perfil `hybrid`; tipo `concept`.
+
+## §2 · Detalle
+
+Contenido sintético. {sustituir_por_prompt_real}
+
+{src:blk_synthetic001}

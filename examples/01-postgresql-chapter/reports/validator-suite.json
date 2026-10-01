@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-10-01T01:54:47.198110+00:00",
+  "validators": {
+    "ir_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/01-postgresql-chapter/artifacts/ir/01-postgresql-chapter-main.json"
+      ]
+    },
+    "ledger_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/01-postgresql-chapter/artifacts/knowledge/ledger.json"
+      ]
+    },
+    "sdm_validation": {
+      "exit": 0,
+      "output": [
+        "OK — /Users/martin/Desktop/projects/notemartin-study-notes/examples/01-postgresql-chapter/artifacts/sdm.json"
+      ]
+    }
+  },
+  "passes": true
+}

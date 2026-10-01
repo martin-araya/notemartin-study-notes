@@ -1,0 +1,23 @@
+---
+title: 01-postgresql-chapter
+schema_version: "1.0.0"
+source_id: 01-postgresql-chapter
+profile: reference
+status: published
+---
+
+# 01-postgresql-chapter
+
+:::note
+Nota sintética generada por `build_examples.py` cuando falta `synthetic-notes/01-postgresql-select.nm`. Regenerar con `--example 01-postgresql-chapter` para producir contenido real.
+:::
+
+## §1 · Resumen
+
+Esta nota demuestra la cadena L0–L4 sobre el corpus `01-postgresql-chapter`. Perfil `reference`; tipo `api-reference`.
+
+## §2 · Detalle
+
+Contenido sintético. {sustituir_por_prompt_real}
+
+{src:blk_synthetic001}
