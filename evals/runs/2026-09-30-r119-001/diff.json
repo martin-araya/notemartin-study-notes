@@ -1,0 +1,13 @@
+{
+  "added": [],
+  "removed": [],
+  "common": [
+    "case-01-postgresql-select",
+    "case-02-database-internals-concept",
+    "case-03-rfc-7231-concurrency",
+    "case-04-arxiv-two-column-arch",
+    "case-05-iso-sql-tables-config",
+    "case-13-internet-archive-scan"
+  ],
+  "changed": []
+}

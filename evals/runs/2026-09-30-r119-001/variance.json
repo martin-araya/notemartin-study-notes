@@ -1,0 +1,575 @@
+{
+  "schema_version": "1.0.0",
+  "release_tag": "2026-09-30-r119-001",
+  "n_runs": 3,
+  "thresholds_applied": "536d4c53a8d5cf28f0577f7bc3ed543391040e0117778b282362eed381fa67eb",
+  "thresholds_path": "evals/regression/variance_thresholds.yaml",
+  "dry_run": true,
+  "cases": [
+    {
+      "case_id": "case-01-postgresql-select",
+      "metrics": {
+        "coverage_must_keep_terminal": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.05
+          }
+        },
+        "notes_planned": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 1
+          }
+        },
+        "ir_node_count": {
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0,
+          "max": 0,
+          "range": 0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev_ratio": 0.1
+          }
+        },
+        "human_global_avg": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.5
+          }
+        },
+        "approved_rate": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": false,
+          "threshold": {
+            "min_value": 1.0
+          }
+        }
+      },
+      "approved": [
+        false,
+        false,
+        false
+      ],
+      "approved_rate": 0.0,
+      "passes_regression": false
+    },
+    {
+      "case_id": "case-04-arxiv-two-column-arch",
+      "metrics": {
+        "coverage_must_keep_terminal": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.05
+          }
+        },
+        "notes_planned": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 1
+          }
+        },
+        "ir_node_count": {
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0,
+          "max": 0,
+          "range": 0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev_ratio": 0.1
+          }
+        },
+        "human_global_avg": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.5
+          }
+        },
+        "approved_rate": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": false,
+          "threshold": {
+            "min_value": 1.0
+          }
+        }
+      },
+      "approved": [
+        false,
+        false,
+        false
+      ],
+      "approved_rate": 0.0,
+      "passes_regression": false
+    },
+    {
+      "case_id": "case-05-iso-sql-tables-config",
+      "metrics": {
+        "coverage_must_keep_terminal": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.05
+          }
+        },
+        "notes_planned": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 1
+          }
+        },
+        "ir_node_count": {
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0,
+          "max": 0,
+          "range": 0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev_ratio": 0.1
+          }
+        },
+        "human_global_avg": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.5
+          }
+        },
+        "approved_rate": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": false,
+          "threshold": {
+            "min_value": 1.0
+          }
+        }
+      },
+      "approved": [
+        false,
+        false,
+        false
+      ],
+      "approved_rate": 0.0,
+      "passes_regression": false
+    },
+    {
+      "case_id": "case-06-kubernetes-api-ref-params",
+      "metrics": {
+        "coverage_must_keep_terminal": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.05
+          }
+        },
+        "notes_planned": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 1
+          }
+        },
+        "ir_node_count": {
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0,
+          "max": 0,
+          "range": 0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev_ratio": 0.1
+          }
+        },
+        "human_global_avg": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.5
+          }
+        },
+        "approved_rate": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": false,
+          "threshold": {
+            "min_value": 1.0
+          }
+        }
+      },
+      "approved": [
+        false,
+        false,
+        false
+      ],
+      "approved_rate": 0.0,
+      "passes_regression": false
+    },
+    {
+      "case_id": "case-09-conference-slides-diag",
+      "metrics": {
+        "coverage_must_keep_terminal": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.05
+          }
+        },
+        "notes_planned": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 1
+          }
+        },
+        "ir_node_count": {
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0,
+          "max": 0,
+          "range": 0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev_ratio": 0.1
+          }
+        },
+        "human_global_avg": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.5
+          }
+        },
+        "approved_rate": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": false,
+          "threshold": {
+            "min_value": 1.0
+          }
+        }
+      },
+      "approved": [
+        false,
+        false,
+        false
+      ],
+      "approved_rate": 0.0,
+      "passes_regression": false
+    },
+    {
+      "case_id": "case-13-internet-archive-scan",
+      "metrics": {
+        "coverage_must_keep_terminal": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.05
+          }
+        },
+        "notes_planned": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 1
+          }
+        },
+        "ir_node_count": {
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0,
+          "max": 0,
+          "range": 0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev_ratio": 0.1
+          }
+        },
+        "human_global_avg": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": true,
+          "threshold": {
+            "max_stdev": 0.5
+          }
+        },
+        "approved_rate": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "range": 0.0,
+          "within_threshold": false,
+          "threshold": {
+            "min_value": 1.0
+          }
+        }
+      },
+      "approved": [
+        false,
+        false,
+        false
+      ],
+      "approved_rate": 0.0,
+      "passes_regression": false
+    }
+  ],
+  "summary": {
+    "cases_total": 6,
+    "cases_pass": 0,
+    "cases_fail": 6,
+    "blocking_failures": [
+      "case-01-postgresql-select",
+      "case-04-arxiv-two-column-arch",
+      "case-05-iso-sql-tables-config",
+      "case-06-kubernetes-api-ref-params",
+      "case-09-conference-slides-diag",
+      "case-13-internet-archive-scan"
+    ]
+  }
+}

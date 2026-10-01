@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "candidate": "evals/runs/2026-09-30-r119-001/report.json",
+  "baseline": "evals/runs/2026-09-30-r118-001/report.json",
+  "variance": "evals/runs/2026-09-30-r119-001/variance.json",
+  "status": "fail",
+  "checks": [
+    {
+      "ok": false,
+      "message": "condition 1 (variance_within_threshold): cases_fail=6"
+    },
+    {
+      "ok": false,
+      "message": "condition 2 (no_blocking_failures): ['case-01-postgresql-select', 'case-04-arxiv-two-column-arch', 'case-05-iso-sql-tables-config', 'case-06-kubernetes-api-ref-params', 'case-09-conference-slides-diag', 'case-13-internet-archive-scan']"
+    },
+    {
+      "ok": true,
+      "message": "no_regression_flip OK"
+    },
+    {
+      "ok": false,
+      "message": "condition 4 (no_human_pending): 6 casos sin evaluación humana"
+    }
+  ],
+  "reasons": [
+    "condition 1 (variance_within_threshold): cases_fail=6",
+    "condition 2 (no_blocking_failures): ['case-01-postgresql-select', 'case-04-arxiv-two-column-arch', 'case-05-iso-sql-tables-config', 'case-06-kubernetes-api-ref-params', 'case-09-conference-slides-diag', 'case-13-internet-archive-scan']",
+    "condition 4 (no_human_pending): 6 casos sin evaluación humana"
+  ],
+  "regression_set_size": 6
+}
