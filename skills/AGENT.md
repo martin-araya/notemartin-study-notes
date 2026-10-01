@@ -319,6 +319,8 @@ No se salta ningún paso, ni en fases fáciles.
 
 **De la skill** — distinto de todo lo anterior: se ejecuta un prompt realista con la skill cargada y se evalúa el resultado con la rúbrica. Es lo único que mide si las instrucciones funcionan. Los tests de scripts pueden estar todos verdes y la skill seguir produciendo notas malas.
 
+**Regresión y varianza (F119)** — la suite de evals de la skill (`evals/suite/`, F118) mide si un caso individual pasa. El set de regresión (`evals/regression/`, F119) ejecuta cada caso N veces y mide varianza sobre 5 métricas: `coverage_must_keep_terminal`, `notes_planned`, `ir_node_count`, `human_global_avg`, `approved_rate`. Un release se bloquea si la varianza supera el umbral o si un caso del set pasa de aprobado a no aprobado. Proceso en `docs/release.md`; los 4 archivos de evidencia (`report.json`, `variance.json`, `diff.json`, `gate.json`) son obligatorios al aceptar un PR que toca la skill.
+
 **Lo que no se prueba automáticamente:** calidad pedagógica y fidelidad visual. Para eso están la rúbrica y las capturas. No inventes un test que "mida" si una analogía es buena.
 
 ---
