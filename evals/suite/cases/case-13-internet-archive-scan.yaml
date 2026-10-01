@@ -1,0 +1,63 @@
+id: case-13-internet-archive-scan
+version: 1.0.0
+corpus_source: 13-internet-archive-scan-hostil
+profile: hybrid
+
+prompt: |
+  Tengo un escaneo hostil de un libro técnico antiguo (Internet Archive):
+  escaneo torcido unos 3-5°, ruido de fondo, sombra de lomo, OCR
+  degradado. Quiero que lo proceses igual que cualquier otra fuente: el
+  pipeline debe hacer su trabajo (preprocesado + OCR multilingüe +
+  reintentos). Si la confianza media queda bajo 0.70, marca las regiones
+  dudosas como low_confidence y NO inventes contenido. Una nota hybrid
+  con intuición inicial, analogía breve, y referencias marcadas con
+  {src:blk_xxx} a los bloques OCR. Cualquier bloque de código cuya
+  fidelidad OCR esté bajo 0.85 debe quedar marcado como :::warning con
+  texto "OCR low confidence" en lugar de reescribirse. Salida a Obsidian.
+
+expected_outputs:
+  notes_min: 1
+  ir_files_min: 1
+  ledger_required: true
+
+# Clave hermana — estado declarado hasta que F6 descargue la muestra real
+expected_code_snippets:
+  schema_version: "1.0.0"
+  source_card: evals/corpus/13-internet-archive-scan-hostil/card.md
+  status: pending_due_to_missing_sample
+  snippets: []
+
+assertions:
+  automatic:
+    - id: ocr-code-fidelity
+      type: ocr_code_fidelity
+      spec:
+        snippets_ref: evals/suite/cases/case-13-internet-archive-scan.yaml::expected_code_snippets
+        sdm_or_ocr_path_rel: sdm.json
+        ingest_summary_rel: ingest/preprocess_summary.json
+        edit_distance_threshold: 0.85
+      threshold: 0.85
+      validator: evals/suite/runner/check_assertions.py
+
+    - id: ledger-coverage
+      type: ledger_coverage
+      spec:
+        ledger_path_rel: knowledge/ledger.json
+        min_must_keep_terminal: 1.0
+      threshold: 1.0
+      validator: scripts/util/validate_ledger.py
+
+    - id: no-fabricated-ocr
+      type: fidelity_audit
+      spec:
+        workdir_rel: .
+      threshold: 1.0
+      validator: evals/suite/runner/check_assertions.py
+
+  human:
+    - id: rubric-application
+      spec:
+        rubric: evals/rubric.md
+        profile: hybrid
+        dimensions: [fidelity, coverage, traceability, pedagogy, structure, components, operational, render-fidelity]
+        anchors_used: [ANC-05]

@@ -1,0 +1,52 @@
+id: case-02-database-internals-concept
+version: 1.0.0
+corpus_source: 02-database-internals-chapter
+profile: study
+
+prompt: |
+  Tengo el capítulo de muestra de "Database Internals" sobre árboles B y
+  almacenamiento. Quiero una nota concept con intuición inicial, analogía
+  (libro mayor, sistema de archivos, o similar), ejemplo de búsqueda por
+  rango en un árbol B+, comparación con LSM-trees, resumen al final y
+  trampas explícitas. Salida a Obsidian como nota de estudio, con preguntas
+  de repaso al final. Perfil study: priman analogía, ejemplo y trampa sobre
+  exhaustividad de parámetros.
+
+expected_outputs:
+  notes_min: 1
+  ir_files_min: 1
+  ledger_required: true
+
+assertions:
+  automatic:
+    - id: ledger-coverage
+      type: ledger_coverage
+      spec:
+        ledger_path_rel: knowledge/ledger.json
+        min_must_keep_terminal: 1.0
+      threshold: 1.0
+      validator: scripts/util/validate_ledger.py
+
+    - id: ir-source-refs-resolvable
+      type: ir_validation
+      spec:
+        ir_glob: ir/*.json
+        require_resolvable_source_refs: true
+      threshold: 1.0
+      validator: scripts/util/validate_ir.py
+
+    - id: study-pedagogy-elements-present
+      type: ledger_coverage
+      spec:
+        ledger_path_rel: knowledge/ledger.json
+        required_elements: [intuition, analogy, comparison, traps]
+      threshold: 1.0
+      validator: scripts/util/validate_ledger.py
+
+  human:
+    - id: rubric-application
+      spec:
+        rubric: evals/rubric.md
+        profile: study
+        dimensions: [fidelity, coverage, traceability, pedagogy, structure, components, operational, render-fidelity]
+        anchors_used: [ANC-01, ANC-06]

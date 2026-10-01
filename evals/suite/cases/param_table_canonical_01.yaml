@@ -1,0 +1,42 @@
+schema_version: 1.0.0
+source_card: evals/corpus/01-postgresql-chapter/card.md
+source_sample_sha256: a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657
+extraction_date: '2026-09-30'
+threshold_min_count: 10
+params:
+- name: table_name
+  kind: identifier
+  section: FROM Clause
+- name: alias
+  kind: identifier
+  section: FROM Clause
+- name: TABLESAMPLE
+  kind: clause_keyword
+  section: FROM Clause
+- name: select
+  kind: identifier
+  section: FROM Clause
+- name: with_query_name
+  kind: identifier
+  section: FROM Clause
+- name: function_name
+  kind: identifier
+  section: FROM Clause
+- name: join_type
+  kind: clause_keyword
+  section: FROM Clause
+- name: 'ON'
+  kind: clause_keyword
+  section: FROM Clause
+- name: USING
+  kind: clause_keyword
+  section: FROM Clause
+- name: NATURAL
+  kind: clause_keyword
+  section: FROM Clause
+- name: CROSS JOIN
+  kind: clause_keyword
+  section: FROM Clause
+- name: LATERAL
+  kind: clause_keyword
+  section: FROM Clause

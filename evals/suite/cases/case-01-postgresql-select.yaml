@@ -1,0 +1,74 @@
+id: case-01-postgresql-select
+version: 1.0.0
+corpus_source: 01-postgresql-chapter
+profile: reference
+
+prompt: |
+  Necesito una nota api-reference sobre el comando SELECT de PostgreSQL 16 a partir
+  de esta página de la documentación oficial. La nota debe ir a Obsidian y Notion.
+  Estructura: parámetros documentados con su sintaxis, descripción y notas de
+  compatibilidad; ejemplos canónicos; cláusulas FROM/WHERE/GROUP BY/ORDER BY
+  referenciadas como enlaces a sus notas propias; terminología uniforme; cero
+  invenciones. Las cláusulas FROM pueden referenciar tablas, alias, sub-SELECTs,
+  joins, TABLESAMPLE y funciones. No quiero prosa pedagógica ni analogías: es
+  referencia pura.
+
+expected_outputs:
+  notes_min: 1
+  ir_files_min: 1
+  ledger_required: true
+
+# Clave hermana — generada por evals/suite/runner/build_canonical.py
+param_table_canonical:
+  schema_version: "1.0.0"
+  source_card: evals/corpus/01-postgresql-chapter/card.md
+  source_sample_sha256: a8f4ce1405802cacbb35e6fb88f5e3cf138a4e872910cdfd276f378f13371657
+  extraction_date: "2026-09-30"
+  threshold_min_count: 10
+  params:
+    - {name: table_name,        kind: identifier,     section: "FROM Clause"}
+    - {name: alias,             kind: identifier,     section: "FROM Clause"}
+    - {name: TABLESAMPLE,       kind: clause_keyword, section: "FROM Clause"}
+    - {name: select,            kind: identifier,     section: "FROM Clause"}
+    - {name: with_query_name,   kind: identifier,     section: "FROM Clause"}
+    - {name: function_name,     kind: identifier,     section: "FROM Clause"}
+    - {name: join_type,         kind: clause_keyword, section: "FROM Clause"}
+    - {name: "ON",              kind: clause_keyword, section: "FROM Clause"}
+    - {name: USING,             kind: clause_keyword, section: "FROM Clause"}
+    - {name: NATURAL,           kind: clause_keyword, section: "FROM Clause"}
+    - {name: "CROSS JOIN",      kind: clause_keyword, section: "FROM Clause"}
+    - {name: LATERAL,           kind: clause_keyword, section: "FROM Clause"}
+
+assertions:
+  automatic:
+    - id: param-table-coverage
+      type: param_table_coverage
+      spec:
+        canonical_ref: evals/suite/cases/param_table_canonical_01.yaml
+        ledger_path_rel: knowledge/ledger.json
+      threshold: 1.0
+      validator: evals/suite/runner/check_assertions.py
+
+    - id: ledger-no-loose-discards
+      type: ledger_coverage
+      spec:
+        ledger_path_rel: knowledge/ledger.json
+        min_must_keep_terminal: 1.0
+      threshold: 1.0
+      validator: scripts/util/validate_ledger.py
+
+    - id: ir-source-refs-resolvable
+      type: ir_validation
+      spec:
+        ir_glob: ir/*.json
+        require_resolvable_source_refs: true
+      threshold: 1.0
+      validator: scripts/util/validate_ir.py
+
+  human:
+    - id: rubric-application
+      spec:
+        rubric: evals/rubric.md
+        profile: reference
+        dimensions: [fidelity, coverage, traceability, pedagogy, structure, components, operational, render-fidelity]
+        anchors_used: [ANC-03, ANC-04]

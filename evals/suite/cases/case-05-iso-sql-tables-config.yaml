@@ -1,0 +1,53 @@
+id: case-05-iso-sql-tables-config
+version: 1.0.0
+corpus_source: 05-iso-sql-tables
+profile: reference
+
+prompt: |
+  Tengo la sección de parámetros de configuración de PostgreSQL del manual
+  de referencia (≥ 200 páginas en total, muestra con tabla densa de
+  parámetros). Quiero una nota configuration con la tabla canónica completa
+  (nombre, tipo, default, rango, modificable en caliente, requiere
+  reinicio, versión de PostgreSQL en que aparece), combinaciones peligrosas
+  destacadas como :::warning, interacciones entre parámetros, y un diagrama
+  de dependencias entre los 5 más críticos. Sin analogías ni elementos
+  pedagógicos; es referencia pura. Salida a Obsidian y Notion.
+
+expected_outputs:
+  notes_min: 1
+  ir_files_min: 1
+  ledger_required: true
+
+assertions:
+  automatic:
+    - id: ledger-coverage
+      type: ledger_coverage
+      spec:
+        ledger_path_rel: knowledge/ledger.json
+        min_must_keep_terminal: 1.0
+      threshold: 1.0
+      validator: scripts/util/validate_ledger.py
+
+    - id: ir-source-refs-resolvable
+      type: ir_validation
+      spec:
+        ir_glob: ir/*.json
+        require_resolvable_source_refs: true
+      threshold: 1.0
+      validator: scripts/util/validate_ir.py
+
+    - id: no-truncation
+      type: ledger_coverage
+      spec:
+        ledger_path_rel: knowledge/ledger.json
+        check: no_etc_or_entre_otros_in_target_notes
+      threshold: 1.0
+      validator: scripts/util/validate_ledger.py
+
+  human:
+    - id: rubric-application
+      spec:
+        rubric: evals/rubric.md
+        profile: reference
+        dimensions: [fidelity, coverage, traceability, pedagogy, structure, components, operational, render-fidelity]
+        anchors_used: [ANC-03, ANC-04]

@@ -1,0 +1,50 @@
+id: case-03-rfc-7231-concurrency
+version: 1.0.0
+corpus_source: 03-rfc-7231
+profile: reference
+
+prompt: |
+  Necesito una nota reference sobre la sección "Request Concurrent Requests"
+  del RFC 7231 (HTTP/1.1 Semantics). Quiero terminología uniforme ("client",
+  "origin server", "request target"), prosa precisa sin adjetivos, secciones
+  enlazadas internamente, tabla de métodos aplicables, y una sección de
+  "Security Considerations" como bloque colapsable. Cero analogías ni
+  elementos pedagógicos. Salida a Obsidian y Notion.
+
+expected_outputs:
+  notes_min: 1
+  ir_files_min: 1
+  ledger_required: true
+
+assertions:
+  automatic:
+    - id: ledger-coverage
+      type: ledger_coverage
+      spec:
+        ledger_path_rel: knowledge/ledger.json
+        min_must_keep_terminal: 1.0
+      threshold: 1.0
+      validator: scripts/util/validate_ledger.py
+
+    - id: ir-source-refs-resolvable
+      type: ir_validation
+      spec:
+        ir_glob: ir/*.json
+        require_resolvable_source_refs: true
+      threshold: 1.0
+      validator: scripts/util/validate_ir.py
+
+    - id: sdm-validation
+      type: sdm_validation
+      spec:
+        sdm_path_rel: sdm.json
+      threshold: 1.0
+      validator: scripts/util/validate_sdm.py
+
+  human:
+    - id: rubric-application
+      spec:
+        rubric: evals/rubric.md
+        profile: reference
+        dimensions: [fidelity, coverage, traceability, pedagogy, structure, components, operational, render-fidelity]
+        anchors_used: [ANC-03, ANC-04]
