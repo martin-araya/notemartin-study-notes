@@ -2,6 +2,8 @@
 
 Registro de decisiones arquitectónicas del proyecto. Cada ADR es un markdown corto con tres secciones: **Contexto**, **Decisión**, **Consecuencias**.
 
+> Documentos complementarios: [`CONTRIBUTING.md`](../../CONTRIBUTING.md) §2 (triada regla→motivación→prueba), [`references/00-pipeline/contributing.md`](../../skill/notemartin-study-notes/references/00-pipeline/contributing.md) (estilo de referencias), [`VERSIONING.md`](../../VERSIONING.md) (cuándo bumpear major — los ADRs pueden motivar un bump).
+
 ## Plantilla
 
 ```markdown
@@ -9,10 +11,12 @@ Registro de decisiones arquitectónicas del proyecto. Cada ADR es un markdown co
 
 **Fecha:** YYYY-MM-DD
 **Estado:** propuesta | aceptada | sustituida
+**Atada a:** F<phase>, INV-<id>, ADR-<id>
 
 ## Contexto
 
 Qué problema se aborda, qué alternativas se consideraron.
+Caso de fallo real que motiva la decisión (per CONTRIBUTING.md §2 triada).
 
 ## Decisión
 
@@ -21,6 +25,7 @@ Qué se decide.
 ## Consecuencias
 
 Qué se gana, qué se pierde, qué queda atado a esta decisión.
+Si la decisión afecta al contrato de artefactos, indicar el schema_version afectado.
 ```
 
 ## Reglas
@@ -29,6 +34,8 @@ Qué se gana, qué se pierde, qué queda atado a esta decisión.
 - Idioma español.
 - Las decisiones cerradas (marcadas como `aceptada` en `skills/AGENT.md` §8) **no se reabren** salvo petición explícita del usuario; si se reabre, se crea un ADR nuevo que sustituya al anterior.
 - Un ADR atado a un invariante (`INV-xx`) lo referencia en "Consecuencias".
+- Todo ADR nuevo sigue la **triada** de CONTRIBUTING.md §2 (motivación + definición + caso de prueba).
+- Para registrar un conversor externo (per `docs/external-ingest-contract.md` §6), abrir un ADR con nombre `ADR-NNNN-external-converter-<nombre>.md`.
 
 ## ADRs ya registradas
 
@@ -44,3 +51,16 @@ Qué se gana, qué se pierde, qué queda atado a esta decisión.
 - `ADR-0010-notion-renderer.md` — F55: renderer Notion API; dialecto canónico `notion_api` (D1, cierra discrepancia F53↔F11); cliente HTTP `urllib.request` stdlib puro (D2); anidamiento en 2 pasadas con placeholders (D3); idempotencia por `notemartin_note_id` property (D4).
 
 Las decisiones cerradas hasta ahora viven en `skills/AGENT.md` §8. Cuando una de ellas se reabre formalmente, se promueve a ADR aquí.
+
+## Cómo abrir un ADR nuevo
+
+```bash
+# 1. Copia la plantilla.
+cp docs/adr/ADR-NNNN-template.md docs/adr/ADR-0011-<slug>.md
+
+# 2. Edita el nuevo ADR siguiendo la plantilla y la triada de CONTRIBUTING.md §2.
+
+# 3. Lista el ADR nuevo en la sección "ADRs ya registradas" de este README.
+
+# 4. (Opcional) Adjúntalo a un PR; scripts/check_pr.py item 10 lo detecta como warning si no.
+```
