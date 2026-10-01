@@ -1,0 +1,27 @@
+{
+  "case_id": "case-01-postgresql-select",
+  "schema_version": "1.0.0",
+  "description": "Fixture de referencia para el caso 01 del set de regresión (F119). Documenta los artefactos sintéticos que sirven como línea base.",
+  "references": {
+    "f118_case_yaml": "evals/suite/cases/case-01-postgresql-select.yaml",
+    "f118_canonical": "evals/suite/cases/param_table_canonical_01.yaml",
+    "sdm_synthetic": "evals/sdm-sample/01-postgresql-chapter.json",
+    "sdm_full": "evals/sdm-sample/01-postgresql-chapter-full.json",
+    "ledger_synthetic": "evals/ledger-sample/full-coverage.json",
+    "corpus_card": "evals/corpus/01-postgresql-chapter/card.md",
+    "corpus_sample": "evals/corpus/01-postgresql-chapter/sample.html"
+  },
+  "expected_metrics": {
+    "coverage_must_keep_terminal": {"mean": 1.0, "stdev_max": 0.05},
+    "notes_planned": {"mean": 1, "stdev_max": 1},
+    "ir_node_count": {"mean_min": 1, "stdev_ratio_max": 0.10},
+    "human_global_avg": {"mean_min": 3.5, "stdev_max": 0.5},
+    "approved_rate": {"min": 1.0}
+  },
+  "param_table_canonical_count": 12,
+  "notes_for_reviewer": [
+    "La métrica primaria es la cobertura de parámetros (param-table-coverage de F118).",
+    "El threshold de cobertura es 1.0; cualquier valor < 1.0 falla M1.",
+    "El caso está blindado por la aserción estricta; un agente estable debe pasar siempre."
+  ]
+}

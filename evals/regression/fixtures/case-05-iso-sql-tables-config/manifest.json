@@ -1,0 +1,21 @@
+{
+  "case_id": "case-05-iso-sql-tables-config",
+  "schema_version": "1.0.0",
+  "description": "Fixture de referencia para el caso 05 del set de regresión (F119). Estresa tabla exhaustiva y prohibición de truncado (INV-10).",
+  "references": {
+    "f118_case_yaml": "evals/suite/cases/case-05-iso-sql-tables-config.yaml",
+    "sdm_synthetic": "evals/sdm-sample/05-iso-sql-tables.json",
+    "corpus_card": "evals/corpus/05-iso-sql-tables/card.md"
+  },
+  "expected_metrics": {
+    "coverage_must_keep_terminal": {"mean_min": 0.95, "stdev_max": 0.05},
+    "notes_planned": {"mean_min": 1, "stdev_max": 1},
+    "ir_node_count": {"mean_min": 1, "stdev_ratio_max": 0.10},
+    "human_global_avg": {"mean_min": 3.5, "stdev_max": 0.5},
+    "approved_rate": {"min": 1.0}
+  },
+  "notes_for_reviewer": [
+    "La aserción no-truncation de F118 verifica INV-10 (prohibido etc., entre otros, los más relevantes).",
+    "Cambios en el estilo de redacción (F98 paraphrase, F99 voice-style) pueden introducir truncado inadvertido."
+  ]
+}

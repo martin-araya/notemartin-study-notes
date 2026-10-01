@@ -1,0 +1,22 @@
+{
+  "case_id": "case-13-internet-archive-scan",
+  "schema_version": "1.0.0",
+  "description": "Fixture de referencia para el caso 13 del set de regresión (F119). Estresa modo degradado de OCR (architecture.md §8).",
+  "references": {
+    "f118_case_yaml": "evals/suite/cases/case-13-internet-archive-scan.yaml",
+    "corpus_card": "evals/corpus/13-internet-archive-scan-hostil/card.md"
+  },
+  "expected_metrics": {
+    "coverage_must_keep_terminal": {"mean_min": 0.0, "stdev_max": 0.05, "note": "pending_due_to_missing_sample; se reactiva con muestra real"},
+    "notes_planned": {"mean_min": 0, "stdev_max": 1},
+    "ir_node_count": {"mean_min": 0, "stdev_ratio_max": 0.10},
+    "human_global_avg": {"mean_min": 0.0, "stdev_max": 0.5},
+    "approved_rate": {"min": 1.0, "note": "siempre 1.0 porque no hay muestra; el pending cuenta como pass"}
+  },
+  "status": "pending_due_to_missing_sample",
+  "notes_for_reviewer": [
+    "La aserción ocr-code-fidelity queda en status=pending hasta que F6 descargue sample.pdf.",
+    "Mientras esté pending, el caso se evalúa pero no bloquea el release (gate reconoce el estado).",
+    "Cuando F6 descargue la muestra, eliminar este comentario y actualizar expected_metrics."
+  ]
+}

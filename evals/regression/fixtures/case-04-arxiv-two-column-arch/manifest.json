@@ -1,0 +1,22 @@
+{
+  "case_id": "case-04-arxiv-two-column-arch",
+  "schema_version": "1.0.0",
+  "description": "Fixture de referencia para el caso 04 del set de regresión (F119). Estresa layout a dos columnas y orden de lectura.",
+  "references": {
+    "f118_case_yaml": "evals/suite/cases/case-04-arxiv-two-column-arch.yaml",
+    "sdm_synthetic": "evals/sdm-sample/04-arxiv-two-column.json",
+    "corpus_card": "evals/corpus/04-arxiv-two-column/card.md",
+    "corpus_sample": "evals/corpus/04-arxiv-two-column/sample.pdf"
+  },
+  "expected_metrics": {
+    "coverage_must_keep_terminal": {"mean_min": 0.90, "stdev_max": 0.05},
+    "notes_planned": {"mean_min": 1, "stdev_max": 1},
+    "ir_node_count": {"mean_min": 1, "stdev_ratio_max": 0.10},
+    "human_global_avg": {"mean_min": 3.0, "stdev_max": 0.5},
+    "approved_rate": {"min": 1.0}
+  },
+  "notes_for_reviewer": [
+    "El layout a dos columnas es histórico de bugs; cambios en preprocess.py / layout.py (F19/F21) pueden romper el orden de lectura sin tocar las instrucciones.",
+    "La métrica M3 (ir_node_count) puede tener más varianza que otros casos por el coste de detectar regiones."
+  ]
+}

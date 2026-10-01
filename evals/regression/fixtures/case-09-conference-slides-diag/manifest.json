@@ -1,0 +1,25 @@
+{
+  "case_id": "case-09-conference-slides-diag",
+  "schema_version": "1.0.0",
+  "description": "Fixture de referencia para el caso 09 del set de regresión (F119). Estresa ingesta de diapositivas PPT y decisión diagram/slide.",
+  "references": {
+    "f118_case_yaml": "evals/regression/cases/case-09-conference-slides-diag.yaml",
+    "sdm_synthetic": "evals/sdm-sample/09-conference-slides.json",
+    "corpus_card": "evals/corpus/09-conference-slides/card.md"
+  },
+  "expected_metrics": {
+    "coverage_must_keep_terminal": {"mean_min": 0.80, "stdev_max": 0.10, "note": "mayor tolerancia por ambigüedad semántica de slides"},
+    "notes_planned": {"mean_min": 1, "stdev_max": 2, "note": "mayor tolerancia; las slides pueden unirse o separarse"},
+    "ir_node_count": {"mean_min": 1, "stdev_ratio_max": 0.20, "note": "mayor tolerancia; estructura de slides es inherentemente variable"},
+    "human_global_avg": {"mean_min": 2.8, "stdev_max": 0.7, "note": "mayor tolerancia"},
+    "approved_rate": {"min": 0.8, "note": "M5 relajada: aprobado en al menos 80% de ejecuciones; cualquier flip se investiga"}
+  },
+  "custom_thresholds": {
+    "rationale": "Las diapositivas tienen semántica ambigua por diseño; distintas corridas pueden elegir distintas divisiones. Por eso este caso tiene tolerancias más amplias en M1..M4. M5 se relaja a 0.8 con nota explícita.",
+    "approved_fallback": "Si M5 < 1.0 pero >= 0.8, el gate lo marca como 'soft_fail' en lugar de 'fail'. Sigue bloqueando el release, pero el motivo indica que requiere revisión."
+  },
+  "notes_for_reviewer": [
+    "Caso nuevo en F119; se beneficia de umbrales más amplios durante las primeras N ejecuciones mientras se estabiliza.",
+    "Si tras 3 releases consecutivos pasa con umbrales estrictos, subir a umbrales por defecto."
+  ]
+}

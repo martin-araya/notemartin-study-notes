@@ -1,0 +1,21 @@
+{
+  "case_id": "case-06-kubernetes-api-ref-params",
+  "schema_version": "1.0.0",
+  "description": "Fixture de referencia para el caso 06 del set de regresión (F119). Estresa API reference con tabla de parámetros exhaustiva (50+ filas).",
+  "references": {
+    "f118_case_yaml": "evals/regression/cases/case-06-kubernetes-api-ref-params.yaml",
+    "sdm_synthetic": "evals/sdm-sample/06-kubernetes-api-ref.json",
+    "corpus_card": "evals/corpus/06-kubernetes-api-ref/card.md"
+  },
+  "expected_metrics": {
+    "coverage_must_keep_terminal": {"mean_min": 0.95, "stdev_max": 0.05},
+    "notes_planned": {"mean_min": 1, "stdev_max": 1},
+    "ir_node_count": {"mean_min": 1, "stdev_ratio_max": 0.10},
+    "human_global_avg": {"mean_min": 3.5, "stdev_max": 0.5},
+    "approved_rate": {"min": 1.0}
+  },
+  "notes_for_reviewer": [
+    "Caso nuevo en F119; replica la estructura de caso 01 (api-reference) pero con tabla más densa.",
+    "Útil para detectar regresiones específicas en la división semántica (F44 nota-plan §4): una tabla de 50+ filas no debe partirse en múltiples notas."
+  ]
+}

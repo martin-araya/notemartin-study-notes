@@ -1,0 +1,8 @@
+# Caso del set de regresión (F119) — referencia al caso 04 de F118.
+id: case-04-arxiv-two-column-arch
+ref:
+  case_yaml: evals/suite/cases/case-04-arxiv-two-column-arch.yaml
+version: 1.0.0
+corpus_source: 04-arxiv-two-column
+profile: hybrid
+regression_role: primary

@@ -1,0 +1,50 @@
+# Umbrales versionados para el set de regresión — `evals/regression/variance_thresholds.yaml`
+#
+# Forma canónica (F119): schema_version + n_runs + 5 métricas.
+# Cambiar un valor: commit + nota en CHANGELOG; ADR si > 20 %.
+# Cambiar una clave o una métrica: reabre F119.
+
+schema_version: "1.0.0"
+
+# Número de ejecuciones por caso. Default 5. Más alto = más estable pero más caro.
+# Cambiar este valor es commit + nota en CHANGELOG.
+n_runs: 5
+
+# Métricas y sus umbrales. Ver evals/regression/variance.md §4 para definiciones.
+metrics:
+  # M1: coverage_must_keep_terminal ratio
+  # stdev de (1 - must_keep_pending / must_keep_total) sobre N ejecuciones.
+  coverage_must_keep_terminal:
+    max_stdev: 0.05           # <= 0.05 entre N ejecuciones
+
+  # M2: notes_planned (entero)
+  # stdev del número de notas planificadas sobre N ejecuciones.
+  notes_planned:
+    max_stdev: 1              # <= 1 nota
+
+  # M3: ir_node_count (entero)
+  # ratio stdev/mean sobre N ejecuciones.
+  ir_node_count:
+    max_stdev_ratio: 0.10     # <= 10 % del valor medio
+
+  # M4: human_global_avg (float 0-4)
+  # stdev de compute_global(scores, profile) sobre N ejecuciones.
+  human_global_avg:
+    max_stdev: 0.5            # <= 0.5 puntos
+
+  # M5: approved_rate (ratio)
+  # SIEMPRE 1.0. Cualquier flip bloquea el release.
+  approved_rate:
+    min_value: 1.0            # == 1.0
+
+# Política del gate (release_gate.py). 4 condiciones; todas deben cumplirse.
+# Cambiar esta lista reabre F119.
+release_gate_conditions:
+  - id: variance_within_threshold
+    description: "variance.json.summary.cases_fail == 0"
+  - id: no_blocking_failures
+    description: "variance.json.summary.blocking_failures == []"
+  - id: no_regression_flip
+    description: "compare_runs(candidate, baseline): ningún caso del set pasa approved=true -> approved=false"
+  - id: no_human_pending
+    description: "candidate.report.json.cases_human_pending == 0"

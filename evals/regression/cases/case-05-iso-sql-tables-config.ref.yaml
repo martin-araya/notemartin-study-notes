@@ -1,0 +1,8 @@
+# Caso del set de regresión (F119) — referencia al caso 05 de F118.
+id: case-05-iso-sql-tables-config
+ref:
+  case_yaml: evals/suite/cases/case-05-iso-sql-tables-config.yaml
+version: 1.0.0
+corpus_source: 05-iso-sql-tables
+profile: reference
+regression_role: primary

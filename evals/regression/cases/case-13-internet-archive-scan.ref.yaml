@@ -1,0 +1,9 @@
+# Caso del set de regresión (F119) — referencia al caso 13 de F118.
+id: case-13-internet-archive-scan
+ref:
+  case_yaml: evals/suite/cases/case-13-internet-archive-scan.yaml
+version: 1.0.0
+corpus_source: 13-internet-archive-scan-hostil
+profile: hybrid
+regression_role: primary
+status_pending_due_to_missing_sample: true

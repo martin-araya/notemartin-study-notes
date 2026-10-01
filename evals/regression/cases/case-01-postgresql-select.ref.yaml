@@ -1,0 +1,9 @@
+# Caso del set de regresión (F119) — referencia al caso 01 de F118.
+# El runner desreferencia este archivo y carga evals/suite/cases/case-01-postgresql-select.yaml.
+id: case-01-postgresql-select
+ref:
+  case_yaml: evals/suite/cases/case-01-postgresql-select.yaml
+version: 1.0.0
+corpus_source: 01-postgresql-chapter
+profile: reference
+regression_role: primary
