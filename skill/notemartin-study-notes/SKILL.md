@@ -231,6 +231,43 @@ El catálogo exhaustivo vive en `scripts/README.md` `[pendiente F117]` y se mate
 | `evals/visual/run_eval.py` | F77 eval visual: 5 sub-criterios (C1 notas fuente + sha256, C2 12 artefactos válidos, C3 45 vars semánticas en light+dark, C4 visual_inspect.py exit 0 o issues documentados, C5 checklist 12 entradas). Verifica los 3 criterios del ROADMAP §1498-1500: capturas en 7 destinos / no contenido cortado / defectos corregidos o asignados | `python3 evals/visual/run_eval.py` | Python 3.9+ stdlib puro |
 | `evals/visual/visual_inspect.py` | F77 inspector de artefactos: lee los 12 artefactos en `artifacts/` y detecta líneas > 200 chars, tablas 10+ cols sin wrapper, links rotos, marcas `{src:}` no canónicas, HTML sin cerrar, `<th>` sin scope (a11y WCAG 1.3.1), SVG sin `<title>` o viewBox, CSV con > 5 clauses. CLI `--artifacts-dir <dir>`, `--json`, `--strict`. Exit 0 sin issues; 1 con issues; 2 error de uso | `python3 evals/visual/visual_inspect.py --artifacts-dir evals/visual/artifacts` | Python 3.9+ stdlib puro |
 
+### §6.1 · Suite de evals de la skill (F118) — **no la invoca el agente**
+
+La suite de evaluación de la skill vive en `evals/suite/` y la opera un **evaluador** (humano o proceso externo), **no el agente**. El agente no carga estos archivos en su contexto y no los invoca durante el procesamiento de fuentes. Sirven para medir si la skill cumple su contrato sobre prompts realistas del corpus (F6).
+
+| Ruta | Qué hace | Invocación | Dependencias |
+|---|---|---|---|
+| `evals/suite/runner/run_case.py` | Lanza un caso: ejecuta el agente con el prompt del YAML o en modo dry-run; captura stdout + workdir; vuelca `skill_fingerprint.json` | `python3 evals/suite/runner/run_case.py --case <yaml> --run-id <id> [--agent-command <cmd>] [--dry-run]` | Python 3.9+ stdlib + PyYAML |
+| `evals/suite/runner/check_assertions.py` | Evalúa las aserciones automáticas declaradas en el caso (tipos: `param_table_coverage`, `ledger_coverage`, `ir_validation`, `sdm_validation`, `ocr_code_fidelity`, `fidelity_audit`, `manifest_valid`) y vuelca `assertions.json` | `python3 evals/suite/runner/check_assertions.py --case <yaml> --run-dir <path>` | Python 3.9+ stdlib + PyYAML + invocación de `scripts/util/validate_*.py` |
+| `evals/suite/runner/build_canonical.py` | Genera `param_table_canonical` desde el HTML de muestra del corpus (extrae `<dl class="variablelist">` y asigna sección por h3 previo) | `python3 evals/suite/runner/build_canonical.py --card <md> --sample <html> --out <yaml>` | Python 3.9+ stdlib + PyYAML opcional |
+| `evals/suite/runner/apply_rubric.py` | Genera plantilla `human.json` por caso con las 8 dimensiones de `evals/rubric.md` + pesos y mínimos por perfil; incluye `compute_global()` | `python3 evals/suite/runner/apply_rubric.py --case <yaml> --rubric <md> --out <json>` | Python 3.9+ stdlib + PyYAML |
+| `evals/suite/runner/compare_runs.py` | Diff entre dos runs (`runs/<run-A>` vs `runs/<run-B>`): cambios de skill_fingerprint, casos añadidos/eliminados, aserciones que cambian pass/fail, scores humanos por dimensión | `python3 evals/suite/runner/compare_runs.py <run-A> <run-B> [--markdown]` | Python 3.9+ stdlib puro |
+| `evals/suite/runner/drive_suite.py` | Lanza los 6 casos de la suite y agrega `report.json` | `python3 evals/suite/runner/drive_suite.py --run-id <id> [--agent-command <cmd>] [--dry-run]` | Python 3.9+ stdlib |
+
+Contrato y casos en `evals/suite/SCHEMA.md`, `evals/suite/cases/*.yaml` y `evals/suite/rubric-application.md`. Comparabilidad entre iteraciones de la skill cerrada por C4 (F118) — ver `compare_runs.py` y `runs/<run-id>/skill_fingerprint.json`.
+
+### §6.2 · Regresión y varianza (F119) — **no la invoca el agente**
+
+Set de regresión y medición de varianza. La opera el evaluador (humano o proceso externo), no el agente. Ejecuta N veces cada caso del set, mide varianza sobre 5 métricas, y bloquea un release cuando una métrica cae fuera de umbral.
+
+| Ruta | Qué hace | Invocación | Dependencias |
+|---|---|---|---|
+| `evals/suite/runner/run_regression.py` | Ejecuta N veces cada caso del set de regresión (default 5), mide 5 métricas (`coverage_must_keep_terminal`, `notes_planned`, `ir_node_count`, `human_global_avg`, `approved_rate`), compara contra umbrales, emite `variance.json` | `python3 evals/suite/runner/run_regression.py --case-dir evals/regression/cases/ --release-tag <tag> --out-dir <dir> [--agent-command <cmd>] [--dry-run] [--n-runs N]` | Python 3.9+ stdlib + PyYAML + invocación de `run_case.py` / `check_assertions.py` / `apply_rubric.py` (F118) |
+| `evals/suite/runner/release_gate.py` | Evalúa las 4 condiciones del gate (variance_within_threshold + no_blocking_failures + no_regression_flip + no_human_pending) y emite `gate.json` | `python3 evals/suite/runner/release_gate.py --candidate <report.json> --baseline <report.json> --variance <variance.json> [--regression-set SET.md] --out <gate.json>` | Python 3.9+ stdlib puro + invocación de `compare_runs.py` (F118) |
+
+Set, spec normativa y umbrales en `evals/regression/{README,SET,variance}.md` y `variance_thresholds.yaml`. Proceso de release (6 pasos + evidencia de no-regresión) en `docs/release.md`.
+
+### §6.3 · Ejemplos end-to-end (F120) — **no la invoca el agente**
+
+Cuatro ejemplos end-to-end que demuestran la cadena L0-L4 sobre el corpus. Los produce un orquestador a partir de los scripts del paquete. Sirven como referencia verificable (artefactos commiteados) de cómo se ven las salidas en los 3 destinos ricos + 2 bonus.
+
+| Ruta | Qué hace | Invocación | Dependencias |
+|---|---|---|---|
+| `examples/build_examples.py` | Regenera los 4 ejemplos: copia/ensambla SDM+ledger+IR sintéticos, ejecuta los 7 renderers L4 (F54-F59 + F60), genera reportes de calidad | `python3 examples/build_examples.py [--example <id>] [--all] [--real-captures]` | Python 3.9+ stdlib + PyYAML + invocación de `scripts/render/*.py` y `scripts/util/validate_*.py` |
+| `examples/capture.py` | Genera capturas SVG sintéticas por destino (con placeholders Jinja-like) + PNG opcional con Playwright/cairosvg | `python3 examples/capture.py --render-dir <dir> --note-id <id> [--real-captures]` | Python 3.9+ stdlib puro + opcional Playwright/cairosvg |
+
+Estructura por ejemplo en `examples/SCHEMA.md` (artifacts/ + render/<dest>/ + reports/ + 5 capturas SVG por destino). Caso 13 reutiliza el fixture sintético `evals/preprocess-sample/fixtures/hostile-scan.png` porque la muestra del corpus 13 sigue pendiente por F6; el README del ejemplo documenta cómo swap cuando llegue.
+
 Cualquier otra acción ejecutable prevista por el pipeline (validación, parseo NoteMark, otros renderers F55-F60, publicación) sigue marcada `[pendiente Fxxx]` en `docs/skill-anatomy.md` §6. El agente **no inventa** invocaciones; cuando la fase que materializa el script cierre, esa fila entra en `scripts/README.md` y se cita desde §5.
 
 ## §7 · Modos de operación
