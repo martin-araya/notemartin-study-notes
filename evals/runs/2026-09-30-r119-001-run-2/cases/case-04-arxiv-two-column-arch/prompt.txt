@@ -1,0 +1,7 @@
+Tengo un preprint de arXiv en PDF a dos columnas sobre una arquitectura
+de sistema distribuido. Quiero una nota hybrid: mitad reference (figuras,
+terminología uniforme, terminología cruzada), mitad study (intuición
+inicial, analogía breve, trampa explícita sobre la principal limitación
+del sistema). Salida a Obsidian y AppFlowy. El layout a dos columnas es
+el reto: la nota debe reflejar el orden de lectura correcto, no
+entrelazado.

@@ -1,0 +1,8 @@
+Tengo las diapositivas de una conferencia técnica en PDF (exportadas de PPT).
+Quiero una nota hybrid: mitad reference (lista de slides con título y
+bullets clave, terminología uniforme), mitad study (intuición inicial sobre
+la tesis de la charla, analogía breve, trampa explícita si la hay). Cada
+slide con figura debe distinguir entre `syntax-diagram` (si es una
+railroad/ASN.1) y `figure` (si es screenshot o foto). Las cajas
+editoriales de las slides (callouts, "Tip", "Demo") deben mapearse a las
+directivas `:::note`/`:::warning` correctas. Salida a Obsidian.

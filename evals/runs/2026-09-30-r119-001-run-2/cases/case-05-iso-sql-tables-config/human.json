@@ -1,0 +1,56 @@
+{
+  "case_id": "case-05-iso-sql-tables-config",
+  "evaluator": "",
+  "timestamp": "2026-09-30T23:04:45.619688+00:00",
+  "anchors_used": [
+    "ANC-03",
+    "ANC-04"
+  ],
+  "scores": {
+    "fidelity": null,
+    "coverage": null,
+    "traceability": null,
+    "pedagogy": null,
+    "structure": null,
+    "components": null,
+    "operational": null,
+    "render-fidelity": null
+  },
+  "profile": "reference",
+  "weights_and_mins": {
+    "fidelity": {
+      "weight": 0.3,
+      "min": 3
+    },
+    "coverage": {
+      "weight": 0.2,
+      "min": 3
+    },
+    "traceability": {
+      "weight": 0.2,
+      "min": 3
+    },
+    "pedagogy": {
+      "weight": 0.1,
+      "min": 2
+    },
+    "structure": {
+      "weight": 0.05,
+      "min": 2
+    },
+    "components": {
+      "weight": 0.1,
+      "min": 2
+    },
+    "operational": {
+      "weight": 0.05,
+      "min": 2
+    },
+    "render-fidelity": {
+      "weight": 0.0,
+      "min": 2
+    }
+  },
+  "approved": null,
+  "notes": ""
+}
