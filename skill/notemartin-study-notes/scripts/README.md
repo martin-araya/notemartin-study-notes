@@ -1503,3 +1503,27 @@ reporte con 4 niveles (req/rec/opt/bin) y exit codes alineados con F113.
 | Códigos | 0 PASS / 2 warnings / 1 errors / 3 IO/uso. |
 | Dependencias | Python 3.9+ stdlib puro + PyYAML (recomendado). |
 | Wirings | `scripts/CHECKLIST.md` (spec); `scripts/pkg/deps.yaml` (manifest). | |
+
+### Evaluador de la skill (F118) — fuera del paquete
+
+El catálogo de arriba cubre los scripts que **el agente** invoca durante el procesamiento de fuentes. La suite de evaluación de la skill (F118) vive en `evals/suite/` y la opera un **evaluador** (humano o proceso externo), no el agente. Sus 5 scripts (`run_case.py`, `check_assertions.py`, `build_canonical.py`, `apply_rubric.py`, `compare_runs.py`) están documentados en `evals/suite/README.md` y `evals/suite/SCHEMA.md`, y también referenciados en `SKILL.md` §6.1 para visibilidad.
+
+### Regresión y varianza (F119) — fuera del paquete
+
+El catálogo de arriba cubre los scripts que **el agente** invoca durante el procesamiento de fuentes. La suite de regresión y varianza (F119) vive en `evals/regression/` con dos scripts adicionales en `evals/suite/runner/`: `run_regression.py` (corre N veces cada caso y mide varianza) y `release_gate.py` (evalúa las 4 condiciones del gate). Documentación normativa en `evals/regression/{README,SET,variance}.md`, umbrales en `variance_thresholds.yaml`, y proceso de release en `docs/release.md`. Referenciado desde `SKILL.md` §6.2.
+
+### Ejemplos end-to-end (F120) — fuera del paquete
+
+Los 4 ejemplos end-to-end viven en `examples/` y los produce un orquestador (`examples/build_examples.py`). Los 2 scripts nuevos son `build_examples.py` (orquestador L0–L4) y `capture.py` (capturas SVG sintéticas + opcional Playwright). Documentación normativa en `examples/{README,SCHEMA}.md`. Referenciado desde `SKILL.md` §6.3 para visibilidad. No los invoca el agente; los produce el evaluador.
+
+### Empaquetado de la skill (F122)
+
+`scripts/build_skill.py` y `scripts/smoke_test.py` viven en `scripts/` (no en `skill/notemartin-study-notes/scripts/`) porque empaquetan **el paquete en sí mismo**. Si los metiéramos dentro, `scripts/` se autorreferenciaría y `build_skill.py` se incluiría a sí mismo en el ZIP. Documentación normativa en `docs/repo-layout.md` §4 (allowlist/denylist) y en `docs/release.md` paso 1.5 (cómo se invocan durante un release). Producen `dist/<release-tag>.skill` (ZIP reproducible).
+
+### Versionado y CHANGELOG (F123)
+
+`scripts/check_version.py` valida `VERSION`, `manifest.json` y los 14 schemas. Documentación normativa en [`VERSIONING.md`](../../../VERSIONING.md), [`CHANGELOG.md`](../../../CHANGELOG.md), [`COMPATIBILITY.md`](../../../COMPATIBILITY.md). `scripts/build_skill.py` lee `VERSION` por defecto. Es un gate de CI: `--all` falla si VERSION no coincide con manifest.json o si `git status` no está limpio.
+
+### Contribución y PR checklist (F124)
+
+`scripts/check_pr.py` valida 10 items verificables del PR: 4 hard FAIL (denylist, regla de ubicación, check_version, check_deps) + 6 soft WARN (cierre de references, schemas, scripts documentados, triada, multi-dominio, ADRs). Soft gate por default; `--strict` trata WARN como FAIL. Documentación normativa en [`CONTRIBUTING.md`](../../../CONTRIBUTING.md), plantilla en [`references/00-pipeline/contributing.md`](../../../skill/notemartin-study-notes/references/00-pipeline/contributing.md).
