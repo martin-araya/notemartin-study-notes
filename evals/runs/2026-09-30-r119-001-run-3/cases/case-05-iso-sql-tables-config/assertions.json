@@ -1,0 +1,45 @@
+{
+  "case_id": "case-05-iso-sql-tables-config",
+  "automatic": [
+    {
+      "id": "ledger-coverage",
+      "type": "ledger_coverage",
+      "validator": "scripts/util/validate_ledger.py",
+      "passed": false,
+      "observed": 0.0,
+      "threshold": 0.0,
+      "evidence": "ledger no encontrado: /Users/martin/Desktop/projects/notemartin-study-notes/evals/runs/2026-09-30-r119-001-run-3/cases/case-05-iso-sql-tables-config/workdir/knowledge/ledger.json",
+      "errors": [
+        "ledger no encontrado: /Users/martin/Desktop/projects/notemartin-study-notes/evals/runs/2026-09-30-r119-001-run-3/cases/case-05-iso-sql-tables-config/workdir/knowledge/ledger.json"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ir-source-refs-resolvable",
+      "type": "ir_validation",
+      "validator": "scripts/util/validate_ir.py",
+      "passed": false,
+      "observed": 0.0,
+      "threshold": 0.0,
+      "evidence": "sin IR files matching ir/*.json",
+      "errors": [
+        "sin IR files matching ir/*.json"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "no-truncation",
+      "type": "ledger_coverage",
+      "validator": "scripts/util/validate_ledger.py",
+      "passed": false,
+      "observed": 0.0,
+      "threshold": 0.0,
+      "evidence": "ledger no encontrado: /Users/martin/Desktop/projects/notemartin-study-notes/evals/runs/2026-09-30-r119-001-run-3/cases/case-05-iso-sql-tables-config/workdir/knowledge/ledger.json",
+      "errors": [
+        "ledger no encontrado: /Users/martin/Desktop/projects/notemartin-study-notes/evals/runs/2026-09-30-r119-001-run-3/cases/case-05-iso-sql-tables-config/workdir/knowledge/ledger.json"
+      ],
+      "status": "pending"
+    }
+  ],
+  "human": null
+}

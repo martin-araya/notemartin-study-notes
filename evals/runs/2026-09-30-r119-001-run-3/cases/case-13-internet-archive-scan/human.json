@@ -1,0 +1,55 @@
+{
+  "case_id": "case-13-internet-archive-scan",
+  "evaluator": "",
+  "timestamp": "2026-09-30T23:04:46.986324+00:00",
+  "anchors_used": [
+    "ANC-05"
+  ],
+  "scores": {
+    "fidelity": null,
+    "coverage": null,
+    "traceability": null,
+    "pedagogy": null,
+    "structure": null,
+    "components": null,
+    "operational": null,
+    "render-fidelity": null
+  },
+  "profile": "hybrid",
+  "weights_and_mins": {
+    "fidelity": {
+      "weight": 0.25,
+      "min": 3
+    },
+    "coverage": {
+      "weight": 0.175,
+      "min": 3
+    },
+    "traceability": {
+      "weight": 0.15,
+      "min": 3
+    },
+    "pedagogy": {
+      "weight": 0.175,
+      "min": 2
+    },
+    "structure": {
+      "weight": 0.075,
+      "min": 2
+    },
+    "components": {
+      "weight": 0.075,
+      "min": 2
+    },
+    "operational": {
+      "weight": 0.075,
+      "min": 2
+    },
+    "render-fidelity": {
+      "weight": 0.025,
+      "min": 2
+    }
+  },
+  "approved": null,
+  "notes": ""
+}

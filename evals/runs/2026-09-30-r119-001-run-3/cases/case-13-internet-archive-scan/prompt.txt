@@ -1,0 +1,10 @@
+Tengo un escaneo hostil de un libro técnico antiguo (Internet Archive):
+escaneo torcido unos 3-5°, ruido de fondo, sombra de lomo, OCR
+degradado. Quiero que lo proceses igual que cualquier otra fuente: el
+pipeline debe hacer su trabajo (preprocesado + OCR multilingüe +
+reintentos). Si la confianza media queda bajo 0.70, marca las regiones
+dudosas como low_confidence y NO inventes contenido. Una nota hybrid
+con intuición inicial, analogía breve, y referencias marcadas con
+{src:blk_xxx} a los bloques OCR. Cualquier bloque de código cuya
+fidelidad OCR esté bajo 0.85 debe quedar marcado como :::warning con
+texto "OCR low confidence" en lugar de reescribirse. Salida a Obsidian.

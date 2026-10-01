@@ -1,0 +1,8 @@
+Tengo la sección de parámetros de configuración de PostgreSQL del manual
+de referencia (≥ 200 páginas en total, muestra con tabla densa de
+parámetros). Quiero una nota configuration con la tabla canónica completa
+(nombre, tipo, default, rango, modificable en caliente, requiere
+reinicio, versión de PostgreSQL en que aparece), combinaciones peligrosas
+destacadas como :::warning, interacciones entre parámetros, y un diagrama
+de dependencias entre los 5 más críticos. Sin analogías ni elementos
+pedagógicos; es referencia pura. Salida a Obsidian y Notion.

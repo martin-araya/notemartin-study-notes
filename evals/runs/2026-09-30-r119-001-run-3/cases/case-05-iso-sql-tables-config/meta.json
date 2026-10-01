@@ -1,0 +1,9 @@
+{
+  "run_id": "2026-09-30-r119-001-run-3",
+  "case_id": "case-05-iso-sql-tables-config",
+  "timestamp": "2026-09-30T23:04:45.679341+00:00",
+  "skill_version": "aa033a4",
+  "model_id": "regression-eval",
+  "agent_command": "(dry-run)",
+  "dry_run": true
+}

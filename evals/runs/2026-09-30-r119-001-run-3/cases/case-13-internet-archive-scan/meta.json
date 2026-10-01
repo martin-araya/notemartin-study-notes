@@ -1,0 +1,9 @@
+{
+  "run_id": "2026-09-30-r119-001-run-3",
+  "case_id": "case-13-internet-archive-scan",
+  "timestamp": "2026-09-30T23:04:46.894891+00:00",
+  "skill_version": "aa033a4",
+  "model_id": "regression-eval",
+  "agent_command": "(dry-run)",
+  "dry_run": true
+}
