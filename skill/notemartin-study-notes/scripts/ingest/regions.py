@@ -70,7 +70,7 @@ MONOSPACE_FONTS = (
 )
 
 PATTERNS = [
-    ("editorial_note", re.compile(r"^(Note|Tip|Warning|Caution|Important|See also|Example|NB|Remark):?", re.IGNORECASE), 1.0),
+    ("editorial_note", re.compile(r"^(Note|Tip|Warning|Caution|Important|See also|Example|NB|Remark|Theorem|Lemma|Proposition|Corollary|Definition|Claim|Proof|Algorithm):?", re.IGNORECASE), 1.0),
     ("caption", re.compile(r"^(Figure|Fig\.|Tab\.|Tabla|Listing|Snippet|Code)\s*\d", re.IGNORECASE), 0.7),
     ("index", re.compile(r"^(\d+\.)+\s+[A-Z]", re.IGNORECASE), 0.6),
     ("console", re.compile(r"^(\$\s|>\s|PS1=|>>>|>>)"), 0.7),
@@ -600,6 +600,10 @@ def _match_words_to_region(region: Dict[str, Any], page_words: List[Word]) -> Li
 def _has_table_pattern(words: List[Word], indices: List[int]) -> bool:
     """Detect columnar alignment in the region (proxy for F21's table_grid)."""
     if len(indices) < 4:
+        return False
+    # Si la región contiene múltiples líneas largas de prosa, no es una tabla
+    long_prose = sum(1 for i in indices if len(words[i].text.strip()) > 40)
+    if long_prose >= 2:
         return False
     xs = sorted(set(round(words[i].x, 0) for i in indices))
     if len(xs) < 3:

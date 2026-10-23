@@ -16,7 +16,7 @@ Variable por autor; arXiv estándar permite redistribución con fines no comerci
 PDF nativo (LaTeX compilado, dos columnas).
 
 ## Páginas
-~15.
+~15 (objetivo original). **Muestra real: 8 páginas** (ver «Nota de corrección»).
 
 ## Densidad
 - Tablas: media.
@@ -66,3 +66,6 @@ Sin esta fuente no hay cobertura para "PDF a dos columnas"; el validador de layo
 - Comando de descarga: `curl -sSL --max-time 20 -o sample.pdf https://arxiv.org/pdf/2201.00001`
 - Hash sha256: `9c0ec88674d888e77aa774fe22e12904b7f3ec77bd0aa55cc3676d3d02a4502e` (4 018 868 bytes).
 - Sustituto concreto: el documento original puede cambiar de URL; mientras el sha256 siga siendo verificable, la muestra es válida.
+
+## Nota de corrección (2026-10-23)
+Verificado sobre el `sample.pdf` con el sha256 anterior: es `arXiv:2201.00001v3 [math.NA]` (17 Feb 2022), «Modeling Advection on Directed Graphs using Matérn Gaussian Processes for Traffic Flow», **8 páginas**, no un preprint cs.DB de ~15 páginas. Contiene teoremas, pruebas, un algoritmo, tablas, figuras y apéndices A–C, y `layout.py` detecta de 1 a 5 columnas según la página (el layout real no es un dos columnas limpio). Por tanto la aserción `two-column-reading-order` del caso 04 no se ejerce con un paper de dos columnas real. Plan de corrección en `docs/arxiv-adaptation-plan.md` (P0: añadir `15-arxiv-two-column-real`).

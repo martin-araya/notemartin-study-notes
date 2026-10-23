@@ -121,6 +121,7 @@ class FormulaRecord:
     image_path: Optional[str] = None
     bbox: Tuple[float, float, float, float] = (0.0, 0.0, 0.0, 0.0)
     dwell_ms: int = 0
+    latex_source: str = "ocr"
 
 
 # ============================================================
@@ -426,6 +427,7 @@ def run(
     ocr_path: Optional[Path],
     images_dir: Optional[Path],
     json_only: bool = False,
+    tex_manifest_path: Optional[Path] = None,
 ) -> int:
     source = Path(source).resolve()
     if not source.exists():
@@ -441,6 +443,15 @@ def run(
         page_words = _load_words_from_fragments(fragments_path)
     if not page_words and ocr_path and ocr_path.exists():
         page_words = _load_words_from_ocr(ocr_path)
+
+    # Cargar ecuaciones del oráculo TeX si están disponibles
+    tex_equations: List[Dict[str, Any]] = []
+    if tex_manifest_path and tex_manifest_path.exists():
+        try:
+            manifest_data = json.loads(tex_manifest_path.read_text(encoding="utf-8"))
+            tex_equations = manifest_data.get("equations", [])
+        except Exception as e:
+            warnings.append(f"error loading tex manifest: {e}")
 
     out_formulas_dir = out_dir / "ingest" / "formulas"
     out_formulas_dir.mkdir(parents=True, exist_ok=True)
@@ -474,6 +485,47 @@ def run(
                 all_formulas.append(formula)
                 counter += 1
 
+    # Cascada TeX si hay ecuaciones del oráculo
+    if tex_equations:
+        used_tex: Set[int] = set()
+        # Paso 1: Match por número
+        for f in all_formulas:
+            if f.number:
+                clean_num = str(f.number).strip("() []{}.,")
+                for eq in tex_equations:
+                    if eq["index"] in used_tex:
+                        continue
+                    eq_num = str(eq.get("number") or "").strip("() []{}.,")
+                    if eq_num and eq_num == clean_num:
+                        f.latex = eq["latex"]
+                        f.latex_compiled = True
+                        f.pending = False
+                        f.compile_errors = []
+                        f.latex_source = "tex"
+                        used_tex.add(eq["index"])
+                        break
+        # Paso 2: Match secuencial
+        rem_tex = [eq for eq in tex_equations if eq["index"] not in used_tex]
+        t_idx = 0
+        for f in all_formulas:
+            if f.latex_source == "tex":
+                continue
+            if t_idx < len(rem_tex):
+                eq = rem_tex[t_idx]
+                f.latex = eq["latex"]
+                f.latex_compiled = True
+                f.pending = False
+                f.compile_errors = []
+                f.latex_source = "tex"
+                used_tex.add(eq["index"])
+                t_idx += 1
+
+    # Determinar latex_source para fórmulas no TeX
+    default_src = "glyphs" if (fragments_path and fragments_path.exists()) else "ocr"
+    for f in all_formulas:
+        if f.latex_source == "ocr":
+            f.latex_source = "pending" if f.pending else default_src
+
     for page_num, page_formulas in formulas_by_page.items():
         atomic_write_text(
             out_formulas_dir / f"page-{page_num:04d}.formulas.json",
@@ -492,6 +544,7 @@ def run(
                         "bbox": list(f.bbox),
                         "page": f.page,
                         "dwell_ms": f.dwell_ms,
+                        "latex_source": f.latex_source,
                     }
                     for f in page_formulas
                 ],
@@ -689,13 +742,23 @@ Códigos de salida:
     parser.add_argument("--fragments", default=None, help="fragments.json (F18) opcional")
     parser.add_argument("--ocr", default=None, help="ocr_summary.json (F20) opcional")
     parser.add_argument("--images-dir", default=None, help="Directorio de imágenes preprocesadas (F19) para recortes")
+    parser.add_argument("--tex-manifest", default=None, help="arxiv_tex_manifest.json (P3) opcional")
     parser.add_argument("--json-only", action="store_true", help="Solo escribir formulas_summary.json (no formulas.md)")
     args = parser.parse_args(argv)
 
     fragments_path = Path(args.fragments) if args.fragments else None
     ocr_path = Path(args.ocr) if args.ocr else None
     images_dir = Path(args.images_dir) if args.images_dir else None
-    code = run(Path(args.source), Path(args.out_dir), fragments_path, ocr_path, images_dir, json_only=args.json_only)
+    tex_manifest_path = Path(args.tex_manifest) if args.tex_manifest else None
+    code = run(
+        Path(args.source),
+        Path(args.out_dir),
+        fragments_path,
+        ocr_path,
+        images_dir,
+        json_only=args.json_only,
+        tex_manifest_path=tex_manifest_path,
+    )
     return code
 
 

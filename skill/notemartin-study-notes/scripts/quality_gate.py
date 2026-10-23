@@ -39,6 +39,7 @@ COMPLETENESS_PY = VALIDATOR_SCRIPT_DIR / "validate" / "completeness.py"
 RUN_ALL_PY = VALIDATOR_SCRIPT_DIR / "validate" / "run_all.py"
 FIDELITY_AUDIT_PY = VALIDATOR_SCRIPT_DIR / "audit" / "fidelity_audit.py"
 DEDUP_DETECT_PY = VALIDATOR_SCRIPT_DIR / "dedup" / "detect.py"
+PAPER_COVERAGE_PY = VALIDATOR_SCRIPT_DIR / "validate" / "paper_coverage.py"
 
 DEBT_PATH_DEFAULT = "reports/debt.json"
 QG_REPORT_PATH_DEFAULT = "reports/quality-gate.json"
@@ -121,15 +122,20 @@ def invoke_dedup(wd: Path) -> dict | None:
                            "--notes-dir", str(wd / "notes"), "scan"])
 
 
+def invoke_paper_coverage(wd: Path) -> dict | None:
+    return run_subprocess([sys.executable, str(PAPER_COVERAGE_PY),
+                           "--workdir", str(wd), "--json-only"])
+
+
 # ────────────────────────────────────────────────────────────────────
 # Aggregation
 # ────────────────────────────────────────────────────────────────────
 def aggregate_summary(sources: dict) -> dict:
-    """Suma issues de las 3 fuentes. F43 'critical' se mapea a error."""
+    """Suma issues de las fuentes. F43/P6 'critical' se mapea a error."""
     n_err = 0
     n_warn = 0
     n_info = 0
-    for key in ("completeness", "validators", "fidelity"):
+    for key in ("completeness", "validators", "fidelity", "paper_coverage"):
         rep = sources.get(key)
         if not rep or not isinstance(rep, dict):
             continue
@@ -140,7 +146,7 @@ def aggregate_summary(sources: dict) -> dict:
             n_warn += s.get("warnings", 0)
             n_info += s.get("info", 0)
             continue
-        # F43 shape: findings list con severity {critical, warning, info}.
+        # F43/P6 shape: findings list con severity {critical, warning, info}.
         for it in rep.get("findings", []) or []:
             sev = it.get("severity")
             if sev == "critical":
@@ -450,6 +456,14 @@ def cmd_report(wd: Path, args) -> int:
     sources["fidelity"] = invoke_fidelity(wd)
     if len(state["irs"]) >= 5:
         sources["dedup"] = invoke_dedup(wd)
+
+    # Cobertura especializada de papers si la fuente es arXiv (P6)
+    if sdm and isinstance(sdm, dict):
+        src_info = sdm.get("source", {})
+        if src_info.get("vendor") == "arXiv" or src_info.get("arxiv_id"):
+            paper_cov = invoke_paper_coverage(wd)
+            if paper_cov:
+                sources["paper_coverage"] = paper_cov
 
     coverage, not_covered = compute_coverage(sdm, ledger)
     summary = aggregate_summary(sources)

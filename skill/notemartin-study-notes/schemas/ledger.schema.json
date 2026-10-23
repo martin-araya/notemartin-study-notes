@@ -119,9 +119,15 @@
         "version-note",
         "syntax-rule",
         "cross-reference",
-        "formula"
+        "formula",
+        "theorem",
+        "proof",
+        "algorithm",
+        "claim-result",
+        "experimental-setup",
+        "bibliography-entry"
       ],
-      "description": "Enum cerrado de los 14 tipos de unidades (Fase 37 §3). Endurecido en Fase 38 — version 2.0.0."
+      "description": "Enum de tipos de unidades (Fase 37 §3 + extensión académica de papers)."
     }
   }
 }

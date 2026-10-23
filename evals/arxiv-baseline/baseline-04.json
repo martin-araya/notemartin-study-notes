@@ -1,0 +1,25 @@
+{
+  "pdf": "evals/corpus/04-arxiv-two-column/sample.pdf",
+  "metrics": {
+    "page_count": 8,
+    "fragment_count": 1462,
+    "ligature_fragments": 78,
+    "math_glyph_fragments": 937,
+    "footnote_role_fragments": 446,
+    "typed_blocks_missing": 3,
+    "columns_per_page": [
+      3,
+      1,
+      1,
+      1,
+      5,
+      4,
+      1,
+      3
+    ],
+    "columns_unstable": true,
+    "continuity_min": 0.1556,
+    "continuity_mean": 0.193,
+    "out_of_flow_ratio": 0.7182
+  }
+}

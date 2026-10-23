@@ -34,6 +34,7 @@ El agente elige la cadena de ingesta L0 con este árbol. Cada hoja nombra el scr
 
 ```
 ¿Archivo o URL?
+├─ Artículo arXiv (ID, URL o PDF con estampa) → scripts/ingest/arxiv_fetch.py [P1]
 ├─ Archivo PDF
 │   ├─ ¿Tiene capa de texto extraíble? (heurística: ≥ 100 caracteres/página en muestra)
 │   │   ├─ Sí → PDF nativo  → scripts/ingest/pdf_native.py       [pendiente F18]
@@ -91,6 +92,7 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | Selección de motor OCR para un documento | `references/01-ingest/ocr-engines.md` | `references/04-authoring/`, `references/05-note-types/` | [pendiente F20] |
 | OCR sobre región clasificada como código | `references/01-ingest/code-ocr.md` | `references/04-authoring/` (la validación sintáctica se decide en zona gris) | [pendiente F25] |
 | Umbrales por tipo de región para revisión humana | `references/01-ingest/confidence.md` | `references/03-knowledge/` | [pendiente F26] |
+| Ingesta de artículos arXiv (ID, URL, metadatos API y TeX oráculo) | [arxiv.md](references/01-ingest/arxiv.md) | `references/04-authoring/` | P1/P3 |
 
 ### §5.2 · Rutas en `references/02-source-model/`, `03-knowledge/`, `04-authoring/`, `05-note-types/`, `06-writing/`, `07-visual/`
 
@@ -124,6 +126,7 @@ Plantilla de 4 columnas fijada por `docs/skill-anatomy.md` §5: **Situación | A
 | Seleccionar el tipo de nota `syntax` | `references/05-note-types/syntax.md` | los otros 14 archivos de `references/05-note-types/` | F84 |
 | Seleccionar el tipo de nota `data-model` | `references/05-note-types/data-model.md` | los otros 14 archivos de `references/05-note-types/` | F85 |
 | Seleccionar el tipo de nota `chapter-digest` | `references/05-note-types/chapter-digest.md` | los otros 14 archivos de `references/05-note-types/` | F86 |
+| Aplicar overlay de artículo académico sobre chapter-digest | [paper-overlay.md](references/05-note-types/paper-overlay.md) | `references/05-note-types/` (demás notas no digest) | P5 |
 | Seleccionar el tipo de nota `comparison` | `references/05-note-types/comparison.md` | los otros 14 archivos de `references/05-note-types/` | F87 |
 | Seleccionar el tipo de nota `version-delta` | `references/05-note-types/version-delta.md` | los otros 14 archivos de `references/05-note-types/` | F88 |
 | Seleccionar el tipo de nota `glossary-term` | `references/05-note-types/glossary-term.md` | los otros 14 archivos de `references/05-note-types/` | F89 |
@@ -205,6 +208,9 @@ El catálogo exhaustivo vive en `scripts/README.md` `[pendiente F117]` y se mate
 | `scripts/ingest/other_formats.py` | EPUB (ebooklib), DOCX (python-docx), PPTX (python-pptx), SRT/VTT/JSON → `regions.json` con speaker_note + anchor_id temporal | `python scripts/ingest/other_formats.py --source <dir> --out-dir <dir> [--format auto]` | Python 3.9+ stdlib + ebooklib + python-docx + python-pptx opcionales |
 | `scripts/ingest/web_docs.py` | Web docs multipágina (BFS desde índice, sin boilerplate, canonical_url profunda, robots.txt opcional, sin ML ni OCR) | `python scripts/ingest/web_docs.py --source <dir> --base-url <url> --out-dir <dir> [--index <path>]` | Python 3.9+ stdlib |
 | `scripts/validate/ingest_check.py` | Núcleo: gate entre L0 y L1/L2 — verifica páginas omitidas, secciones del índice ausentes, saltos de numeración, bloques vacíos, densidad anómala; override humano explícito con `--allow-critical --human-decision` | `python scripts/validate/ingest_check.py --sdm <path> --out-dir <dir> [--declared-index <path>]` | Python 3.9+ stdlib |
+| `scripts/ingest/arxiv_fetch.py` | P1: resuelve ID/URL de arXiv, consulta API Atom, descarga PDF y e-print TeX opcional, emite `source-meta.yaml` | `python scripts/ingest/arxiv_fetch.py --id <id> --out-dir <dir> [--with-tex]` | Python 3.9+ stdlib puro |
+| `scripts/ingest/arxiv_tex.py` | P3: oráculo TeX: aplana inclusiones, expande macros de autor, extrae entornos (fórmulas, teoremas, algoritmos, tablas, .bbl) y alinea con PDF | `python scripts/ingest/arxiv_tex.py --tex-dir <dir> --out-dir <dir> [--ingest-dir <dir>]` | Python 3.9+ stdlib puro |
+| `scripts/validate/paper_coverage.py` | P6: valida completitud ponderada de palabras (≥ 0.98) y 100 % de entidades críticas (fórmulas numeradas, teoremas, algoritmos, tablas) | `python scripts/validate/paper_coverage.py --sdm <path> --ledger <path> --min 0.98` | Python 3.9+ stdlib puro |
 | `scripts/validate/provenance.py` | F34: valida `source_provenance` (procedencia por campo), distinguibilidad read/inferred y gate `--require-version` (documentación sin versión ⇒ exit 1) | `python scripts/validate/provenance.py --sdm <path\|dir> [--require-version] [--min-confidence 0.7]` | Python 3.9+ stdlib |
 | `scripts/ingest/build_sdm.py` | Núcleo L0→L1: ensambla regions/tables/formulas/code/web_docs/other_formats en `sdm.json` conforme a `sdm.schema.json`, asocia pies a figuras (`CAPTION_MAX_PAGES_AHEAD=1`), ids deterministas `sha1(hash+path+idx)[:12]`, emite `source_provenance` (F34) por campo | `python scripts/ingest/build_sdm.py --ingest-dir <dir> --source-meta <yaml> --out-dir <dir> [--format auto] [--check-determinism]` | Python 3.9+ stdlib; PyYAML (obligatorio) |
 | `scripts/ingest/assets.py` | Post-F31: extrae imágenes del source (PDF pypdfium2 / EPUB ZIP), dedup por sha256 → nombre determinista `assets/<sid>/<sha256[:16]>.<ext>`, clasifica en `diagram_conceptual|screenshot|data_figure|decorative` (heurística Pillow + override YAML), valida alt text, actualiza `figure.content.src` en el SDM, emite `assets.json` + `assets_summary.json` | `python scripts/ingest/assets.py --sdm <path> --source-file <pdf\|epub> --out-dir <dir> [--out-sdm <path>] [--classify <yaml>]` | Python 3.9+ stdlib; Pillow ≥ 10 obligatorio; pypdfium2 ≥ 4 para PDF |

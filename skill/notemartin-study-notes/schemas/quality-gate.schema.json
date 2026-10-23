@@ -110,10 +110,11 @@
       "additionalProperties": false,
       "required": ["completeness", "validators", "fidelity"],
       "properties": {
-        "completeness": {"type": ["object", "null"]},
-        "validators":   {"type": ["object", "null"]},
-        "fidelity":     {"type": ["object", "null"]},
-        "dedup":        {"type": ["object", "null"]}
+        "completeness":   {"type": ["object", "null"]},
+        "validators":     {"type": ["object", "null"]},
+        "fidelity":       {"type": ["object", "null"]},
+        "dedup":          {"type": ["object", "null"]},
+        "paper_coverage": {"type": ["object", "null"]}
       },
       "description": "JSON completos de las 4 fuentes. null si la fuente no se pudo ejecutar."
     }
@@ -167,7 +168,7 @@
         },
         "raised_by": {
           "type": "string",
-          "enum": ["completeness", "validators", "fidelity", "human"]
+          "enum": ["completeness", "validators", "fidelity", "human", "paper_coverage"]
         },
         "rule_id": {
           "type": "string",

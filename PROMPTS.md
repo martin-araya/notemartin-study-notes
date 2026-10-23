@@ -217,6 +217,22 @@ mínimo. Salida a Obsidian.
 **Salida esperada:** nota `syntax` con 3 diagramas. Render en Obsidian.
 **Caso F118:** — (no dedicado; cubierto por `examples/` futuros).
 
+### 3.13 · Paper de investigación de arXiv → Notion (Completitud ≥ 98 %)
+
+```
+Tengo el artículo de arXiv 2201.00001 (o URL https://arxiv.org/abs/2201.00001).
+Quiero una nota chapter-digest completa aplicando el overlay de paper académico,
+lista para exportar e importar en Notion.
+Exijo una completitud ≥ 98 % del contenido: todas las ecuaciones numeradas en
+bloques KaTeX $$ ... $$, teoremas y lemas formales, demostraciones completas
+(plegables con toggle details), algoritmos con pseudocódigo, configuración
+experimental, tablas numéricas íntegras y bibliografía completa con resolución
+de citas [n]. Cero omisiones de fórmulas clave.
+```
+
+**Salida esperada:** nota `chapter-digest` con `paper-overlay.md` (perfil `hybrid`/`reference`). Todas las ecuaciones display preservadas en `$$ ... $$`, teoremas como callouts, pruebas en `<details markdown="1">`, tablas sin truncar y bibliografía enlazable. Reporte de calidad `paper_coverage.json` con `word_coverage >= 0.98` y 100 % de entidades críticas. Render en `render/notion_md/`.
+**Caso F118:** `case-12-arxiv-formulas` / `case-04-arxiv-two-column-arch`.
+
 ## 4. Validación de disparo
 
 Cada prompt de §3 ha sido validado contra `evals/trigger-eval/run.py` (F10) — pasa la métrica TPR=1.00 (true positive rate) sobre el set de entrenamiento. Esto significa que la skill **siempre se dispara** cuando el agente recibe estos prompts.

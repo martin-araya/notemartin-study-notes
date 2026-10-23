@@ -56,11 +56,26 @@ ALLOWED_TOPS = {
         "assets",
     },
     "docs": {"*.md", "adr"},
-    "evals": {"*.md", "corpus", "suite", "regression", "trigger-eval", "sdm-sample", "ledger-sample", "ir-sample", "probe", "ocr-sample", "anchor-sample", "fidelity-sample", "validator-suite-sample", "preprocess-sample", "code-ocr-sample", "table-ocr-sample", "visual", "analogies-sample", "anti-patterns-sample", "api-reference-sample", "appflowy-render-sample", "architecture-sample", "assets-sample", "block-directives-sample", "book-index-sample", "book-mode-sample", "checks-sample", "compliance-sample", "conflict-sample", "concept-graph-sample", "consolidate-sample", "corpus", "cross-target-sample", "cs-layout-sample", "density-sample", "diagram-sample", "fact-check-sample", "formulas-sample", "formula-density-sample", "glossary-sample", "html-pdf-sample", "i18n-sample", "inline-mark-sample", "intuition-sample", "ipynb-sample", "lang-detect-sample", "links-sample", "manifest-sample", "math-sample", "mermaid-render-sample", "notemartin-sample", "notion-md-sample", "notion-render-sample", "obsidian-render-sample", "page-asymmetry-sample", "pdf-native-sample", "phases-sample", "post-ocr-sample", "preprocess-sample", "profile-sample", "prompt-sample", "prop-block-sample", "query-sample", "README.md", "regression-sample", "render-contract-sample", "review-report-sample", "runbook-sample", "scenario-sample", "schema-bump-sample", "self-eval-sample", "source-id-sample", "split-sample", "triage-sample", "validate-note-sample", "version-delta-sample", "visual-eval-sample", "web-docs-sample", "workflow-sample"},
+    "evals": {"*.md", "corpus", "suite", "regression", "trigger-eval", "sdm-sample", "ledger-sample", "ir-sample", "probe", "ocr-sample", "anchor-sample", "fidelity-sample", "validator-suite-sample", "preprocess-sample", "code-ocr-sample", "table-ocr-sample", "visual", "analogies-sample", "anti-patterns-sample", "api-reference-sample", "appflowy-render-sample", "architecture-sample", "assets-sample", "block-directives-sample", "book-index-sample", "book-mode-sample", "checks-sample", "compliance-sample", "conflict-sample", "concept-graph-sample", "consolidate-sample", "corpus", "cross-target-sample", "cs-layout-sample", "density-sample", "diagram-sample", "fact-check-sample", "formulas-sample", "formula-density-sample", "glossary-sample", "html-pdf-sample", "i18n-sample", "inline-mark-sample", "intuition-sample", "ipynb-sample", "lang-detect-sample", "links-sample", "manifest-sample", "math-sample", "mermaid-render-sample", "notemartin-sample", "notion-md-sample", "notion-render-sample", "obsidian-render-sample", "page-asymmetry-sample", "pdf-native-sample", "phases-sample", "post-ocr-sample", "preprocess-sample", "profile-sample", "prompt-sample", "prop-block-sample", "query-sample", "README.md", "regression-sample", "render-contract-sample", "review-report-sample", "runbook-sample", "scenario-sample", "schema-bump-sample", "self-eval-sample", "source-id-sample", "split-sample", "triage-sample", "validate-note-sample", "version-delta-sample", "visual-eval-sample", "web-docs-sample", "workflow-sample", "paper-text-sample", "paper-coverage-sample", "arxiv-baseline"},
     "examples": {"README.md", "SCHEMA.md", "build_examples.py", "capture.py", "assets", "synthetic-notes", "01-postgresql-chapter", "02-database-internals-chapter", "06-kubernetes-api-ref", "13-internet-archive-scan-hostil"},
     "scripts": {"README.md", "build_skill.py", "check_version.py", "check_deps.py", "smoke_test.py", "check_pr.py", "util", "validate", "render"},
     "tests": set(),
     ".kilo": set(),
+}
+
+ALLOWED_ROOT_FILES = {
+    "ROADMAP.md",
+    "README.md",
+    "CHANGELOG.md",
+    "VERSION",
+    "VERSIONING.md",
+    "agent.md",
+    "COMPATIBILITY.md",
+    "CONTRIBUTING.md",
+    "EXTEND.md",
+    "INSTALL.md",
+    "PROMPTS.md",
+    ".gitignore",
 }
 # Denylist (files / suffixes / dirs)
 DENYLIST_SUFFIXES = {".pyc", ".pyo", ".swp", ".tmp", ".bak", ".orig", ".rej", ".DS_Store"}
@@ -132,6 +147,10 @@ def _check_location(files: list[dict]) -> tuple[str, str, str]:
     for f in files:
         path = f["path"]
         if f["status"] not in {"A", "M"}:
+            continue
+        if "/" not in path:
+            if path not in ALLOWED_ROOT_FILES:
+                bad.append(f"{path} (top-level file {path!r} no en allowlist)")
             continue
         top = path.split("/", 1)[0]
         if top not in ALLOWED_TOPS:

@@ -31,6 +31,7 @@ Documentación normativa: references/01-ingest/layout.md.
 from __future__ import annotations
 
 import argparse
+import bisect
 import hashlib
 import json
 import re
@@ -64,6 +65,12 @@ MIN_CONTINUITY_SCORE = 0.30
 LINE_HEIGHT_PX = 14.0
 PAGE_WIDTH_PT = 612.0
 PAGE_HEIGHT_PT = 792.0
+
+# --- Modo paper (payload de pdf_native >= 1.1: páginas con width/height) ---
+LONG_LINE_MIN_CHARS = 25       # un fragmento largo es una línea de prosa, no un glifo de fórmula
+MIN_LONG_LINES = 12            # mínimo de líneas largas para decidir columnas / ancho completo
+SPARSE_COLUMN_MIN_SHARE = 0.15 # una columna debe contener ≥ 15 % de las líneas largas
+FULL_WIDTH_FACTOR = 1.6        # ancho > 1.6 × el ancho típico de línea → elemento de ancho completo
 
 CROSS_PAGE_BREAK_MARKERS = (",", ";", ":", "(", "[", "{", "\\")
 PUNCT_END_SENTENCE = (".", "?", "!", ";", ":")
@@ -100,6 +107,7 @@ class Word:
     font_name: Optional[str] = None
     font_size: Optional[float] = None
     page: int = 1
+    approx_width: bool = False  # True si el ancho es una estimación (pdf_native: len*size*0.5)
 
     @property
     def x(self) -> float:
@@ -137,6 +145,7 @@ class Region:
     first_word: str = ""
     last_word: str = ""
     y_centroid: float = 0.0
+    full_width: bool = False
 
 
 # ============================================================
@@ -171,18 +180,38 @@ def load_pages(source_path: Path, input_type: str) -> Tuple[List[List[Word]], in
     if input_type == "auto":
         input_type = detect_input_type(data)
     if input_type == "pdf-native":
-        return _load_from_pdf_native(data), int(PAGE_WIDTH_PT), int(PAGE_HEIGHT_PT)
+        pw, ph = _pdf_native_page_size(data)
+        return _load_from_pdf_native(data), pw, ph
     if input_type == "ocr":
         return _load_from_ocr(data), int(PAGE_WIDTH_PT), int(PAGE_HEIGHT_PT)
     raise RuntimeError(f"cannot detect input type for {source_path}")
 
 
+def _pdf_native_page_size(data: Dict[str, Any]) -> Tuple[int, int]:
+    """Tamaño de la primera página con width/height (payload >= 1.1); si no, 612x792."""
+    for page_data in data.get("pages", []):
+        if page_data.get("width") and page_data.get("height"):
+            return int(round(float(page_data["width"]))), int(round(float(page_data["height"])))
+    return int(PAGE_WIDTH_PT), int(PAGE_HEIGHT_PT)
+
+
 def _load_from_pdf_native(data: Dict[str, Any]) -> List[List[Word]]:
+    """Fragmentos de pdf_native -> Words.
+
+    Con payload >= 1.1 (la página trae `height`): el eje Y se invierte a origen arriba
+    (las coordenadas PDF crecen hacia arriba, así que antes el orden salía de abajo
+    hacia arriba), se omiten fragmentos de boilerplate y el ancho se marca como
+    estimado. Sin `height` se conserva el comportamiento anterior.
+    """
     pages: List[List[Word]] = []
     for page_data in data.get("pages", []):
         words: List[Word] = []
         page_num = int(page_data.get("page", 1))
+        page_h = page_data.get("height")
+        paper_payload = bool(page_h)
         for f in page_data.get("fragments", []):
+            if paper_payload and f.get("is_boilerplate"):
+                continue
             bbox = f.get("bbox", [0, 0, 0, 0])
             text = f.get("text", "").strip()
             if not text:
@@ -199,6 +228,7 @@ def _load_from_pdf_native(data: Dict[str, Any]) -> List[List[Word]]:
                 font_name=f.get("font_name"),
                 font_size=f.get("font_size"),
                 page=page_num,
+                approx_width=paper_payload,
             ))
         pages.append(words)
     return pages
@@ -236,7 +266,7 @@ def _load_from_ocr(data: Dict[str, Any]) -> List[List[Word]]:
 # Column detection
 # ============================================================
 
-def detect_columns(words: List[Word], page_width: float) -> List[Tuple[float, float]]:
+def _detect_columns_raw(words: List[Word], page_width: float) -> List[Tuple[float, float]]:
     """Return list of (x_start, x_end) column ranges.
 
     Uses the LEFT edge of each word's bbox (x_min) to find column starts.
@@ -298,6 +328,80 @@ def detect_columns(words: List[Word], page_width: float) -> List[Tuple[float, fl
         return column_edges
 
 
+def detect_columns(words: List[Word], page_width: float) -> List[Tuple[float, float]]:
+    """Columnas de la página: histograma X crudo + poda de columnas espurias (modo paper)."""
+    return _prune_sparse_columns(words, _detect_columns_raw(words, page_width))
+
+
+def _long_line_words(words: List[Word]) -> List[Word]:
+    return [w for w in words if len(w.text) >= LONG_LINE_MIN_CHARS]
+
+
+def _prune_sparse_columns(words: List[Word], columns: List[Tuple[float, float]]) -> List[Tuple[float, float]]:
+    """Descarta columnas que casi no contienen líneas de prosa.
+
+    En papers, bloques de autores, ecuaciones centradas o sangrías producen picos
+    sueltos en el histograma X que se leen como columnas extra (1–5 columnas según la
+    página). Una columna real contiene ≥ SPARSE_COLUMN_MIN_SHARE de las líneas largas.
+    Si hay pocas líneas largas (OCR palabra a palabra) no se toca nada.
+    """
+    if len(columns) < 2:
+        return columns
+    long_words = _long_line_words(words)
+    if len(long_words) < MIN_LONG_LINES:
+        return columns
+    counts = [0] * len(columns)
+    for w in long_words:
+        counts[assign_to_column(w.x, columns)] += 1
+    min_count = max(3, SPARSE_COLUMN_MIN_SHARE * len(long_words))
+    kept = [c for c, n in zip(columns, counts) if n >= min_count]
+    if len(kept) < 2:
+        return [(0.0, columns[-1][1])]
+    return kept
+
+
+def detect_full_width(words: List[Word], columns: List[Tuple[float, float]], indices: List[int]) -> set:
+    """Índices de palabras que abarcan varias columnas (título, abstract, figure*/table*).
+
+    Un elemento es de ancho completo si empieza en la primera columna y su ancho
+    supera FULL_WIDTH_FACTOR × el ancho mediano de las líneas largas. Se compara contra
+    la mediana (no contra un ancho absoluto) porque el ancho de pdf_native es estimado.
+    """
+    if len(columns) < 2:
+        return set()
+    long_idx = [i for i in indices if len(words[i].text) >= LONG_LINE_MIN_CHARS]
+    if len(long_idx) < MIN_LONG_LINES:
+        return set()
+    widths = sorted(words[i].w for i in long_idx)
+    typical = widths[len(widths) // 2]
+    if typical <= 0:
+        return set()
+    second_start = columns[1][0]
+    return {i for i in indices if words[i].w > FULL_WIDTH_FACTOR * typical and words[i].x < second_start}
+
+
+def _order_words(indices: List[int], words: List[Word]) -> List[int]:
+    """Orden de lectura dentro de una región: línea a línea y, dentro de la línea, por X.
+
+    Los sub/superíndices tienen otro Y que su palabra padre; se agrupan en la misma
+    línea con una tolerancia de 0.6 × la altura para que no se intercalen con la línea vecina.
+    """
+    ordered = sorted(indices, key=lambda i: words[i].y_centroid)
+    out: List[int] = []
+    line: List[int] = []
+    line_y = 0.0
+    for i in ordered:
+        w = words[i]
+        if line and abs(w.y_centroid - line_y) > 0.6 * max(w.h, 1.0):
+            out.extend(sorted(line, key=lambda j: words[j].x))
+            line = []
+        if not line:
+            line_y = w.y_centroid
+        line.append(i)
+    out.extend(sorted(line, key=lambda j: words[j].x))
+    return out
+
+
 def assign_to_column(x_left: float, columns: List[Tuple[float, float]]) -> int:
     best_idx = 0
     best_dist = float("inf")
@@ -317,6 +421,10 @@ def assign_to_column(x_left: float, columns: List[Tuple[float, float]]) -> int:
 def is_margin_note(word: Word, page_width: float) -> bool:
     if word.x < MARGIN_THRESHOLD_PX:
         return True
+    if word.approx_width:
+        # El ancho es una estimación (len*size*0.5) que sobrepasa el margen real en líneas
+        # de cuerpo normales: solo se confirma el margen derecho si el texto *empieza* ahí.
+        return word.x > page_width - MARGIN_THRESHOLD_PX
     if word.x + word.w > page_width - MARGIN_THRESHOLD_PX:
         return True
     return False
@@ -425,61 +533,52 @@ def build_regions(words: List[Word], columns: List[Tuple[float, float]], page_wi
             continue
         main_indices.append(i)
 
-    main_indices: List[int] = []
-    for i in range(len(words)):
-        if i in sidebar_word_set or i in margin_word_set or i in caption_word_set:
-            continue
-        main_indices.append(i)
+    fw_set = detect_full_width(words, columns, main_indices)
+    column_indices = [i for i in main_indices if i not in fw_set]
 
-    main_indices.sort(key=lambda i: (assign_to_column(words[i].x, columns), words[i].y_centroid))
+    column_indices.sort(key=lambda i: (assign_to_column(words[i].x, columns), words[i].y_centroid))
     column_groups: Dict[int, List[int]] = {}
-    for i in main_indices:
+    for i in column_indices:
         col_idx = assign_to_column(words[i].x, columns)
         column_groups.setdefault(col_idx, []).append(i)
 
     region_counter = 0
-    for col_idx in sorted(column_groups.keys()):
-        words_in_col = column_groups[col_idx]
-        if not words_in_col:
-            continue
+
+    def _emit(group: List[int], col_idx: int, full_width: bool) -> None:
+        nonlocal region_counter
+        group = _order_words(group, words)
+        region_counter += 1
+        regions.append(Region(
+            id=f"r{region_counter:03d}",
+            cls="column",
+            bbox=_region_bbox(group, words),
+            in_main_flow=True,
+            column_index=col_idx,
+            word_indices=group,
+            first_word=words[group[0]].text,
+            last_word=words[group[-1]].text,
+            y_centroid=_y_centroid(group, words),
+            full_width=full_width,
+        ))
+
+    def _emit_by_y_gap(indices: List[int], col_idx: int, full_width: bool) -> None:
         current_group: List[int] = []
         last_y = None
-        for idx in words_in_col:
+        for idx in indices:
             w = words[idx]
-            if last_y is not None and (w.y_centroid - last_y) > 1.8 * LINE_HEIGHT_PX:
-                if current_group:
-                    region_counter += 1
-                    rid = f"r{region_counter:03d}"
-                    bbox = _region_bbox(current_group, words)
-                    regions.append(Region(
-                        id=rid,
-                        cls="column",
-                        bbox=bbox,
-                        in_main_flow=True,
-                        column_index=col_idx,
-                        word_indices=current_group,
-                        first_word=words[current_group[0]].text,
-                        last_word=words[current_group[-1]].text,
-                        y_centroid=_y_centroid(current_group, words),
-                    ))
-                    current_group = []
+            if last_y is not None and (w.y_centroid - last_y) > 1.8 * LINE_HEIGHT_PX and current_group:
+                _emit(current_group, col_idx, full_width)
+                current_group = []
             current_group.append(idx)
             last_y = w.y_centroid
         if current_group:
-            region_counter += 1
-            rid = f"r{region_counter:03d}"
-            bbox = _region_bbox(current_group, words)
-            regions.append(Region(
-                id=rid,
-                cls="column",
-                bbox=bbox,
-                in_main_flow=True,
-                column_index=col_idx,
-                word_indices=current_group,
-                first_word=words[current_group[0]].text,
-                last_word=words[current_group[-1]].text,
-                y_centroid=_y_centroid(current_group, words),
-            ))
+            _emit(current_group, col_idx, full_width)
+
+    for col_idx in sorted(column_groups.keys()):
+        if column_groups[col_idx]:
+            _emit_by_y_gap(column_groups[col_idx], col_idx, False)
+    if fw_set:
+        _emit_by_y_gap(sorted(fw_set, key=lambda i: words[i].y_centroid), 0, True)
 
     for cluster in sidebar_clusters:
         if not cluster:
@@ -538,10 +637,31 @@ def build_regions(words: List[Word], columns: List[Tuple[float, float]], page_wi
 # Reading order
 # ============================================================
 
+def _band_keys(regions: List[Region]) -> Dict[str, Tuple[int, int, float]]:
+    """Clave de orden por región: (banda, columna, y).
+
+    Cada región de ancho completo abre una banda propia; las regiones de columna entre dos
+    elementos de ancho completo comparten banda. Sin ancho completo todo es la banda 1,
+    así que el orden queda (columna, y) como antes.
+    """
+    fw = sorted((r for r in regions if r.in_main_flow and r.full_width), key=lambda r: r.y_centroid)
+    fw_y = [r.y_centroid for r in fw]
+    rank = {r.id: i for i, r in enumerate(fw)}
+    keys: Dict[str, Tuple[int, int, float]] = {}
+    for r in regions:
+        if r.in_main_flow and r.full_width:
+            keys[r.id] = (2 * rank[r.id], 0, r.y_centroid)
+        else:
+            band = 2 * bisect.bisect(fw_y, r.y_centroid) + 1
+            keys[r.id] = (band, r.column_index, r.y_centroid)
+    return keys
+
+
 def compute_reading_order(regions: List[Region]) -> Tuple[List[str], List[Dict[str, Any]]]:
     main = [r for r in regions if r.in_main_flow]
     out_of_flow = [r for r in regions if not r.in_main_flow]
-    main_sorted = sorted(main, key=lambda r: (r.column_index, r.y_centroid))
+    keys = _band_keys(regions)
+    main_sorted = sorted(main, key=lambda r: keys[r.id])
     out_of_flow_sorted = sorted(out_of_flow, key=lambda r: (0 if r.cls.startswith("sidebar") else 1, r.y_centroid))
     ordered = main_sorted + out_of_flow_sorted
     ordered_ids = [r.id for r in ordered]
@@ -597,13 +717,15 @@ def verify_reading_order(
     if len(main) < 2:
         return True, []
     region_by_id = {r.id: r for r in main}
+    keys = _band_keys(regions)
     em_main_ids = [rid for rid in emitted_order if rid in region_by_id]
     inconsistencies: List[Dict[str, Any]] = []
     for i in range(len(em_main_ids) - 1):
         a = region_by_id[em_main_ids[i]]
         b = region_by_id[em_main_ids[i + 1]]
-        if a.column_index > b.column_index:
-            ground_truth = sorted(main, key=lambda r: (r.column_index, r.y_centroid))
+        # Solo se comparan columnas dentro de la misma banda (el ancho completo las separa).
+        if keys[a.id][0] == keys[b.id][0] and a.column_index > b.column_index:
+            ground_truth = sorted(main, key=lambda r: keys[r.id])
             inconsistencies.append({
                 "page": 1,
                 "expected_order": [r.id for r in ground_truth],

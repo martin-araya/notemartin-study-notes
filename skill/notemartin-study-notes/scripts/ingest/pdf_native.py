@@ -44,7 +44,11 @@ except ImportError:  # pragma: no cover
     pypdf = None  # type: ignore
 
 SCHEMA_VERSION = "1.0.0"
-EXTRACTION_VERSION = "1.0.0"
+EXTRACTION_VERSION = "1.1.0"  # 1.1.0: modo paper (ligaduras, guiones, índices, estampa arXiv)
+
+# paper_text.py vive en scripts/util/ (funciones puras, sin dependencias).
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "util"))
+import paper_text  # noqa: E402
 
 # ============================================================
 # Constants (per references/01-ingest/pdf-native.md §4-§5)
@@ -520,7 +524,8 @@ def render_markdown(payload: Dict[str, Any]) -> str:
 # Entry point
 # ============================================================
 
-def run(source: Path, out_dir: Path, plan_path: Optional[Path], json_only: bool = False) -> int:
+def run(source: Path, out_dir: Path, plan_path: Optional[Path], json_only: bool = False,
+        paper_mode: bool = True) -> int:
     source = Path(source).resolve()
     if not source.exists():
         print(f"ERROR: source not found: {source}", file=sys.stderr)
@@ -593,6 +598,7 @@ def run(source: Path, out_dir: Path, plan_path: Optional[Path], json_only: bool 
             pass
 
     all_page_fragments: List[List[Dict[str, Any]]] = []
+    page_sizes: Dict[int, Tuple[float, float]] = {}
     skipped_pure_scan = 0
 
     for page_idx in range(page_count):
@@ -600,6 +606,10 @@ def run(source: Path, out_dir: Path, plan_path: Optional[Path], json_only: bool 
         if scope_pages is not None and page_num not in scope_pages:
             continue
         page = reader.pages[page_idx]
+        try:
+            page_sizes[page_num] = (round(float(page.mediabox.width), 3), round(float(page.mediabox.height), 3))
+        except Exception:
+            pass
         page_warnings: List[str] = []
         fragments = extract_page_fragments(page, page_num, page_warnings)
         for w in page_warnings:
@@ -611,6 +621,12 @@ def run(source: Path, out_dir: Path, plan_path: Optional[Path], json_only: bool 
             warnings.append(f"page {page_num}: 0 fragments extracted")
         all_page_fragments.append(fragments)
 
+    paper_stats: Dict[str, int] = {}
+    if paper_mode:
+        paper_stats["ligature_fragments"] = sum(
+            paper_text.apply_ligature_normalization(frags) for frags in all_page_fragments
+        )
+
     flat = [f for frags in all_page_fragments for f in frags]
     body_size = detect_body_size(flat)
     heading_levels = detect_heading_levels(flat, body_size)
@@ -618,6 +634,23 @@ def run(source: Path, out_dir: Path, plan_path: Optional[Path], json_only: bool 
         apply_heading_roles(frags, body_size, heading_levels)
 
     boilerplate_summary, _boilerplate_ids = detect_boilerplate(all_page_fragments, page_height)
+
+    arxiv_meta: Optional[Dict[str, str]] = None
+    if paper_mode:
+        paper_stats["script_fragments"] = sum(
+            paper_text.mark_scripts(frags, body_size) for frags in all_page_fragments
+        )
+        for frags in all_page_fragments:
+            for f in frags:
+                stamp = paper_text.detect_arxiv_stamp(f["text"])
+                if stamp:
+                    f["role"] = "header"
+                    f["is_boilerplate"] = True
+                    arxiv_meta = arxiv_meta or {**stamp, "page": str(f["page"])}
+        vocab = paper_text.build_vocab(all_page_fragments)
+        paper_stats["dehyphenated_words"] = sum(
+            paper_text.dehyphenate(frags, vocab) for frags in all_page_fragments
+        )
 
     outline = extract_outline(reader, warnings)
     assign_section_paths(all_page_fragments, outline)
@@ -634,7 +667,7 @@ def run(source: Path, out_dir: Path, plan_path: Optional[Path], json_only: bool 
         annotated: List[Dict[str, Any]] = []
         for f in frags:
             f_id = fragment_id(f["page"], f["bbox"], f["text"])
-            annotated.append({
+            entry = {
                 "id": f_id,
                 "page": f["page"],
                 "bbox": f["bbox"],
@@ -645,8 +678,16 @@ def run(source: Path, out_dir: Path, plan_path: Optional[Path], json_only: bool 
                 "heading_level": f.get("heading_level"),
                 "section_path": f.get("section_path"),
                 "is_boilerplate": bool(f.get("is_boilerplate", False)),
-            })
-        payload_pages.append({"page": page_num, "fragments": annotated})
+            }
+            if f.get("script"):
+                entry["script"] = f["script"]
+            if f.get("normalizations"):
+                entry["normalizations"] = f["normalizations"]
+            annotated.append(entry)
+        page_entry: Dict[str, Any] = {"page": page_num, "fragments": annotated}
+        if page_num in page_sizes:
+            page_entry["width"], page_entry["height"] = page_sizes[page_num]
+        payload_pages.append(page_entry)
 
     payload = {
         "schema_version": SCHEMA_VERSION,
@@ -668,6 +709,10 @@ def run(source: Path, out_dir: Path, plan_path: Optional[Path], json_only: bool 
         "warnings": warnings,
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
+    if paper_mode:
+        payload["paper_normalization"] = paper_stats
+        if arxiv_meta:
+            payload["arxiv"] = arxiv_meta
 
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -703,10 +748,13 @@ Códigos de salida:
     parser.add_argument("--out-dir", required=True, help="Directorio de salida (fragments.json + extraction.md)")
     parser.add_argument("--plan", default=None, help="Ruta a triage.json para limitar extracción a rangos nativos")
     parser.add_argument("--json-only", action="store_true", help="Solo escribir fragments.json (no extraction.md)")
+    parser.add_argument("--no-paper-normalize", action="store_true",
+                        help="Desactiva el modo paper (ligaduras, guiones, índices, estampa arXiv)")
     args = parser.parse_args(argv)
 
     plan_path = Path(args.plan) if args.plan else None
-    code = run(Path(args.source), Path(args.out_dir), plan_path, json_only=args.json_only)
+    code = run(Path(args.source), Path(args.out_dir), plan_path, json_only=args.json_only,
+               paper_mode=not args.no_paper_normalize)
     return code
 
 

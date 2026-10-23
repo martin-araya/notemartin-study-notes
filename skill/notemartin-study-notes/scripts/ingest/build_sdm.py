@@ -1309,7 +1309,7 @@ def build_sdm_payload(
         "language": source_meta.get("language", "en"),
         "format": source_meta.get("format", "pdf"),
     }
-    for opt in ("version", "edition", "isbn", "date"):
+    for opt in ("version", "edition", "isbn", "date", "arxiv_id", "arxiv_version", "categories", "doi", "license", "journal_ref", "abstract", "tex_available"):
         if opt in source_meta and source_meta[opt] is not None:
             source[opt] = source_meta[opt]
     if "authors" in source_meta:
@@ -1319,7 +1319,8 @@ def build_sdm_payload(
     source_provenance: Dict[str, Dict[str, Any]] = {}
     tracked = ["id", "hash", "vendor", "product", "version", "edition",
                "isbn", "authors", "url", "language", "date", "format",
-               "algorithm"]
+               "algorithm", "arxiv_id", "arxiv_version", "categories",
+               "doi", "license", "journal_ref", "abstract", "tex_available"]
     for field in tracked:
         method, conf, reason = _method_for(field)
         value = source.get(field)

@@ -35,7 +35,8 @@
               "url_regex",
               "inferred",
               "default",
-              "absent"
+              "absent",
+              "arxiv_api"
             ],
             "description": "How this field was obtained. read = user-supplied (--source-meta). inferred family = derived heuristically."
           },
@@ -62,19 +63,27 @@
       "additionalProperties": false,
       "required": ["id", "hash", "vendor", "product", "url", "language", "format"],
       "properties": {
-        "id":       { "type": "string", "description": "Identificador único de la fuente (e.g. '01-postgresql-chapter')." },
-        "hash":     { "type": "string", "pattern": "^[0-9a-f]{64}$", "description": "sha256 hex del archivo fuente." },
-        "algorithm":{ "type": "string", "enum": ["sha256"], "default": "sha256" },
-        "vendor":   { "type": "string" },
-        "product":  { "type": "string" },
-        "version":  { "type": ["string", "null"] },
-        "edition":  { "type": ["string", "null"] },
-        "authors":  { "type": "array", "items": { "type": "string" } },
-        "isbn":     { "type": ["string", "null"], "description": "ISBN o part number, si aplica." },
-        "url":      { "type": "string", "format": "uri" },
-        "language": { "type": "string", "minLength": 2, "description": "Código BCP-47 (en, es, etc.)." },
-        "date":     { "type": ["string", "null"], "format": "date" },
-        "format":   { "type": "string", "enum": ["pdf", "html", "epub", "docx", "pptx", "txt", "md", "repo", "transcript"] }
+        "id":            { "type": "string", "description": "Identificador único de la fuente (e.g. '01-postgresql-chapter')." },
+        "hash":          { "type": "string", "pattern": "^[0-9a-f]{64}$", "description": "sha256 hex del archivo fuente." },
+        "algorithm":     { "type": "string", "enum": ["sha256"], "default": "sha256" },
+        "vendor":        { "type": "string" },
+        "product":       { "type": "string" },
+        "version":       { "type": ["string", "null"] },
+        "edition":       { "type": ["string", "null"] },
+        "authors":       { "type": "array", "items": { "type": "string" } },
+        "isbn":          { "type": ["string", "null"], "description": "ISBN o part number, si aplica." },
+        "url":           { "type": "string", "format": "uri" },
+        "language":      { "type": "string", "minLength": 2, "description": "Código BCP-47 (en, es, etc.)." },
+        "date":          { "type": ["string", "null"], "format": "date" },
+        "format":        { "type": "string", "enum": ["pdf", "html", "epub", "docx", "pptx", "txt", "md", "repo", "transcript"] },
+        "arxiv_id":      { "type": ["string", "null"] },
+        "arxiv_version": { "type": ["string", "null"] },
+        "categories":    { "type": "array", "items": { "type": "string" } },
+        "doi":           { "type": ["string", "null"] },
+        "license":       { "type": ["string", "null"] },
+        "journal_ref":   { "type": ["string", "null"] },
+        "abstract":      { "type": ["string", "null"] },
+        "tex_available": { "type": "boolean" }
       }
     },
     "section": {
@@ -101,13 +110,14 @@
         "content":    { "$ref": "#/$defs/blockContent" },
         "anchor":     { "$ref": "#/$defs/anchor" },
         "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
-        "origin":     { "type": "string", "enum": ["native", "ocr", "reconstructed"] }
+        "origin":     { "type": "string", "enum": ["native", "ocr", "reconstructed", "source_tex"] }
       }
     },
     "blockType": {
       "enum": ["prose", "heading", "list", "table", "code", "console",
                "formula", "figure", "caption", "note", "warning",
-               "example", "syntax-diagram", "footnote", "toc", "boilerplate"]
+               "example", "syntax-diagram", "footnote", "toc", "boilerplate",
+               "abstract", "theorem", "proof", "algorithm", "reference-list", "reference-entry"]
     },
     "blockContent": {
       "description": "Forma de `content` discriminada por `type`. Cada rama if/then fija la estructura esperada para su tipo. Se usa `anyOf` (no `oneOf`) porque las ramas cuyo `if` no coincide se evalúan como vacíamente válidas; el discriminador real es el campo `type` del bloque, ya constreñido por el enum.",
@@ -227,7 +237,25 @@
                     } } },
 
         { "if": { "properties": { "type": { "const": "boilerplate" } }, "required": ["type"] },
-          "then": { "type": "string" } }
+          "then": { "type": "string" } },
+
+        { "if": { "properties": { "type": { "const": "abstract" } }, "required": ["type"] },
+          "then": { "type": "string" } },
+
+        { "if": { "properties": { "type": { "const": "theorem" } }, "required": ["type"] },
+          "then": { "type": ["string", "object"] } },
+
+        { "if": { "properties": { "type": { "const": "proof" } }, "required": ["type"] },
+          "then": { "type": "string" } },
+
+        { "if": { "properties": { "type": { "const": "algorithm" } }, "required": ["type"] },
+          "then": { "type": ["string", "object"] } },
+
+        { "if": { "properties": { "type": { "const": "reference-list" } }, "required": ["type"] },
+          "then": { "type": "array", "items": { "type": ["string", "object"] } } },
+
+        { "if": { "properties": { "type": { "const": "reference-entry" } }, "required": ["type"] },
+          "then": { "type": ["string", "object"] } }
       ]
     },
     "anchor": {

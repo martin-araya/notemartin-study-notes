@@ -34,6 +34,7 @@ VALID_TYPES = {
     "prose", "heading", "list", "table", "code", "console",
     "formula", "figure", "caption", "note", "warning",
     "example", "syntax-diagram", "footnote", "toc", "boilerplate",
+    "abstract", "theorem", "proof", "algorithm", "reference-list", "reference-entry",
 }
 
 ID_RE = re.compile(r"^[0-9a-f]{12}$")
